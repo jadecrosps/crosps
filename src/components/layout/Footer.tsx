@@ -86,7 +86,7 @@ export function Footer() {
                 </p>
                 <div className="flex flex-col gap-3">
                   {section.links.map((link) =>
-                    link.external ? (
+                    "external" in link && link.external ? (
                       <a
                         key={link.label}
                         href={link.href}
