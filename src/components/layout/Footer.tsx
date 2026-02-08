@@ -8,17 +8,17 @@ const FOOTER_LINKS = [
   {
     heading: "LEARN MORE",
     links: [
-      { label: "Stockists", href: "/contact" },
-      { label: "Contact", href: "/contact" },
-      { label: "Shipping", href: "/faq" },
+      { label: "Stockists", href: "/contact", external: false },
+      { label: "Contact", href: "/contact", external: false },
+      { label: "Shipping", href: "/faq", external: false },
     ],
   },
   {
     heading: "SMALL PRINT",
     links: [
-      { label: "Terms & Conditions", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "FAQ", href: "/faq" },
+      { label: "Terms & Conditions", href: "#", external: false },
+      { label: "Privacy Policy", href: "#", external: false },
+      { label: "FAQ", href: "/faq", external: false },
     ],
   },
   {
