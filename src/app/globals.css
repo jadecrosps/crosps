@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-saans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-da-vinci), Georgia, "Times New Roman", serif;
+
+  /* ── Purple ─────────────────────────────────────────────── */
+  --color-crosps-purple: #A59BE8;
+  --color-crosps-purple-dark: #7D6DDE;
+  --color-crosps-purple-light: #DDDBF7;
+  --color-crosps-purple-dust: #DDD6E0;
+
+  /* ── Green ──────────────────────────────────────────────── */
+  --color-crosps-green: #6CC872;
+  --color-crosps-green-light: #B5E3B8;
+  --color-crosps-green-dark: #5AB560;
+
+  /* ── Neutrals ───────────────────────────────────────────── */
+  --color-crosps-charcoal: #231906;
+  --color-crosps-charcoal-88: rgba(35, 25, 6, 0.88);
+  --color-crosps-charcoal-72: rgba(35, 25, 6, 0.72);
+  --color-crosps-charcoal-50: rgba(35, 25, 6, 0.50);
+  --color-crosps-charcoal-15: rgba(35, 25, 6, 0.15);
+  --color-crosps-cream: #FCFBF7;
+  --color-crosps-offwhite: #FCFBF7;
+  --color-crosps-gray: rgba(35, 25, 6, 0.50);
+  --color-crosps-gray-light: rgba(35, 25, 6, 0.15);
+
+  /* ── Product ────────────────────────────────────────────── */
+  --color-product-onion: #d4a843;
+  --color-product-tomato: #c94b3a;
+  --color-product-pepper: #e8a537;
+
+  /* ── Text sizes — Da Vinci ──────────────────────────────── */
+  --text-dv-96: 96px;
+  --text-dv-80: 80px;
+  --text-dv-56: 56px;
+  --text-dv-32: 32px;
+  --text-dv-28: 28px;
+
+  /* ── Text sizes — Saans ─────────────────────────────────── */
+  --text-saans-96: 96px;
+  --text-saans-56: 56px;
+  --text-saans-40: 40px;
+  --text-saans-24: 24px;
+  --text-saans-18: 18px;
+  --text-saans-16: 16px;
+  --text-saans-15: 15px;
+  --text-saans-14: 14px;
+
+  /* ── Text sizes — UI ────────────────────────────────────── */
+  --text-button: 16px;
+  --text-label: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--color-crosps-charcoal);
+    background-color: #ffffff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Ticker / marquee ────────────────────────────────────── */
+@utility animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
