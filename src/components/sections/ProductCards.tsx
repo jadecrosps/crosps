@@ -13,7 +13,7 @@ export function ProductCards() {
             <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-[1.2] text-crosps-charcoal">
               A taste of what&apos;s to come
             </h2>
-            <p className="text-[clamp(1rem,2vw,1.5rem)] leading-[1.2]">
+            <p className="text-[clamp(1.25rem,2.5vw,1.5rem)] leading-[1.2]">
               <SerifAccent>
                 ....Because not all crisps are created equal.
               </SerifAccent>

@@ -15,7 +15,22 @@ export const saans = localFont({
 export const daVinci = localFont({
   src: [
     {
+      path: "../../public/fonts/Da Vinci/TRJNDaVinci-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Da Vinci/TRJNDaVinci-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
       path: "../../public/fonts/Da Vinci/TRJNDaVinci-Italic.woff",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Da Vinci/TRJNDaVinci-Italic.otf",
       weight: "400",
       style: "italic",
     },
