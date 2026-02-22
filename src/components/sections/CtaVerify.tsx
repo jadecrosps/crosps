@@ -50,7 +50,7 @@ export function CtaVerify() {
                   />
                   <button
                     type="submit"
-                    className="shrink-0 cursor-pointer text-[16px] leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal"
+                    className="shrink-0 cursor-pointer text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal"
                   >
                     Enter
                   </button>

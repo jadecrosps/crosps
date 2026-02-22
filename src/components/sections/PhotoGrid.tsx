@@ -89,7 +89,7 @@ export function PhotoGrid() {
               href="https://www.instagram.com/eatcrosps/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit items-center justify-center border border-crosps-charcoal bg-transparent px-6 py-3 text-[length:var(--text-button)] font-medium tracking-wide text-crosps-charcoal transition-colors hover:bg-crosps-charcoal hover:text-white"
+              className="inline-flex w-fit items-center justify-center border border-crosps-charcoal bg-transparent px-6 py-3 text-[length:var(--text-button)] font-medium uppercase tracking-wide text-crosps-charcoal transition-colors hover:bg-crosps-charcoal hover:text-white"
             >
               Follow Our Socials
             </a>
