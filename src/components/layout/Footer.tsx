@@ -115,7 +115,7 @@ export function Footer() {
         <div className="h-px w-full bg-crosps-charcoal-15" />
 
         {/* Bottom bar */}
-        <div className="flex items-center justify-between py-8">
+        <div className="flex flex-col items-center gap-4 py-8 md:flex-row md:justify-between">
           <Link href="/" aria-label="Crosps home">
             <CrospsLogo className="h-8 w-auto text-crosps-charcoal" />
           </Link>

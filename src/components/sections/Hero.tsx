@@ -36,7 +36,7 @@ export function Hero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#signup"
-              className="inline-flex items-center justify-center border border-white px-6 py-3 text-[16px] font-medium tracking-wide text-white transition-colors duration-200 hover:bg-white/10"
+              className="inline-flex items-center justify-center border border-white px-6 py-3 text-[16px] font-medium uppercase tracking-wide text-white transition-colors duration-200 hover:bg-white/10"
             >
               Sign Me Up
             </a>

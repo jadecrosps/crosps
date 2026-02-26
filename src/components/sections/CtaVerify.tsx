@@ -57,7 +57,7 @@ export function CtaVerify() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="shrink-0 cursor-pointer text-[16px] leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
+                    className="shrink-0 cursor-pointer text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
                   >
                     {isLoading ? "..." : "Enter"}
                   </button>
