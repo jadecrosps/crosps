@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CrospsLogo } from "@/components/ui/CrospsLogo";
+import { useSubscribe } from "@/hooks/useSubscribe";
 
 const FOLLOW_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/eatcrosps/", external: true },
@@ -12,11 +13,16 @@ const FOLLOW_LINKS = [
 
 export function Footer() {
   const [email, setEmail] = useState("");
+  const { subscribe, isLoading, isSuccess, error } = useSubscribe();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (isSuccess) setEmail("");
+  }, [isSuccess]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email) return;
-    setEmail("");
+    if (!email || isLoading) return;
+    await subscribe(email);
   }
 
   return (
@@ -32,21 +38,38 @@ export function Footer() {
             <p className="font-serif text-[32px] leading-[1.2] text-crosps-charcoal">
               Join our mailing list before your friends do.
             </p>
-            <form onSubmit={handleSubmit} className="flex h-[50px] items-center justify-between border border-crosps-charcoal-15 px-6 py-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email Address"
-                className="w-full bg-transparent text-[16px] leading-[1.5] text-crosps-charcoal placeholder:text-crosps-charcoal/50 outline-none"
-              />
-              <button type="submit" aria-label="Subscribe" className="shrink-0 cursor-pointer opacity-50">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="3" y1="8" x2="13" y2="8" />
-                  <polyline points="9 4 13 8 9 12" />
-                </svg>
-              </button>
-            </form>
+            <div>
+              <form onSubmit={handleSubmit} className="flex h-[50px] items-center justify-between border border-crosps-charcoal-15 px-6 py-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email Address"
+                  className="w-full bg-transparent text-[16px] leading-[1.5] text-crosps-charcoal placeholder:text-crosps-charcoal/50 outline-none"
+                />
+                <button
+                  type="submit"
+                  aria-label="Subscribe"
+                  disabled={isLoading}
+                  className="shrink-0 cursor-pointer opacity-50 disabled:opacity-20"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="3" y1="8" x2="13" y2="8" />
+                    <polyline points="9 4 13 8 9 12" />
+                  </svg>
+                </button>
+              </form>
+              {isSuccess && (
+                <p className="mt-2 text-[14px] text-crosps-charcoal">
+                  You&apos;re in! We&apos;ll be in touch.
+                </p>
+              )}
+              {error && (
+                <p className="mt-2 text-[14px] text-red-600">
+                  {error}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Vertical divider (desktop) */}

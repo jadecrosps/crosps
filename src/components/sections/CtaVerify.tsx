@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useSubscribe } from "@/hooks/useSubscribe";
 
 export function CtaVerify() {
   const [email, setEmail] = useState("");
+  const { subscribe, isLoading, isSuccess, error } = useSubscribe();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (isSuccess) setEmail("");
+  }, [isSuccess]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email) return;
-    setEmail("");
+    if (!email || isLoading) return;
+    await subscribe(email);
   }
 
   return (
@@ -50,12 +56,23 @@ export function CtaVerify() {
                   />
                   <button
                     type="submit"
-                    className="shrink-0 cursor-pointer text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal"
+                    disabled={isLoading}
+                    className="shrink-0 cursor-pointer text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
                   >
-                    Enter
+                    {isLoading ? "..." : "Enter"}
                   </button>
                 </div>
                 <div className="h-px w-full bg-crosps-charcoal-15" />
+                {isSuccess && (
+                  <p className="mt-2 text-center text-[14px] text-crosps-charcoal">
+                    You&apos;re in! We&apos;ll be in touch.
+                  </p>
+                )}
+                {error && (
+                  <p className="mt-2 text-center text-[14px] text-red-600">
+                    {error}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -63,8 +80,8 @@ export function CtaVerify() {
           {/* Right: image */}
           <div className="relative aspect-[786/621] w-full md:flex-1">
             <Image
-              src="/brocolli_car.png"
-              alt="Person holding broccoli in a car"
+              src="/crosps-vegetable-farm.png"
+              alt="Crosps vegetable farm"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 58vw"
