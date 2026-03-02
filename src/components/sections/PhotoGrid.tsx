@@ -17,7 +17,7 @@ const FALLBACK_IMAGES = [
 
 function SkeletonCard() {
   return (
-    <div className="relative h-[500px] w-full animate-pulse rounded-lg bg-crosps-gray-light" />
+    <div className="relative h-[500px] w-full animate-pulse bg-crosps-gray-light" />
   );
 }
 
@@ -68,20 +68,20 @@ export function PhotoGrid() {
     <section className="bg-white py-20 md:py-28 lg:py-36">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         {/* Header: two columns per Figma */}
-        <div className="mb-10 grid gap-8 md:grid-cols-2 md:gap-12 lg:mb-12">
+        <div className="mb-10 grid gap-6 md:grid-cols-2 md:gap-20 lg:mb-16">
           <div>
             <p
               className="mb-2 text-[length:var(--text-label)] font-medium uppercase tracking-wide text-crosps-charcoal"
               style={{ fontSize: "12px" }}
             >
-              SOCIAL MEDIA
+              FOLLOW OUR JOURNEY
             </p>
             <h2 className="text-[length:var(--text-saans-40)] font-normal tracking-tight text-crosps-charcoal md:text-4xl">
               Step inside the world of <SerifAccent>Crosps</SerifAccent>
             </h2>
           </div>
           <div className="flex flex-col justify-center">
-            <p className="mb-4 text-[length:var(--text-saans-18)] text-[var(--color-crosps-charcoal-88)]">
+            <p className="mb-2 text-[length:var(--text-saans-18)] text-[var(--color-crosps-charcoal-88)] md:mb-4">
               A look behind the scenes, early tastings, and the moments that
               shape Crosps. Don&apos;t miss out.
             </p>
@@ -89,15 +89,15 @@ export function PhotoGrid() {
               href="https://www.instagram.com/eatcrosps/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit items-center justify-center border border-crosps-charcoal bg-transparent px-6 py-3 text-[length:var(--text-button)] font-medium uppercase tracking-wide text-crosps-charcoal transition-colors hover:bg-crosps-charcoal hover:text-white"
+              className="mt-4 inline-flex w-fit items-center justify-center border border-crosps-charcoal bg-transparent px-6 py-3 text-[length:var(--text-button)] font-medium uppercase tracking-wide text-crosps-charcoal transition-colors hover:bg-crosps-charcoal hover:text-white md:mt-0"
             >
               Follow Our Socials
             </a>
           </div>
         </div>
 
-        {/* Grid: 4 images, 500px height, 16px gap */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+        {/* Mobile: horizontal scroll carousel / Desktop: 4-column grid */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-2 sm:overflow-x-visible lg:grid-cols-4 lg:gap-4">
           {loading
             ? Array.from({ length: 4 }).map((_, i) => (
                 <SkeletonCard key={i} />
@@ -108,14 +108,14 @@ export function PhotoGrid() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative h-[500px] w-full overflow-hidden rounded-lg"
+                  className="group relative h-[500px] w-[80vw] shrink-0 snap-start overflow-hidden sm:w-full"
                 >
                   <Image
                     src={item.src}
                     alt={item.alt}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 25vw"
                     unoptimized={item.src.startsWith("https://") && !item.src.includes("behold")}
                   />
                 </a>
