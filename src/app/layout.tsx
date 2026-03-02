@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { saans, daVinci } from "@/lib/fonts";
 import { Agentation } from "agentation";
 import "./globals.css";
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className={`${saans.variable} ${daVinci.variable}`}>
       <body className="font-sans antialiased">
         {children}
+        <Analytics />
         {process.env.NODE_ENV === "development" && <Agentation />}
       </body>
     </html>
