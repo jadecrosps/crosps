@@ -4,7 +4,7 @@ import { SerifAccent } from "@/components/ui/SerifAccent";
 
 export function ProductCards() {
   return (
-    <section id="products" className="bg-white py-16 md:py-20">
+    <section id="products" className="bg-white pb-24 pt-12 md:pb-36 md:pt-16">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <div className="flex flex-col gap-16 md:gap-20">
         {/* Header: heading left, body right */}

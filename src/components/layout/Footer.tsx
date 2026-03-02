@@ -32,7 +32,7 @@ export function Footer() {
         <div className="h-px w-full bg-crosps-charcoal-15" />
 
         {/* Main footer content */}
-        <div className="flex flex-col gap-10 py-10 lg:flex-row lg:items-start lg:justify-between lg:gap-0">
+        <div className="flex flex-col gap-6 py-10 lg:flex-row lg:items-start lg:justify-between lg:gap-0">
           {/* Left: mailing list */}
           <div className="flex flex-col gap-6 lg:w-[343px] lg:shrink-0">
             <p className="font-serif text-[32px] leading-[1.2] text-crosps-charcoal">
@@ -81,7 +81,7 @@ export function Footer() {
           <div className="h-px w-full bg-crosps-charcoal-15 lg:hidden" />
 
           {/* Right: Follow links */}
-          <div className="flex w-[213px] flex-col gap-6">
+          <div className="flex w-[213px] flex-col gap-3 lg:gap-6">
             <p className="px-3 py-2 text-[14px] leading-[1.2] text-crosps-charcoal">
               FOLLOW
             </p>
@@ -115,7 +115,7 @@ export function Footer() {
         <div className="h-px w-full bg-crosps-charcoal-15" />
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center gap-4 py-8 md:flex-row md:justify-between">
+        <div className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-center md:justify-between">
           <Link href="/" aria-label="Crosps home">
             <CrospsLogo className="h-8 w-auto text-crosps-charcoal" />
           </Link>
