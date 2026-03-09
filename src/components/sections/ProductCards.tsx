@@ -19,7 +19,7 @@ export function ProductCards() {
               </SerifAccent>
             </p>
           </div>
-          <div className="max-w-[557px] text-[18px] font-normal leading-[1.5] text-crosps-charcoal-88">
+          <div className="max-w-[557px] text-[16px] font-normal leading-[1.5] text-crosps-charcoal-88 md:text-[18px]">
             <p>
               Whole vegetables, vacuum-fried at low temperatures to preserve
               their natural flavour, colour, and nutrients. Creating a crisp

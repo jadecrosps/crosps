@@ -5,7 +5,7 @@ import { Agentation } from "agentation";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Crosps | Real Vegetables, Unreal Crunch",
+  title: "Crosps | Vegetable crisps made from real, whole, vegetables.",
   description:
     "Crosps are baked vegetable crisps made with just four real ingredients. No additives, plant based, and packed with flavour.",
 };
