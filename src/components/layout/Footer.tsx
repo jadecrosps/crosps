@@ -85,7 +85,7 @@ export function Footer() {
             <p className="px-3 py-2 text-[14px] leading-[1.2] text-crosps-charcoal">
               FOLLOW
             </p>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1">
               {FOLLOW_LINKS.map((link) =>
                 link.external ? (
                   <a

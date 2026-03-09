@@ -21,16 +21,15 @@ export function Hero() {
       {/* Content pinned to bottom */}
       <div className="relative z-10 flex h-full flex-col justify-end">
         <div className="mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24 lg:pb-32">
-          <h1 className="text-5xl font-normal leading-[1.1] tracking-tight text-white md:text-7xl lg:text-[96px]">
+          <h1 className="text-[clamp(2.75rem,8vw,3.5rem)] font-normal leading-[1.1] tracking-tight text-white md:text-7xl lg:text-[96px]">
             Real Vegetables,
             <br />
             Unreal <SerifAccent className="text-white">Crunch.</SerifAccent>
           </h1>
 
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 md:text-lg">
-            Baked vegetable crisps made from real, whole vegetables.
-            No artificial colours, no preservatives — just honest,
-            crunchy goodness straight from the ground.
+          <p className="mt-4 max-w-lg text-[18px] leading-relaxed text-white/85 md:text-[20px]">
+            Whole vegetables thoughtfully transformed into gluten-free,
+            nutrient-rich crisps that prove vegetables can be extraordinary.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
