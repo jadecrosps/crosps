@@ -15,8 +15,6 @@ export const BADGES = [
   "No Additives",
   "Plant Based",
   "Soy Free",
-  "Nut Free",
-  "Gluten Free",
   "100% Real Vegetables",
   "High Fibre",
 ];
