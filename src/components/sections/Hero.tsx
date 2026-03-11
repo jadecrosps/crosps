@@ -27,10 +27,9 @@ export function Hero() {
             Unreal <SerifAccent className="text-white">Crunch.</SerifAccent>
           </h1>
 
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 md:text-lg">
-            Baked vegetable crisps made from real, whole vegetables.
-            No artificial colours, no preservatives — just honest,
-            crunchy goodness straight from the ground.
+          <p className="mt-4 max-w-lg text-[20px] leading-[1.4] text-white/85">
+            Whole vegetables thoughtfully transformed into nutrient-rich
+            crisps that prove vegetables can be extraordinary.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
