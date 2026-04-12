@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Crosps | Vegetable crisps made from real, whole, vegetables.",
   description:
-    "Crosps are baked vegetable crisps made with just four real ingredients. No additives, plant based, and packed with flavour.",
+    "Crosps are whole vegetables thoughtfully transformed into gluten-free, plant based crisps that prove vegetables can be extraordinary.",
 };
 
 export default function RootLayout({
