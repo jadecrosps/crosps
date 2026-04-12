@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Crosps | Real Vegetables, Unreal Crunch",
   description:
-    "Crosps are baked vegetable crisps made with just four real ingredients. No additives, plant based, and packed with flavour.",
+    "Crosps are whole vegetables thoughtfully transformed into gluten-free, plant based crisps that prove vegetables can be extraordinary.",
 };
 
 export default function RootLayout({
