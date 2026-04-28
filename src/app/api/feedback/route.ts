@@ -23,12 +23,16 @@ const KLAVIYO_REVISION = "2024-10-15";
 const EVENT_NAME = "QR Scan Submitted";
 
 type FeedbackType = "improvement" | "almost_there" | "review";
+type Sku = "onion" | "tomato" | "pepper";
+
+const VALID_SKUS: readonly Sku[] = ["onion", "tomato", "pepper"];
 
 type Body = {
   email?: string | null;
   rating?: number;
   feedback_text?: string;
   feedback_type?: FeedbackType;
+  sku?: string | null;
 };
 
 export async function POST(req: NextRequest) {
@@ -39,13 +43,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
 
-  const { email, rating, feedback_text, feedback_type } = body;
+  const { email, rating, feedback_text, feedback_type, sku } = body;
+
+  // Defensive: only accept whitelisted SKUs server-side too
+  const validSku: Sku | null =
+    sku && (VALID_SKUS as readonly string[]).includes(sku) ? (sku as Sku) : null;
 
   const submittedAt = new Date().toISOString();
   const properties = {
     rating: typeof rating === "number" ? rating : null,
     feedback_text: feedback_text ?? "",
     feedback_type: feedback_type ?? null,
+    sku: validSku,
     source: "qr-hi",
     submitted_at: submittedAt,
   };
