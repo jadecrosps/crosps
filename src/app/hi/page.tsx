@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
 import { SerifAccent } from "@/components/ui/SerifAccent";
 
 type Step = "rating" | "feedback" | "email" | "done";
 type Band = "low" | "mid" | "high";
+type Sku = "onion" | "tomato" | "pepper";
+
+const VALID_SKUS: readonly Sku[] = ["onion", "tomato", "pepper"];
 
 export default function HiPage() {
   const [step, setStep] = useState<Step>("rating");
@@ -15,6 +18,16 @@ export default function HiPage() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [sku, setSku] = useState<Sku | null>(null);
+
+  // Read ?sku= from URL once on mount; only accept the three valid values
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const param = new URLSearchParams(window.location.search).get("sku");
+    if (param && (VALID_SKUS as readonly string[]).includes(param)) {
+      setSku(param as Sku);
+    }
+  }, []);
 
   const band: Band = (() => {
     const r = rating ?? 0;
@@ -56,6 +69,7 @@ export default function HiPage() {
           rating,
           feedback_text: feedback,
           feedback_type: feedbackType,
+          sku,
         }),
       });
     } catch (err) {
