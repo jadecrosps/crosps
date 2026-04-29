@@ -1,14 +1,34 @@
 "use client";
 
+/* ╔══════════════════════════════════════════════════════════════════════╗
+ * ║ ⚠️  CRITICAL — PHYSICAL PACKAGING DEPENDENCY                          ║
+ * ╠══════════════════════════════════════════════════════════════════════╣
+ * ║ This route (/hi) is the destination for QR codes printed on physical ║
+ * ║ Crosps snack-bag packaging. Every bag in circulation routes here.    ║
+ * ║                                                                      ║
+ * ║   • DO NOT DELETE this route.                                        ║
+ * ║   • DO NOT RENAME this route without adding a permanent 301 redirect ║
+ * ║     from /hi → wherever it moves. (See vercel.json + vercel.json.md.) ║
+ * ║   • DO NOT CHANGE the accepted `sku` values: "onion", "tomato",      ║
+ * ║     "pepper". They are baked into printed QR codes — changing the    ║
+ * ║     strings breaks every bag in the wild.                            ║
+ * ║                                                                      ║
+ * ║ Printed URLs (encoded in physical QR codes):                         ║
+ * ║   https://eatcrosps.com/hi?sku=onion                                 ║
+ * ║   https://eatcrosps.com/hi?sku=tomato                                ║
+ * ║   https://eatcrosps.com/hi?sku=pepper                                ║
+ * ║                                                                      ║
+ * ║ See README.md → "⚠️ Critical: Physical packaging dependencies".      ║
+ * ╚══════════════════════════════════════════════════════════════════════╝
+ */
+
 import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
 import { SerifAccent } from "@/components/ui/SerifAccent";
+import { validateSku, type Sku } from "@/lib/sku";
 
 type Step = "rating" | "feedback" | "email" | "done";
 type Band = "low" | "mid" | "high";
-type Sku = "onion" | "tomato" | "pepper";
-
-const VALID_SKUS: readonly Sku[] = ["onion", "tomato", "pepper"];
 
 export default function HiPage() {
   const [step, setStep] = useState<Step>("rating");
@@ -24,9 +44,7 @@ export default function HiPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const param = new URLSearchParams(window.location.search).get("sku");
-    if (param && (VALID_SKUS as readonly string[]).includes(param)) {
-      setSku(param as Sku);
-    }
+    setSku(validateSku(param));
   }, []);
 
   const band: Band = (() => {

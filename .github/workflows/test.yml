@@ -1,0 +1,25 @@
+name: Test
+
+# Runs on every PR and on every push to main. The /hi → Klaviyo SKU
+# pipeline is locked in by these tests; they are a hard gate for shipping.
+# See README.md → "⚠️ Critical: Physical packaging dependencies".
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run test:ci
