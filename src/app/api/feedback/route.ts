@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
+import { validateSku, type Sku } from "@/lib/sku";
 
 /**
  * POST /api/feedback
@@ -23,9 +24,6 @@ const KLAVIYO_REVISION = "2024-10-15";
 const EVENT_NAME = "QR Scan Submitted";
 
 type FeedbackType = "improvement" | "almost_there" | "review";
-type Sku = "onion" | "tomato" | "pepper";
-
-const VALID_SKUS: readonly Sku[] = ["onion", "tomato", "pepper"];
 
 type Body = {
   email?: string | null;
@@ -45,9 +43,8 @@ export async function POST(req: NextRequest) {
 
   const { email, rating, feedback_text, feedback_type, sku } = body;
 
-  // Defensive: only accept whitelisted SKUs server-side too
-  const validSku: Sku | null =
-    sku && (VALID_SKUS as readonly string[]).includes(sku) ? (sku as Sku) : null;
+  // Defensive: re-validate server-side (client can be tampered with)
+  const validSku: Sku | null = validateSku(sku);
 
   const submittedAt = new Date().toISOString();
   const properties = {
