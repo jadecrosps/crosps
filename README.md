@@ -1,5 +1,41 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## ⚠️ Critical: Physical packaging dependencies
+
+**Read this before touching `/hi` or anything related to it.**
+
+The `/hi` route (`src/app/hi/page.tsx`) is the destination for QR codes
+**printed on physical Crosps snack-bag packaging**. Every bag in circulation
+points here. Bags are already in retailers, in customers' hands, on shelves
+that can't be recalled or reprinted cheaply.
+
+This means:
+
+- **DO NOT delete the `/hi` route.** It is in use in the real world.
+- **DO NOT rename it** without adding a permanent **301 redirect** from
+  `/hi` (preserving query strings) to wherever it moves. The redirect goes
+  in [`vercel.json`](./vercel.json) under `redirects` — see
+  [`vercel.json.md`](./vercel.json.md) for the exact placeholder structure
+  and the rationale around query-string pass-through. Add it **before**
+  the rename ships.
+- **DO NOT change the `sku` parameter values.** The accepted values are
+  exactly `onion`, `tomato`, `pepper`. These strings are encoded in
+  printed QR codes. Changing them — including casing or spelling — breaks
+  scanning behaviour for every bag already in the wild. If you need a new
+  flavour, add a new SKU value; never repurpose an existing one.
+
+### URLs encoded in printed QR codes
+
+| Flavour | Printed URL |
+|---------|-------------|
+| Onion   | `https://eatcrosps.com/hi?sku=onion` |
+| Tomato  | `https://eatcrosps.com/hi?sku=tomato` |
+| Pepper  | `https://eatcrosps.com/hi?sku=pepper` |
+
+The source SVGs for the printed codes live in `qr-codes/` so they can be
+regenerated identically if needed. Any change to those URLs requires
+reprinting packaging — treat it as a hard constraint.
+
 ## Getting Started
 
 First, run the development server:
