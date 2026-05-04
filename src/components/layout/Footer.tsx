@@ -61,7 +61,8 @@ export function Footer() {
               </form>
               {isSuccess && (
                 <p className="mt-2 text-[14px] text-crosps-charcoal">
-                  You&apos;re in! We&apos;ll be in touch.
+                  You&apos;re in. Thank you SO much for subscribing. We
+                  appreciate it so much and we&apos;ll be in touch soon.
                 </p>
               )}
               {error && (
