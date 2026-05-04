@@ -361,7 +361,7 @@ function EmailStep({
         className="w-full border border-crosps-charcoal-15 bg-white px-4 py-4 text-[16px] leading-[1.4] text-crosps-charcoal placeholder:text-crosps-charcoal/40 outline-none focus:border-crosps-charcoal"
       />
 
-      <div className="mt-auto flex flex-col gap-3">
+      <div className="flex flex-col gap-3">
         <button
           type="submit"
           disabled={submitting || !email}
