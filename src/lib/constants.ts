@@ -11,12 +11,12 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const BADGES = [
-  "Only 4 Ingredients",
-  "No Additives",
-  "Plant Based",
-  "Soy Free",
-  "100% Real Vegetables",
   "High Fibre",
+  "Real Vegetables",
+  "Only 4 Ingredients",
+  "Plant Based",
+  "Gluten Free",
+  "No Added Sugar",
 ];
 
 export const PRODUCTS: Product[] = [
