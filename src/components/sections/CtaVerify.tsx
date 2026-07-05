@@ -30,8 +30,8 @@ export function CtaVerify() {
                 STAY UP TO DATE
               </span>
 
-              {/* Heading + body */}
-              <div className="flex flex-col items-center gap-3 text-center">
+              {/* Heading + body — left aligned, badge and form stay centered */}
+              <div className="flex w-full flex-col items-start gap-3 text-left">
                 <h2 className="font-serif text-[32px] italic leading-none text-crosps-charcoal">
                   Be the first in line.
                 </h2>

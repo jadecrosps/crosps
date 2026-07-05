@@ -10,7 +10,7 @@ export function ProductCards() {
         {/* Header: heading left, body right */}
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
           <div className="flex flex-col gap-1 shrink-0">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-[1.2] text-crosps-charcoal">
+            <h2 className="text-[clamp(1.5rem,2.75vw,2rem)] font-normal leading-[1.2] text-crosps-charcoal">
               Every vegetable has its own character.
             </h2>
             <p className="text-[clamp(1.25rem,2.5vw,1.5rem)] leading-[1.2]">
@@ -21,9 +21,13 @@ export function ProductCards() {
             <p>
               Crosps starts with vegetables. We wanted to create a savoury
               snack where the vegetable takes centre stage, not just
-              another crisp with vegetable powder added in. The result is
-              something genuinely different: light, satisfying and made
-              with ingredients you&rsquo;ll actually recognise.
+              another crisp with vegetable powder added in.
+            </p>
+            <br />
+            <p>
+              The result is something genuinely different: light,
+              satisfying and made with ingredients you&rsquo;ll actually
+              recognise.
             </p>
           </div>
         </div>
