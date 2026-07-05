@@ -30,8 +30,8 @@ export function CtaVerify() {
                 STAY UP TO DATE
               </span>
 
-              {/* Heading + body — left aligned, badge and form stay centered */}
-              <div className="flex w-full flex-col items-start gap-3 text-left">
+              {/* Heading + body — centered */}
+              <div className="flex flex-col items-center gap-3 text-center">
                 <h2 className="font-serif text-[32px] italic leading-none text-crosps-charcoal">
                   Be the first in line.
                 </h2>
@@ -57,7 +57,7 @@ export function CtaVerify() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="shrink-0 cursor-pointer text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
+                    className="shrink-0 cursor-pointer px-2 text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
                   >
                     {isLoading ? "..." : "Enter"}
                   </button>

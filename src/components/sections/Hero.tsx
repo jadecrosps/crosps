@@ -33,7 +33,7 @@ export function Hero() {
             Unreal <SerifAccent className="text-white">Crunch.</SerifAccent>
           </h1>
 
-          <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-white/85 md:text-[17px]">
+          <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-white/85 md:text-[18px]">
             Whole vegetables, carefully transformed to preserve their
             natural flavour, colour and character, creating a crisp unlike
             anything else on the shelf.

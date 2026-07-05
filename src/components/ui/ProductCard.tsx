@@ -65,7 +65,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </h3>
         <div className="flex flex-col gap-1 items-center w-full">
-          <p className="font-serif text-[24px] italic leading-[1.2] text-crosps-charcoal">
+          <p className="font-serif text-[20px] italic leading-[1.2] text-crosps-charcoal">
             {product.tagline}
           </p>
         </div>
