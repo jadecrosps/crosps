@@ -51,7 +51,7 @@ export function Footer() {
                   type="submit"
                   aria-label="Subscribe"
                   disabled={isLoading}
-                  className="shrink-0 cursor-pointer opacity-50 disabled:opacity-20"
+                  className="shrink-0 cursor-pointer px-2 opacity-50 disabled:opacity-20"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="3" y1="8" x2="13" y2="8" />
