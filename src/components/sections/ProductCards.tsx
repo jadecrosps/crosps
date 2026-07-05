@@ -9,7 +9,7 @@ export function ProductCards() {
         <div className="flex flex-col gap-16 md:gap-20">
         {/* Header: heading left, body right */}
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
-          <div className="flex flex-col gap-1 shrink-0">
+          <div className="flex flex-col gap-[10px] shrink-0 md:gap-1">
             <h2 className="text-[32px] font-normal leading-[1.2] text-crosps-charcoal md:text-[40px]">
               Every vegetable has its own character.
             </h2>
