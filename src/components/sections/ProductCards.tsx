@@ -10,10 +10,10 @@ export function ProductCards() {
         {/* Header: heading left, body right */}
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
           <div className="flex flex-col gap-1 shrink-0">
-            <h2 className="text-[clamp(1.5rem,2.75vw,2rem)] font-normal leading-[1.2] text-crosps-charcoal">
+            <h2 className="text-[32px] font-normal leading-[1.2] text-crosps-charcoal md:text-[40px]">
               Every vegetable has its own character.
             </h2>
-            <p className="text-[clamp(1.25rem,2.5vw,1.5rem)] leading-[1.2]">
+            <p className="text-[24px] leading-[1.2]">
               <SerifAccent>We simply let it shine.</SerifAccent>
             </p>
           </div>
