@@ -60,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Text content */}
-      <div className="flex flex-col items-center gap-2 px-2 text-center">
+      <div className="flex flex-col items-center gap-2 px-2 pt-2 text-center">
         <h3 className="text-[32px] font-normal leading-[1.2] text-crosps-charcoal">
           {product.name}
         </h3>

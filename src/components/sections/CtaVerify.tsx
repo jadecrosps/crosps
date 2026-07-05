@@ -23,7 +23,7 @@ export function CtaVerify() {
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <div className="flex flex-col md:flex-row">
           {/* Left: green light panel */}
-          <div className="flex shrink-0 flex-col items-center justify-center bg-crosps-green-light px-6 py-10 md:w-[42%] md:px-6 md:py-[185px]">
+          <div className="flex shrink-0 flex-col items-center justify-center bg-crosps-green-light px-6 pt-10 pb-12 md:w-[42%] md:px-6 md:py-[185px]">
             <div className="flex max-w-[336px] flex-col items-center gap-10">
               {/* NEWS badge */}
               <span className="bg-white px-3 py-2 text-[12px] font-medium leading-[1.4] tracking-[1px] text-crosps-charcoal">
