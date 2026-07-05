@@ -6,7 +6,7 @@ export function ProductCards() {
   return (
     <section id="products" className="bg-white pb-24 pt-12 md:pb-36 md:pt-16">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <div className="flex flex-col gap-16 md:gap-20">
+        <div className="flex flex-col gap-10 md:gap-20">
         {/* Header: heading left, body right */}
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
           <div className="flex flex-col gap-[10px] shrink-0 md:gap-1">
@@ -28,10 +28,15 @@ export function ProductCards() {
 
         {/* Product cards + CTA */}
         <div className="flex flex-col items-center gap-14 md:gap-[72px]">
-          {/* Cards grid */}
-          <div className="grid w-full grid-cols-1 gap-12 md:grid-cols-3 md:gap-4">
+          {/* Cards: horizontal snap-carousel on mobile, 3-col grid on desktop */}
+          <div className="flex w-full gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-x-visible md:gap-4">
             {PRODUCTS.map((product) => (
-              <ProductCard key={product.name} product={product} />
+              <div
+                key={product.name}
+                className="w-[80vw] shrink-0 snap-start md:w-auto"
+              >
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         </div>
