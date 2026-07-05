@@ -13,21 +13,15 @@ export function ProductCards() {
             <h2 className="text-[32px] font-normal leading-[1.2] text-crosps-charcoal md:text-[40px]">
               Every vegetable has its own character.
             </h2>
-            <p className="text-[24px] leading-[1.2]">
+            <p className="text-[28px] leading-[1.2]">
               <SerifAccent>We simply let it shine.</SerifAccent>
             </p>
           </div>
           <div className="max-w-[557px] text-[16px] font-normal leading-[1.5] text-crosps-charcoal-88 md:text-[18px]">
             <p>
-              Crosps starts with vegetables. We wanted to create a savoury
-              snack where the vegetable takes centre stage, not just
-              another crisp with vegetable powder added in.
-            </p>
-            <br />
-            <p>
-              The result is something genuinely different: light,
-              satisfying and made with ingredients you&rsquo;ll actually
-              recognise.
+              Made with real vegetables and just four carefully chosen
+              ingredients, Crosps proves that exceptional snacking
+              doesn&rsquo;t need unnecessary complexity.
             </p>
           </div>
         </div>
