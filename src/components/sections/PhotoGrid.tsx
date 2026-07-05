@@ -82,8 +82,8 @@ export function PhotoGrid() {
           </div>
           <div className="flex flex-col justify-center">
             <p className="mb-2 text-[length:var(--text-saans-18)] text-[var(--color-crosps-charcoal-88)] md:mb-4">
-              A look behind the scenes, early tastings, and the moments that
-              shape Crosps. Don&apos;t miss out.
+              From packaging, photoshoots and launch day, come behind the
+              scenes as Crosps comes to life.
             </p>
             <a
               href="https://www.instagram.com/eatcrosps/"
@@ -91,7 +91,7 @@ export function PhotoGrid() {
               rel="noopener noreferrer"
               className="mt-4 inline-flex w-fit items-center justify-center border border-crosps-charcoal bg-transparent px-6 py-3 text-[length:var(--text-button)] font-medium uppercase tracking-wide text-crosps-charcoal transition-colors hover:bg-crosps-charcoal hover:text-white md:mt-0"
             >
-              Follow Our Socials
+              Follow Us
             </a>
           </div>
         </div>

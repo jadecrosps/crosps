@@ -16,26 +16,26 @@ export const BADGES = [
 
 export const PRODUCTS: Product[] = [
   {
-    name: "Onion",
-    tagline: "Bold. Sweet. Unexpected",
+    name: "Mixed Onion",
+    tagline: "Bold. Sweet. Unexpected.",
     description:
-      "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite. Complex, savoury, you either love it or hate it",
+      "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite. Complex, savoury, you either love it or hate it.",
     imageSrc: "/products/onion.png",
     bgColor: "#f8bbc3",
   },
   {
     name: "Tomato",
-    tagline: "Bright. Tangy. Familiar",
+    tagline: "Bright. Tangy. Familiar.",
     description:
-      "A beloved favourite, gently crisped to capture it\u2019s juicy, vibrant flavour. Comforting yet elevated. One of our most popular SKUs.",
+      "A beloved favourite, gently crisped to capture its juicy, vibrant flavour. Comforting yet elevated.",
     imageSrc: "/products/tomato.png",
     bgColor: "#fdad93",
   },
   {
-    name: "Pepper",
-    tagline: "Sweet. Savoury. Underrated.",
+    name: "Mixed Bell Pepper",
+    tagline: "Sweet. Crisp. Vibrant.",
     description:
-      "One of the most popular vegetables in the world. Now re-imagined into a light crunch and bold colour. A classic with a refined twist.",
+      "One of the most popular vegetables in the world, re-imagined into a light crunch and bold colour. A classic with a refined twist.",
     imageSrc: "/products/pepper.png",
     bgColor: "#f8cf88",
   },

@@ -31,14 +31,14 @@ export function CtaVerify() {
               </span>
 
               {/* Heading + body */}
-              <div className="flex flex-col items-center gap-2 text-center">
+              <div className="flex flex-col items-center gap-3 text-center">
                 <h2 className="font-serif text-[32px] italic leading-none text-crosps-charcoal">
-                  You&apos;ll want in early.
+                  Be first in line.
                 </h2>
-                <div className="text-[16px] leading-[1.5] text-crosps-charcoal-88">
-                  <p>Launching with tomato, pepper and onion.</p>
-                  <p>Get in now, and have no regrets later.</p>
-                </div>
+                <p className="max-w-[320px] text-[16px] leading-[1.5] text-crosps-charcoal-88">
+                  Join the waitlist for launch updates, exclusive offers and
+                  first access to Crosps.
+                </p>
               </div>
 
               {/* Email input */}
@@ -59,7 +59,7 @@ export function CtaVerify() {
                     disabled={isLoading}
                     className="shrink-0 cursor-pointer text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
                   >
-                    {isLoading ? "..." : "Enter"}
+                    {isLoading ? "..." : "Join Waitlist"}
                   </button>
                 </div>
                 <div className="h-px w-full bg-crosps-charcoal-15" />

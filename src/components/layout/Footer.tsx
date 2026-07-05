@@ -36,7 +36,7 @@ export function Footer() {
           {/* Left: mailing list */}
           <div className="flex flex-col gap-6 lg:w-[343px] lg:shrink-0">
             <p className="font-serif text-[32px] leading-[1.2] text-crosps-charcoal">
-              Join our mailing list before your friends do.
+              Join us from the beginning.
             </p>
             <div>
               <form onSubmit={handleSubmit} className="flex h-[50px] items-center justify-between border border-crosps-charcoal-15 px-6 py-4">

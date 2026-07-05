@@ -1,5 +1,3 @@
-import { SerifAccent } from "@/components/ui/SerifAccent";
-
 export function Hero() {
   return (
     <section className="relative min-h-[480px] h-[min(90vh,900px)] w-full overflow-hidden">
@@ -28,14 +26,16 @@ export function Hero() {
       <div className="relative z-10 flex h-full flex-col justify-end">
         <div className="mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24 lg:pb-32">
           <h1 className="text-[clamp(2.75rem,8vw,3.5rem)] font-normal leading-[1.1] tracking-tight text-white md:text-7xl lg:text-[96px]">
-            Real Vegetables,
+            Real Vegetables.
             <br />
-            Unreal <SerifAccent className="text-white">Crunch.</SerifAccent>
+            Just Four Ingredients.
           </h1>
 
-          <p className="mt-4 max-w-lg text-[18px] leading-relaxed text-white/85 md:text-[20px]">
-            Whole vegetables thoughtfully transformed into gluten-free,
-            nutrient-rich crisps that prove vegetables can be extraordinary.
+          <p className="mt-4 max-w-xl text-[18px] leading-relaxed text-white/85 md:text-[20px]">
+            The vegetable isn&rsquo;t just an ingredient. it&rsquo;s the
+            product. Made to preserve the natural flavour, colour and
+            character of real vegetables, creating a crisp unlike anything
+            else on the shelf.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -43,7 +43,7 @@ export function Hero() {
               href="#signup"
               className="inline-flex items-center justify-center border border-white px-6 py-3 text-[16px] font-medium uppercase tracking-wide text-white transition-colors duration-200 hover:bg-white/10"
             >
-              Sign Me Up
+              Join the Waitlist
             </a>
           </div>
         </div>
