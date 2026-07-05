@@ -17,7 +17,7 @@ export function ProductCards() {
               <SerifAccent>We simply let it shine.</SerifAccent>
             </p>
           </div>
-          <div className="max-w-[557px] text-[16px] font-normal leading-[1.5] text-crosps-charcoal-88 md:text-[18px]">
+          <div className="max-w-[557px] text-[18px] font-normal leading-[1.5] text-crosps-charcoal-88">
             <p>
               Made with real vegetables and just four carefully chosen
               ingredients, Crosps proves that exceptional snacking
