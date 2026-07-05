@@ -1,10 +1,5 @@
 import type { Product, Feature, Ingredient, NavLink } from "@/types";
 
-// ── Hero image ──────────────────────────────────────────────────────
-// Change this URL to swap the hero background. Use any absolute URL or
-// a path relative to /public (e.g. "/hero.jpg").
-export const HERO_IMAGE = "/homepage-hero.png";
-
 export const NAV_LINKS: NavLink[] = [
   { label: "Shop", href: "#products" },
   { label: "What", href: "#story" },

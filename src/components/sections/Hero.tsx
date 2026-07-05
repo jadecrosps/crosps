@@ -1,19 +1,25 @@
-import Image from "next/image";
 import { SerifAccent } from "@/components/ui/SerifAccent";
-import { HERO_IMAGE } from "@/lib/constants";
 
 export function Hero() {
   return (
     <section className="relative min-h-[480px] h-[min(90vh,900px)] w-full overflow-hidden">
-      {/* Background image — change HERO_IMAGE in lib/constants.ts to swap */}
-      <Image
-        src={HERO_IMAGE}
-        alt="Farmer working in a vegetable field"
-        fill
-        className="object-cover"
-        priority
-        sizes="100vw"
-      />
+      {/* Background video — silent autoplay loop.
+          Poster shows immediately while the video loads.
+          To swap the video, replace /public/hero.mp4 + /public/hero.webm
+          (and /public/hero-poster.jpg for the loading fallback). */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster="/hero-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/hero.webm" type="video/webm" />
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/30" />
