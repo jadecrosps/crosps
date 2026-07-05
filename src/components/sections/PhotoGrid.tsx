@@ -65,7 +65,7 @@ export function PhotoGrid() {
         }));
 
   return (
-    <section className="bg-white py-20 md:py-28 lg:py-36">
+    <section className="bg-white py-12 md:py-16 lg:py-20">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         {/* Header: two columns per Figma */}
         <div className="mb-10 grid gap-6 md:grid-cols-2 md:gap-20 lg:mb-16">
