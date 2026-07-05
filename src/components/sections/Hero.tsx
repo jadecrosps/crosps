@@ -27,13 +27,13 @@ export function Hero() {
       {/* Content pinned to bottom */}
       <div className="relative z-10 flex h-full flex-col justify-end">
         <div className="mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24 lg:pb-32">
-          <h1 className="text-[clamp(2.25rem,6.5vw,3rem)] font-normal leading-[1.1] tracking-tight text-white md:text-6xl lg:text-[72px]">
+          <h1 className="text-[40px] font-normal leading-[1.1] tracking-tight text-white md:text-6xl lg:text-[72px]">
             Real Vegetables,
             <br />
             Unreal <SerifAccent className="text-white">Crunch.</SerifAccent>
           </h1>
 
-          <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-white/85 md:text-[18px]">
+          <p className="mt-4 max-w-lg text-[17px] leading-relaxed text-white/85 md:text-[18px]">
             Whole vegetables, carefully transformed to preserve their
             natural flavour, colour and character, creating a crisp unlike
             anything else on the shelf.

@@ -53,7 +53,7 @@ export function ProductCard({ product }: ProductCardProps) {
             alt={`${product.name} crisps`}
             width={280}
             height={280}
-            className="object-contain"
+            className="object-contain w-[220px] md:w-[280px] h-auto"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>

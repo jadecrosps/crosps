@@ -76,7 +76,7 @@ export function PhotoGrid() {
             >
               FOLLOW OUR JOURNEY
             </p>
-            <h2 className="text-[length:var(--text-saans-40)] font-normal tracking-tight text-crosps-charcoal md:text-4xl">
+            <h2 className="text-[28px] font-normal leading-[1.1] tracking-tight text-crosps-charcoal md:text-4xl">
               Step inside the world of <SerifAccent>Crosps</SerifAccent>
             </h2>
           </div>
