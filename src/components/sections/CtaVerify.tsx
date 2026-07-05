@@ -30,15 +30,15 @@ export function CtaVerify() {
                 STAY UP TO DATE
               </span>
 
-              {/* Heading + body */}
-              <div className="flex flex-col items-center gap-2 text-center">
+              {/* Heading + body — left aligned, badge and form stay centered */}
+              <div className="flex w-full flex-col items-start gap-3 text-left">
                 <h2 className="font-serif text-[32px] italic leading-none text-crosps-charcoal">
-                  You&apos;ll want in early.
+                  Be the first in line.
                 </h2>
-                <div className="text-[16px] leading-[1.5] text-crosps-charcoal-88">
-                  <p>Launching with tomato, pepper and onion.</p>
-                  <p>Get in now, and have no regrets later.</p>
-                </div>
+                <p className="text-[16px] leading-[1.5] text-crosps-charcoal-88">
+                  Join the waitlist for launch updates, exclusive offers
+                  and first access to Crosps.
+                </p>
               </div>
 
               {/* Email input */}

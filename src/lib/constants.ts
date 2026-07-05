@@ -33,7 +33,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: "Pepper",
-    tagline: "Sweet. Savoury. Underrated.",
+    tagline: "Sweet. Savoury. Vibrant.",
     description:
       "One of the most popular vegetables in the world. Now re-imagined into a light crunch and bold colour. A classic with a refined twist.",
     imageSrc: "/products/pepper.png",
