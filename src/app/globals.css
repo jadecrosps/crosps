@@ -64,6 +64,15 @@
   }
 }
 
+/* ── Hide scrollbar ──────────────────────────────────────── */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* ── Ticker / marquee ────────────────────────────────────── */
 @utility animate-ticker {
   animation: ticker 30s linear infinite;
@@ -75,5 +84,21 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* ── Step transitions (used on /hi flow) ─────────────────── */
+.fade-in {
+  animation: fade-in-up 320ms ease-out both;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

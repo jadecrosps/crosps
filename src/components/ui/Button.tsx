@@ -14,7 +14,7 @@ export function Button({
   onClick,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center px-6 py-3 text-[16px] font-medium tracking-wide transition-colors duration-200 cursor-pointer";
+    "inline-flex items-center justify-center px-6 py-3 text-[16px] font-medium uppercase tracking-wide transition-colors duration-200 cursor-pointer";
 
   const variants = {
     primary: "bg-crosps-green text-white hover:bg-crosps-green-dark",

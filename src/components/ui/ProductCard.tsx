@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <article
       ref={ref}
-      className={`group flex flex-col gap-6 transition-all duration-700 ease-out ${
+      className={`group flex flex-col gap-3 transition-all duration-700 ease-out ${
         visible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-8"
@@ -53,19 +53,19 @@ export function ProductCard({ product }: ProductCardProps) {
             alt={`${product.name} crisps`}
             width={280}
             height={280}
-            className="object-contain"
+            className="object-contain w-[220px] md:w-[280px] h-auto"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>
       </div>
 
       {/* Text content */}
-      <div className="flex flex-col items-center gap-4 px-2 text-center">
+      <div className="flex flex-col items-center gap-2 px-2 pt-2 text-center">
         <h3 className="text-[32px] font-normal leading-[1.2] text-crosps-charcoal">
           {product.name}
         </h3>
-        <div className="flex flex-col gap-2 items-center w-full">
-          <p className="font-serif text-[24px] leading-[1.2] text-crosps-charcoal">
+        <div className="flex flex-col gap-1 items-center w-full">
+          <p className="font-serif text-[20px] italic leading-[1.2] text-crosps-charcoal">
             {product.tagline}
           </p>
         </div>

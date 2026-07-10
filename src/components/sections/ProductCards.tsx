@@ -4,41 +4,39 @@ import { SerifAccent } from "@/components/ui/SerifAccent";
 
 export function ProductCards() {
   return (
-    <section id="products" className="bg-white py-16 md:py-20">
+    <section id="products" className="bg-white pb-24 pt-12 md:pb-36 md:pt-16">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <div className="flex flex-col gap-16 md:gap-20">
+        <div className="flex flex-col gap-10 md:gap-20">
         {/* Header: heading left, body right */}
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
-          <div className="flex flex-col gap-1 shrink-0">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-[1.2] text-crosps-charcoal">
-              A taste of what&apos;s to come
+          <div className="flex flex-col gap-[10px] shrink-0 md:gap-1">
+            <h2 className="text-[32px] font-normal leading-[1.2] text-crosps-charcoal md:text-[40px]">
+              Every vegetable has its own character.
             </h2>
-            <p className="text-[clamp(1rem,2vw,1.5rem)] leading-[1.2]">
-              <SerifAccent>
-                ....Because not all crisps are created equal.
-              </SerifAccent>
+            <p className="text-[28px] leading-[1.2]">
+              <SerifAccent>We simply let it shine.</SerifAccent>
             </p>
           </div>
           <div className="max-w-[557px] text-[18px] font-normal leading-[1.5] text-crosps-charcoal-88">
             <p>
-              Whole vegetables, vacuum-fried at low temperatures to preserve
-              their natural flavour, colour, and nutrients. Creating a crisp
-              that&apos;s lighter, cleaner, and genuinely satisfying.
-            </p>
-            <br />
-            <p>
-              Each crisp celebrates the character of the vegetable itself,
-              elevated into something worth savouring.
+              Made with real vegetables and just four carefully chosen
+              ingredients, Crosps proves that exceptional snacking
+              doesn&rsquo;t need unnecessary complexity.
             </p>
           </div>
         </div>
 
         {/* Product cards + CTA */}
         <div className="flex flex-col items-center gap-14 md:gap-[72px]">
-          {/* Cards grid */}
-          <div className="grid w-full grid-cols-1 gap-12 md:grid-cols-3 md:gap-4">
+          {/* Cards: horizontal snap-carousel on mobile, 3-col grid on desktop */}
+          <div className="flex w-full gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-x-visible md:gap-4">
             {PRODUCTS.map((product) => (
-              <ProductCard key={product.name} product={product} />
+              <div
+                key={product.name}
+                className="w-[80vw] shrink-0 snap-start md:w-auto"
+              >
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         </div>

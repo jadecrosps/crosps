@@ -3,7 +3,7 @@ import { BADGES } from "@/lib/constants";
 function TickerItem({ text }: { text: string }) {
   return (
     <>
-      <span className="font-serif text-[32px] leading-[1.2] text-crosps-charcoal whitespace-nowrap">
+      <span className="font-serif text-[28px] italic leading-[1.2] text-crosps-charcoal whitespace-nowrap md:text-[32px]">
         {text}
       </span>
       <span className="size-[5px] rounded-full bg-crosps-charcoal shrink-0" />

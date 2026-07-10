@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useSubscribe } from "@/hooks/useSubscribe";
 
 export function CtaVerify() {
   const [email, setEmail] = useState("");
+  const { subscribe, isLoading, isSuccess, error } = useSubscribe();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (isSuccess) setEmail("");
+  }, [isSuccess]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email) return;
-    setEmail("");
+    if (!email || isLoading) return;
+    await subscribe(email);
   }
 
   return (
@@ -17,22 +23,22 @@ export function CtaVerify() {
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <div className="flex flex-col md:flex-row">
           {/* Left: green light panel */}
-          <div className="flex shrink-0 flex-col items-center justify-center bg-crosps-green-light px-6 py-20 md:w-[42%] md:px-6 md:py-[185px]">
+          <div className="flex shrink-0 flex-col items-center justify-center bg-crosps-green-light px-6 pt-10 pb-12 md:w-[42%] md:px-6 md:py-[185px]">
             <div className="flex max-w-[336px] flex-col items-center gap-10">
               {/* NEWS badge */}
               <span className="bg-white px-3 py-2 text-[12px] font-medium leading-[1.4] tracking-[1px] text-crosps-charcoal">
                 STAY UP TO DATE
               </span>
 
-              {/* Heading + body */}
-              <div className="flex flex-col items-center gap-2 text-center">
+              {/* Heading + body — centered */}
+              <div className="flex flex-col items-center gap-3 text-center">
                 <h2 className="font-serif text-[32px] italic leading-none text-crosps-charcoal">
-                  You&apos;ll want in early.
+                  Be the first in line.
                 </h2>
-                <div className="text-[16px] leading-[1.5] text-crosps-charcoal-88">
-                  <p>Launching with tomato, pepper and onion.</p>
-                  <p>Get in now, and have no regrets later.</p>
-                </div>
+                <p className="text-[16px] leading-[1.5] text-crosps-charcoal-88">
+                  Join the waitlist for launch updates, exclusive offers
+                  and first access to Crosps.
+                </p>
               </div>
 
               {/* Email input */}
@@ -50,12 +56,23 @@ export function CtaVerify() {
                   />
                   <button
                     type="submit"
-                    className="shrink-0 cursor-pointer text-[16px] leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal"
+                    disabled={isLoading}
+                    className="shrink-0 cursor-pointer px-2 text-[16px] uppercase leading-none text-crosps-charcoal-72 hover:text-crosps-charcoal disabled:opacity-50"
                   >
-                    Enter
+                    {isLoading ? "..." : "Enter"}
                   </button>
                 </div>
                 <div className="h-px w-full bg-crosps-charcoal-15" />
+                {isSuccess && (
+                  <p className="mt-2 text-center text-[14px] text-crosps-charcoal">
+                    You&apos;re in! We&apos;ll be in touch.
+                  </p>
+                )}
+                {error && (
+                  <p className="mt-2 text-center text-[14px] text-red-600">
+                    {error}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -63,8 +80,8 @@ export function CtaVerify() {
           {/* Right: image */}
           <div className="relative aspect-[786/621] w-full md:flex-1">
             <Image
-              src="/brocolli_car.png"
-              alt="Person holding broccoli in a car"
+              src="/crosps-vegetable-farm.png"
+              alt="Crosps vegetable farm"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 58vw"

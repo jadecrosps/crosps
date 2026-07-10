@@ -1,24 +1,17 @@
 import type { Product, Feature, Ingredient, NavLink } from "@/types";
 
-// ── Hero image ──────────────────────────────────────────────────────
-// Change this URL to swap the hero background. Use any absolute URL or
-// a path relative to /public (e.g. "/hero.jpg").
-export const HERO_IMAGE = "/hero.png";
-
 export const NAV_LINKS: NavLink[] = [
   { label: "Shop", href: "#products" },
   { label: "What", href: "#story" },
 ];
 
 export const BADGES = [
-  "Only 4 Ingredients",
-  "No Additives",
-  "Plant Based",
-  "Soy Free",
-  "Nut Free",
-  "Gluten Free",
-  "100% Real Vegetables",
   "High Fibre",
+  "Real Vegetables",
+  "Only 4 Ingredients",
+  "Plant Based",
+  "Gluten Free",
+  "No Added Sugar",
 ];
 
 export const PRODUCTS: Product[] = [
@@ -40,7 +33,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: "Pepper",
-    tagline: "Sweet. Savoury. Underrated.",
+    tagline: "Sweet. Savoury. Vibrant.",
     description:
       "One of the most popular vegetables in the world. Now re-imagined into a light crunch and bold colour. A classic with a refined twist.",
     imageSrc: "/products/pepper.png",

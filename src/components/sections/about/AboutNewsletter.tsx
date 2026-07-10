@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSubscribe } from "@/hooks/useSubscribe";
 
 export function AboutNewsletter() {
   const [email, setEmail] = useState("");
+  const { subscribe, isLoading, isSuccess, error } = useSubscribe();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (isSuccess) setEmail("");
+  }, [isSuccess]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email) return;
-    setEmail("");
+    if (!email || isLoading) return;
+    await subscribe(email);
   }
 
   return (
@@ -31,11 +37,22 @@ export function AboutNewsletter() {
             />
             <button
               type="submit"
-              className="shrink-0 cursor-pointer text-[14px] font-medium uppercase tracking-wide text-crosps-charcoal transition-opacity hover:opacity-80"
+              disabled={isLoading}
+              className="shrink-0 cursor-pointer text-[14px] font-medium uppercase tracking-wide text-crosps-charcoal transition-opacity hover:opacity-80 disabled:opacity-50"
             >
-              Subscribe
+              {isLoading ? "..." : "Subscribe"}
             </button>
           </form>
+          {isSuccess && (
+            <p className="mt-3 text-[14px] text-crosps-charcoal">
+              You&apos;re in! We&apos;ll be in touch.
+            </p>
+          )}
+          {error && (
+            <p className="mt-3 text-[14px] text-red-600">
+              {error}
+            </p>
+          )}
         </div>
       </div>
     </section>
