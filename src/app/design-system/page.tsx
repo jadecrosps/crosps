@@ -11,6 +11,7 @@ import { EmailCapture } from "@/components/v2/EmailCapture";
 import { IngredientCard, VegetableIngredientCard } from "@/components/v2/IngredientCard";
 import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
+import { StorySection } from "@/components/v2/StorySection";
 
 export const metadata: Metadata = {
   title: "Design System | Crosps",
@@ -331,8 +332,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
 
+          <div>
+            <p className="type-mono px-5 text-ink-50 md:px-10">12b · Story</p>
+            <StorySection />
+          </div>
+
           <div className="px-5 md:px-10">
-            <p className="type-mono mb-4 text-ink-50">12b · Waitlist banner</p>
+            <p className="type-mono mb-4 text-ink-50">12c · Waitlist banner</p>
             <div className="grid md:grid-cols-[574px_1fr]">
               <div className="flex flex-col items-center justify-center gap-10 bg-cream px-6 py-20 text-center md:py-[185px]">
                 <div className="flex flex-col gap-2">
@@ -354,7 +360,7 @@ export default function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col items-center gap-12 px-5 md:px-10">
-            <p className="type-mono self-start text-ink-50">12c · Stockists</p>
+            <p className="type-mono self-start text-ink-50">12d · Stockists</p>
             <SectionHeading title="Found in good places" subtitle="Find Crosps in some of the best shops." />
             <div className="flex flex-wrap items-end justify-center gap-14">
               {STOCKISTS.map((s) => (
@@ -365,7 +371,7 @@ export default function DesignSystemPage() {
           </div>
 
           <div className="px-5 md:px-10">
-            <p className="type-mono mb-4 text-ink-50">12d · Instagram</p>
+            <p className="type-mono mb-4 text-ink-50">12e · Instagram</p>
             <div className="mb-6 flex items-end justify-between">
               <div className="flex flex-col gap-2">
                 <p className="type-label text-ink">Socials</p>
@@ -385,7 +391,7 @@ export default function DesignSystemPage() {
           </div>
 
           <div>
-            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">12e · Footer</p>
+            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">12f · Footer</p>
             <Footer />
           </div>
         </div>
