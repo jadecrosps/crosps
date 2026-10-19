@@ -119,7 +119,7 @@ export const V2_LINKS = {
   about: "/about",
   faq: "/v2/faq",
   contact: "/contact",
-  product: (slug: string) => `/v2#shop-${slug}`,
+  product: (slug: string) => `/v2/products/${slug}`,
 };
 
 // Side margin for V2 pages. Default 80px; ?gutter=40|60|80|100|120 to compare.
@@ -127,3 +127,69 @@ export function gutterStyle(gutter?: string): React.CSSProperties {
   const px = [40, 60, 80, 100, 120].includes(Number(gutter)) ? Number(gutter) : 80;
   return { "--gutter": `${px}px` } as React.CSSProperties;
 }
+
+// Product page content. Prices and checkout come from Shopify when it's
+// connected; these are the fallbacks and the copy.
+export type ProductDetails = {
+  shopifyHandle: string;
+  vegetable: { label: string; image: string; crop?: Crop; colour: string };
+  paragraphs: string[];
+  gallery: { src: string; alt: string; contain?: boolean }[];
+};
+
+export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
+  tomato: {
+    shopifyHandle: "tomato-chips",
+    vegetable: { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
+    paragraphs: [
+      "Tomatoes do more than add flavour. Naturally rich in lycopene, vitamin C and potassium, they’re a nutrient-dense vegetable (or fruit!) that brings colour and crunch to every bite.",
+      "Gently crisped to preserve their goodness, these vibrant slices pack all the character of a tangy, delicious tomato, with a crispy twist.",
+    ],
+    gallery: [
+      { src: "/v2/pack-tomato.png", alt: "Tomato Chips pack", contain: true },
+      { src: "/v2/hover-tomato.jpg", alt: "Tomato Chips on the go" },
+      { src: "/v2/ing-tomato.jpg", alt: "Fresh tomato" },
+      { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
+    ],
+  },
+  onion: {
+    shopifyHandle: "onion-chips",
+    vegetable: { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+    paragraphs: [
+      "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite.",
+      "Complex and savoury: you either love it or hate it.",
+    ],
+    gallery: [
+      { src: "/v2/pack-onion.png", alt: "Onion Chips pack", contain: true },
+      { src: "/v2/hover-onion.jpg", alt: "Onion Chips on the go" },
+      { src: "/v2/lifestyle-pack.jpg", alt: "Carrying Crosps" },
+      { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
+    ],
+  },
+  pepper: {
+    shopifyHandle: "pepper-chips",
+    vegetable: {
+      label: "Peppers",
+      image: "/v2/ing-pepper.jpg",
+      crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
+      colour: "var(--color-pepper)",
+    },
+    paragraphs: [
+      "One of the most popular vegetables in the world, now reimagined as a light crunch with bold colour.",
+      "A classic with a refined twist.",
+    ],
+    gallery: [
+      { src: "/v2/pack-pepper.png", alt: "Pepper Chips pack", contain: true },
+      { src: "/v2/story.jpg", alt: "A pepper crisp next to a fresh slice of pepper" },
+      { src: "/v2/ing-pepper.jpg", alt: "Fresh green pepper" },
+      { src: "/v2/lifestyle-pack.jpg", alt: "Carrying Crosps" },
+      { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
+    ],
+  },
+};
+
+// "Nut free" from the Figma is left out: the facility also handles nuts.
+export const PRODUCT_CLAIMS = ["Plant based", "Gluten free", "No additives", "Soy free", "High fibre", "100% real vegetables"];
+
+export const ALLERGEN_NOTE =
+  "Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.";
