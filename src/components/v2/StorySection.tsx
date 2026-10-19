@@ -34,7 +34,7 @@ export function StorySection({ image = "/v2/story.jpg", href = "#" }: { image?: 
           </div>
         </div>
         {/* Keeps the Figma frame ratio (787×737) at every width. */}
-        <div className="relative aspect-[787/737] w-full min-w-0 self-start lg:max-w-[640px] lg:flex-1">
+        <div className="relative aspect-[787/737] w-full min-w-0 self-start lg:max-w-[800px] lg:flex-1">
           <Image src={image} alt="A pepper crisp next to a fresh slice of pepper" fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
         </div>
       </div>
