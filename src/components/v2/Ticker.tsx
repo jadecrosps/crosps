@@ -16,7 +16,8 @@ export function Ticker({ items }: { items: string[] }) {
 
   return (
     <div className="overflow-hidden bg-cream py-6">
-      <div className="animate-ticker flex w-max">
+      {/* Half the speed of the live site's ticker, which shares the animation. */}
+      <div className="animate-ticker flex w-max" style={{ animationDuration: "60s" }}>
         {row(false)}
         {row(true)}
       </div>

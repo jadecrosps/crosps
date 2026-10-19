@@ -15,6 +15,6 @@ export function SectionHeading({
   );
 }
 
-export function Divider() {
-  return <hr className="w-full border-0 border-t border-ink-10" />;
+export function Divider({ className = "" }: { className?: string }) {
+  return <hr className={`w-full border-0 border-t border-ink-10 ${className}`} />;
 }

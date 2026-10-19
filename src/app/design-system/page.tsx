@@ -11,6 +11,8 @@ import { EmailCapture } from "@/components/v2/EmailCapture";
 import { IngredientCard, VegetableIngredientCard } from "@/components/v2/IngredientCard";
 import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
+import { StorySection } from "@/components/v2/StorySection";
+import { FaqDirectory, type FaqGroup } from "@/components/v2/FaqDirectory";
 
 export const metadata: Metadata = {
   title: "Design System | Crosps",
@@ -55,11 +57,79 @@ const SPACING = [8, 16, 24, 40, 56, 64, 80];
 
 const PRODUCTS = [
   { name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
-  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags" },
-  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags" },
+  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags", status: "Pre order" },
+  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags", status: "Pre order" },
 ];
 
 const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
+
+// Current eatcrosps.com/faq answers, grouped, plus allergens.
+const FAQ_GROUPS: FaqGroup[] = [
+  {
+    id: "ingredients",
+    title: "Ingredients & Nutrition",
+    items: [
+      {
+        question: "What are Crosps made of?",
+        answer:
+          "Crosps are made from just four ingredients: real vegetables (tomato, onion, or pepper depending on the flavour), rapeseed oil, sea salt, and a touch of tapioca starch. No additives, no fillers. Just simple, recognisable ingredients.",
+      },
+      {
+        question: "Are your products vegan?",
+        answer:
+          "Yes. All Crosps flavours are 100% plant-based and vegan. We use only vegetables, oil, sea salt, and tapioca starch, with no animal-derived ingredients.",
+      },
+      {
+        question: "Do Crosps contain any allergens?",
+        answer:
+          "No. Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
+      },
+      {
+        question: "Can kids eat Crosps?",
+        answer:
+          "Crosps are made from simple, real ingredients and are a source of fibre. They’re a snack the whole family can enjoy. As with any snack, we recommend them as part of a balanced diet.",
+      },
+    ],
+  },
+  {
+    id: "product",
+    title: "The Product",
+    items: [
+      {
+        question: "How are they so crunchy?",
+        answer:
+          "We use a gentle baking process that crisps the vegetables without excess oil. Lower heat helps preserve nutrients and flavour while still giving you that satisfying crunch you expect from a great crisp.",
+      },
+      {
+        question: "What makes Crosps different from normal crisps?",
+        answer:
+          "Crosps start with real vegetables as the main ingredient, not potato or corn. We use up to 50% less oil, keep the good stuff (fibre, nutrients), and let the natural flavour of the veg lead. No artificial flavours or unnecessary additives.",
+      },
+    ],
+  },
+  {
+    id: "ordering",
+    title: "Ordering",
+    items: [
+      {
+        question: "Can I order a single pack?",
+        answer:
+          "We’re launching with multipacks for now. Sign up to our mailing list to be the first to hear when single packs and new formats become available.",
+      },
+    ],
+  },
+  {
+    id: "stockists",
+    title: "Stockists",
+    items: [
+      {
+        question: "Where can I buy Crosps?",
+        answer:
+          "We’re launching soon. Join our mailing list or follow us on social for stockist updates and where to find Crosps near you.",
+      },
+    ],
+  },
+];
 
 const STOCKISTS = [
   { src: "/v2/stockist-farmerj.png", alt: "Farmer J", w: 134, h: 76 },
@@ -68,7 +138,16 @@ const STOCKISTS = [
   { src: "/v2/stockist-wholefoods.png", alt: "Whole Foods Market", w: 76, h: 76 },
 ];
 
+// Tapioca copy is a draft, to be confirmed.
+const INGREDIENT_INFO = {
+  oil: "We use non-hydrogenated rapeseed oil, which is naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
+  tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
+};
+
 const QUESTIONS = [
+  "FAQ: 8 questions in 4 categories so far. Send more (shipping, storage, shelf life) whenever you have them.",
+  "Contact form: where should messages go? Options: a shared inbox (e.g. hello@eatcrosps.com), Klaviyo, or both. Until then the form shows a thank-you but sends nothing.",
+  "The Tapioca Starch tooltip text is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
   "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
@@ -105,12 +184,15 @@ export default function DesignSystemPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Button href={FIGMA_URL}>Open the Figma file</Button>
-          <Button href="#s13" variant="light" className="border border-ink-10">
+          <Button href="/design-system/mobile" variant="light" className="border border-ink-10">
+            Mobile preview
+          </Button>
+          <Button href="#s14" variant="light" className="border border-ink-10">
             Open questions
           </Button>
         </div>
         <nav className="type-small flex flex-wrap gap-x-4 gap-y-2 text-ink-72">
-          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "Sections", "Open questions"].map(
+          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "FAQ", "Sections", "Open questions"].map(
             (label, i) => (
               <a key={label} href={`#s${i + 1}`} className="hover:text-ink">
                 {i + 1}. {label}
@@ -192,8 +274,8 @@ export default function DesignSystemPage() {
             <Spec>Light · for use on photography</Spec>
           </div>
           <div>
-            <TextLink href="#">Want to stock Crosps?</TextLink>
-            <Spec>Text link · uppercase, underlined, arrow</Spec>
+            <TextLink href="/design-system/contact?topic=stock">Want to stock Crosps?</TextLink>
+            <Spec>Text link · uppercase, underlined, arrow extends on hover</Spec>
           </div>
           <div>
             <div className="flex gap-3 bg-ink p-4">
@@ -201,7 +283,7 @@ export default function DesignSystemPage() {
               <NavLink href="#">About</NavLink>
               <NavLink href="#">Cart (0)</NavLink>
             </div>
-            <Spec>Nav link · 14px uppercase</Spec>
+            <Spec>Nav link · 14px uppercase, underline on hover</Spec>
           </div>
         </div>
       </Section>
@@ -223,7 +305,7 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={7} title="Ticker" note="Scrolls continuously. Da Vinci Italic on cream, separated by small dots.">
+      <Section n={7} title="Ticker" note="Scrolls slowly and continuously. Da Vinci Italic on cream, separated by small dots.">
         <div className="-mx-5 md:-mx-10">
           <Ticker items={TICKER} />
         </div>
@@ -238,11 +320,18 @@ export default function DesignSystemPage() {
             <p className="type-statement mt-8">
               Crosps is made for people who care about the details: what they eat, what they bring to the table, and the
               world they create around them.
+              <br />
+              Three recognisable vegetables. Four ingredients. Each one distinct.
+            </p>
+            <p className="type-statement mt-10">
+              More than just a <SerifAccent>crisp.</SerifAccent>
             </p>
           </div>
           <div className="max-w-[557px]">
             <Divider />
-            <h3 className="mt-[30px] font-sans text-[31px] leading-[1.1]">We didn’t want to make another crisp.</h3>
+            <h3 className="mt-[30px] font-sans text-[31px] leading-[1.1]">
+              We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
+            </h3>
             <p className="mt-[30px] font-sans text-[18px] leading-[1.4]">
               Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting
               role. Crosps changes that.
@@ -285,16 +374,25 @@ export default function DesignSystemPage() {
             label="Rapeseed Oil"
             image="/v2/ing-oil.jpg"
             crop={{ width: 175.26, height: 134.94, left: -10.76, top: -17.45 }}
+            info={INGREDIENT_INFO.oil}
           />
+          <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
           <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
-          <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" />
         </div>
       </Section>
 
-      <Section n={12} title="Sections" note="How the pieces combine. These are previews of the patterns, not the final homepage.">
+      <Section
+        n={12}
+        title="FAQ"
+        note="Adapted from the Onform FAQ page. Search filters every answer; the category list tracks where you are on the page. Answers here are the current site’s FAQs, grouped."
+      >
+        <FaqDirectory groups={FAQ_GROUPS} contactHref="/design-system/contact" />
+      </Section>
+
+      <Section n={13} title="Sections" note="How the pieces combine. These are previews of the patterns, not the final homepage.">
         <div className="-mx-5 flex flex-col gap-16 md:-mx-10">
           <div>
-            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">12a · Nav on hero</p>
+            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">13a · Nav on hero</p>
             <div className="relative h-[520px] overflow-hidden">
               <Image src="/v2/hero.jpg" alt="" fill sizes="100vw" className="object-cover" />
               <div className="absolute inset-0 bg-black/20" />
@@ -316,8 +414,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
 
+          <div>
+            <p className="type-mono px-5 text-ink-50 md:px-10">13b · Story</p>
+            <StorySection />
+          </div>
+
           <div className="px-5 md:px-10">
-            <p className="type-mono mb-4 text-ink-50">12b · Waitlist banner</p>
+            <p className="type-mono mb-4 text-ink-50">13c · Waitlist banner</p>
             <div className="grid md:grid-cols-[574px_1fr]">
               <div className="flex flex-col items-center justify-center gap-10 bg-cream px-6 py-20 text-center md:py-[185px]">
                 <div className="flex flex-col gap-2">
@@ -339,22 +442,25 @@ export default function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col items-center gap-12 px-5 md:px-10">
-            <p className="type-mono self-start text-ink-50">12c · Stockists</p>
+            <p className="type-mono self-start text-ink-50">13d · Stockists</p>
             <SectionHeading title="Found in good places" subtitle="Find Crosps in some of the best shops." />
             <div className="flex flex-wrap items-end justify-center gap-14">
               {STOCKISTS.map((s) => (
                 <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
               ))}
             </div>
-            <TextLink href="#">Want to stock Crosps?</TextLink>
+            <TextLink href="/design-system/contact?topic=stock">Want to stock Crosps?</TextLink>
           </div>
 
           <div className="px-5 md:px-10">
-            <p className="type-mono mb-4 text-ink-50">12d · Instagram</p>
-            <div className="mb-6 flex items-center justify-between">
-              <p className="type-heading">
-                Step inside the world of <SerifAccent>Crosps</SerifAccent>
-              </p>
+            <p className="type-mono mb-4 text-ink-50">13e · Instagram</p>
+            <div className="mb-6 flex items-end justify-between">
+              <div className="flex flex-col gap-2">
+                <p className="type-label text-ink">Socials</p>
+                <p className="type-heading">
+                  Step inside the world of <SerifAccent>Crosps</SerifAccent>
+                </p>
+              </div>
               <Image src="/v2/instagram.svg" alt="Instagram" width={24} height={24} />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -367,13 +473,27 @@ export default function DesignSystemPage() {
           </div>
 
           <div>
-            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">12e · Footer</p>
+            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">13f · Footer</p>
             <Footer />
+          </div>
+
+          <div className="flex flex-col items-start gap-4 px-5 md:px-10">
+            <p className="type-mono text-ink-50">13g · Contact page</p>
+            <p className="type-body max-w-[640px] text-ink-72">
+              Its own page, with two routes: stockist enquiries and general messages. “Want to stock Crosps?” links
+              straight to the stockist form.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button href="/design-system/contact">Open the contact page</Button>
+              <Button href="/design-system/contact?topic=stock" variant="light" className="border border-ink-10">
+                Stockist version
+              </Button>
+            </div>
           </div>
         </div>
       </Section>
 
-      <Section n={13} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
+      <Section n={14} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
         <ol className="flex max-w-[760px] list-decimal flex-col gap-4 pl-5">
           {QUESTIONS.map((q) => (
             <li key={q} className="type-body text-ink-88">

@@ -29,13 +29,24 @@ export function Button({ children, variant = "dark", href, className = "", ...re
   );
 }
 
+// Arrow whose shaft extends on hover of the parent link.
+function Arrow() {
+  return (
+    <span aria-hidden className="relative flex h-[10px] w-3 items-center transition-[width] duration-300 ease-out group-hover/link:w-7">
+      <span className="h-px w-full bg-current" />
+      <span className="absolute right-0 size-[7px] rotate-45 border-r border-t border-current" />
+    </span>
+  );
+}
+
 export function TextLink({ children, href }: { children: React.ReactNode; href: string }) {
   return (
     <Link
       href={href}
-      className="type-button uppercase text-ink underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-70"
+      className="group/link type-button inline-flex items-center gap-2 uppercase text-ink"
     >
-      {children} &rarr;
+      <span className="underline decoration-from-font underline-offset-4">{children}</span>
+      <Arrow />
     </Link>
   );
 }
@@ -52,7 +63,7 @@ export function NavLink({
   return (
     <Link
       href={href}
-      className={`type-nav px-2 pb-0.5 pt-2 transition-opacity hover:opacity-70 ${tone === "light" ? "text-white" : "text-ink"}`}
+      className={`type-nav border-b border-transparent px-2 pb-0.5 pt-2 transition-colors hover:border-current ${tone === "light" ? "text-white" : "text-ink"}`}
     >
       {children}
     </Link>
