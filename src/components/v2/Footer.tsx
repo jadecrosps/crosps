@@ -2,15 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { EmailCapture } from "./EmailCapture";
 
+export type FooterLinks = Partial<Record<string, string>>;
+
 const COLUMNS = [
   { title: "Explore", links: ["FAQ", "Stockists", "Shipping & Returns"] },
   { title: "Legal", links: ["Terms of Service", "Privacy Policy", "Cookie Policy"] },
   { title: "Follow", links: ["Instagram", "Tiktok", "Contact"] },
 ];
 
-export function Footer() {
+const DEFAULT_LINKS: FooterLinks = { Instagram: "https://www.instagram.com/eatcrosps/" };
+
+// Links without a destination yet fall back to "#".
+export function Footer({ links = {} }: { links?: FooterLinks }) {
+  const hrefs = { ...DEFAULT_LINKS, ...links };
   return (
-    <footer className="flex flex-col gap-20 bg-cream px-5 pb-10 pt-14 md:px-10">
+    <footer className="gutter-x flex flex-col gap-20 bg-cream pb-10 pt-14">
       <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
         <div className="flex w-full max-w-[375px] flex-col gap-8">
           <div className="flex flex-col gap-2">
@@ -26,7 +32,7 @@ export function Footer() {
               <ul className="flex flex-col gap-2">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <Link href="#" className="type-small text-ink-72 transition-colors hover:text-ink">
+                    <Link href={hrefs[link] ?? "#"} className="type-small text-ink-72 transition-colors hover:text-ink">
                       {link}
                     </Link>
                   </li>

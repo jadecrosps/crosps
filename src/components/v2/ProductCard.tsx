@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Tag } from "./Tag";
 import { CroppedImage, type Crop } from "./CroppedImage";
 
@@ -11,10 +12,11 @@ export type ProductCardProps = {
   hoverCrop?: Crop;
   tag?: string;
   status?: string;
+  href?: string;
 };
 
-export function ProductCard({ name, descriptor, price, image, hoverImage, hoverCrop, tag, status }: ProductCardProps) {
-  return (
+export function ProductCard({ name, descriptor, price, image, hoverImage, hoverCrop, tag, status, href }: ProductCardProps) {
+  const card = (
     <article className="group flex flex-col gap-2">
       <div className="relative aspect-[441/500] overflow-hidden bg-paper">
         <Image src={image} alt={`${name} pack`} fill sizes="(max-width: 768px) 80vw, 33vw" className="object-contain p-[8%]" />
@@ -44,5 +46,13 @@ export function ProductCard({ name, descriptor, price, image, hoverImage, hoverC
         <p className="type-price text-ink">{price}</p>
       </div>
     </article>
+  );
+
+  return href ? (
+    <Link href={href} className="block">
+      {card}
+    </Link>
+  ) : (
+    card
   );
 }

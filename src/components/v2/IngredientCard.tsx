@@ -57,7 +57,7 @@ function InfoLabel({ label, info }: { label: string; info: string }) {
       <div
         id={id}
         role="tooltip"
-        className={`type-small absolute bottom-full left-0 z-10 mb-2 w-[260px] bg-ink p-3 leading-[1.4] text-white transition-opacity duration-200 ${
+        className={`type-small absolute bottom-full left-0 z-10 mb-2 w-[260px] bg-cream p-3 leading-[1.4] text-ink shadow-sm transition-opacity duration-200 ${
           open ? "opacity-100" : "pointer-events-none opacity-0 group-hover/info:pointer-events-auto group-hover/info:opacity-100 group-focus-within/info:opacity-100"
         }`}
       >
