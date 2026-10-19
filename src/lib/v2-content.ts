@@ -130,8 +130,15 @@ export function gutterStyle(gutter?: string): React.CSSProperties {
 
 // Product page content. Prices and checkout come from Shopify when it's
 // connected; these are the fallbacks and the copy.
+export type Stat = { value: string; unit?: string; label: string };
+export type NutritionRow = { label: string; per100: string; perServing: string; sub?: boolean };
+
 export type ProductDetails = {
   shopifyHandle: string;
+  benefits: string[];
+  stats: Stat[];
+  ingredients: string;
+  nutrition: NutritionRow[];
   vegetable: { label: string; image: string; crop?: Crop; colour: string };
   paragraphs: string[];
   gallery: { src: string; alt: string; contain?: boolean }[];
@@ -140,6 +147,29 @@ export type ProductDetails = {
 export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
   tomato: {
     shopifyHandle: "tomato-chips",
+    benefits: [
+      "Bright and tangy, naturally sweet and rich in umami.",
+      "Made from 88% real tomato. Just four ingredients.",
+      "Perfect as they are, or crumbled over salads and soups.",
+    ],
+    stats: [
+      { value: "88", unit: "%", label: "Tomato" },
+      { value: "4", label: "Ingredients" },
+      { value: "14", unit: "g", label: "Fibre /100g" },
+      { value: "89", unit: "kcal", label: "Per serving" },
+      { value: "ZERO", label: "Added sugar" },
+    ],
+    ingredients: "Tomato (88%), Rapeseed Oil, Tapioca Starch, Sea Salt.",
+    nutrition: [
+      { label: "Energy", per100: "2449kJ / 592kcal", perServing: "367kJ / 89kcal" },
+      { label: "Fat", per100: "48g", perServing: "7.2g" },
+      { label: "of which saturates", per100: "3.5g", perServing: "0.5g", sub: true },
+      { label: "Carbohydrate", per100: "27g", perServing: "4.1g" },
+      { label: "of which sugars", per100: "18g", perServing: "2.7g", sub: true },
+      { label: "Fibre", per100: "14g", perServing: "2.1g" },
+      { label: "Protein", per100: "6.0g", perServing: "0.9g" },
+      { label: "Salt", per100: "0.14g", perServing: "0.02g" },
+    ],
     vegetable: { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
     paragraphs: [
       "Tomatoes do more than add flavour. Naturally rich in lycopene, vitamin C and potassium, they’re a nutrient-dense vegetable (or fruit!) that brings colour and crunch to every bite.",
@@ -154,6 +184,29 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
   },
   onion: {
     shopifyHandle: "onion-chips",
+    benefits: [
+      "A mellow sweetness with a savoury finish.",
+      "Made from 90% real white and purple onion. Just four ingredients.",
+      "Perfect as they are, or crumbled over salads and soups.",
+    ],
+    stats: [
+      { value: "90", unit: "%", label: "Onion" },
+      { value: "4", label: "Ingredients" },
+      { value: "27", unit: "g", label: "Fibre /100g" },
+      { value: "69", unit: "kcal", label: "Per serving" },
+      { value: "ZERO", label: "Added sugar" },
+    ],
+    ingredients: "Onion (90%) (White 65%, Purple 35%), Rapeseed Oil, Tapioca Starch, Sea Salt.",
+    nutrition: [
+      { label: "Energy", per100: "1898kJ / 458kcal", perServing: "285kJ / 69kcal" },
+      { label: "Fat", per100: "28g", perServing: "4.2g" },
+      { label: "of which saturates", per100: "2.0g", perServing: "0.3g", sub: true },
+      { label: "Carbohydrate", per100: "33g", perServing: "5.0g" },
+      { label: "of which sugars", per100: "33g", perServing: "5.0g", sub: true },
+      { label: "Fibre", per100: "27g", perServing: "4.1g" },
+      { label: "Protein", per100: "5.0g", perServing: "0.8g" },
+      { label: "Salt", per100: "0.4g", perServing: "0.06g" },
+    ],
     vegetable: { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
     paragraphs: [
       "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite.",
@@ -168,6 +221,29 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
   },
   pepper: {
     shopifyHandle: "pepper-chips",
+    benefits: [
+      "Gently sweet and full of flavour.",
+      "Made from 88% real green, red and yellow bell pepper. Just four ingredients.",
+      "Perfect as they are, or crumbled over salads and soups.",
+    ],
+    stats: [
+      { value: "88", unit: "%", label: "Bell pepper" },
+      { value: "4", label: "Ingredients" },
+      { value: "16", unit: "g", label: "Fibre /100g" },
+      { value: "80", unit: "kcal", label: "Per serving" },
+      { value: "ZERO", label: "Added sugar" },
+    ],
+    ingredients: "Bell Pepper (88%) (Green 50%, Red 30%, Yellow 20%), Rapeseed Oil, Tapioca Starch, Sea Salt.",
+    nutrition: [
+      { label: "Energy", per100: "2211kJ / 533kcal", perServing: "332kJ / 80kcal" },
+      { label: "Fat", per100: "37g", perServing: "5.6g" },
+      { label: "of which saturates", per100: "3.0g", perServing: "0.5g", sub: true },
+      { label: "Carbohydrate", per100: "35g", perServing: "5.3g" },
+      { label: "of which sugars", per100: "24g", perServing: "3.6g", sub: true },
+      { label: "Fibre", per100: "16g", perServing: "2.4g" },
+      { label: "Protein", per100: "7.0g", perServing: "1.1g" },
+      { label: "Salt", per100: "0.57g", perServing: "0.09g" },
+    ],
     vegetable: {
       label: "Peppers",
       image: "/v2/ing-pepper.jpg",
@@ -188,8 +264,8 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
   },
 };
 
-// "Nut free" from the Figma is left out: the facility also handles nuts.
-export const PRODUCT_CLAIMS = ["Plant based", "Gluten free", "No additives", "Soy free", "High fibre", "100% real vegetables"];
+// Benefits, stats, ingredients and nutrition come from the approved packaging
+// proofs (UFP 5234 V2, 18-09-2026). A serving is 15g; each bag is 2 servings.
 
 export const ALLERGEN_NOTE =
   "Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.";

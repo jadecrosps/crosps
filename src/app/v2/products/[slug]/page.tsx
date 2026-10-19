@@ -8,11 +8,11 @@ import { Accordion } from "@/components/v2/Accordion";
 import { IngredientCard } from "@/components/v2/IngredientCard";
 import { ProductGallery } from "@/components/v2/product/ProductGallery";
 import { ProductPurchase } from "@/components/v2/product/ProductPurchase";
+import { ProductBenefits, NutritionTable } from "@/components/v2/product/ProductBenefits";
 import { getShopifyProduct } from "@/lib/shopify";
 import {
   ALLERGEN_NOTE,
   INGREDIENT_INFO,
-  PRODUCT_CLAIMS,
   PRODUCT_DETAILS,
   PRODUCTS,
   V2_LINKS,
@@ -83,6 +83,8 @@ export default async function ProductPage({ params, searchParams }: Params) {
               ))}
             </div>
 
+            <ProductBenefits benefits={details.benefits} stats={details.stats} />
+
             <div className="flex flex-col gap-3">
               <p className="type-mono">8 packs of 30g</p>
               <hr className="border-0 border-t border-ink-10" />
@@ -95,18 +97,13 @@ export default async function ProductPage({ params, searchParams }: Params) {
               sellingPlans={shopify?.sellingPlans ?? []}
             />
 
-            <ul className="grid grid-cols-2 gap-x-6 gap-y-3 border-y border-ink-10 py-6">
-              {PRODUCT_CLAIMS.map((c) => (
-                <li key={c} className="type-mono flex items-center gap-2">
-                  <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-ink" />
-                  {c}
-                </li>
-              ))}
-            </ul>
 
             <div>
               <Accordion title="Ingredients">
-                {details.vegetable.label}, rapeseed oil, tapioca starch, sea salt.
+                {details.ingredients}
+              </Accordion>
+              <Accordion title="Nutrition">
+                <NutritionTable rows={details.nutrition} />
               </Accordion>
               <Accordion title="Allergens">{ALLERGEN_NOTE}</Accordion>
             </div>
