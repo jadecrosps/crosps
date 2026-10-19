@@ -55,8 +55,8 @@ const SPACING = [8, 16, 24, 40, 56, 64, 80];
 
 const PRODUCTS = [
   { name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
-  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags" },
-  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags" },
+  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags", status: "Pre order" },
+  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags", status: "Pre order" },
 ];
 
 const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
@@ -68,7 +68,14 @@ const STOCKISTS = [
   { src: "/v2/stockist-wholefoods.png", alt: "Whole Foods Market", w: 76, h: 76 },
 ];
 
+// Draft copy: to be confirmed.
+const INGREDIENT_INFO = {
+  oil: "Rapeseed oil is naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
+  tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
+};
+
 const QUESTIONS = [
+  "The ingredient tooltip text (Rapeseed Oil, Tapioca Starch) is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
   "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
@@ -193,7 +200,7 @@ export default function DesignSystemPage() {
           </div>
           <div>
             <TextLink href="#">Want to stock Crosps?</TextLink>
-            <Spec>Text link · uppercase, underlined, arrow</Spec>
+            <Spec>Text link · uppercase, underlined, arrow extends on hover</Spec>
           </div>
           <div>
             <div className="flex gap-3 bg-ink p-4">
@@ -201,7 +208,7 @@ export default function DesignSystemPage() {
               <NavLink href="#">About</NavLink>
               <NavLink href="#">Cart (0)</NavLink>
             </div>
-            <Spec>Nav link · 14px uppercase</Spec>
+            <Spec>Nav link · 14px uppercase, underline on hover</Spec>
           </div>
         </div>
       </Section>
@@ -223,7 +230,7 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={7} title="Ticker" note="Scrolls continuously. Da Vinci Italic on cream, separated by small dots.">
+      <Section n={7} title="Ticker" note="Scrolls slowly and continuously. Da Vinci Italic on cream, separated by small dots.">
         <div className="-mx-5 md:-mx-10">
           <Ticker items={TICKER} />
         </div>
@@ -238,11 +245,18 @@ export default function DesignSystemPage() {
             <p className="type-statement mt-8">
               Crosps is made for people who care about the details: what they eat, what they bring to the table, and the
               world they create around them.
+              <br />
+              Three recognisable vegetables. Four ingredients. Each one distinct.
+            </p>
+            <p className="type-statement mt-10">
+              More than just a <SerifAccent>crisp.</SerifAccent>
             </p>
           </div>
           <div className="max-w-[557px]">
             <Divider />
-            <h3 className="mt-[30px] font-sans text-[31px] leading-[1.1]">We didn’t want to make another crisp.</h3>
+            <h3 className="mt-[30px] font-sans text-[31px] leading-[1.1]">
+              We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
+            </h3>
             <p className="mt-[30px] font-sans text-[18px] leading-[1.4]">
               Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting
               role. Crosps changes that.
@@ -285,9 +299,10 @@ export default function DesignSystemPage() {
             label="Rapeseed Oil"
             image="/v2/ing-oil.jpg"
             crop={{ width: 175.26, height: 134.94, left: -10.76, top: -17.45 }}
+            info={INGREDIENT_INFO.oil}
           />
           <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
-          <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" />
+          <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
         </div>
       </Section>
 
@@ -351,10 +366,13 @@ export default function DesignSystemPage() {
 
           <div className="px-5 md:px-10">
             <p className="type-mono mb-4 text-ink-50">12d · Instagram</p>
-            <div className="mb-6 flex items-center justify-between">
-              <p className="type-heading">
-                Step inside the world of <SerifAccent>Crosps</SerifAccent>
-              </p>
+            <div className="mb-6 flex items-end justify-between">
+              <div className="flex flex-col gap-2">
+                <p className="type-label text-ink">Socials</p>
+                <p className="type-heading">
+                  Step inside the world of <SerifAccent>Crosps</SerifAccent>
+                </p>
+              </div>
               <Image src="/v2/instagram.svg" alt="Instagram" width={24} height={24} />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">

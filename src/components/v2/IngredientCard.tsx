@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { CroppedImage, type Crop } from "./CroppedImage";
 
 const SIZES = "(max-width: 768px) 120vw, 45vw";
@@ -15,11 +15,13 @@ export function IngredientCard({
   image,
   crop,
   overlay,
+  info,
 }: {
   label: string;
   image: string;
   crop?: Crop;
   overlay?: string;
+  info?: string;
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -27,7 +29,40 @@ export function IngredientCard({
         <CroppedImage src={image} alt={label} crop={crop} sizes={SIZES} />
         {overlay && <div className="absolute inset-0" style={{ background: overlay }} />}
       </Frame>
-      <p className="font-sans text-[16px] leading-[1.2] text-ink">{label}</p>
+      {info ? <InfoLabel label={label} info={info} /> : <p className="font-sans text-[16px] leading-[1.2] text-ink">{label}</p>}
+    </div>
+  );
+}
+
+// Label with a tooltip: opens on hover or keyboard focus, and toggles on tap.
+function InfoLabel({ label, info }: { label: string; info: string }) {
+  const [open, setOpen] = useState(false);
+  const id = useId();
+
+  return (
+    <div className="group/info relative self-start" onMouseLeave={() => setOpen(false)}>
+      <button
+        type="button"
+        aria-describedby={id}
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        onBlur={() => setOpen(false)}
+        className="flex cursor-pointer items-center gap-1.5 font-sans text-[16px] leading-[1.2] text-ink"
+      >
+        {label}
+        <span aria-hidden className="flex size-[14px] items-center justify-center rounded-full border border-ink-50 text-[10px] leading-none text-ink-72">
+          i
+        </span>
+      </button>
+      <div
+        id={id}
+        role="tooltip"
+        className={`type-small absolute bottom-full left-0 z-10 mb-2 w-[260px] bg-ink p-3 leading-[1.4] text-white transition-opacity duration-200 ${
+          open ? "opacity-100" : "pointer-events-none opacity-0 group-hover/info:pointer-events-auto group-hover/info:opacity-100 group-focus-within/info:opacity-100"
+        }`}
+      >
+        {info}
+      </div>
     </div>
   );
 }

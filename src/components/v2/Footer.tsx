@@ -26,7 +26,7 @@ export function Footer() {
               <ul className="flex flex-col gap-2">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <Link href="#" className="type-body text-ink-72 transition-colors hover:text-ink">
+                    <Link href="#" className="type-small text-ink-72 transition-colors hover:text-ink">
                       {link}
                     </Link>
                   </li>
