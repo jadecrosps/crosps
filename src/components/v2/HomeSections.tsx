@@ -33,7 +33,7 @@ export function HomeHero({ links }: { links: HomeLinks }) {
       <div className="relative">
         <Nav links={{ home: "/v2", shop: links.shop, about: links.about, faq: links.faq }} />
       </div>
-      <div className="relative flex flex-col items-start gap-10 px-5 pb-14 md:px-10 md:pb-[105px]">
+      <div className="gutter-x relative flex flex-col items-start gap-10 pb-14 md:pb-[105px]">
         <div className="flex flex-col gap-3 text-white">
           <h1 className="type-display max-w-[776px]">
             A new world of vegetable <SerifAccent>crisps.</SerifAccent>
@@ -54,7 +54,7 @@ export function HomeHero({ links }: { links: HomeLinks }) {
 // Figma 1:164: statement, three product cards, "Shop the collection".
 export function ProductRange({ links }: { links: HomeLinks }) {
   return (
-    <section id="shop" className="flex scroll-mt-6 flex-col items-center gap-14 px-5 pb-14 pt-16 md:px-10 md:pb-[72px] md:pt-[88px]">
+    <section id="shop" className="gutter-x flex scroll-mt-6 flex-col items-center gap-14 py-20 md:gap-20 md:py-32">
       <div className="flex max-w-[1016px] flex-col items-center gap-10 text-center">
         <div className="flex flex-col gap-8 md:gap-12">
           <p className="type-statement">Good taste is personal.</p>
@@ -82,7 +82,7 @@ export function ProductRange({ links }: { links: HomeLinks }) {
 // Figma 1:185
 export function QuoteHeading({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-5 pb-8 pt-16 text-center md:px-10">
+    <div className="gutter-x py-20 text-center md:py-28">
       <p className="type-serif-xl text-ink">{children}</p>
     </div>
   );
@@ -91,7 +91,7 @@ export function QuoteHeading({ children }: { children: React.ReactNode }) {
 // Figma 1:201
 export function Stockists({ links }: { links: HomeLinks }) {
   return (
-    <section className="flex flex-col items-center gap-12 px-5 pt-16 md:px-10">
+    <section className="gutter-x flex flex-col items-center gap-12 pt-20 md:pt-28">
       <SectionHeading title="Found in good places" subtitle="Find Crosps in some of the best shops." />
       <div className="flex flex-wrap items-end justify-center gap-10 md:gap-14">
         {STOCKISTS.map((s) => (
@@ -99,7 +99,7 @@ export function Stockists({ links }: { links: HomeLinks }) {
         ))}
       </div>
       <TextLink href={`${links.contact}?topic=stock`}>Want to stock Crosps?</TextLink>
-      <Divider className="mt-4" />
+      <Divider className="mt-12 md:mt-16" />
     </section>
   );
 }
@@ -107,7 +107,7 @@ export function Stockists({ links }: { links: HomeLinks }) {
 // Figma 2:1066
 export function Ingredients({ links }: { links: HomeLinks }) {
   return (
-    <section className="flex flex-col items-center gap-14 px-5 pb-20 pt-8 md:px-10">
+    <section className="gutter-x flex flex-col items-center gap-14 py-20 md:py-28">
       <SectionHeading
         title="The standard"
         subtitle={
@@ -148,7 +148,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
 // Figma 1:250
 export function Reviews() {
   return (
-    <section className="flex flex-col items-center gap-14 px-5 pb-16 md:px-10">
+    <section className="gutter-x flex flex-col items-center gap-14 pb-20 md:pb-28">
       <Divider />
       <SectionHeading title="Worth talking about." subtitle="A few thoughts from people who thought so too." />
       <div className="flex w-full flex-wrap justify-center gap-6">
@@ -165,7 +165,7 @@ export function Reviews() {
 // Figma 24:1327
 export function WaitlistBanner() {
   return (
-    <section className="px-5 pb-16 pt-4 md:px-10 md:pb-20">
+    <section className="gutter-x pb-20 md:pb-28">
       <div className="grid md:grid-cols-[574px_1fr]">
         <div className="flex flex-col items-center justify-center gap-10 bg-cream px-6 py-20 text-center md:py-[185px]">
           <div className="flex flex-col gap-2">

@@ -42,7 +42,7 @@ export function InstagramFeed() {
   }, []);
 
   return (
-    <section className="px-5 pb-20 pt-10 md:px-10">
+    <section className="gutter-x py-20 md:py-28">
       <div className="mb-6 flex items-end justify-between">
         <div className="flex flex-col gap-2">
           <p className="type-label text-ink">Socials</p>

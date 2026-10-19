@@ -16,7 +16,7 @@ const DEFAULT_LINKS: FooterLinks = { Instagram: "https://www.instagram.com/eatcr
 export function Footer({ links = {} }: { links?: FooterLinks }) {
   const hrefs = { ...DEFAULT_LINKS, ...links };
   return (
-    <footer className="flex flex-col gap-20 bg-cream px-5 pb-10 pt-14 md:px-10">
+    <footer className="gutter-x flex flex-col gap-20 bg-cream pb-10 pt-14">
       <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
         <div className="flex w-full max-w-[375px] flex-col gap-8">
           <div className="flex flex-col gap-2">

@@ -71,6 +71,14 @@
   --radius-button-sm: 2px;
 }
 
+/* ── V2 page gutter: 20px on phones, --gutter (default 40px) from tablet up ── */
+@utility gutter-x {
+  padding-inline: 20px;
+  @media (width >= 48rem) {
+    padding-inline: var(--gutter, 40px);
+  }
+}
+
 /* ── V2 type styles ─────────────────────────────────────── */
 @utility type-display {
   font-family: var(--font-sans);

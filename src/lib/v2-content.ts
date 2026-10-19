@@ -121,3 +121,9 @@ export const V2_LINKS = {
   contact: "/contact",
   product: (slug: string) => `/v2#shop-${slug}`,
 };
+
+// Side margin for V2 pages. Default 80px; ?gutter=40|60|80|100|120 to compare.
+export function gutterStyle(gutter?: string): React.CSSProperties {
+  const px = [40, 60, 80, 100, 120].includes(Number(gutter)) ? Number(gutter) : 80;
+  return { "--gutter": `${px}px` } as React.CSSProperties;
+}

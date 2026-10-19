@@ -15,8 +15,8 @@ const PARAGRAPHS = [
 // Figma "Desktop / Product Section" 35:2036: story copy left, gallery photo right.
 export function StorySection({ image = "/v2/story.jpg", href = "#" }: { image?: string; href?: string }) {
   return (
-    <section className="px-5 py-14 md:px-10 md:py-16">
-      <div className="flex flex-col gap-10 lg:flex-row lg:gap-4">
+    <section className="gutter-x py-20 md:py-28">
+      <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
         <div className="flex flex-col justify-between gap-10 lg:w-[557px] lg:shrink-0">
           <div className="flex flex-col gap-[30px]">
             <Divider className="max-w-[514px]" />
@@ -34,7 +34,7 @@ export function StorySection({ image = "/v2/story.jpg", href = "#" }: { image?: 
           </div>
         </div>
         {/* Keeps the Figma frame ratio (787×737) at every width. */}
-        <div className="relative aspect-[787/737] min-w-0 flex-1 self-start">
+        <div className="relative aspect-[787/737] w-full min-w-0 self-start lg:max-w-[640px] lg:flex-1">
           <Image src={image} alt="A pepper crisp next to a fresh slice of pepper" fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
         </div>
       </div>

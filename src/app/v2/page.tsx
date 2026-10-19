@@ -4,7 +4,7 @@ import { StorySection } from "@/components/v2/StorySection";
 import { Footer } from "@/components/v2/Footer";
 import { InstagramFeed } from "@/components/v2/InstagramFeed";
 import { HomeHero, ProductRange, QuoteHeading, Stockists, Ingredients, Reviews, WaitlistBanner } from "@/components/v2/HomeSections";
-import { TICKER, V2_LINKS } from "@/lib/v2-content";
+import { TICKER, V2_LINKS, gutterStyle } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
   title: "Crosps | A new world of vegetable crisps",
@@ -13,9 +13,10 @@ export const metadata: Metadata = {
 };
 
 // V2 homepage (Figma "Landing Page" 1:146). Preview only until launch.
-export default function V2HomePage() {
+export default async function V2HomePage({ searchParams }: { searchParams: Promise<{ gutter?: string }> }) {
+  const { gutter } = await searchParams;
   return (
-    <div className="bg-white text-ink">
+    <div className="bg-white text-ink" style={gutterStyle(gutter)}>
       <HomeHero links={V2_LINKS} />
       <main>
         <ProductRange links={V2_LINKS} />

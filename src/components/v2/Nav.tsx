@@ -26,7 +26,7 @@ export function Nav({
   ];
 
   return (
-    <nav className="relative flex h-[84px] items-center justify-between px-5 md:px-10">
+    <nav className="gutter-x relative flex h-[84px] items-center justify-between">
       <div className="hidden items-center gap-[13px] md:flex">
         {items.map((i) => (
           <NavLink key={i.label} href={i.href} tone={tone}>

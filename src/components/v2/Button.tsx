@@ -9,7 +9,7 @@ type ButtonProps = {
 
 const VARIANTS = {
   dark: "bg-ink text-white hover:bg-ink-88",
-  light: "bg-white text-ink backdrop-blur-[8px] hover:bg-cream",
+  light: "bg-white text-ink backdrop-blur-[8px] hover:bg-stone",
 };
 
 export function Button({ children, variant = "dark", href, className = "", ...rest }: ButtonProps) {
