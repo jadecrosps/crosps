@@ -11,11 +11,24 @@ import { PRODUCTS, STOCKISTS, INGREDIENT_INFO, REVIEWS } from "@/lib/v2-content"
 
 export type HomeLinks = { shop: string; about: string; faq: string; contact: string; product: (slug: string) => string };
 
-// Figma 1:147: full-bleed photo, nav on top, headline bottom-left.
+// Figma 1:147 layout: full-bleed video, nav on top, headline bottom-left.
 export function HomeHero({ links }: { links: HomeLinks }) {
   return (
     <section className="relative flex min-h-[640px] flex-col justify-between overflow-hidden md:h-[834px]">
-      <Image src="/v2/hero.jpg" alt="" fill priority sizes="100vw" className="object-cover object-[60%_center]" />
+      {/* Same background video as the current homepage (public/hero.*). */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster="/hero-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/hero.webm" type="video/webm" />
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-black/20" />
       <div className="relative">
         <Nav links={{ home: "/v2", shop: links.shop, about: links.about, faq: links.faq }} />
