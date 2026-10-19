@@ -16,15 +16,15 @@
   --color-crosps-green-dark: #5AB560;
 
   /* ── Neutrals ───────────────────────────────────────────── */
-  --color-crosps-charcoal: #020202;
-  --color-crosps-charcoal-88: rgba(2, 2, 2, 0.88);
-  --color-crosps-charcoal-72: rgba(2, 2, 2, 0.72);
-  --color-crosps-charcoal-50: rgba(2, 2, 2, 0.50);
-  --color-crosps-charcoal-15: rgba(2, 2, 2, 0.15);
+  --color-crosps-charcoal: #231906;
+  --color-crosps-charcoal-88: rgba(35, 25, 6, 0.88);
+  --color-crosps-charcoal-72: rgba(35, 25, 6, 0.72);
+  --color-crosps-charcoal-50: rgba(35, 25, 6, 0.50);
+  --color-crosps-charcoal-15: rgba(35, 25, 6, 0.15);
   --color-crosps-cream: #FCFBF7;
   --color-crosps-offwhite: #FCFBF7;
-  --color-crosps-gray: rgba(2, 2, 2, 0.50);
-  --color-crosps-gray-light: rgba(2, 2, 2, 0.15);
+  --color-crosps-gray: rgba(35, 25, 6, 0.50);
+  --color-crosps-gray-light: rgba(35, 25, 6, 0.15);
 
   /* ── Product ────────────────────────────────────────────── */
   --color-product-onion: #d4a843;
@@ -65,7 +65,7 @@
   --color-stone: #e5e3e1;
   --color-tomato: #ac0f00;
   --color-pepper: #598615;
-  --color-onion: #8c3b5f;
+  --color-onion: #ec83bf;
 
   --radius-button: 4px;
   --radius-button-sm: 2px;

@@ -30,7 +30,7 @@ const COLOURS = [
   { name: "Paper", token: "paper", value: "#FCFBF8", note: "Product card background", className: "bg-paper" },
   { name: "Stone", token: "stone", value: "#E5E3E1", note: "Tag hover", className: "bg-stone" },
   { name: "Tomato", token: "tomato", value: "#AC0F00", note: "Tomato tab underline", className: "bg-tomato" },
-  { name: "Onion", token: "onion", value: "#8C3B5F", note: "Onion tab underline (my pick)", className: "bg-onion" },
+  { name: "Onion", token: "onion", value: "#EC83BF", note: "Onion tab underline", className: "bg-onion" },
   { name: "Pepper", token: "pepper", value: "#598615", note: "Pepper tab underline", className: "bg-pepper" },
 ];
 
@@ -70,7 +70,6 @@ const STOCKISTS = [
 
 const QUESTIONS = [
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
-  "Figma has no colour for the Onion tab underline. I’ve picked a red-onion purple (#8C3B5F). What should it be?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
   "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
 ];
