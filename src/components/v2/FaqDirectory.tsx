@@ -55,9 +55,11 @@ function FaqItem({ question, answer, defaultOpen = false }: { question: string; 
 export function FaqDirectory({
   groups,
   searchPlaceholder = "Try “What are Crosps made of?”",
+  contactHref = "/contact",
 }: {
   groups: FaqGroup[];
   searchPlaceholder?: string;
+  contactHref?: string;
 }) {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(groups[0]?.id);
@@ -128,7 +130,7 @@ export function FaqDirectory({
           </nav>
           <div className="hidden flex-col gap-3 border-t border-ink-10 pt-6 lg:flex">
             <p className="type-small text-ink-50">Still have a question?</p>
-            <Link href="/contact" className="type-small text-ink underline underline-offset-4 hover:text-ink-72">
+            <Link href={contactHref} className="type-small text-ink underline underline-offset-4 hover:text-ink-72">
               Contact us
             </Link>
           </div>
@@ -139,7 +141,7 @@ export function FaqDirectory({
         {filtered.length === 0 && (
           <p className="type-body text-ink-72">
             No answers for “{query}”.{" "}
-            <Link href="/contact" className="text-ink underline underline-offset-4">
+            <Link href={contactHref} className="text-ink underline underline-offset-4">
               Ask us directly
             </Link>
             .

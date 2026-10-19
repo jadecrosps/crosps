@@ -63,7 +63,7 @@ const PRODUCTS = [
 
 const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
 
-// Current eatcrosps.com/faq answers, grouped. Oil updated to rapeseed to match the ingredients section.
+// Current eatcrosps.com/faq answers, grouped, plus allergens.
 const FAQ_GROUPS: FaqGroup[] = [
   {
     id: "ingredients",
@@ -78,6 +78,11 @@ const FAQ_GROUPS: FaqGroup[] = [
         question: "Are your products vegan?",
         answer:
           "Yes. All Crosps flavours are 100% plant-based and vegan. We use only vegetables, oil, sea salt, and tapioca starch, with no animal-derived ingredients.",
+      },
+      {
+        question: "Do Crosps contain any allergens?",
+        answer:
+          "No. Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
       },
       {
         question: "Can kids eat Crosps?",
@@ -140,8 +145,8 @@ const INGREDIENT_INFO = {
 };
 
 const QUESTIONS = [
-  "FAQ: the live site’s FAQ says olive oil, but the new ingredients section says rapeseed oil. I’ve used rapeseed in the new FAQ. Which is right? (The live /faq page is unchanged.)",
-  "FAQ: I’ve grouped the 7 existing questions into 4 categories. Send any new questions (e.g. shipping, allergens, storage) and I’ll slot them in.",
+  "FAQ: 8 questions in 4 categories so far. Send more (shipping, storage, shelf life) whenever you have them.",
+  "Contact form: where should messages go? Options: a shared inbox (e.g. hello@eatcrosps.com), Klaviyo, or both. Until then the form shows a thank-you but sends nothing.",
   "The Tapioca Starch tooltip text is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
@@ -266,7 +271,7 @@ export default function DesignSystemPage() {
             <Spec>Light · for use on photography</Spec>
           </div>
           <div>
-            <TextLink href="#">Want to stock Crosps?</TextLink>
+            <TextLink href="/design-system/contact?topic=stock">Want to stock Crosps?</TextLink>
             <Spec>Text link · uppercase, underlined, arrow extends on hover</Spec>
           </div>
           <div>
@@ -378,7 +383,7 @@ export default function DesignSystemPage() {
         title="FAQ"
         note="Adapted from the Onform FAQ page. Search filters every answer; the category list tracks where you are on the page. Answers here are the current site’s FAQs, grouped."
       >
-        <FaqDirectory groups={FAQ_GROUPS} />
+        <FaqDirectory groups={FAQ_GROUPS} contactHref="/design-system/contact" />
       </Section>
 
       <Section n={13} title="Sections" note="How the pieces combine. These are previews of the patterns, not the final homepage.">
@@ -441,7 +446,7 @@ export default function DesignSystemPage() {
                 <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
               ))}
             </div>
-            <TextLink href="#">Want to stock Crosps?</TextLink>
+            <TextLink href="/design-system/contact?topic=stock">Want to stock Crosps?</TextLink>
           </div>
 
           <div className="px-5 md:px-10">
@@ -467,6 +472,20 @@ export default function DesignSystemPage() {
           <div>
             <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">13f · Footer</p>
             <Footer />
+          </div>
+
+          <div className="flex flex-col items-start gap-4 px-5 md:px-10">
+            <p className="type-mono text-ink-50">13g · Contact page</p>
+            <p className="type-body max-w-[640px] text-ink-72">
+              Its own page, with two routes: stockist enquiries and general messages. “Want to stock Crosps?” links
+              straight to the stockist form.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button href="/design-system/contact">Open the contact page</Button>
+              <Button href="/design-system/contact?topic=stock" variant="light" className="border border-ink-10">
+                Stockist version
+              </Button>
+            </div>
           </div>
         </div>
       </Section>
