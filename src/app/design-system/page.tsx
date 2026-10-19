@@ -12,6 +12,7 @@ import { IngredientCard, VegetableIngredientCard } from "@/components/v2/Ingredi
 import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
 import { StorySection } from "@/components/v2/StorySection";
+import { FaqDirectory, type FaqGroup } from "@/components/v2/FaqDirectory";
 
 export const metadata: Metadata = {
   title: "Design System | Crosps",
@@ -62,6 +63,69 @@ const PRODUCTS = [
 
 const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
 
+// Current eatcrosps.com/faq answers, grouped. Oil updated to rapeseed to match the ingredients section.
+const FAQ_GROUPS: FaqGroup[] = [
+  {
+    id: "ingredients",
+    title: "Ingredients & Nutrition",
+    items: [
+      {
+        question: "What are Crosps made of?",
+        answer:
+          "Crosps are made from just four ingredients: real vegetables (tomato, onion, or pepper depending on the flavour), rapeseed oil, sea salt, and a touch of tapioca starch. No additives, no fillers. Just simple, recognisable ingredients.",
+      },
+      {
+        question: "Are your products vegan?",
+        answer:
+          "Yes. All Crosps flavours are 100% plant-based and vegan. We use only vegetables, oil, sea salt, and tapioca starch, with no animal-derived ingredients.",
+      },
+      {
+        question: "Can kids eat Crosps?",
+        answer:
+          "Crosps are made from simple, real ingredients and are a source of fibre. They’re a snack the whole family can enjoy. As with any snack, we recommend them as part of a balanced diet.",
+      },
+    ],
+  },
+  {
+    id: "product",
+    title: "The Product",
+    items: [
+      {
+        question: "How are they so crunchy?",
+        answer:
+          "We use a gentle baking process that crisps the vegetables without excess oil. Lower heat helps preserve nutrients and flavour while still giving you that satisfying crunch you expect from a great crisp.",
+      },
+      {
+        question: "What makes Crosps different from normal crisps?",
+        answer:
+          "Crosps start with real vegetables as the main ingredient, not potato or corn. We use up to 50% less oil, keep the good stuff (fibre, nutrients), and let the natural flavour of the veg lead. No artificial flavours or unnecessary additives.",
+      },
+    ],
+  },
+  {
+    id: "ordering",
+    title: "Ordering",
+    items: [
+      {
+        question: "Can I order a single pack?",
+        answer:
+          "We’re launching with multipacks for now. Sign up to our mailing list to be the first to hear when single packs and new formats become available.",
+      },
+    ],
+  },
+  {
+    id: "stockists",
+    title: "Stockists",
+    items: [
+      {
+        question: "Where can I buy Crosps?",
+        answer:
+          "We’re launching soon. Join our mailing list or follow us on social for stockist updates and where to find Crosps near you.",
+      },
+    ],
+  },
+];
+
 const STOCKISTS = [
   { src: "/v2/stockist-farmerj.png", alt: "Farmer J", w: 134, h: 76 },
   { src: "/v2/stockist-superette.png", alt: "Superette", w: 167, h: 50 },
@@ -76,6 +140,8 @@ const INGREDIENT_INFO = {
 };
 
 const QUESTIONS = [
+  "FAQ: the live site’s FAQ says olive oil, but the new ingredients section says rapeseed oil. I’ve used rapeseed in the new FAQ. Which is right? (The live /faq page is unchanged.)",
+  "FAQ: I’ve grouped the 7 existing questions into 4 categories. Send any new questions (e.g. shipping, allergens, storage) and I’ll slot them in.",
   "The Tapioca Starch tooltip text is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
@@ -113,12 +179,12 @@ export default function DesignSystemPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Button href={FIGMA_URL}>Open the Figma file</Button>
-          <Button href="#s13" variant="light" className="border border-ink-10">
+          <Button href="#s14" variant="light" className="border border-ink-10">
             Open questions
           </Button>
         </div>
         <nav className="type-small flex flex-wrap gap-x-4 gap-y-2 text-ink-72">
-          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "Sections", "Open questions"].map(
+          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "FAQ", "Sections", "Open questions"].map(
             (label, i) => (
               <a key={label} href={`#s${i + 1}`} className="hover:text-ink">
                 {i + 1}. {label}
@@ -307,10 +373,18 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={12} title="Sections" note="How the pieces combine. These are previews of the patterns, not the final homepage.">
+      <Section
+        n={12}
+        title="FAQ"
+        note="Adapted from the Onform FAQ page. Search filters every answer; the category list tracks where you are on the page. Answers here are the current site’s FAQs, grouped."
+      >
+        <FaqDirectory groups={FAQ_GROUPS} />
+      </Section>
+
+      <Section n={13} title="Sections" note="How the pieces combine. These are previews of the patterns, not the final homepage.">
         <div className="-mx-5 flex flex-col gap-16 md:-mx-10">
           <div>
-            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">12a · Nav on hero</p>
+            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">13a · Nav on hero</p>
             <div className="relative h-[520px] overflow-hidden">
               <Image src="/v2/hero.jpg" alt="" fill sizes="100vw" className="object-cover" />
               <div className="absolute inset-0 bg-black/20" />
@@ -333,12 +407,12 @@ export default function DesignSystemPage() {
           </div>
 
           <div>
-            <p className="type-mono px-5 text-ink-50 md:px-10">12b · Story</p>
+            <p className="type-mono px-5 text-ink-50 md:px-10">13b · Story</p>
             <StorySection />
           </div>
 
           <div className="px-5 md:px-10">
-            <p className="type-mono mb-4 text-ink-50">12c · Waitlist banner</p>
+            <p className="type-mono mb-4 text-ink-50">13c · Waitlist banner</p>
             <div className="grid md:grid-cols-[574px_1fr]">
               <div className="flex flex-col items-center justify-center gap-10 bg-cream px-6 py-20 text-center md:py-[185px]">
                 <div className="flex flex-col gap-2">
@@ -360,7 +434,7 @@ export default function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col items-center gap-12 px-5 md:px-10">
-            <p className="type-mono self-start text-ink-50">12d · Stockists</p>
+            <p className="type-mono self-start text-ink-50">13d · Stockists</p>
             <SectionHeading title="Found in good places" subtitle="Find Crosps in some of the best shops." />
             <div className="flex flex-wrap items-end justify-center gap-14">
               {STOCKISTS.map((s) => (
@@ -371,7 +445,7 @@ export default function DesignSystemPage() {
           </div>
 
           <div className="px-5 md:px-10">
-            <p className="type-mono mb-4 text-ink-50">12e · Instagram</p>
+            <p className="type-mono mb-4 text-ink-50">13e · Instagram</p>
             <div className="mb-6 flex items-end justify-between">
               <div className="flex flex-col gap-2">
                 <p className="type-label text-ink">Socials</p>
@@ -391,13 +465,13 @@ export default function DesignSystemPage() {
           </div>
 
           <div>
-            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">12f · Footer</p>
+            <p className="type-mono mb-4 px-5 text-ink-50 md:px-10">13f · Footer</p>
             <Footer />
           </div>
         </div>
       </Section>
 
-      <Section n={13} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
+      <Section n={14} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
         <ol className="flex max-w-[760px] list-decimal flex-col gap-4 pl-5">
           {QUESTIONS.map((q) => (
             <li key={q} className="type-body text-ink-88">
