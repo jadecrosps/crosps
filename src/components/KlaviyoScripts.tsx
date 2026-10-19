@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const KLAVIYO_COMPANY_ID = "WSHPRF";
 
 // Internal review pages where the sign-up popup would get in the way.
-const EXCLUDED_PREFIXES = ["/design-system"];
+const EXCLUDED_PREFIXES = ["/design-system", "/v2"];
 
 export function KlaviyoScripts() {
   const pathname = usePathname();
