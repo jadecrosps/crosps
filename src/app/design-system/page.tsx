@@ -70,7 +70,7 @@ const STOCKISTS = [
 
 // Tapioca copy is a draft, to be confirmed.
 const INGREDIENT_INFO = {
-  oil: "We use non-hydrogenated rapeseed oil, so there are no trans fats. It’s naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
+  oil: "We use non-hydrogenated rapeseed oil, which is naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
   tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
 };
 
