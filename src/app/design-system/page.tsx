@@ -68,14 +68,14 @@ const STOCKISTS = [
   { src: "/v2/stockist-wholefoods.png", alt: "Whole Foods Market", w: 76, h: 76 },
 ];
 
-// Draft copy: to be confirmed.
+// Tapioca copy is a draft, to be confirmed.
 const INGREDIENT_INFO = {
-  oil: "Rapeseed oil is naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
+  oil: "We use non-hydrogenated rapeseed oil, so there are no trans fats. It’s naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
   tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
 };
 
 const QUESTIONS = [
-  "The ingredient tooltip text (Rapeseed Oil, Tapioca Starch) is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
+  "The Tapioca Starch tooltip text is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
   "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
