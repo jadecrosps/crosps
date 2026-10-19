@@ -184,6 +184,9 @@ export default function DesignSystemPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Button href={FIGMA_URL}>Open the Figma file</Button>
+          <Button href="/design-system/mobile" variant="light" className="border border-ink-10">
+            Mobile preview
+          </Button>
           <Button href="#s14" variant="light" className="border border-ink-10">
             Open questions
           </Button>
