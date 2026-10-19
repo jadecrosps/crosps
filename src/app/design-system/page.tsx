@@ -72,12 +72,12 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "What are Crosps made of?",
         answer:
-          "Crosps are made from just four ingredients: real vegetables (tomato, onion, or pepper depending on the flavour), rapeseed oil, sea salt, and a touch of tapioca starch. No additives, no fillers. Just simple, recognisable ingredients.",
+          "Crosps are vegetable crisps made from just four ingredients: the vegetable itself, oil, tapioca starch and a touch of sea salt. Just simple, recognisable ingredients.",
       },
       {
         question: "Are your products vegan?",
         answer:
-          "Yes. All Crosps flavours are 100% plant-based and vegan. We use only vegetables, oil, sea salt, and tapioca starch, with no animal-derived ingredients.",
+          "All Crosps flavours are 100% plant-based. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
       },
       {
         question: "Do Crosps contain any allergens?",
@@ -114,7 +114,7 @@ const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can I order a single pack?",
         answer:
-          "We’re launching with multipacks for now. Sign up to our mailing list to be the first to hear when single packs and new formats become available.",
+          "We’re only launching with our pack of 8 for now. You can find single packs at our stockists, or sign up to our mailing list to hear where they’re available next.",
       },
     ],
   },
