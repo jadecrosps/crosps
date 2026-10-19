@@ -117,7 +117,7 @@ export const V2_LINKS = {
   home: "/v2",
   shop: "/v2#shop",
   about: "/about",
-  faq: "/faq",
+  faq: "/v2/faq",
   contact: "/contact",
   product: (slug: string) => `/v2#shop-${slug}`,
 };
