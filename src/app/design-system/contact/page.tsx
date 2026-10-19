@@ -28,13 +28,13 @@ export default async function ContactPreviewPage({
         </Link>
       </p>
       <Nav tone="dark" />
-      <main className="grid gap-12 px-5 pb-24 pt-10 md:px-10 md:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-20">
-        <div className="flex flex-col gap-6 lg:sticky lg:top-10 lg:self-start">
+      <main className="grid gap-10 px-5 pb-24 pt-10 md:px-10 md:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-20">
+        <div className="flex flex-col gap-3 lg:sticky lg:top-10 lg:self-start">
           <h1 className="type-display">
             Get in <SerifAccent>touch.</SerifAccent>
           </h1>
           <p className="type-body-lg max-w-[460px] text-ink-88">
-            Want Crosps on your shelves, or just want to say hello? Pick one and we’ll get back to you.
+            Want Crosps on your shelves, or just want to say hello? Either way, we’d love to hear from you.
           </p>
           <p className="type-small text-ink-72">
             Looking for a quick answer? Try the{" "}

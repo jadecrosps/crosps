@@ -93,7 +93,7 @@ export function ContactForm({
                 {t.title}
                 <span
                   aria-hidden
-                  className={`size-3 shrink-0 rounded-full border border-ink transition-colors ${topic === t.id ? "bg-ink" : ""}`}
+                  className={`size-2 shrink-0 rounded-full border border-ink transition-colors ${topic === t.id ? "bg-ink" : ""}`}
                 />
               </span>
               <span className="type-small text-ink-72">{t.body}</span>
