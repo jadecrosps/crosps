@@ -1,5 +1,4 @@
 import localFont from "next/font/local";
-import { DM_Mono } from "next/font/google";
 
 export const saans = localFont({
   src: [
@@ -18,11 +17,11 @@ export const saans = localFont({
   display: "swap",
 });
 
-// Stand-in for "Saans Mono", which is only available as an unlicensed trial.
-export const dmMono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-dm-mono",
+export const saansMono = localFont({
+  src: "../../public/fonts/Saans/SaansMono-Regular.woff2",
+  weight: "400",
+  style: "normal",
+  variable: "--font-saans-mono",
   display: "swap",
 });
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { saans, daVinci, dmMono } from "@/lib/fonts";
+import { saans, daVinci, saansMono } from "@/lib/fonts";
 import { Agentation } from "agentation";
 import { KlaviyoScripts } from "@/components/KlaviyoScripts";
 import "./globals.css";
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${saans.variable} ${daVinci.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${saans.variable} ${daVinci.variable} ${saansMono.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

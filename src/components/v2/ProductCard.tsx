@@ -1,32 +1,42 @@
 import Image from "next/image";
 import { Tag } from "./Tag";
+import { CroppedImage, type Crop } from "./CroppedImage";
 
 export type ProductCardProps = {
   name: string;
   descriptor: string;
   price: string;
   image: string;
+  hoverImage?: string;
+  hoverCrop?: Crop;
   tag?: string;
   status?: string;
 };
 
-export function ProductCard({ name, descriptor, price, image, tag, status }: ProductCardProps) {
+export function ProductCard({ name, descriptor, price, image, hoverImage, hoverCrop, tag, status }: ProductCardProps) {
   return (
     <article className="group flex flex-col gap-2">
-      <div className="relative aspect-[440/500] overflow-hidden bg-paper">
-        <Image
-          src={image}
-          alt={`${name} pack`}
-          fill
-          sizes="(max-width: 768px) 80vw, 33vw"
-          className="object-contain p-[8%] transition-transform duration-500 group-hover:scale-[1.03]"
-        />
+      <div className="relative aspect-[441/500] overflow-hidden bg-paper">
+        <Image src={image} alt={`${name} pack`} fill sizes="(max-width: 768px) 80vw, 33vw" className="object-contain p-[8%]" />
+        {hoverImage && (
+          <CroppedImage
+            src={hoverImage}
+            alt=""
+            crop={hoverCrop}
+            sizes="(max-width: 768px) 140vw, 55vw"
+            className="opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          />
+        )}
         {tag && (
           <div className="absolute left-6 top-6">
-            <Tag>{tag}</Tag>
+            <Tag className={hoverImage ? "transition-colors group-hover:bg-stone group-hover:text-ink" : ""}>{tag}</Tag>
           </div>
         )}
-        {status && <p className="type-label absolute right-6 top-[30px] text-ink">{status}</p>}
+        {status && (
+          <p className={`type-label absolute right-6 top-[30px] text-ink ${hoverImage ? "transition-colors group-hover:text-white" : ""}`}>
+            {status}
+          </p>
+        )}
       </div>
       <div className="flex flex-col gap-0.5">
         <h3 className="font-sans text-[18px] leading-[1.2] text-ink">{name}</h3>

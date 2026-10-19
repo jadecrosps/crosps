@@ -20,16 +20,18 @@ export const metadata: Metadata = {
 const FIGMA_URL = "https://www.figma.com/design/dhEpu1iUwMY6O8Z1PGP0Ny/Website-V2?node-id=1-146";
 
 const COLOURS = [
-  { name: "Ink", token: "ink", value: "#231906", note: "All text, dark buttons, tags", className: "bg-ink" },
-  { name: "Ink 88%", token: "ink-88", value: "rgba(35,25,6,.88)", note: "Body copy on cream", className: "bg-ink-88" },
-  { name: "Ink 72%", token: "ink-72", value: "rgba(35,25,6,.72)", note: "Footer links, small print", className: "bg-ink-72" },
-  { name: "Ink 50%", token: "ink-50", value: "rgba(35,25,6,.5)", note: "Descriptors, placeholders", className: "bg-ink-50" },
-  { name: "Ink 10%", token: "ink-10", value: "rgba(35,25,6,.1)", note: "Divider lines", className: "bg-ink-10" },
+  { name: "Ink", token: "ink", value: "#020202", note: "All text, dark buttons, tags", className: "bg-ink" },
+  { name: "Ink 88%", token: "ink-88", value: "rgba(2,2,2,.88)", note: "Body copy on cream", className: "bg-ink-88" },
+  { name: "Ink 72%", token: "ink-72", value: "rgba(2,2,2,.72)", note: "Footer links, small print", className: "bg-ink-72" },
+  { name: "Ink 50%", token: "ink-50", value: "rgba(2,2,2,.5)", note: "Descriptors, placeholders", className: "bg-ink-50" },
+  { name: "Ink 10%", token: "ink-10", value: "rgba(2,2,2,.1)", note: "Divider lines", className: "bg-ink-10" },
   { name: "White", token: "white", value: "#FFFFFF", note: "Page background, light button", className: "bg-white" },
   { name: "Cream", token: "cream", value: "#F6F5EE", note: "Ticker, waitlist panel, footer", className: "bg-cream" },
   { name: "Paper", token: "paper", value: "#FCFBF8", note: "Product card background", className: "bg-paper" },
   { name: "Stone", token: "stone", value: "#E5E3E1", note: "Tag hover", className: "bg-stone" },
-  { name: "Tomato", token: "tomato", value: "#AC0F00", note: "Active tab underline", className: "bg-tomato" },
+  { name: "Tomato", token: "tomato", value: "#AC0F00", note: "Tomato tab underline", className: "bg-tomato" },
+  { name: "Onion", token: "onion", value: "#8C3B5F", note: "Onion tab underline (my pick)", className: "bg-onion" },
+  { name: "Pepper", token: "pepper", value: "#598615", note: "Pepper tab underline", className: "bg-pepper" },
 ];
 
 const TYPE = [
@@ -44,17 +46,17 @@ const TYPE = [
   { name: "Small", cls: "type-small", spec: "Saans 14 / 1.2", sample: "Copyright ©2026 Crosps. All Rights Reserved" },
   { name: "Nav", cls: "type-nav", spec: "Saans 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
   { name: "Button", cls: "type-button", spec: "Saans 16 / 1 · +0.3% tracking", sample: "Shop the collection" },
-  { name: "Label", cls: "type-label", spec: "Mono Medium 12 / 1.5 · uppercase", sample: "8×30g bags" },
-  { name: "Mono", cls: "type-mono", spec: "Mono 14 / 1.2 · uppercase", sample: "Anne-Marie, London" },
-  { name: "Price", cls: "type-price", spec: "Mono 16 / 1.2", sample: "21.99 GBP" },
+  { name: "Label", cls: "type-label", spec: "Saans Mono 12 / 1.5 · uppercase", sample: "8×30g bags" },
+  { name: "Mono", cls: "type-mono", spec: "Saans Mono 14 / 1.2 · uppercase", sample: "Anne-Marie, London" },
+  { name: "Price", cls: "type-price", spec: "Saans Mono 16 / 1.2", sample: "21.99 GBP" },
 ];
 
 const SPACING = [8, 16, 24, 40, 56, 64, 80];
 
 const PRODUCTS = [
-  { name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", tag: "8×30g bags", status: "Pre order" },
-  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", tag: "8×30g bags" },
-  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", tag: "8×30g bags" },
+  { name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
+  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags" },
+  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags" },
 ];
 
 const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
@@ -67,13 +69,10 @@ const STOCKISTS = [
 ];
 
 const QUESTIONS = [
-  "Two near-blacks are used in Figma: #231906 and #020202 (some headings, and the ingredients “Shop” button). I’ve used #231906 everywhere. Is that right?",
-  "Headings use 28, 29, 31 and 32px in different places. I’ve standardised to 28px (section headings) and 32px (statements). OK?",
-  "The mono font in Figma is Saans Mono TRIAL (not licensed for web) plus DM Mono for prices. I’ve used DM Mono for all mono text. Do you have a Saans Mono licence?",
-  "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink.",
-  "The ticker reads “No Added” and repeats “Gluten Free”. I’ve used “No Added Sugar” and removed the repeat.",
-  "Figma only has desktop frames. Mobile sizes here are my proposal. Do you have mobile designs?",
-  "The ingredient tabs (Tomato / Onion / Peppers) only have a tomato photo. I need onion and pepper close-ups for that card.",
+  "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
+  "Figma has no colour for the Onion tab underline. I’ve picked a red-onion purple (#8C3B5F). What should it be?",
+  "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
+  "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
 ];
 
 function Section({ n, title, children, note }: { n: number; title: string; children: React.ReactNode; note?: string }) {
@@ -135,7 +134,7 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={2} title="Typography" note="Saans for almost everything, Da Vinci Italic for single emphasised words and accents, mono for labels and prices.">
+      <Section n={2} title="Typography" note="Saans for almost everything, Da Vinci Italic for single emphasised words and accents, Saans Mono for labels and prices.">
         <div className="flex flex-col">
           {TYPE.map((t) => (
             <div key={t.name} className="grid gap-2 border-b border-ink-10 py-6 md:grid-cols-[220px_1fr] md:gap-10">
@@ -217,7 +216,7 @@ export default function DesignSystemPage() {
         <Spec>Dark tag (default) · light tag (hover) · plain status label</Spec>
       </Section>
 
-      <Section n={6} title="Product card" note="Paper background, pack centred, tag top-left, optional status top-right. Name, descriptor and price underneath.">
+      <Section n={6} title="Product card" note="Paper background, pack centred, tag top-left, optional status top-right. Hover swaps in a lifestyle photo and the tag turns stone. Name, descriptor and price underneath.">
         <div className="grid gap-5 md:grid-cols-3">
           {PRODUCTS.map((p) => (
             <ProductCard key={p.name} {...p} />
@@ -269,17 +268,26 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={11} title="Ingredients" note="Tall photo with a label. The first card switches between the three vegetables.">
+      <Section n={11} title="Ingredients" note="Tall photo with a label. The first card switches photo between the three vegetables, each with its own underline colour.">
         <div className="grid gap-2 md:grid-cols-4">
           <VegetableIngredientCard
             options={[
-              { label: "Tomato", image: "/v2/ing-tomato.jpg" },
-              { label: "Onion", image: "/v2/ing-tomato.jpg" },
-              { label: "Peppers", image: "/v2/ing-tomato.jpg" },
+              { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
+              { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+              {
+                label: "Peppers",
+                image: "/v2/ing-pepper.jpg",
+                crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
+                colour: "var(--color-pepper)",
+              },
             ]}
           />
-          <IngredientCard label="Rapeseed Oil" image="/v2/ing-oil.jpg" />
-          <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" />
+          <IngredientCard
+            label="Rapeseed Oil"
+            image="/v2/ing-oil.jpg"
+            crop={{ width: 175.26, height: 134.94, left: -10.76, top: -17.45 }}
+          />
+          <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
           <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" />
         </div>
       </Section>
