@@ -301,8 +301,8 @@ export default function DesignSystemPage() {
             crop={{ width: 175.26, height: 134.94, left: -10.76, top: -17.45 }}
             info={INGREDIENT_INFO.oil}
           />
-          <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
           <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
+          <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
         </div>
       </Section>
 

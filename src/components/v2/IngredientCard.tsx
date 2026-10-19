@@ -47,10 +47,10 @@ function InfoLabel({ label, info }: { label: string; info: string }) {
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
         onBlur={() => setOpen(false)}
-        className="flex cursor-pointer items-center gap-1.5 font-sans text-[16px] leading-[1.2] text-ink"
+        className="flex cursor-pointer items-center gap-1 font-sans text-[16px] leading-[1.2] text-ink"
       >
         {label}
-        <span aria-hidden className="flex size-[14px] items-center justify-center rounded-full border border-ink-50 text-[10px] leading-none text-ink-72">
+        <span aria-hidden className="flex size-[11px] items-center justify-center rounded-full border border-ink-50 text-[8px] leading-none text-ink-72">
           i
         </span>
       </button>
