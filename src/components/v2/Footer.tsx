@@ -7,10 +7,13 @@ export type FooterLinks = Partial<Record<string, string>>;
 const COLUMNS = [
   { title: "Explore", links: ["FAQ", "Stockists", "Shipping & Returns"] },
   { title: "Legal", links: ["Terms of Service", "Privacy Policy", "Cookie Policy"] },
-  { title: "Follow", links: ["Instagram", "Tiktok", "Contact"] },
+  { title: "Follow", links: ["Instagram", "TikTok", "Contact"] },
 ];
 
-const DEFAULT_LINKS: FooterLinks = { Instagram: "https://www.instagram.com/eatcrosps/" };
+const DEFAULT_LINKS: FooterLinks = {
+  Instagram: "https://www.instagram.com/eatcrosps/",
+  TikTok: "https://www.tiktok.com/@eatcrosps",
+};
 
 // Links without a destination yet fall back to "#".
 export function Footer({ links = {} }: { links?: FooterLinks }) {

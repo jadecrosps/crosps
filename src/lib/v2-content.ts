@@ -37,12 +37,12 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Are your products vegan?",
         answer:
-          "All Crosps flavours are 100% plant-based. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
+          "All Crosps flavours are 100% plant-based. They are packed in a facility which also handles cereals containing gluten, milk, sesame and egg.",
       },
       {
         question: "Do Crosps contain any allergens?",
         answer:
-          "No. Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
+          "No. Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, milk, sesame and egg.",
       },
       {
         question: "Can kids eat Crosps?",
@@ -122,9 +122,9 @@ export const V2_LINKS = {
   product: (slug: string) => `/v2/products/${slug}`,
 };
 
-// Side margin for V2 pages. Default 80px; ?gutter=40|60|80|100|120 to compare.
+// Side margin for V2 pages. Default 100px; ?gutter=40|60|80|100|120 to compare.
 export function gutterStyle(gutter?: string): React.CSSProperties {
-  const px = [40, 60, 80, 100, 120].includes(Number(gutter)) ? Number(gutter) : 80;
+  const px = [40, 60, 80, 100, 120].includes(Number(gutter)) ? Number(gutter) : 100;
   return { "--gutter": `${px}px` } as React.CSSProperties;
 }
 
@@ -268,4 +268,4 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
 // proofs (UFP 5234 V2, 18-09-2026). A serving is 15g; each bag is 2 servings.
 
 export const ALLERGEN_NOTE =
-  "Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.";
+  "Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, milk, sesame and egg.";
