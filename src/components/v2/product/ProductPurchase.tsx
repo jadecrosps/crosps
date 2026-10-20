@@ -33,9 +33,9 @@ export function ProductPurchase({
     }
     setBusy(true);
     setMessage(null);
-    const ok = await cart.add(variantId, qty, planId ?? undefined);
+    const error = await cart.add(variantId, qty, planId ?? undefined);
     setBusy(false);
-    if (!ok) setMessage(cart.error);
+    setMessage(error);
   }
 
   return (

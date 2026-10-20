@@ -181,13 +181,14 @@ export type RawCart = {
   };
 };
 
+// Lines Shopify couldn't fill come back with quantity 0; leave them out.
 export function toCart(raw: RawCart): Cart {
   return {
     id: raw.id,
     checkoutUrl: raw.checkoutUrl,
     totalQuantity: raw.totalQuantity,
     subtotal: raw.cost.subtotalAmount,
-    lines: raw.lines.nodes.map((l) => ({
+    lines: raw.lines.nodes.filter((l) => l.quantity > 0).map((l) => ({
       id: l.id,
       quantity: l.quantity,
       title: l.merchandise.product.title,

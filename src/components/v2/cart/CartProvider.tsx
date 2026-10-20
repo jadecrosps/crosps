@@ -11,7 +11,8 @@ type CartContextValue = {
   cart: Cart | null;
   count: number;
   open: () => void;
-  add: (variantId: string, quantity: number, sellingPlanId?: string) => Promise<boolean>;
+  // Resolves to null on success, or a message to show.
+  add: (variantId: string, quantity: number, sellingPlanId?: string) => Promise<string | null>;
   pending: boolean;
   error: string | null;
 };
@@ -26,6 +27,7 @@ export function useCart() {
 const ERRORS = {
   not_configured: "Checkout isn’t connected yet. It will be once the Shopify store is linked.",
   failed: "Something went wrong. Please try again.",
+  sold_out: "Sorry, this is sold out right now.",
 };
 
 function money(m: { amount: string; currencyCode: string }) {
@@ -67,9 +69,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const add = useCallback(
     async (variantId: string, quantity: number, sellingPlanId?: string) => {
-      const ok = apply(await addToCart(variantId, quantity, sellingPlanId));
-      if (ok) setOpen(true);
-      return ok;
+      const r = await addToCart(variantId, quantity, sellingPlanId);
+      apply(r);
+      if (r.ok) setOpen(true);
+      return r.ok ? null : ERRORS[r.error];
     },
     [apply],
   );

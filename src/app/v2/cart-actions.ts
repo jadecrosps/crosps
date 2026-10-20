@@ -8,7 +8,15 @@ import { CART_FIELDS, shopifyConfigured, storefront, toCart, type Cart, type Raw
 
 const COOKIE = "crosps_cart";
 
-export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "not_configured" | "failed" };
+export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "not_configured" | "failed" | "sold_out" };
+
+class SoldOut extends Error {}
+
+type Warning = { code: string };
+
+function checkWarnings(warnings: Warning[] | undefined) {
+  if (warnings?.some((w) => w.code === "MERCHANDISE_OUT_OF_STOCK" || w.code === "MERCHANDISE_NOT_ENOUGH_STOCK")) throw new SoldOut();
+}
 
 async function cartId() {
   return (await cookies()).get(COOKIE)?.value ?? null;
@@ -23,6 +31,7 @@ async function run(fn: () => Promise<Cart | null>): Promise<CartResult> {
   try {
     return { ok: true, cart: await fn() };
   } catch (err) {
+    if (err instanceof SoldOut) return { ok: false, error: "sold_out" };
     console.error("[cart]", err);
     return { ok: false, error: "failed" };
   }
@@ -45,17 +54,19 @@ export async function addToCart(variantId: string, quantity: number, sellingPlan
     const line = { merchandiseId: variantId, quantity, ...(sellingPlanId ? { sellingPlanId } : {}) };
     const id = await cartId();
     if (id) {
-      const { cartLinesAdd } = await storefront<{ cartLinesAdd: { cart: RawCart | null } }>(
-        `mutation Add($id: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $id, lines: $lines) { cart { ...CartFields } } } ${CART_FIELDS}`,
+      const { cartLinesAdd } = await storefront<{ cartLinesAdd: { cart: RawCart | null; warnings: Warning[] } }>(
+        `mutation Add($id: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $id, lines: $lines) { cart { ...CartFields } warnings { code } } } ${CART_FIELDS}`,
         { id, lines: [line] },
       );
+      checkWarnings(cartLinesAdd.warnings);
       if (cartLinesAdd.cart) return toCart(cartLinesAdd.cart);
     }
     // No cart yet (or it expired): start a new one.
-    const { cartCreate } = await storefront<{ cartCreate: { cart: RawCart } }>(
-      `mutation Create($lines: [CartLineInput!]) { cartCreate(input: { lines: $lines }) { cart { ...CartFields } } } ${CART_FIELDS}`,
+    const { cartCreate } = await storefront<{ cartCreate: { cart: RawCart; warnings: Warning[] } }>(
+      `mutation Create($lines: [CartLineInput!]) { cartCreate(input: { lines: $lines }) { cart { ...CartFields } warnings { code } } } ${CART_FIELDS}`,
       { lines: [line] },
     );
+    checkWarnings(cartCreate.warnings);
     const cart = toCart(cartCreate.cart);
     await remember(cart);
     return cart;

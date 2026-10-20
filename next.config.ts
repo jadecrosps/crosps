@@ -30,6 +30,11 @@ const nextConfig: NextConfig = {
         hostname: "behold.pictures",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+        pathname: "/**",
+      },
     ],
   },
 };
