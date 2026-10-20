@@ -122,7 +122,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
         <VegetableIngredientCard
           options={[
             { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
-            { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+            { label: "Onion", image: "/v2/ing-onion.jpg", colour: "var(--color-onion)" },
             {
               label: "Peppers",
               image: "/v2/ing-pepper.jpg",
