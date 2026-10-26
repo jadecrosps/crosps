@@ -7,10 +7,13 @@ export type FooterLinks = Partial<Record<string, string>>;
 const COLUMNS = [
   { title: "Explore", links: ["FAQ", "Stockists", "Shipping & Returns"] },
   { title: "Legal", links: ["Terms of Service", "Privacy Policy", "Cookie Policy"] },
-  { title: "Follow", links: ["Instagram", "Tiktok", "Contact"] },
+  { title: "Follow", links: ["Instagram", "TikTok", "Contact"] },
 ];
 
-const DEFAULT_LINKS: FooterLinks = { Instagram: "https://www.instagram.com/eatcrosps/" };
+const DEFAULT_LINKS: FooterLinks = {
+  Instagram: "https://www.instagram.com/eatcrosps/",
+  TikTok: "https://www.tiktok.com/@eatcrosps",
+};
 
 // Links without a destination yet fall back to "#".
 export function Footer({ links = {} }: { links?: FooterLinks }) {
@@ -43,7 +46,7 @@ export function Footer({ links = {} }: { links?: FooterLinks }) {
         </div>
       </div>
       <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
-        <Image src="/v2/logo-ink.svg" alt="Crosps" width={140} height={32} />
+        <Image src="/v2/crosps-logo-black.svg" alt="Crosps" width={314} height={76} className="h-[34px] w-auto" />
         <p className="type-small text-ink-72">Copyright ©2026 Crosps. All Rights Reserved</p>
       </div>
     </footer>

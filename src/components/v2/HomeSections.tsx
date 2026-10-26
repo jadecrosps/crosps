@@ -3,6 +3,7 @@ import { SerifAccent } from "@/components/ui/SerifAccent";
 import { Button, TextLink } from "./Button";
 import { Nav } from "./Nav";
 import { ProductCard } from "./ProductCard";
+import { MobileCarousel } from "./MobileCarousel";
 import { SectionHeading, Divider } from "./SectionHeading";
 import { ReviewCard } from "./ReviewCard";
 import { EmailCapture } from "./EmailCapture";
@@ -69,11 +70,11 @@ export function ProductRange({ links }: { links: HomeLinks }) {
           More than just a <SerifAccent>crisp.</SerifAccent>
         </p>
       </div>
-      <div className="grid w-full gap-5 md:grid-cols-3">
+      <MobileCarousel label="Products" className="md:grid-cols-3 md:gap-5">
         {PRODUCTS.map((p) => (
           <ProductCard key={p.slug} {...p} href={links.product(p.slug)} />
         ))}
-      </div>
+      </MobileCarousel>
       <Button href={links.shop}>Shop the collection</Button>
     </section>
   );
@@ -118,11 +119,11 @@ export function Ingredients({ links }: { links: HomeLinks }) {
           </>
         }
       />
-      <div className="grid w-full gap-6 sm:grid-cols-2 md:gap-2 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-2 gap-x-2 gap-y-6 lg:grid-cols-4">
         <VegetableIngredientCard
           options={[
             { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
-            { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+            { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
             {
               label: "Peppers",
               image: "/v2/ing-pepper.jpg",
@@ -151,13 +152,11 @@ export function Reviews() {
     <section className="gutter-x flex flex-col items-center gap-14 pb-20 md:pb-28">
       <Divider />
       <SectionHeading title="Worth talking about." subtitle="A few thoughts from people who thought so too." />
-      <div className="flex w-full flex-wrap justify-center gap-6">
+      <MobileCarousel label="Reviews" className="md:grid-cols-[repeat(auto-fit,minmax(0,322px))] md:justify-center md:gap-6">
         {REVIEWS.map((r) => (
-          <div key={r.author} className="w-full sm:w-[calc(50%-12px)] lg:w-[322px]">
-            <ReviewCard {...r} />
-          </div>
+          <ReviewCard key={r.author} {...r} />
         ))}
-      </div>
+      </MobileCarousel>
     </section>
   );
 }
@@ -180,7 +179,7 @@ export function WaitlistBanner() {
           </div>
           <EmailCapture />
         </div>
-        <div className="relative min-h-[320px]">
+        <div className="relative order-first min-h-[320px] md:order-none">
           <Image src="/v2/callout.jpg" alt="Crosps packs on a table" fill sizes="(max-width: 768px) 100vw, 55vw" className="object-cover" />
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import type { Feed, Post } from "@behold/types";
 import { SerifAccent } from "@/components/ui/SerifAccent";
+import { MobileCarousel } from "./MobileCarousel";
 
 const FEED_ID = process.env.NEXT_PUBLIC_BEHOLD_FEED_ID;
 const BEHOLD_URL = FEED_ID ? `https://feeds.behold.so/${FEED_ID}` : null;
@@ -54,20 +55,21 @@ export function InstagramFeed() {
           <Image src="/v2/instagram.svg" alt="" width={24} height={24} />
         </a>
       </div>
-      <div className="grid grid-cols-2 gap-2 md:gap-4 lg:grid-cols-4">
+      <MobileCarousel label="Instagram posts" className="md:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {posts.map((p) => (
-          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block h-[240px] overflow-hidden md:h-[500px]">
+          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block h-[420px] select-none overflow-hidden [-webkit-touch-callout:none] md:h-[500px]">
             <Image
               src={p.src}
               alt={p.alt}
               fill
+              draggable={false}
               sizes="(max-width: 1024px) 50vw, 25vw"
               className="object-cover transition-transform duration-500 hover:scale-[1.03]"
               unoptimized={p.src.startsWith("https://") && !p.src.includes("behold")}
             />
           </a>
         ))}
-      </div>
+      </MobileCarousel>
     </section>
   );
 }
