@@ -46,7 +46,7 @@ export function Footer({ links = {} }: { links?: FooterLinks }) {
         </div>
       </div>
       <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
-        <Image src="/v2/logo-ink.svg" alt="Crosps" width={140} height={32} />
+        <Image src="/v2/crosps-logo-black.svg" alt="Crosps" width={314} height={76} className="h-[34px] w-auto" />
         <p className="type-small text-ink-72">Copyright ©2026 Crosps. All Rights Reserved</p>
       </div>
     </footer>

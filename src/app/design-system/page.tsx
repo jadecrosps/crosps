@@ -85,7 +85,7 @@ export default function DesignSystemPage() {
   return (
     <main className="bg-white text-ink">
       <header className="flex flex-col gap-6 px-5 pb-14 pt-16 md:px-10">
-        <Image src="/v2/logo-ink.svg" alt="Crosps" width={140} height={32} />
+        <Image src="/v2/crosps-logo-black.svg" alt="Crosps" width={314} height={76} className="h-[34px] w-auto" />
         <h1 className="type-display max-w-[900px]">
           Design system <SerifAccent>v2</SerifAccent>
         </h1>

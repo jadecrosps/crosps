@@ -47,7 +47,14 @@ export function Nav({
         {open ? "Close" : "Menu"}
       </button>
       <Link href={links.home ?? "/"} aria-label="Crosps home" className="absolute left-1/2 -translate-x-1/2">
-        <Image src={tone === "light" ? "/v2/logo-white.svg" : "/v2/logo-ink.svg"} alt="Crosps" width={110} height={26} />
+        <Image
+          src={tone === "light" ? "/v2/crosps-logo-white.svg" : "/v2/crosps-logo-black.svg"}
+          alt="Crosps"
+          width={314}
+          height={76}
+          priority
+          className="h-[27px] w-auto"
+        />
       </Link>
       {cart ? (
         <button
