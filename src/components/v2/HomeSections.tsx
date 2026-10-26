@@ -3,6 +3,7 @@ import { SerifAccent } from "@/components/ui/SerifAccent";
 import { Button, TextLink } from "./Button";
 import { Nav } from "./Nav";
 import { ProductCard } from "./ProductCard";
+import { MobileCarousel } from "./MobileCarousel";
 import { SectionHeading, Divider } from "./SectionHeading";
 import { ReviewCard } from "./ReviewCard";
 import { EmailCapture } from "./EmailCapture";
@@ -69,11 +70,11 @@ export function ProductRange({ links }: { links: HomeLinks }) {
           More than just a <SerifAccent>crisp.</SerifAccent>
         </p>
       </div>
-      <div className="grid w-full gap-5 md:grid-cols-3">
+      <MobileCarousel label="Products" className="md:grid-cols-3 md:gap-5">
         {PRODUCTS.map((p) => (
           <ProductCard key={p.slug} {...p} href={links.product(p.slug)} />
         ))}
-      </div>
+      </MobileCarousel>
       <Button href={links.shop}>Shop the collection</Button>
     </section>
   );
@@ -118,7 +119,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
           </>
         }
       />
-      <div className="grid w-full gap-6 sm:grid-cols-2 md:gap-2 lg:grid-cols-4">
+      <MobileCarousel label="Ingredients" className="md:grid-cols-2 md:gap-2 lg:grid-cols-4">
         <VegetableIngredientCard
           options={[
             { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
@@ -139,7 +140,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
         />
         <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
         <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
-      </div>
+      </MobileCarousel>
       <Button href={links.shop}>Shop</Button>
     </section>
   );
