@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// V2 Contact: laid out like the FAQ page (heading column left, form right).
+// V2 Contact: heading and intro on the left (~40%), design-system form on the right.
 export default async function V2ContactPage({
   searchParams,
 }: {
@@ -23,9 +23,8 @@ export default async function V2ContactPage({
   return (
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
       <Nav tone="dark" links={{ home: V2_LINKS.home, shop: V2_LINKS.shop, about: V2_LINKS.about, faq: V2_LINKS.faq }} />
-      <main className="gutter-x flex flex-col gap-12 pb-24 pt-10 md:pt-14 lg:flex-row lg:gap-0">
-        {/* Same column split as the FAQ page: heading on the left, content on the right. */}
-        <header className="flex flex-col items-start gap-4 lg:w-[300px] lg:shrink-0 lg:self-start lg:border-r lg:border-ink-10 lg:pr-8 lg:sticky lg:top-8">
+      <main className="gutter-x grid gap-12 pb-24 pt-10 md:pt-14 lg:grid-cols-[minmax(0,574fr)_minmax(0,786fr)] lg:gap-0">
+        <header className="flex max-w-[420px] flex-col items-start gap-4 lg:sticky lg:top-8 lg:self-start lg:pr-10">
           <h1 className="font-serif text-[40px] italic leading-[1.2] md:text-[48px]">Contact Us</h1>
           <p className="type-body text-ink-88">
             Whether you have a question or would like to stock Crosps, we’d love to hear from you.
@@ -38,8 +37,8 @@ export default async function V2ContactPage({
             .
           </p>
         </header>
-        <div className="min-w-0 flex-1 lg:pl-8">
-          <div className="max-w-[720px]">
+        <div className="min-w-0 lg:px-[112px]">
+          <div className="max-w-[640px]">
             <ContactForm
               initialTopic={initialTopic}
               submitLabel="Send"
