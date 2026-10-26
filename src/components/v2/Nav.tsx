@@ -53,7 +53,7 @@ export function Nav({
           width={314}
           height={76}
           priority
-          className="h-[27px] w-auto"
+          className="h-[25px] w-auto"
         />
       </Link>
       {cart ? (
