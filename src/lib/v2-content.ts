@@ -208,7 +208,7 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       { label: "Protein", per100: "5.0g", perServing: "0.8g" },
       { label: "Salt", per100: "0.4g", perServing: "0.06g" },
     ],
-    vegetable: { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+    vegetable: { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
     paragraphs: [
       "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite.",
       "Complex and savoury: you either love it or hate it.",
@@ -216,6 +216,7 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
     gallery: [
       { src: "/v2/pack-onion.png", alt: "Onion Chips pack", contain: true },
       { src: "/v2/hover-onion.jpg", alt: "Onion Chips on the go" },
+      { src: "/v2/ing-onion-red.jpg", alt: "Red onion, sliced" },
       { src: "/v2/lifestyle-pack.jpg", alt: "Carrying Crosps" },
       { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
     ],

@@ -62,7 +62,6 @@ const QUESTIONS = [
   "The Tapioca Starch tooltip text is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
-  "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
 ];
 
 function Section({ n, title, children, note }: { n: number; title: string; children: React.ReactNode; note?: string }) {
@@ -273,7 +272,7 @@ export default function DesignSystemPage() {
           <VegetableIngredientCard
             options={[
               { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
-              { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+              { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
               {
                 label: "Peppers",
                 image: "/v2/ing-pepper.jpg",
