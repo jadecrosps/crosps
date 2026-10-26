@@ -116,7 +116,7 @@ export const REVIEWS = [
 export const V2_LINKS = {
   home: "/v2",
   shop: "/v2#shop",
-  about: "/about",
+  about: "/v2/about",
   faq: "/v2/faq",
   contact: "/contact",
   product: (slug: string) => `/v2/products/${slug}`,
