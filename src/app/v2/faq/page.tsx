@@ -3,7 +3,7 @@ import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
 import { FaqDirectory } from "@/components/v2/FaqDirectory";
 import Link from "next/link";
-import { FAQ_GROUPS, V2_LINKS, gutterStyle } from "@/lib/v2-content";
+import { FAQ_GROUPS, V2_LINKS, gutterStyle, V2_FOOTER_LINKS } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
   title: "FAQ | Crosps",
@@ -27,7 +27,7 @@ export default async function V2FaqPage({ searchParams }: { searchParams: Promis
         </header>
         <FaqDirectory groups={FAQ_GROUPS} contactHref={V2_LINKS.contact} />
       </main>
-      <Footer links={{ FAQ: V2_LINKS.faq, Contact: V2_LINKS.contact, Stockists: `${V2_LINKS.contact}?topic=stock` }} />
+      <Footer links={V2_FOOTER_LINKS} />
     </div>
   );
 }

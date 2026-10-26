@@ -118,8 +118,9 @@ export const V2_LINKS = {
   shop: "/v2#shop",
   about: "/v2/about",
   faq: "/v2/faq",
-  contact: "/contact",
+  contact: "/v2/contact",
   product: (slug: string) => `/v2/products/${slug}`,
+  policy: (handle: string) => `/v2/policies/${handle}`,
 };
 
 // Side margin for V2 pages. Default 100px; ?gutter=40|60|80|100|120 to compare.
@@ -269,3 +270,13 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
 
 export const ALLERGEN_NOTE =
   "Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, milk, sesame and egg.";
+
+// Footer link targets shared by every V2 page.
+export const V2_FOOTER_LINKS = {
+  FAQ: V2_LINKS.faq,
+  Stockists: `${V2_LINKS.contact}?topic=stock`,
+  "Shipping & Returns": V2_LINKS.policy("refund-policy"),
+  "Terms of Service": V2_LINKS.policy("terms-of-service"),
+  "Privacy Policy": V2_LINKS.policy("privacy-policy"),
+  Contact: V2_LINKS.contact,
+};

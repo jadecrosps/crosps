@@ -38,9 +38,13 @@ function Field({
 export function ContactForm({
   initialTopic = "hello",
   onSubmit,
+  submitLabel,
+  note,
 }: {
   initialTopic?: ContactTopic;
   onSubmit?: (topic: ContactTopic, data: Record<string, string>) => void;
+  submitLabel?: string;
+  note?: React.ReactNode;
 }) {
   const [topic, setTopic] = useState<ContactTopic>(initialTopic);
   const [sent, setSent] = useState(false);
@@ -150,8 +154,9 @@ export function ContactForm({
         )}
       </Field>
 
-      <div>
-        <Button type="submit">{topic === "stock" ? "Send enquiry" : "Send message"}</Button>
+      <div className="flex flex-col items-start gap-4">
+        <Button type="submit">{submitLabel ?? (topic === "stock" ? "Send enquiry" : "Send message")}</Button>
+        {note && <p className="type-body text-ink-50">{note}</p>}
       </div>
     </form>
   );

@@ -18,6 +18,7 @@ import {
   V2_LINKS,
   gutterStyle,
   type Product,
+  V2_FOOTER_LINKS,
 } from "@/lib/v2-content";
 
 type Params = { params: Promise<{ slug: string }>; searchParams: Promise<{ gutter?: string }> };
@@ -152,7 +153,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
         </section>
       </main>
 
-      <Footer links={{ FAQ: V2_LINKS.faq, Contact: V2_LINKS.contact, Stockists: `${V2_LINKS.contact}?topic=stock` }} />
+      <Footer links={V2_FOOTER_LINKS} />
     </div>
   );
 }

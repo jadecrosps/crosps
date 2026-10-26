@@ -199,3 +199,29 @@ export function toCart(raw: RawCart): Cart {
     })),
   };
 }
+
+// ── Store policies (Settings → Policies in Shopify) ───────
+
+export const POLICY_HANDLES = ["privacy-policy", "refund-policy", "terms-of-service", "shipping-policy"] as const;
+export type PolicyHandle = (typeof POLICY_HANDLES)[number];
+
+const POLICY_FIELDS: Record<PolicyHandle, string> = {
+  "privacy-policy": "privacyPolicy",
+  "refund-policy": "refundPolicy",
+  "terms-of-service": "termsOfService",
+  "shipping-policy": "shippingPolicy",
+};
+
+export async function getShopPolicy(handle: PolicyHandle): Promise<{ title: string; body: string } | null> {
+  if (!shopifyConfigured()) return null;
+  const field = POLICY_FIELDS[handle];
+  try {
+    const { shop } = await storefront<{ shop: Record<string, { title: string; body: string } | null> }>(
+      `query Policy { shop { ${field} { title body } } }`,
+    );
+    return shop[field] ?? null;
+  } catch (err) {
+    console.error("[shopify] policy fetch failed", handle, err);
+    return null;
+  }
+}
