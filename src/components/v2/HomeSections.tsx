@@ -119,7 +119,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
           </>
         }
       />
-      <MobileCarousel label="Ingredients" className="md:grid-cols-2 md:gap-2 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-2 gap-x-2 gap-y-6 lg:grid-cols-4">
         <VegetableIngredientCard
           options={[
             { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
@@ -140,7 +140,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
         />
         <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
         <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
-      </MobileCarousel>
+      </div>
       <Button href={links.shop}>Shop</Button>
     </section>
   );

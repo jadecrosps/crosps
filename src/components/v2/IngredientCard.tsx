@@ -40,7 +40,7 @@ function InfoLabel({ label, info }: { label: string; info: string }) {
   const id = useId();
 
   return (
-    <div className="group/info relative self-start" onMouseLeave={() => setOpen(false)}>
+    <div className="group/info relative w-full md:w-auto md:self-start" onMouseLeave={() => setOpen(false)}>
       <button
         type="button"
         aria-describedby={id}
@@ -57,8 +57,11 @@ function InfoLabel({ label, info }: { label: string; info: string }) {
       <div
         id={id}
         role="tooltip"
-        className={`type-small absolute bottom-full left-0 z-10 mb-2 w-[260px] bg-cream p-3 leading-[1.4] text-ink shadow-sm transition-opacity duration-200 ${
-          open ? "opacity-100" : "pointer-events-none opacity-0 group-hover/info:pointer-events-auto group-hover/info:opacity-100 group-focus-within/info:opacity-100"
+        // Phones: opens in place under the label (tap). From md: floating pop-up on hover/focus.
+        className={`type-small z-10 bg-cream p-3 leading-[1.4] text-ink md:absolute md:bottom-full md:left-0 md:mb-2 md:mt-0 md:block md:w-[260px] md:shadow-sm md:transition-opacity md:duration-200 ${
+          open
+            ? "mt-2 block md:opacity-100"
+            : "hidden md:pointer-events-none md:opacity-0 md:group-hover/info:pointer-events-auto md:group-hover/info:opacity-100 md:group-focus-within/info:opacity-100"
         }`}
       >
         {info}
@@ -78,7 +81,7 @@ export function VegetableIngredientCard({ options }: { options: VegetableOption[
       <Frame>
         <CroppedImage key={current.label} src={current.image} alt={current.label} crop={current.crop} sizes={SIZES} />
       </Frame>
-      <div role="tablist" className="flex gap-2">
+      <div role="tablist" className="flex flex-wrap gap-x-2 gap-y-1">
         {options.map((option, i) => (
           <button
             key={option.label}
@@ -86,7 +89,7 @@ export function VegetableIngredientCard({ options }: { options: VegetableOption[
             aria-selected={i === active}
             onClick={() => setActive(i)}
             style={i === active ? { borderColor: option.colour } : undefined}
-            className={`cursor-pointer border-b-[1.5px] px-0.5 font-sans text-[16px] leading-[1.2] text-ink transition-opacity ${
+            className={`cursor-pointer border-b-[1.5px] px-0.5 font-sans text-[14px] leading-[1.2] md:text-[16px] text-ink transition-opacity ${
               i === active ? "" : "border-transparent opacity-50 hover:opacity-80"
             }`}
           >

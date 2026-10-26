@@ -124,7 +124,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
               </>
             }
           />
-          <MobileCarousel label="Ingredients" className="md:grid-cols-2 md:gap-2 lg:grid-cols-4">
+          <div className="grid w-full grid-cols-2 gap-x-2 gap-y-6 lg:grid-cols-4">
             <IngredientCard label={details.vegetable.label} image={details.vegetable.image} crop={details.vegetable.crop} />
             <IngredientCard
               label="Rapeseed Oil"
@@ -134,7 +134,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
             />
             <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
             <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
-          </MobileCarousel>
+          </div>
         </section>
 
         {/* Figma 1:1237 / Lobie "Complete the Collection" */}
