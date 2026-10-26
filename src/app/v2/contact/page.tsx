@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// V2 Contact (Figma 1:823): cream intro panel, design-system form beside it.
+// V2 Contact: laid out like the FAQ page (heading column left, form right).
 export default async function V2ContactPage({
   searchParams,
 }: {
@@ -23,39 +23,37 @@ export default async function V2ContactPage({
   return (
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
       <Nav tone="dark" links={{ home: V2_LINKS.home, shop: V2_LINKS.shop, about: V2_LINKS.about, faq: V2_LINKS.faq }} />
-      <main className="gutter-x grid gap-8 pb-24 pt-6 lg:grid-cols-[minmax(0,574fr)_minmax(0,786fr)] lg:gap-0">
-        <div className="flex items-center justify-center bg-cream px-6 py-20 lg:min-h-[639px] lg:py-[120px]">
-          <div className="flex max-w-[352px] flex-col items-center gap-10 text-center">
-            <span className="type-label bg-white px-3 py-2 text-ink">Say hi</span>
-            <div className="flex flex-col items-center gap-4">
-              <h1 className="font-serif text-[40px] italic leading-[1.2] md:text-[48px]">Contact Us</h1>
-              <p className="type-body text-ink-88">
-                Whether you have a question or would like to stock Crosps, we’d love to hear from you.
-              </p>
-              <p className="type-body text-ink-88">
-                Send us a message, or find answers in our{" "}
-                <Link href={V2_LINKS.faq} className="underline underline-offset-4 hover:text-ink">
-                  FAQ
-                </Link>
-                .
-              </p>
-            </div>
+      <main className="gutter-x flex flex-col gap-12 pb-24 pt-10 md:pt-14 lg:flex-row lg:gap-0">
+        {/* Same column split as the FAQ page: heading on the left, content on the right. */}
+        <header className="flex flex-col items-start gap-4 lg:w-[300px] lg:shrink-0 lg:self-start lg:border-r lg:border-ink-10 lg:pr-8 lg:sticky lg:top-8">
+          <h1 className="font-serif text-[40px] italic leading-[1.2] md:text-[48px]">Contact Us</h1>
+          <p className="type-body text-ink-88">
+            Whether you have a question or would like to stock Crosps, we’d love to hear from you.
+          </p>
+          <p className="type-body text-ink-88">
+            Send us a message, or find answers in our{" "}
+            <Link href={V2_LINKS.faq} className="border-b border-ink pb-0.5 text-ink transition-opacity hover:opacity-70">
+              FAQ
+            </Link>
+            .
+          </p>
+        </header>
+        <div className="min-w-0 flex-1 lg:pl-8">
+          <div className="max-w-[720px]">
+            <ContactForm
+              initialTopic={initialTopic}
+              submitLabel="Send"
+              note={
+                <>
+                  By clicking ‘Send’ you agree to the{" "}
+                  <Link href={V2_LINKS.policy("privacy-policy")} className="underline underline-offset-4 hover:text-ink">
+                    Privacy Policy
+                  </Link>
+                  .
+                </>
+              }
+            />
           </div>
-        </div>
-        <div className="lg:px-[112px] lg:py-12">
-          <ContactForm
-            initialTopic={initialTopic}
-            submitLabel="Send"
-            note={
-              <>
-                By clicking ‘Send’ you agree to the{" "}
-                <Link href={V2_LINKS.policy("privacy-policy")} className="underline underline-offset-4 hover:text-ink">
-                  Privacy Policy
-                </Link>
-                .
-              </>
-            }
-          />
         </div>
       </main>
       <Footer links={V2_FOOTER_LINKS} />
