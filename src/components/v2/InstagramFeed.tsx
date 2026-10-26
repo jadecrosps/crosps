@@ -57,11 +57,12 @@ export function InstagramFeed() {
       </div>
       <MobileCarousel label="Instagram posts" className="md:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {posts.map((p) => (
-          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block h-[420px] overflow-hidden md:h-[500px]">
+          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block h-[420px] select-none overflow-hidden [-webkit-touch-callout:none] md:h-[500px]">
             <Image
               src={p.src}
               alt={p.alt}
               fill
+              draggable={false}
               sizes="(max-width: 1024px) 50vw, 25vw"
               className="object-cover transition-transform duration-500 hover:scale-[1.03]"
               unoptimized={p.src.startsWith("https://") && !p.src.includes("behold")}

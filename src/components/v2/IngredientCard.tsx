@@ -57,11 +57,11 @@ function InfoLabel({ label, info }: { label: string; info: string }) {
       <div
         id={id}
         role="tooltip"
-        // Phones: opens in place under the label (tap). From md: floating pop-up on hover/focus.
-        className={`type-small z-10 bg-cream p-3 leading-[1.4] text-ink md:absolute md:bottom-full md:left-0 md:mb-2 md:mt-0 md:block md:w-[260px] md:shadow-sm md:transition-opacity md:duration-200 ${
+        // Phones: tap opens it over the bottom of the photo, card width. From md: 260px hover pop-up.
+        className={`type-small absolute inset-x-0 bottom-full z-10 mb-2 bg-cream p-3 leading-[1.4] text-ink shadow-sm transition-opacity duration-200 md:right-auto md:w-[260px] ${
           open
-            ? "mt-2 block md:opacity-100"
-            : "hidden md:pointer-events-none md:opacity-0 md:group-hover/info:pointer-events-auto md:group-hover/info:opacity-100 md:group-focus-within/info:opacity-100"
+            ? "opacity-100"
+            : "pointer-events-none opacity-0 md:group-hover/info:pointer-events-auto md:group-hover/info:opacity-100 md:group-focus-within/info:opacity-100"
         }`}
       >
         {info}

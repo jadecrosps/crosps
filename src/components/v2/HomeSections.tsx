@@ -152,13 +152,11 @@ export function Reviews() {
     <section className="gutter-x flex flex-col items-center gap-14 pb-20 md:pb-28">
       <Divider />
       <SectionHeading title="Worth talking about." subtitle="A few thoughts from people who thought so too." />
-      <div className="flex w-full flex-wrap justify-center gap-6">
+      <MobileCarousel label="Reviews" className="md:grid-cols-[repeat(auto-fit,minmax(0,322px))] md:justify-center md:gap-6">
         {REVIEWS.map((r) => (
-          <div key={r.author} className="w-full sm:w-[calc(50%-12px)] lg:w-[322px]">
-            <ReviewCard {...r} />
-          </div>
+          <ReviewCard key={r.author} {...r} />
         ))}
-      </div>
+      </MobileCarousel>
     </section>
   );
 }
@@ -181,7 +179,7 @@ export function WaitlistBanner() {
           </div>
           <EmailCapture />
         </div>
-        <div className="relative min-h-[320px]">
+        <div className="relative order-first min-h-[320px] md:order-none">
           <Image src="/v2/callout.jpg" alt="Crosps packs on a table" fill sizes="(max-width: 768px) 100vw, 55vw" className="object-cover" />
         </div>
       </div>
