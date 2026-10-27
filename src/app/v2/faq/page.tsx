@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// V2 FAQ: moremud.co support-centre layout (photo banner with headline, large category nav,
+// V2 FAQ: moremud.co support-centre layout (large category nav,
 // contact panel) around the Crosps searchable list.
 export default async function V2FaqPage({ searchParams }: { searchParams: Promise<{ gutter?: string }> }) {
   const { gutter } = await searchParams;
@@ -20,14 +20,7 @@ export default async function V2FaqPage({ searchParams }: { searchParams: Promis
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
       <Nav tone="dark" links={{ home: V2_LINKS.home, shop: V2_LINKS.shop, about: V2_LINKS.about, faq: V2_LINKS.faq }} />
       <main className="flex flex-col pb-20 md:pb-32">
-        {/* Photo banner with the title over it */}
-        <section className="px-5 pt-2 md:px-10">
-          <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden md:aspect-[1633/620]">
-            <Image src="/v2/hero.jpg" alt="" fill priority sizes="100vw" className="object-cover" />
-            <h1 className="relative px-6 text-center font-serif text-[44px] italic leading-[1.05] text-white md:text-[80px]">Everything you need to know</h1>
-          </div>
-        </section>
-
+        <h1 className="sr-only">FAQ</h1>
         <div className="gutter-x pt-12 md:pt-16">
           <FaqDirectory groups={FAQ_GROUPS} contactHref={V2_LINKS.contact} />
         </div>
