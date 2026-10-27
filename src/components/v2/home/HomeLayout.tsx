@@ -66,17 +66,16 @@ export function InsetHero({ links }: { links: Links }) {
   );
 }
 
-// Large left-aligned statement under the hero, leading into the shop row.
-export function IntroStatement({ shopHref }: { shopHref: string }) {
+// Large centred statement under the hero.
+export function IntroStatement() {
   return (
-    <section className="gutter-x flex pb-12 pt-20 md:pb-16 md:pt-32">
-      <div className="flex max-w-[1080px] flex-col items-start gap-6">
+    <section className="gutter-x flex justify-center py-20 md:py-32">
+      <div className="flex max-w-[1080px] flex-col items-center gap-6 text-center">
         <p className="type-label text-ink-72">Good taste is personal</p>
         <p className="type-statement text-ink">
           Crosps is made for people who care about the details: what they eat, what they bring to the table, and the world
           they create around them. Three recognisable vegetables. Four ingredients. Each one <SerifAccent>distinct.</SerifAccent>
         </p>
-        <TextLink href={shopHref}>Shop now</TextLink>
       </div>
     </section>
   );
@@ -150,7 +149,7 @@ export function SocialProof({ links }: { links: Links }) {
 // Centred statement line.
 export function CenteredCta() {
   return (
-    <section className="gutter-x flex flex-col items-center py-20 text-center md:py-32">
+    <section className="gutter-x flex flex-col items-center pt-20 text-center md:pt-32">
       <h2 className="font-sans text-[32px] leading-[1.1] text-ink md:whitespace-nowrap md:text-[40px]">
         Made from crops, not <SerifAccent>compromises.</SerifAccent>
       </h2>
