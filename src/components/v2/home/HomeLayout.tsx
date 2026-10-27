@@ -179,7 +179,14 @@ export function WaitlistCard() {
     <section className="gutter-x pb-20 md:pb-32">
       {/* Banner proportions from clueperfumery.com (1513×726), 40px inner padding. */}
       <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1513/726] md:min-h-0 md:p-10">
-        <Image src="/v2/callout.jpg" alt="Crosps packs on a table" fill sizes="100vw" className="object-cover" />
+        <Image
+          src="/v2/waitlist-police-box.jpg"
+          alt="Holding packs of Crosps Onion Chips by a London police box"
+          fill
+          sizes="100vw"
+          // Portrait photo in a wide banner: keep the face and the packs in frame.
+          className="object-cover object-[50%_42%]"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
         <div className="relative flex max-w-[420px] flex-col gap-6 text-white">
           <div className="flex flex-col gap-2">
