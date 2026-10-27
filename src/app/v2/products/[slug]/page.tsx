@@ -101,7 +101,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
 
             <div className="flex flex-col gap-4">
               <p className="type-body text-ink-88">{details.description}</p>
-              <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
+              <ul className="grid justify-start gap-x-10 gap-y-1 sm:grid-cols-[auto_auto]">
                 {CLAIMS.map((c) => (
                   <li key={c} className="type-body flex items-center gap-3 text-ink">
                     <span aria-hidden className="text-[14px]">✓</span>
