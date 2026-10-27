@@ -21,7 +21,7 @@ export function ReviewsMarquee({
         <li
           key={`${r.author}-${i}`}
           aria-hidden={i >= REVIEWS.length || undefined}
-          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-cream p-6"
+          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 border border-ink-10 bg-white p-6"
         >
           <div className="flex flex-col gap-3">
             {r.rating === 5 && <Stars />}
