@@ -8,7 +8,7 @@ import { QuickAdd } from "./QuickAdd";
 import { STORY_PARAGRAPHS } from "../StorySection";
 import { PRODUCTS, STOCKISTS, type Product } from "@/lib/v2-content";
 
-// Homepage sections laid out after moremud.co, in the Crosps design system.
+// Homepage sections in the Crosps design system (section flow after pludolabs.com).
 
 type Links = { shop: string; about: string; contact: string; product: (slug: string) => string };
 
@@ -31,38 +31,6 @@ export function PillLink({ href, children, external }: { href: string; children:
     >
       {children}
     </a>
-  );
-}
-
-// Inset hero: the video sits inside the page margins, under a white nav.
-export function InsetHero({ links }: { links: Links }) {
-  return (
-    <section className="gutter-x">
-      <div className="relative flex h-[78vh] min-h-[520px] max-h-[780px] flex-col justify-end overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster="/hero-poster.jpg"
-          aria-hidden="true"
-        >
-          <source src="/hero.webm" type="video/webm" />
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
-        <div className="relative flex flex-col items-start gap-8 p-6 md:p-12">
-          <h1 className="type-display max-w-[720px] text-white">
-            A new world of vegetable <SerifAccent>crisps.</SerifAccent>
-          </h1>
-          <Button href={links.shop} variant="light">
-            Shop now
-          </Button>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -91,7 +59,7 @@ export function ShopRow({
 }) {
   return (
     <section id="shop" className="gutter-x flex scroll-mt-6 flex-col gap-8 pb-20 md:pb-32">
-      <RowHeader title="Shop Crosps" action={<PillLink href={links.shop}>Shop all →</PillLink>} />
+      <RowHeader title="Shop Crosps" />
       <MobileCarousel label="Products" className="md:grid-cols-3 md:gap-5">
         {PRODUCTS.map((p) => (
           <div key={p.slug} className="flex flex-col gap-4">
@@ -100,6 +68,89 @@ export function ShopRow({
           </div>
         ))}
       </MobileCarousel>
+      <Button href={links.shop} className="self-center">
+        Shop all
+      </Button>
+    </section>
+  );
+}
+
+// Benefits around the pack over a full-width photo (after pludolabs.com "Functionality, at every level").
+const BENEFITS = [
+  { title: "Only four ingredients", body: "The vegetable, rapeseed oil, tapioca starch and a touch of sea salt." },
+  { title: "High in fibre", body: "Up to 27g of fibre per 100g, depending on the flavour." },
+  { title: "No added sugar", body: "Any sweetness comes from the vegetable itself." },
+  { title: "Plant based & gluten free", body: "A snack the whole table can share." },
+];
+
+function BenefitItem({ b }: { b: (typeof BENEFITS)[number] }) {
+  return (
+    <div className="flex max-w-[240px] flex-col gap-2">
+      <p className="type-mono text-ink">{b.title}</p>
+      <p className="type-body text-ink-72">{b.body}</p>
+    </div>
+  );
+}
+
+export function BenefitsFeature() {
+  return (
+    <section className="flex flex-col gap-10 pb-20 md:pb-32">
+      <h2 className="gutter-x font-sans text-center text-[32px] leading-[1.1] text-ink md:text-[40px]">
+        Made from crops, not <SerifAccent>compromises.</SerifAccent>
+      </h2>
+      <div className="relative flex justify-center px-5 py-10 md:px-10 md:py-20">
+        <Image src="/v2/insta-4.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        <div className="relative grid w-full max-w-[1100px] items-center gap-10 bg-white/80 p-8 backdrop-blur-md md:grid-cols-[1fr_minmax(0,320px)_1fr] md:p-12">
+          <div className="flex flex-col gap-10 md:gap-24">
+            <BenefitItem b={BENEFITS[0]} />
+            <BenefitItem b={BENEFITS[1]} />
+          </div>
+          <div className="relative order-first mx-auto aspect-[4/5] w-[200px] md:order-none md:w-full">
+            <Image src="/v2/pack-onion.png" alt="Crosps Onion Chips pack" fill sizes="320px" className="object-contain" />
+          </div>
+          <div className="flex flex-col gap-10 md:items-end md:gap-24 md:text-right">
+            <BenefitItem b={BENEFITS[2]} />
+            <BenefitItem b={BENEFITS[3]} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Slow-scrolling strip of photos (after pludolabs.com "Part of the daily routine").
+const EVERYDAY = [
+  { src: "/v2/hover-tomato.jpg", alt: "Tomato Chips on the go" },
+  { src: "/v2/insta-2.jpg", alt: "Crosps on Instagram" },
+  { src: "/v2/lifestyle-pack.jpg", alt: "Carrying Crosps" },
+  { src: "/v2/hover-onion.jpg", alt: "Onion Chips on the go" },
+  { src: "/v2/story.jpg", alt: "A pepper crisp next to a fresh slice of pepper" },
+  { src: "/v2/insta-3.jpg", alt: "Crosps on Instagram" },
+  { src: "/v2/hover-pepper.jpg", alt: "Pepper Chips on the go" },
+];
+
+export function EverydayReel() {
+  const row = (hidden: boolean) => (
+    <ul className="flex shrink-0 gap-3 pr-3" aria-hidden={hidden || undefined}>
+      {EVERYDAY.map((p) => (
+        <li key={p.src} className="relative aspect-[3/4] w-[min(300px,62vw)] shrink-0 overflow-hidden">
+          <Image src={p.src} alt={hidden ? "" : p.alt} fill sizes="300px" className="object-cover" />
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <section className="flex flex-col gap-10 pb-20 md:pb-32">
+      <div className="gutter-x flex flex-col items-center gap-2 text-center">
+        <h2 className="type-heading text-ink">Part of the everyday</h2>
+        <p className="type-body text-ink-72">On the go, at the table, in the bag.</p>
+      </div>
+      <div className="overflow-hidden motion-reduce:overflow-x-auto">
+        <div className="animate-ticker flex w-max hover:[animation-play-state:paused] motion-reduce:animate-none" style={{ animationDuration: "60s" }}>
+          {row(false)}
+          {row(true)}
+        </div>
+      </div>
     </section>
   );
 }
@@ -142,17 +193,6 @@ export function SocialProof({ links }: { links: Links }) {
           <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
         ))}
       </div>
-    </section>
-  );
-}
-
-// Centred statement line.
-export function CenteredCta() {
-  return (
-    <section className="gutter-x flex flex-col items-center py-20 text-center md:py-32">
-      <h2 className="font-sans text-[32px] leading-[1.1] text-ink md:whitespace-nowrap md:text-[40px]">
-        Made from crops, not <SerifAccent>compromises.</SerifAccent>
-      </h2>
     </section>
   );
 }
