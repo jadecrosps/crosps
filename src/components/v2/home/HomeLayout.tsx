@@ -108,9 +108,10 @@ export function ShopRow({
 export function StorySplit({ image, alt, href }: { image: string; alt: string; href: string }) {
   return (
     <section className="gutter-x grid gap-10 pb-20 md:pb-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
-      <div className="flex flex-col justify-between gap-10">
+      <div className="flex flex-col gap-8">
         <p className="type-label text-ink">Why Crosps</p>
-        <div className="flex max-w-[560px] flex-col items-start gap-8">
+        {/* Starts 32px under the label, then rides down the column as the page scrolls, ending level with the photo's bottom. */}
+        <div className="flex max-w-[560px] flex-col items-start gap-8 lg:sticky lg:top-10">
           <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
             We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
           </h2>
