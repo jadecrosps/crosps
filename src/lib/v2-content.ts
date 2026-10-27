@@ -104,12 +104,25 @@ export const INGREDIENT_INFO = {
   tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
 };
 
-export const REVIEWS = [
+// rating: stars to show (omit when the reviewer didn't give one).
+export const REVIEWS: { quote: string; author: string; rating?: number }[] = [
   {
     quote: "The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!",
     author: "Anne-Marie, London",
+    rating: 5,
   },
-  { quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!", author: "Orla, Dublin" },
+  { quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!", author: "Orla, Dublin", rating: 5 },
+  {
+    quote:
+      "Absolutely beautiful snack. I love the fact they’re sweet and savoury so you hit both of your cravings. They don’t last long in my house as it’s loved by my kids and us adults.",
+    author: "Charlotte, Dublin",
+    rating: 5,
+  },
+  {
+    quote:
+      "I tried the tomato and the onion flavours. They’re both delightful. I preferred the tomato flavour, although I can sense that the onion one will be great with dips.",
+    author: "Romana, London",
+  },
 ];
 
 // Where V2 pages link to. Points at the current site until each V2 page exists.

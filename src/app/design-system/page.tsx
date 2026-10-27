@@ -256,8 +256,9 @@ export default function DesignSystemPage() {
           <ReviewCard
             quote="The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!"
             author="Anne-Marie, London"
+            rating={5}
           />
-          <ReviewCard quote="Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!" author="Orla, Dublin" />
+          <ReviewCard quote="Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!" author="Orla, Dublin" rating={5} />
         </div>
       </Section>
 
