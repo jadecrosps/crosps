@@ -108,7 +108,7 @@ export function Stockists({ links }: { links: HomeLinks }) {
 // Figma 2:1066
 export function Ingredients({ links }: { links: HomeLinks }) {
   return (
-    <section className="gutter-x flex flex-col gap-14 py-20 md:py-28">
+    <section className="gutter-x flex flex-col gap-14 pt-20 md:pt-28">
       {/* Left-aligned, with Shop now on the right like "Want to stock Crosps?" */}
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
