@@ -16,8 +16,8 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
-  { slug: "onion", name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
   { slug: "pepper", name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags", status: "Pre order" },
+  { slug: "onion", name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
   { slug: "tomato", name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags", status: "Pre order" },
 ];
 
@@ -104,12 +104,39 @@ export const INGREDIENT_INFO = {
   tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
 };
 
-export const REVIEWS = [
+// rating: stars to show (omit when the reviewer didn't give one).
+// title/body: the reviewer's first sentence and the rest, in their own words.
+export const REVIEWS: { quote: string; title: string; body: string; author: string; rating?: number }[] = [
   {
     quote: "The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!",
+    title: "The tomato chips were delicious!",
+    body: "Would pair extremely well with a crisp white wine in the summer!",
     author: "Anne-Marie, London",
+    rating: 5,
   },
-  { quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!", author: "Orla, Dublin" },
+  {
+    quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!",
+    title: "Very hard to pick one but tomatoes 🍅 are my winner.",
+    body: "LOVE LOVE LOVE them!",
+    author: "Orla, Dublin",
+    rating: 5,
+  },
+  {
+    quote:
+      "Absolutely beautiful snack. I love the fact they’re sweet and savoury so you hit both of your cravings. They don’t last long in my house as it’s loved by my kids and us adults.",
+    title: "Absolutely beautiful snack.",
+    body: "I love the fact they’re sweet and savoury so you hit both of your cravings. They don’t last long in my house as it’s loved by my kids and us adults.",
+    author: "Charlotte, Dublin",
+    rating: 5,
+  },
+  {
+    quote:
+      "I tried the tomato and the onion flavours. They’re both delightful. I preferred the tomato flavour, although I can sense that the onion one will be great with dips.",
+    title: "I tried the tomato and the onion flavours.",
+    body: "They’re both delightful. I preferred the tomato flavour, although I can sense that the onion one will be great with dips.",
+    author: "Romana, London",
+    rating: 5,
+  },
 ];
 
 // Where V2 pages link to. Points at the current site until each V2 page exists.
@@ -247,7 +274,7 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       { label: "Salt", per100: "0.57g", perServing: "0.09g" },
     ],
     vegetable: {
-      label: "Peppers",
+      label: "Pepper",
       image: "/v2/ing-pepper.jpg",
       crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
       colour: "var(--color-pepper)",

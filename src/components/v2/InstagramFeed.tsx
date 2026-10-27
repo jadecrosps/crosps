@@ -51,13 +51,18 @@ export function InstagramFeed() {
             Step inside the world of <SerifAccent>Crosps</SerifAccent>
           </h2>
         </div>
-        <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer" aria-label="Crosps on Instagram">
-          <Image src="/v2/instagram.svg" alt="" width={24} height={24} />
+        <a
+          href={PROFILE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="type-label shrink-0 rounded-button border border-brown px-4 py-2 text-ink transition-colors hover:bg-brown hover:text-white"
+        >
+          @eatcrosps
         </a>
       </div>
       <MobileCarousel label="Instagram posts" className="md:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {posts.map((p) => (
-          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block h-[420px] select-none overflow-hidden [-webkit-touch-callout:none] md:h-[500px]">
+          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block aspect-[3/4] select-none overflow-hidden [-webkit-touch-callout:none]">
             <Image
               src={p.src}
               alt={p.alt}

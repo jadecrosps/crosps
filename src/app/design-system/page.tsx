@@ -47,7 +47,7 @@ const TYPE = [
   { name: "Body large", cls: "type-body-lg", spec: "Saans 18 / 1.5", sample: "Real vegetables, transformed into light, crisp, deeply savoury slices that keep their natural colour, character and flavour." },
   { name: "Body", cls: "type-body", spec: "Saans 16 / 1.5", sample: "Three vegetables. One first drop. Join the list for early access." },
   { name: "Small", cls: "type-small", spec: "Saans 14 / 1.2", sample: "Copyright ©2026 Crosps. All Rights Reserved" },
-  { name: "Nav", cls: "type-nav", spec: "Saans 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
+  { name: "Nav", cls: "type-nav", spec: "Saans Mono 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
   { name: "Button", cls: "type-button", spec: "Saans 16 / 1 · +0.3% tracking", sample: "Shop the collection" },
   { name: "Label", cls: "type-label", spec: "Saans Mono 12 / 1.5 · uppercase", sample: "8×30g bags" },
   { name: "Mono", cls: "type-mono", spec: "Saans Mono 14 / 1.2 · uppercase", sample: "Anne-Marie, London" },
@@ -256,8 +256,9 @@ export default function DesignSystemPage() {
           <ReviewCard
             quote="The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!"
             author="Anne-Marie, London"
+            rating={5}
           />
-          <ReviewCard quote="Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!" author="Orla, Dublin" />
+          <ReviewCard quote="Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!" author="Orla, Dublin" rating={5} />
         </div>
       </Section>
 
@@ -274,7 +275,7 @@ export default function DesignSystemPage() {
               { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
               { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
               {
-                label: "Peppers",
+                label: "Pepper",
                 image: "/v2/ing-pepper.jpg",
                 crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
                 colour: "var(--color-pepper)",

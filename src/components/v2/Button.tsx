@@ -8,12 +8,12 @@ type ButtonProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
 const VARIANTS = {
-  dark: "bg-ink text-white hover:bg-ink-88",
+  dark: "bg-brown text-white hover:bg-brown-88",
   light: "bg-white text-ink backdrop-blur-[8px] hover:bg-stone",
 };
 
 export function Button({ children, variant = "dark", href, className = "", ...rest }: ButtonProps) {
-  const classes = `type-button inline-flex items-center justify-center rounded-button px-10 py-4 whitespace-nowrap transition-colors duration-200 ${VARIANTS[variant]} ${className}`;
+  const classes = `type-mono inline-flex items-center justify-center rounded-button px-10 py-4 whitespace-nowrap transition-colors duration-200 ${VARIANTS[variant]} ${className}`;
 
   if (href) {
     return (
@@ -39,13 +39,23 @@ function Arrow() {
   );
 }
 
-export function TextLink({ children, href }: { children: React.ReactNode; href: string }) {
+export function TextLink({
+  children,
+  href,
+  className = "",
+  underline = true,
+}: {
+  children: React.ReactNode;
+  href: string;
+  className?: string;
+  underline?: boolean;
+}) {
   return (
     <Link
       href={href}
-      className="group/link type-button inline-flex items-center gap-2 uppercase text-ink"
+      className={`group/link type-mono inline-flex items-center gap-2 text-ink ${className}`}
     >
-      <span className="underline decoration-from-font underline-offset-4">{children}</span>
+      <span className={underline ? "underline decoration-from-font underline-offset-4" : ""}>{children}</span>
       <Arrow />
     </Link>
   );
