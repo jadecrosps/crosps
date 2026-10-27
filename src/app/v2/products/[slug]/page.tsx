@@ -49,8 +49,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-// Pack claims shown as tags in the product panel.
-const CLAIMS = ["Plant based", "Gluten free", "High fibre", "No added sugar"];
+// Pack claims shown as a checklist in the product panel.
+const CLAIMS = ["Just four ingredients", "Real vegetables, sliced", "Naturally high fibre", "Plant based", "Gluten free", "No added sugar"];
 
 // V2 product page: Figma "Product Page" (1:1102) content in the pludolabs.com product layout.
 export default async function ProductPage({ params, searchParams }: Params) {
@@ -79,8 +79,9 @@ export default async function ProductPage({ params, searchParams }: Params) {
       <main>
         {/* Gallery left (thumbnails down the side), product panel right */}
         <section className="gutter-x grid gap-8 pb-20 pt-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
-          {/* Fits the screen height so it stays fixed while the details scroll and the dropdowns open. */}
-          <div className="min-w-0 lg:sticky lg:top-4 lg:h-[calc(100svh-2rem)] lg:self-start">
+          {/* Sits still in the page (no sticky), sized to fit the screen, so it never shifts
+              when the details scroll or the dropdowns open. */}
+          <div className="min-w-0 lg:h-[calc(100svh-108px)] lg:self-start">
             <ProductGallery slides={details.gallery} tag={product.tag} />
           </div>
 
@@ -91,22 +92,23 @@ export default async function ProductPage({ params, searchParams }: Params) {
                 Loved by our first tasters
               </a>
               <h1 className="font-sans text-[32px] leading-[1.1] md:text-[44px]">{product.name}</h1>
-              <div className="flex flex-wrap gap-2">
-                {CLAIMS.map((c) => (
-                  <Tag key={c} tone="light">
-                    {c}
-                  </Tag>
-                ))}
-              </div>
+              {product.status && (
+                <div>
+                  <Tag tone="light">{product.status} · 8 packs of 30g</Tag>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col gap-4">
-              {product.status && (
-                <p className="type-mono self-start bg-brown px-3 py-2 text-white">
-                  {product.status} · 8 packs of 30g
-                </p>
-              )}
               <p className="type-body text-ink-88">{details.description}</p>
+              <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                {CLAIMS.map((c) => (
+                  <li key={c} className="type-body flex items-center gap-3 text-ink">
+                    <span aria-hidden className="text-[14px]">✓</span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <ProductPurchase
