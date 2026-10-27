@@ -2,12 +2,11 @@ import Image from "next/image";
 import { SerifAccent } from "@/components/ui/SerifAccent";
 import { Button, TextLink } from "../Button";
 import { ProductCard } from "../ProductCard";
-import { ReviewCard } from "../ReviewCard";
 import { EmailCapture } from "../EmailCapture";
 import { MobileCarousel } from "../MobileCarousel";
 import { QuickAdd } from "./QuickAdd";
 import { STORY_PARAGRAPHS } from "../StorySection";
-import { PRODUCTS, REVIEWS, STOCKISTS, type Product } from "@/lib/v2-content";
+import { PRODUCTS, STOCKISTS, type Product } from "@/lib/v2-content";
 
 // Homepage sections laid out after moremud.co, in the Crosps design system.
 
@@ -133,27 +132,15 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
   );
 }
 
-// Reviews + stockists (where More Mud has its magazine grid).
+// Stockist logos (reviews now live in ReviewsMarquee).
 export function SocialProof({ links }: { links: Links }) {
   return (
-    <section className="gutter-x flex flex-col gap-16 pb-20 md:gap-20 md:pb-32">
-      <div className="flex flex-col gap-8">
-        <RowHeader title="Worth talking about." />
-        <MobileCarousel label="Reviews" className="md:grid-cols-[repeat(auto-fit,minmax(0,1fr))] md:gap-2">
-          {REVIEWS.map((r) => (
-            <div key={r.author} className="flex h-full items-center justify-center bg-cream px-6 py-10">
-              <ReviewCard {...r} />
-            </div>
-          ))}
-        </MobileCarousel>
-      </div>
-      <div className="flex flex-col gap-8">
-        <RowHeader title="Found in good places" action={<TextLink href={`${links.contact}?topic=stock`}>Want to stock Crosps?</TextLink>} />
-        <div className="flex flex-wrap items-end justify-center gap-10 border-y border-ink-10 py-10 md:gap-14">
-          {STOCKISTS.map((s) => (
-            <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
-          ))}
-        </div>
+    <section className="gutter-x flex flex-col gap-8 py-20 md:py-32">
+      <RowHeader title="Found in good places" action={<TextLink href={`${links.contact}?topic=stock`}>Want to stock Crosps?</TextLink>} />
+      <div className="flex flex-wrap items-end justify-center gap-10 border-y border-ink-10 py-10 md:gap-14">
+        {STOCKISTS.map((s) => (
+          <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
+        ))}
       </div>
     </section>
   );

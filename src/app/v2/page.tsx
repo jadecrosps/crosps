@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Ticker } from "@/components/v2/Ticker";
 import { Footer } from "@/components/v2/Footer";
 import { InstagramFeed } from "@/components/v2/InstagramFeed";
+import { ReviewsMarquee } from "@/components/v2/ReviewsMarquee";
 import { HomeHero, Ingredients } from "@/components/v2/HomeSections";
 import {
   IntroStatement,
@@ -54,6 +55,7 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
           alt="A pepper crisp next to a fresh slice of pepper"
           href={V2_LINKS.about}
         />
+        <ReviewsMarquee />
         <SocialProof links={V2_LINKS} />
         <CenteredCta links={V2_LINKS} />
         <WaitlistCard />
