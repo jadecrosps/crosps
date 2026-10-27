@@ -17,14 +17,14 @@ export function ReviewsMarquee({
   const row = (hidden: boolean) => (
     <ul className="flex shrink-0 gap-3 pr-3" aria-hidden={hidden || undefined}>
       {REVIEWS.map((r) => (
-        <li key={r.author} className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-white p-6">
+        <li key={r.author} className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-white/10 p-6">
           <div className="flex flex-col gap-3">
-            <p className="font-sans text-[22px] leading-[1.15] text-ink">{r.title}</p>
-            <p className="type-body text-ink-88">{r.body}</p>
+            <p className="font-sans text-[22px] leading-[1.15] text-white">{r.title}</p>
+            <p className="type-body text-white/88">{r.body}</p>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="type-mono text-ink">{r.author}</p>
-            {r.rating === 5 && <Stars />}
+            <p className="type-mono text-white">{r.author}</p>
+            {r.rating === 5 && <Stars className="brightness-0 invert" />}
           </div>
         </li>
       ))}

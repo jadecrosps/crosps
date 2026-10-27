@@ -74,12 +74,20 @@ export type VegetableOption = { label: string; image: string; crop?: Crop; colou
 
 export function VegetableIngredientCard({ options }: { options: VegetableOption[] }) {
   const [active, setActive] = useState(0);
-  const current = options[active];
 
   return (
     <div className="flex flex-col gap-2">
       <Frame>
-        <CroppedImage key={current.label} src={current.image} alt={current.label} crop={current.crop} sizes={SIZES} />
+        {/* All three load up front and cross-fade, so switching never flashes. */}
+        {options.map((option, i) => (
+          <div
+            key={option.label}
+            aria-hidden={i !== active}
+            className={`absolute inset-0 transition-opacity duration-300 ${i === active ? "opacity-100" : "opacity-0"}`}
+          >
+            <CroppedImage src={option.image} alt={option.label} crop={option.crop} sizes={SIZES} loading="eager" />
+          </div>
+        ))}
       </Frame>
       <div role="tablist" className="flex flex-wrap gap-x-2 gap-y-1">
         {options.map((option, i) => (
