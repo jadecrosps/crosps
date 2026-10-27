@@ -107,7 +107,7 @@ export function ShopRow({
 // Story split (after chimi-online.com): text on white on the left, square photo on the right.
 export function StorySplit({ image, alt, href }: { image: string; alt: string; href: string }) {
   return (
-    <section className="gutter-x grid gap-10 pb-20 md:pb-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
+    <section className="gutter-x grid gap-10 pb-20 md:pb-32 lg:grid-cols-[minmax(380px,1fr)_minmax(0,820px)] lg:gap-16">
       <div className="flex flex-col gap-8">
         <p className="type-label text-ink">Why Crosps</p>
         {/* Heading and body start 32px under the label, then ride down the column as the page scrolls,
