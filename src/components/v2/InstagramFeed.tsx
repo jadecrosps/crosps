@@ -51,8 +51,13 @@ export function InstagramFeed() {
             Step inside the world of <SerifAccent>Crosps</SerifAccent>
           </h2>
         </div>
-        <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer" aria-label="Crosps on Instagram">
-          <Image src="/v2/instagram.svg" alt="" width={24} height={24} />
+        <a
+          href={PROFILE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="type-label shrink-0 rounded-button border border-ink px-4 py-2 text-ink transition-colors hover:bg-ink hover:text-white"
+        >
+          @eatcrosps
         </a>
       </div>
       <MobileCarousel label="Instagram posts" className="md:grid-cols-2 md:gap-4 lg:grid-cols-4">
