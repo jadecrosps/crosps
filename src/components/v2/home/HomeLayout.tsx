@@ -6,6 +6,7 @@ import { ReviewCard } from "../ReviewCard";
 import { EmailCapture } from "../EmailCapture";
 import { MobileCarousel } from "../MobileCarousel";
 import { QuickAdd } from "./QuickAdd";
+import { STORY_PARAGRAPHS } from "../StorySection";
 import { PRODUCTS, REVIEWS, STOCKISTS, type Product } from "@/lib/v2-content";
 
 // Homepage sections laid out after moremud.co, in the Crosps design system.
@@ -104,32 +105,28 @@ export function ShopRow({
   );
 }
 
-// Big image card with headline + button over it.
-export function FeatureCard({
-  eyebrow,
-  title,
-  image,
-  alt,
-  cta,
-}: {
-  eyebrow: string;
-  title: React.ReactNode;
-  image: string;
-  alt: string;
-  cta: { href: string; label: string };
-}) {
+// Story split (after chimi-online.com): text on white on the left, square photo on the right.
+export function StorySplit({ image, alt, href }: { image: string; alt: string; href: string }) {
   return (
-    <section className="gutter-x">
-      <div className="relative flex min-h-[560px] flex-col justify-between overflow-hidden p-6 md:h-[min(760px,calc(100svh_-_4rem))] md:min-h-0 md:p-12">
-        <Image src={image} alt={alt} fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/15 to-transparent" />
-        <p className="type-label relative text-white">{eyebrow}</p>
-        <div className="relative flex flex-col items-start gap-8">
-          <h2 className="type-display max-w-[640px] text-white">{title}</h2>
-          <Button href={cta.href} variant="light">
-            {cta.label}
-          </Button>
+    <section className="gutter-x grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
+      <div className="flex flex-col justify-between gap-10">
+        <p className="type-label text-ink">Why Crosps</p>
+        <div className="flex max-w-[560px] flex-col items-start gap-8">
+          <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
+            We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
+          </h2>
+          <div className="flex flex-col gap-4">
+            {STORY_PARAGRAPHS.map((p) => (
+              <p key={p} className="type-body text-ink-88">
+                {p}
+              </p>
+            ))}
+          </div>
+          <Button href={href}>Our story</Button>
         </div>
+      </div>
+      <div className="relative aspect-square w-full">
+        <Image src={image} alt={alt} fill sizes="(max-width: 1024px) 100vw, 820px" className="object-cover" />
       </div>
     </section>
   );
