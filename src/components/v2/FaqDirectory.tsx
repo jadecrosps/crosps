@@ -2,12 +2,13 @@
 
 import { useEffect, useId, useMemo, useState } from "react";
 import Link from "next/link";
+import { TextLink } from "./Button";
 
 export type FaqGroup = { id: string; title: string; items: { question: string; answer: string }[] };
 
 function PlusMinus({ open }: { open: boolean }) {
   return (
-    <span aria-hidden className="relative flex size-6 shrink-0 items-center justify-center rounded-full border border-current">
+    <span aria-hidden className="relative flex size-6 shrink-0 items-center justify-center">
       <span className="relative size-2.5">
         <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
         <span
@@ -111,7 +112,7 @@ export function FaqDirectory({
             />
           </div>
           <nav aria-label="FAQ categories" className="-mx-5 overflow-x-auto px-5 lg:mx-0 lg:overflow-visible lg:px-0">
-            <ul className="flex gap-5 lg:flex-col lg:gap-1">
+            <ul className="flex gap-5 lg:flex-col lg:gap-4">
               {groups.map((g) => {
                 const available = filtered.some((f) => f.id === g.id);
                 return (
@@ -130,6 +131,9 @@ export function FaqDirectory({
               })}
             </ul>
           </nav>
+          <div className="border-t border-ink-10 pt-6">
+            <TextLink href={contactHref}>Is there a question we haven’t answered?</TextLink>
+          </div>
         </div>
       </aside>
 
