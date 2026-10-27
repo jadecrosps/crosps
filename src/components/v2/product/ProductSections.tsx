@@ -32,32 +32,21 @@ export function FeatureCards({ title, intro, cards }: { title: React.ReactNode; 
   );
 }
 
-function Mark({ yes }: { yes: boolean }) {
-  return yes ? (
-    <span aria-label="Yes" className="flex size-6 items-center justify-center rounded-full border border-ink text-[12px] text-ink">
-      ✓
-    </span>
-  ) : (
-    <span aria-label="No" className="text-[16px] text-ink-50">
-      ×
-    </span>
-  );
-}
+// "Us vs. them" comparison: crisp types across the top, Crosps column highlighted.
+export type ComparisonColumn = { name: string; values: string[]; highlight?: boolean; image?: string; imageAlt?: string };
 
-// "Us vs. them" comparison table.
 export function Comparison({
   title,
   intro,
-  pack,
-  packAlt,
   rows,
+  columns,
 }: {
   title: React.ReactNode;
   intro: string;
-  pack: string;
-  packAlt: string;
-  rows: { label: string; us: boolean; them: boolean }[];
+  rows: string[];
+  columns: ComparisonColumn[];
 }) {
+  const cols = `minmax(112px,1fr) repeat(${columns.length}, minmax(128px,1fr))`;
   return (
     <section className="gutter-x flex flex-col items-center gap-10 py-20 md:py-28">
       <div className="flex max-w-[560px] flex-col items-center gap-4 text-center">
@@ -65,28 +54,45 @@ export function Comparison({
         <h2 className="type-heading text-ink">{title}</h2>
         <p className="type-body text-ink-88">{intro}</p>
       </div>
-      <div className="w-full max-w-[760px]">
-        <div className="grid grid-cols-[minmax(0,1fr)_96px_96px] items-end md:grid-cols-[minmax(0,1fr)_140px_140px]">
-          <span />
-          <div className="flex flex-col items-center gap-2 bg-cream px-2 pt-4 pb-3">
-            <div className="relative h-20 w-16">
-              <Image src={pack} alt={packAlt} fill sizes="64px" className="object-contain" />
-            </div>
-            <p className="type-mono text-ink">Crosps</p>
+      {/* Scrolls sideways on small screens rather than squashing the columns. */}
+      <div className="w-full max-w-[1200px] overflow-x-auto">
+        <div role="table" aria-label="How Crosps compares" className="grid min-w-[624px]" style={{ gridTemplateColumns: cols }}>
+          <div role="row" className="contents">
+            <span role="columnheader" className="sticky left-0 z-10 bg-white" />
+            {columns.map((c) => (
+              <div
+                key={c.name}
+                role="columnheader"
+                className={`flex flex-col items-center justify-end gap-3 px-3 pb-4 pt-6 text-center ${c.highlight ? "bg-cream" : ""}`}
+              >
+                {c.image && (
+                  <div className="relative h-24 w-20">
+                    <Image src={c.image} alt={c.imageAlt ?? ""} fill sizes="80px" className="object-contain" />
+                  </div>
+                )}
+                <p className="type-mono text-ink">{c.name}</p>
+              </div>
+            ))}
           </div>
-          <p className="type-mono pb-3 text-center text-ink-72">Typical crisp</p>
+          {rows.map((label, r) => (
+            <div role="row" key={label} className="contents">
+              <p role="rowheader" className="type-mono sticky left-0 z-10 flex items-center border-t border-ink-10 bg-white py-5 pr-4 text-ink">
+                {label}
+              </p>
+              {columns.map((c) => (
+                <p
+                  key={c.name}
+                  role="cell"
+                  className={`type-body flex items-center justify-center border-t border-ink-10 px-3 py-5 text-center ${
+                    c.highlight ? "bg-cream text-ink" : "text-ink-72"
+                  }`}
+                >
+                  {c.values[r]}
+                </p>
+              ))}
+            </div>
+          ))}
         </div>
-        {rows.map((r, n) => (
-          <div key={r.label} className="grid grid-cols-[minmax(0,1fr)_96px_96px] items-stretch md:grid-cols-[minmax(0,1fr)_140px_140px]">
-            <p className="type-body border-t border-ink-10 py-4 pr-4 text-ink">{r.label}</p>
-            <div className={`flex items-center justify-center border-t border-ink-10 bg-cream ${n === rows.length - 1 ? "pb-1" : ""}`}>
-              <Mark yes={r.us} />
-            </div>
-            <div className="flex items-center justify-center border-t border-ink-10">
-              <Mark yes={r.them} />
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );

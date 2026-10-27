@@ -169,13 +169,19 @@ export default async function ProductPage({ params, searchParams }: Params) {
               A different kind of <SerifAccent>crisp.</SerifAccent>
             </>
           }
-          intro="We didn’t want to make another crisp. Here’s what sets Crosps apart."
-          pack={product.image}
-          packAlt={`${product.name} pack`}
-          rows={[
-            { label: "Real vegetable as the main ingredient", us: true, them: false },
-            { label: "Keeps the vegetable’s natural colour", us: true, them: false },
-            { label: "High in fibre", us: true, them: false },
+          intro="We didn’t want to make another crisp. Here’s how Crosps compares."
+          rows={["Base", "Vegetable content", "Ingredients", "Fibre per 100g"]}
+          columns={[
+            { name: "Potato crisps", values: ["Potato", "Potato only", "3 to 16", "3.7–6.5g"] },
+            {
+              name: "Crosps",
+              highlight: true,
+              image: product.image,
+              imageAlt: `${product.name} pack`,
+              values: ["Tomato, onion, bell pepper", "88–90% whole veg", "4", "14–27g"],
+            },
+            { name: "Traditional veg crisps", values: ["Usually root vegetables", "64% mixed root", "3", "10–11g"] },
+            { name: "Lentil crisps", values: ["Lentil flour + starches", "28–30% lentil", "0.7–7.5g", "3–5g"] },
           ]}
         />
 
