@@ -33,6 +33,9 @@ export function ReviewsMarquee({
 
   return (
     <section id="reviews" aria-label="Reviews" className="relative isolate flex scroll-mt-6 flex-col gap-10 overflow-hidden bg-brown py-16 md:py-20">
+      {/* Blurred tomato macro behind the band, toned down with brown. */}
+      <Image src="/v2/ing-tomato.jpg" alt="" fill sizes="100vw" className="-z-10 scale-125 object-cover blur-2xl" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-brown/65" />
       <div className="gutter-x flex flex-col gap-2">
         {/* Stars on their own line above the heading, white on the dark band. */}
         <Stars width={132} className="mb-3 brightness-0 invert" />
