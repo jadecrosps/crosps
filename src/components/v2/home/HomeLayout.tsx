@@ -115,7 +115,7 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
           <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
             We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
           </h2>
-          <div className="flex flex-col gap-4">
+          <div className="flex max-w-[440px] flex-col gap-4">
             {/* The first two paragraphs live on the About page. */}
             {STORY_PARAGRAPHS.slice(2).map((p) => (
               <p key={p} className="type-body text-ink-88">
