@@ -13,7 +13,7 @@ import { PRODUCTS, REVIEWS, STOCKISTS, type Product } from "@/lib/v2-content";
 type Links = { shop: string; about: string; contact: string; product: (slug: string) => string };
 
 // Header row used by every list section: title left, small action right.
-function RowHeader({ title, action }: { title: React.ReactNode; action?: React.ReactNode }) {
+export function RowHeader({ title, action }: { title: React.ReactNode; action?: React.ReactNode }) {
   return (
     <div className="flex items-end justify-between gap-6">
       <h2 className="type-heading text-ink">{title}</h2>
@@ -22,7 +22,7 @@ function RowHeader({ title, action }: { title: React.ReactNode; action?: React.R
   );
 }
 
-function PillLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
+export function PillLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
   return (
     <a
       href={href}
