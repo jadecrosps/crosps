@@ -105,11 +105,11 @@ export function ShopRow({
   );
 }
 
-// Story split (after chimi-online.com): text on white on the left, square photo on the right.
+// Story split (after chimi-online.com): text on white on the left, 16:9 photo on the right.
 export function StorySplit({ image, alt, href }: { image: string; alt: string; href: string }) {
   return (
     <section className="gutter-x grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
-      <div className="flex flex-col justify-between gap-10">
+      <div className="flex flex-col gap-6">
         <p className="type-label text-ink">Why Crosps</p>
         <div className="flex max-w-[560px] flex-col items-start gap-8">
           <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
@@ -125,8 +125,8 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
           <Button href={href}>Our story</Button>
         </div>
       </div>
-      <div className="relative aspect-square w-full">
-        <Image src={image} alt={alt} fill sizes="(max-width: 1024px) 100vw, 820px" className="object-cover" />
+      <div className="relative aspect-[16/9] w-full self-start">
+        <Image src={image} alt={alt} fill sizes="(max-width: 1024px) 100vw, 820px" className="object-cover object-[50%_58%]" />
       </div>
     </section>
   );
