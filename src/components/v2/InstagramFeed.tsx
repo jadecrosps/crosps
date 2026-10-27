@@ -55,7 +55,7 @@ export function InstagramFeed() {
           href={PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="type-label shrink-0 rounded-button border border-brown px-4 py-2 text-ink transition-colors hover:bg-brown hover:text-white"
+          className="type-label shrink-0 rounded-button border border-ink px-4 py-2 text-ink transition-colors hover:bg-ink hover:text-white"
         >
           @eatcrosps
         </a>

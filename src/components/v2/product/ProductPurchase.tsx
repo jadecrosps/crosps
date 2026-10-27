@@ -62,7 +62,7 @@ export function ProductPurchase({
           type="button"
           onClick={add}
           disabled={!available || busy}
-          className="type-button flex h-[52px] flex-1 cursor-pointer items-center justify-center rounded-button bg-brown px-6 text-white transition-colors hover:bg-brown-88 disabled:cursor-default disabled:opacity-50"
+          className="type-button flex h-[52px] flex-1 cursor-pointer items-center justify-center rounded-button bg-ink px-6 text-white transition-colors hover:bg-ink-88 disabled:cursor-default disabled:opacity-50"
         >
           {!available ? "Sold out" : busy ? "Adding…" : `Add to cart · ${fmt(unit * qty)}`}
         </button>

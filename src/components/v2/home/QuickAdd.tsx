@@ -25,7 +25,7 @@ export function QuickAdd({ href, variantId, available = true }: { href: string; 
       <div className="grid grid-cols-2 gap-2">
         <Link
           href={href}
-          className="type-label flex h-10 items-center justify-center rounded-button border border-brown text-ink transition-colors hover:bg-brown hover:text-white"
+          className="type-label flex h-10 items-center justify-center rounded-button border border-ink text-ink transition-colors hover:bg-ink hover:text-white"
         >
           Learn more
         </Link>
@@ -33,7 +33,7 @@ export function QuickAdd({ href, variantId, available = true }: { href: string; 
           type="button"
           onClick={add}
           disabled={!available || busy}
-          className="type-label flex h-10 cursor-pointer items-center justify-center rounded-button bg-brown text-white transition-colors hover:bg-brown-88 disabled:cursor-default disabled:opacity-50"
+          className="type-label flex h-10 cursor-pointer items-center justify-center rounded-button bg-ink text-white transition-colors hover:bg-ink-88 disabled:cursor-default disabled:opacity-50"
         >
           {!available ? "Sold out" : busy ? "Adding…" : "Add to cart"}
         </button>

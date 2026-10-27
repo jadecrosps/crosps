@@ -8,7 +8,7 @@ type ButtonProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
 const VARIANTS = {
-  dark: "bg-brown text-white hover:bg-brown-88",
+  dark: "bg-ink text-white hover:bg-ink-88",
   light: "bg-white text-ink backdrop-blur-[8px] hover:bg-stone",
 };
 
