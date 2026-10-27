@@ -58,7 +58,7 @@ export function ProductPurchase({
               >
                 <input type="radio" name="qty" checked={qty === n} onChange={() => setQty(n)} className="sr-only" />
                 {freeDelivery && (
-                  <span className="type-label absolute -top-2.5 bg-ink px-2 py-0.5 text-[10px] text-white">Free delivery</span>
+                  <span className="type-label absolute -top-2.5 bg-brown px-2 py-0.5 text-[10px] text-white">Free delivery</span>
                 )}
                 <span className="type-body text-ink">
                   {n} {n === 1 ? "case" : "cases"}
@@ -96,7 +96,7 @@ export function ProductPurchase({
           type="button"
           onClick={add}
           disabled={!available || busy}
-          className="type-mono flex h-[52px] w-full cursor-pointer items-center justify-center rounded-button bg-ink px-6 text-white transition-colors hover:bg-ink-88 disabled:cursor-default disabled:opacity-50"
+          className="type-mono flex h-[52px] w-full cursor-pointer items-center justify-center rounded-button bg-brown px-6 text-white transition-colors hover:bg-brown-88 disabled:cursor-default disabled:opacity-50"
         >
           {!available ? "Sold out" : busy ? "Adding…" : `Add to cart · ${fmt(unit * qty)}`}
         </button>

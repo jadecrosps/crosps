@@ -16,7 +16,7 @@ export function BenefitsBlock({ title, image, alt, stats }: { title: React.React
   );
   return (
     <section className="gutter-x">
-      <div className="flex flex-col items-center gap-12 bg-ink px-6 py-16 md:px-12 md:py-20">
+      <div className="flex flex-col items-center gap-12 bg-brown px-6 py-16 md:px-12 md:py-20">
         <h2 className="type-heading text-center text-white">{title}</h2>
         <div className="grid w-full items-center gap-12 md:grid-cols-[1fr_minmax(0,420px)_1fr]">
           <div className="grid grid-cols-2 gap-10 md:grid-cols-1 md:gap-16">

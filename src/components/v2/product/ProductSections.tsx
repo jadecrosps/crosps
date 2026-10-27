@@ -142,7 +142,7 @@ export function IngredientChecklist({ items }: { items: { name: string; note: st
 export function FaqBand({ groups, image, alt, href }: { groups: FaqGroup[]; image: string; alt: string; href: string }) {
   const items = groups.flatMap((g) => g.items);
   return (
-    <section className="gutter-x flex flex-col gap-12 bg-ink py-20 text-white md:py-28">
+    <section className="gutter-x flex flex-col gap-12 bg-brown py-20 text-white md:py-28">
       <h2 className="type-heading text-center">
         Questions, <SerifAccent>answered.</SerifAccent>
       </h2>

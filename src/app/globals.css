@@ -60,6 +60,9 @@
   --color-ink-72: rgba(2, 2, 2, 0.72);
   --color-ink-50: rgba(2, 2, 2, 0.5);
   --color-ink-10: rgba(2, 2, 2, 0.1);
+  /* Brown for dark backgrounds and filled buttons (after k2o.com). */
+  --color-brown: #333230;
+  --color-brown-88: rgba(51, 50, 48, 0.88);
   --color-cream: #f6f5ee;
   --color-paper: #fcfbf8;
   --color-stone: #e5e3e1;
