@@ -110,21 +110,26 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
     <section className="gutter-x grid gap-10 pb-20 md:pb-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
       <div className="flex flex-col gap-8">
         <p className="type-label text-ink">Why Crosps</p>
-        {/* Starts 32px under the label, then rides down the column as the page scrolls, ending level with the photo's bottom. */}
-        <div className="flex max-w-[560px] flex-col items-start gap-8 lg:sticky lg:top-10">
-          <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
-            We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
-          </h2>
-          <div className="flex max-w-[440px] flex-col gap-4">
-            {/* The first two paragraphs live on the About page. */}
-            {STORY_PARAGRAPHS.slice(2).map((p) => (
-              <p key={p} className="type-body text-ink-88">
-                {p}
-              </p>
-            ))}
+        {/* Heading and body start 32px under the label, then ride down the column as the page scrolls,
+            stopping just above the button, which stays fixed at the bottom. */}
+        <div className="flex-1">
+          <div className="flex max-w-[560px] flex-col items-start gap-8 lg:sticky lg:top-10">
+            <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
+              We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
+            </h2>
+            <div className="flex max-w-[440px] flex-col gap-4">
+              {/* The first two paragraphs live on the About page. */}
+              {STORY_PARAGRAPHS.slice(2).map((p) => (
+                <p key={p} className="type-body text-ink-88">
+                  {p}
+                </p>
+              ))}
+            </div>
           </div>
-          <Button href={href}>Our story</Button>
         </div>
+        <Button href={href} className="self-start">
+          Our story
+        </Button>
       </div>
       <div className="relative aspect-square w-full">
         <Image src={image} alt={alt} fill sizes="(max-width: 1024px) 100vw, 820px" className="object-cover" />
