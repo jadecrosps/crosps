@@ -15,23 +15,21 @@ const DEFAULT_LINKS: FooterLinks = {
   TikTok: "https://www.tiktok.com/@eatcrosps",
 };
 
+// Footer laid out after moremud.co: mission + links, newsletter, then a full-width logo.
 // Links without a destination yet fall back to "#".
 export function Footer({ links = {} }: { links?: FooterLinks }) {
   const hrefs = { ...DEFAULT_LINKS, ...links };
   return (
-    <footer className="gutter-x flex flex-col gap-20 bg-cream pb-10 pt-14">
+    <footer className="gutter-x flex flex-col gap-16 bg-cream pb-8 pt-14 md:gap-24 md:pt-20">
       <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
-        <div className="flex w-full max-w-[375px] flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <p className="type-subheading text-ink">Stay a little longer.</p>
-            <p className="type-body text-ink-88">New places. New tables. New things from Crosps.</p>
-          </div>
-          <EmailCapture className="max-w-none" />
-        </div>
-        <div className="flex flex-wrap gap-10 md:gap-14">
-          {COLUMNS.map((col, i) => (
-            <div key={col.title} className={`flex flex-col gap-6 ${i > 0 ? "md:border-l md:border-ink-10 md:pl-14" : ""}`}>
-              <p className="type-mono text-ink">{col.title}</p>
+        <p className="type-mono max-w-[420px] text-ink">
+          Crosps exists to put the vegetable first. Real slices of tomato, onion and pepper, cooked gently enough to keep
+          their colour, shape and flavour. Made from crops, not compromises.
+        </p>
+        <div className="flex flex-wrap gap-10 md:gap-16">
+          {COLUMNS.map((col) => (
+            <div key={col.title} className="flex flex-col gap-4">
+              <p className="type-label text-ink">{col.title}</p>
               <ul className="flex flex-col gap-2">
                 {col.links.map((link) => (
                   <li key={link}>
@@ -45,8 +43,17 @@ export function Footer({ links = {} }: { links?: FooterLinks }) {
           ))}
         </div>
       </div>
-      <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
-        <Image src="/v2/crosps-logo-black.svg" alt="Crosps" width={314} height={76} className="h-[34px] w-auto" />
+
+      <div className="flex w-full max-w-[420px] flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <p className="type-subheading text-ink">Stay a little longer.</p>
+          <p className="type-body text-ink-88">New places. New tables. New things from Crosps.</p>
+        </div>
+        <EmailCapture className="max-w-none" />
+      </div>
+
+      <div className="flex flex-col gap-6">
+        <Image src="/v2/crosps-logo-black.svg" alt="Crosps" width={314} height={76} className="h-auto w-full" />
         <p className="type-small text-ink-72">Copyright ©2026 Crosps. All Rights Reserved</p>
       </div>
     </footer>
