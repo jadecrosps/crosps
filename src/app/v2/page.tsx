@@ -7,12 +7,11 @@ import { HomeHero, Ingredients } from "@/components/v2/HomeSections";
 import {
   IntroStatement,
   ShopRow,
+  StorySplit,
   SocialProof,
-  BenefitsFeature,
-  EverydayReel,
+  CenteredCta,
   WaitlistCard,
 } from "@/components/v2/home/HomeLayout";
-import { FlavourSlider } from "@/components/v2/home/FlavourSlider";
 import { getShopifyProduct } from "@/lib/shopify";
 import {
   PRODUCT_DETAILS,
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// V2 homepage: Crosps design system in the pludolabs.com section flow. Preview only until launch.
+// V2 homepage: Crosps design system in the moremud.co layout. Preview only until launch.
 export default async function V2HomePage({ searchParams }: { searchParams: Promise<{ gutter?: string }> }) {
   const { gutter } = await searchParams;
 
@@ -49,14 +48,16 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
       <main>
         <IntroStatement />
         <ShopRow links={V2_LINKS} variants={variants} />
-        <SocialProof links={V2_LINKS} />
-        <BenefitsFeature />
-        <EverydayReel />
-        <FlavourSlider />
-        <Ingredients links={V2_LINKS} />
         <Ticker items={TICKER} />
+        <CenteredCta />
+        <Ingredients links={V2_LINKS} />
+        <StorySplit
+          image="/v2/story.jpg"
+          alt="A pepper crisp next to a fresh slice of pepper"
+          href={V2_LINKS.about}
+        />
         <ReviewsMarquee />
-        <div className="h-20 md:h-32" />
+        <SocialProof links={V2_LINKS} />
         <WaitlistCard />
         <InstagramFeed />
       </main>
