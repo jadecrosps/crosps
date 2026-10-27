@@ -177,8 +177,8 @@ export function CenteredCta({ links }: { links: Links }) {
 export function WaitlistCard() {
   return (
     <section className="gutter-x pb-20 md:pb-32">
-      {/* Photo ratio (1800×1268), but never taller than the browser window. */}
-      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:h-[min(calc((100vw_-_2*var(--gutter,40px))*0.7044),calc(100svh_-_4rem))] md:min-h-0 md:p-12">
+      {/* Banner proportions from clueperfumery.com (1513×726), 40px inner padding. */}
+      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1513/726] md:min-h-0 md:p-10">
         <Image src="/v2/callout.jpg" alt="Crosps packs on a table" fill sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
         <div className="relative flex max-w-[420px] flex-col gap-6 text-white">
