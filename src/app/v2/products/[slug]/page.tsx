@@ -90,10 +90,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
                 <Image src="/v2/stars.svg" alt="5 out of 5 stars" width={88} height={15} />
                 Loved by our first tasters
               </a>
-              <div className="flex flex-wrap items-center gap-4">
-                <h1 className="font-sans text-[32px] leading-[1.1] md:text-[44px]">{product.name}</h1>
-                {product.status && <span className="type-label bg-brown px-3 py-1.5 text-white">{product.status}</span>}
-              </div>
+              <h1 className="font-sans text-[32px] leading-[1.1] md:text-[44px]">{product.name}</h1>
               <div className="flex flex-wrap gap-2">
                 {CLAIMS.map((c) => (
                   <Tag key={c} tone="light">
@@ -104,9 +101,11 @@ export default async function ProductPage({ params, searchParams }: Params) {
             </div>
 
             <div className="flex flex-col gap-4">
-              <p className="type-body flex items-center gap-3 text-ink">
-                <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-ink" />8 pack of 30g {product.name}
-              </p>
+              {product.status && (
+                <p className="type-mono self-start bg-brown px-3 py-2 text-white">
+                  {product.status} · 8 packs of 30g
+                </p>
+              )}
               <p className="type-body text-ink-88">{details.description}</p>
             </div>
 
