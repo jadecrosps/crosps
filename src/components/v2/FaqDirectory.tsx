@@ -120,7 +120,7 @@ export function FaqDirectory({
                     <a
                       href={`#faq-${g.id}`}
                       aria-current={active === g.id ? "true" : undefined}
-                      className={`type-small whitespace-nowrap transition-colors lg:font-sans lg:text-[28px] lg:leading-[1.15] ${
+                      className={`type-small whitespace-nowrap transition-colors lg:font-sans lg:text-[20px] lg:leading-[1.2] ${
                         !available ? "pointer-events-none text-ink-10" : active === g.id ? "text-ink" : "text-ink-50 hover:text-ink"
                       }`}
                     >
@@ -131,8 +131,10 @@ export function FaqDirectory({
               })}
             </ul>
           </nav>
-          <div className="border-t border-ink-10 pt-6">
-            <TextLink href={contactHref}>Is there a question we haven’t answered?</TextLink>
+          <div className="mt-4 border-t border-ink-10 pt-8">
+            <TextLink href={contactHref} underline={false}>
+              Is there a question we haven’t answered?
+            </TextLink>
           </div>
         </div>
       </aside>

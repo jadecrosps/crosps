@@ -24,7 +24,6 @@ export default async function V2FaqPage({ searchParams }: { searchParams: Promis
         <section className="px-5 pt-2 md:px-10">
           <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden md:aspect-[1633/620]">
             <Image src="/v2/hero.jpg" alt="" fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-black/35" />
             <h1 className="relative px-6 text-center font-serif text-[44px] italic leading-[1.05] text-white md:text-[80px]">Everything you need to know</h1>
           </div>
         </section>
@@ -37,7 +36,7 @@ export default async function V2FaqPage({ searchParams }: { searchParams: Promis
         <section className="gutter-x pt-20 md:pt-32">
           <div className="grid overflow-hidden bg-cream md:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
             <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[420px]">
-              <Image src="/v2/founder.jpg" alt="Jade holding packs of Crosps" fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" />
+              <Image src="/v2/founder.jpg" alt="Jade holding packs of Crosps" fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover object-[50%_20%]" />
             </div>
             <div className="flex flex-col items-start justify-center gap-6 p-8 md:p-14">
               <h2 className="type-heading text-ink">Still have a question?</h2>
