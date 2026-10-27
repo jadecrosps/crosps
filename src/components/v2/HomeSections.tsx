@@ -108,17 +108,22 @@ export function Stockists({ links }: { links: HomeLinks }) {
 // Figma 2:1066
 export function Ingredients({ links }: { links: HomeLinks }) {
   return (
-    <section className="gutter-x flex flex-col items-center gap-14 py-20 md:py-28">
-      <SectionHeading
-        title="The standard"
-        subtitle={
-          <>
-            We put our ingredients where you can see them.
-            <br />
-            The vegetable is the product. Everything it needs. Nothing it doesn’t.
-          </>
-        }
-      />
+    <section className="gutter-x flex flex-col gap-14 py-20 md:py-28">
+      {/* Left-aligned, with Shop now on the right like "Want to stock Crosps?" */}
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <SectionHeading
+          align="left"
+          title="The standard"
+          subtitle={
+            <>
+              We put our ingredients where you can see them.
+              <br />
+              The vegetable is the product. Everything it needs. Nothing it doesn’t.
+            </>
+          }
+        />
+        <TextLink href={links.shop}>Shop now</TextLink>
+      </div>
       <div className="grid w-full grid-cols-2 gap-x-2 gap-y-6 lg:grid-cols-4">
         <VegetableIngredientCard
           options={[
@@ -141,7 +146,6 @@ export function Ingredients({ links }: { links: HomeLinks }) {
         <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
         <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
       </div>
-      <Button href={links.shop}>Shop</Button>
     </section>
   );
 }

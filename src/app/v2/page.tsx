@@ -46,7 +46,7 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
       <HomeHero links={V2_LINKS} />
       <main>
-        <IntroStatement shopHref={V2_LINKS.shop} />
+        <IntroStatement />
         <ShopRow links={V2_LINKS} variants={variants} />
         <Ticker items={TICKER} />
         <CenteredCta />
