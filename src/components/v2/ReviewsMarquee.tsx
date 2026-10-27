@@ -21,7 +21,7 @@ export function ReviewsMarquee({
         <li
           key={`${r.author}-${i}`}
           aria-hidden={i >= REVIEWS.length || undefined}
-          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-brown/10 p-6"
+          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-white/10 p-6"
         >
           <div className="flex flex-col gap-3">
             <p className="font-sans text-[22px] leading-[1.15] text-ink">{r.title}</p>
