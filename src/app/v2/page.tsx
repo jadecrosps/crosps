@@ -49,8 +49,8 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
         <IntroStatement />
         <ShopRow links={V2_LINKS} variants={variants} />
         <Ticker items={TICKER} />
-        <CenteredCta />
         <Ingredients links={V2_LINKS} />
+        <CenteredCta />
         <StorySplit
           image="/v2/story.jpg"
           alt="A pepper crisp next to a fresh slice of pepper"
