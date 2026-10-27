@@ -122,6 +122,7 @@ export const REVIEWS: { quote: string; author: string; rating?: number }[] = [
     quote:
       "I tried the tomato and the onion flavours. They’re both delightful. I preferred the tomato flavour, although I can sense that the onion one will be great with dips.",
     author: "Romana, London",
+    rating: 5,
   },
 ];
 
