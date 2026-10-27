@@ -127,14 +127,14 @@ export function Ingredients({ links }: { links: HomeLinks }) {
       <div className="grid w-full grid-cols-2 gap-x-2 gap-y-6 lg:grid-cols-4">
         <VegetableIngredientCard
           options={[
-            { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
-            { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
             {
               label: "Pepper",
               image: "/v2/ing-pepper.jpg",
               crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
               colour: "var(--color-pepper)",
             },
+            { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
+            { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
           ]}
         />
         <IngredientCard

@@ -21,23 +21,21 @@ export function ReviewsMarquee({
         <li
           key={`${r.author}-${i}`}
           aria-hidden={i >= REVIEWS.length || undefined}
-          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-white/10 p-6"
+          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-cream p-6"
         >
           <div className="flex flex-col gap-3">
+            {r.rating === 5 && <Stars />}
             <p className="font-sans text-[22px] leading-[1.15] text-ink">{r.title}</p>
             <p className="type-body text-ink-88">{r.body}</p>
           </div>
-          <div className="flex flex-col gap-2">
-            <p className="type-mono text-ink">{r.author}</p>
-            {r.rating === 5 && <Stars />}
-          </div>
+          <p className="type-mono text-ink">{r.author}</p>
         </li>
       ))}
     </ul>
   );
 
   return (
-    <section id="reviews" aria-label="Reviews" className="flex scroll-mt-6 flex-col gap-10 bg-cream py-16 md:py-20">
+    <section id="reviews" aria-label="Reviews" className="flex scroll-mt-6 flex-col gap-10 bg-white py-16 md:py-20">
       <div className="gutter-x flex flex-col gap-2">
         {/* Stars on their own line above the heading. */}
         <Stars width={132} className="mb-3" />
