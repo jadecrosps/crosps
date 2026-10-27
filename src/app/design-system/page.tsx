@@ -47,7 +47,7 @@ const TYPE = [
   { name: "Body large", cls: "type-body-lg", spec: "Saans 18 / 1.5", sample: "Real vegetables, transformed into light, crisp, deeply savoury slices that keep their natural colour, character and flavour." },
   { name: "Body", cls: "type-body", spec: "Saans 16 / 1.5", sample: "Three vegetables. One first drop. Join the list for early access." },
   { name: "Small", cls: "type-small", spec: "Saans 14 / 1.2", sample: "Copyright ©2026 Crosps. All Rights Reserved" },
-  { name: "Nav", cls: "type-nav", spec: "Saans 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
+  { name: "Nav", cls: "type-nav", spec: "Saans Mono 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
   { name: "Button", cls: "type-button", spec: "Saans 16 / 1 · +0.3% tracking", sample: "Shop the collection" },
   { name: "Label", cls: "type-label", spec: "Saans Mono 12 / 1.5 · uppercase", sample: "8×30g bags" },
   { name: "Mono", cls: "type-mono", spec: "Saans Mono 14 / 1.2 · uppercase", sample: "Anne-Marie, London" },
