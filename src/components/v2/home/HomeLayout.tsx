@@ -5,7 +5,6 @@ import { ProductCard } from "../ProductCard";
 import { EmailCapture } from "../EmailCapture";
 import { MobileCarousel } from "../MobileCarousel";
 import { QuickAdd } from "./QuickAdd";
-import { ScrollIntoPlace } from "../ScrollIntoPlace";
 import { STORY_PARAGRAPHS } from "../StorySection";
 import { PRODUCTS, STOCKISTS, type Product } from "@/lib/v2-content";
 
@@ -111,12 +110,6 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
     <section className="gutter-x grid gap-10 pb-20 md:pb-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
       <div className="flex flex-col justify-between gap-10">
         <p className="type-label text-ink">Why Crosps</p>
-        {/* Line from the story copy, drifting up into the gap as the section scrolls in. */}
-        <ScrollIntoPlace>
-          <p className="max-w-[560px] font-sans text-[36px] leading-[1.1] text-ink md:text-[48px]">
-            We started with the <SerifAccent>vegetable</SerifAccent> itself.
-          </p>
-        </ScrollIntoPlace>
         <div className="flex max-w-[560px] flex-col items-start gap-8">
           <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
             We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
