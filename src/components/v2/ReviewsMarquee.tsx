@@ -2,7 +2,7 @@ import Image from "next/image";
 import { REVIEWS } from "@/lib/v2-content";
 
 function Stars({ className = "", width = 88 }: { className?: string; width?: number }) {
-  return <Image src="/v2/stars.svg" alt="5 out of 5 stars" width={width} height={Math.round((width * 18) / 106)} className={className} />;
+  return <Image src="/v2/stars.svg" alt="5 out of 5 stars" width={width} height={Math.round((width * 18) / 106)} loading="eager" unoptimized className={className} />;
 }
 
 // Reviews band after pludolabs.com: header on the left, cards scrolling slowly across.
