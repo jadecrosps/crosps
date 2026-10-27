@@ -10,7 +10,7 @@ import { Ticker } from "@/components/v2/Ticker";
 import { ReviewsMarquee } from "@/components/v2/ReviewsMarquee";
 import { InstagramFeed } from "@/components/v2/InstagramFeed";
 import { SerifAccent } from "@/components/ui/SerifAccent";
-import { Comparison, FaqBand, FeatureCards, IngredientChecklist, SplitFeature } from "@/components/v2/product/ProductSections";
+import { Comparison, FaqBand, IngredientChecklist, SplitFeature } from "@/components/v2/product/ProductSections";
 import { QuickAdd } from "@/components/v2/home/QuickAdd";
 import { RowHeader, PillLink } from "@/components/v2/home/HomeLayout";
 import { Accordion } from "@/components/v2/Accordion";
@@ -134,35 +134,6 @@ export default async function ProductPage({ params, searchParams }: Params) {
 
         <Ticker items={TICKER} />
 
-        <FeatureCards
-          title={
-            <>
-              Why you’ll love <SerifAccent>{product.name}</SerifAccent>
-            </>
-          }
-          intro="Most crisps start with potato or corn. Ours start with the vegetable, and keep its colour, character and flavour."
-          cards={[
-            {
-              image: details.vegetable.image,
-              alt: `Fresh ${veg}`,
-              title: `${stat(0)} real ${veg}`,
-              body: "The vegetable comes first, not potato or corn.",
-            },
-            {
-              image: "/v2/crisps-mix.jpg",
-              alt: "Crosps vegetable crisps",
-              title: "Gently crisped",
-              body: "A gentle bake keeps the flavour, the colour and the crunch.",
-            },
-            {
-              image: "/v2/lifestyle-pack.jpg",
-              alt: "Carrying Crosps",
-              title: `${stat(2)} fibre per 100g`,
-              body: "High in fibre, with zero added sugar.",
-            },
-          ]}
-        />
-
         <Comparison
           title={
             <>
@@ -185,6 +156,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
           ]}
         />
 
+        {/* Taste story, with the "why you'll love" points and the ingredients as dropdowns. */}
         <SplitFeature image={product.hoverImage} alt={`${product.name} in hand`} tone="cream">
           <h2 className="type-heading text-ink">
             Why it tastes like <SerifAccent>{veg}.</SerifAccent>
@@ -194,36 +166,24 @@ export default async function ProductPage({ params, searchParams }: Params) {
               {p}
             </p>
           ))}
-        </SplitFeature>
-
-        <SplitFeature
-          flip
-          media={
-            <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-px bg-cream">
-              {[
-                { src: details.vegetable.image, alt: `Fresh ${veg}` },
-                { src: "/v2/ing-oil.jpg", alt: "Rapeseed oil" },
-                { src: "/v2/ing-tapioca.jpg", alt: "Tapioca starch" },
-                { src: "/v2/ing-salt.jpg", alt: "Sea salt" },
-              ].map((i) => (
-                <div key={i.src} className="relative">
-                  <Image src={i.src} alt={i.alt} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
-                </div>
-              ))}
-            </div>
-          }
-        >
-          <h2 className="type-heading text-ink">Only four ingredients</h2>
-          <p className="type-body text-ink-88">Simple, recognisable ingredients, and nothing you need to look up.</p>
-          <IngredientChecklist
-            items={[
-              { name: details.vegetable.label, note: `${stat(0)} of every bag` },
-              { name: "Rapeseed oil", note: "naturally low in saturated fat, with a clean, neutral taste" },
-              { name: "Tapioca starch", note: "helps each slice crisp evenly" },
-              { name: "Sea salt", note: "just a touch" },
-            ]}
-          />
-          <p className="type-small text-ink-72">Full ingredient list: {details.ingredients}</p>
+          <div className="border-t border-ink-10">
+            <Accordion title={`${stat(0)} real ${veg}`}>The vegetable comes first, not potato or corn.</Accordion>
+            <Accordion title="Gently crisped">A gentle bake keeps the flavour, the colour and the crunch.</Accordion>
+            <Accordion title={`${stat(2)} fibre per 100g`}>High in fibre, with zero added sugar.</Accordion>
+            <Accordion title="Only four ingredients">
+              <div className="flex flex-col gap-4">
+                <IngredientChecklist
+                  items={[
+                    { name: details.vegetable.label, note: `${stat(0)} of every bag` },
+                    { name: "Rapeseed oil", note: "naturally low in saturated fat, with a clean, neutral taste" },
+                    { name: "Tapioca starch", note: "helps each slice crisp evenly" },
+                    { name: "Sea salt", note: "just a touch" },
+                  ]}
+                />
+                <p className="type-small text-ink-72">Full ingredient list: {details.ingredients}</p>
+              </div>
+            </Accordion>
+          </div>
         </SplitFeature>
 
         <ReviewsMarquee />

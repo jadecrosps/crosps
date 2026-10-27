@@ -5,33 +5,6 @@ import type { FaqGroup } from "../FaqDirectory";
 
 // Product page sections laid out after pludolabs.com, in the Crosps design system.
 
-type Card = { image: string; alt: string; title: string; body: string };
-
-// Centred intro with three photo cards ("Why people love…").
-export function FeatureCards({ title, intro, cards }: { title: React.ReactNode; intro: string; cards: Card[] }) {
-  return (
-    <section className="gutter-x flex flex-col items-center gap-10 bg-cream py-20 md:py-28">
-      <div className="flex max-w-[640px] flex-col items-center gap-4 text-center">
-        <h2 className="type-heading text-ink">{title}</h2>
-        <p className="type-body text-ink-88">{intro}</p>
-      </div>
-      <div className="grid w-full max-w-[1200px] gap-3 md:grid-cols-3">
-        {cards.map((c) => (
-          <div key={c.title} className="flex flex-col bg-white">
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
-              <Image src={c.image} alt={c.alt} fill sizes="(max-width: 768px) 100vw, 400px" className="object-cover" />
-            </div>
-            <div className="flex flex-col gap-2 p-6">
-              <p className="font-sans text-[22px] leading-[1.15] text-ink">{c.title}</p>
-              <p className="type-body text-ink-72">{c.body}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 // "Us vs. them" comparison: crisp types across the top, Crosps column highlighted.
 export type ComparisonColumn = { name: string; values: string[]; highlight?: boolean; image?: string; imageAlt?: string };
 
