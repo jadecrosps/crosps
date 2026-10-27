@@ -16,15 +16,20 @@ export function ReviewsMarquee({
 }) {
   const row = (hidden: boolean) => (
     <ul className="flex shrink-0 gap-3 pr-3" aria-hidden={hidden || undefined}>
-      {REVIEWS.map((r) => (
-        <li key={r.author} className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-white/10 p-6">
+      {/* Reviews twice per half so the loop stays seamless on wide screens. */}
+      {[...REVIEWS, ...REVIEWS].map((r, i) => (
+        <li
+          key={`${r.author}-${i}`}
+          aria-hidden={i >= REVIEWS.length || undefined}
+          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 bg-brown/10 p-6"
+        >
           <div className="flex flex-col gap-3">
-            <p className="font-sans text-[22px] leading-[1.15] text-white">{r.title}</p>
-            <p className="type-body text-white/88">{r.body}</p>
+            <p className="font-sans text-[22px] leading-[1.15] text-ink">{r.title}</p>
+            <p className="type-body text-ink-88">{r.body}</p>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="type-mono text-white">{r.author}</p>
-            {r.rating === 5 && <Stars className="brightness-0 invert" />}
+            <p className="type-mono text-ink">{r.author}</p>
+            {r.rating === 5 && <Stars />}
           </div>
         </li>
       ))}
@@ -32,16 +37,16 @@ export function ReviewsMarquee({
   );
 
   return (
-    <section id="reviews" aria-label="Reviews" className="flex scroll-mt-6 flex-col gap-10 bg-brown py-16 md:py-20">
+    <section id="reviews" aria-label="Reviews" className="flex scroll-mt-6 flex-col gap-10 bg-cream py-16 md:py-20">
       <div className="gutter-x flex flex-col gap-2">
-        {/* Stars on their own line above the heading, white on the dark band. */}
-        <Stars width={132} className="mb-3 brightness-0 invert" />
-        <p className="type-label text-white/72">From our first tasters</p>
-        <h2 className="type-heading text-white">{title}</h2>
-        <p className="type-body text-white/72">{subtitle}</p>
+        {/* Stars on their own line above the heading. */}
+        <Stars width={132} className="mb-3" />
+        <p className="type-label text-ink-72">From our first tasters</p>
+        <h2 className="type-heading text-ink">{title}</h2>
+        <p className="type-body text-ink-72">{subtitle}</p>
       </div>
       <div className="overflow-hidden motion-reduce:overflow-x-auto">
-        <div className="animate-ticker flex w-max hover:[animation-play-state:paused] motion-reduce:animate-none" style={{ animationDuration: "70s" }}>
+        <div className="animate-ticker flex w-max hover:[animation-play-state:paused] motion-reduce:animate-none" style={{ animationDuration: "140s" }}>
           {row(false)}
           {row(true)}
         </div>
