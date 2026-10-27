@@ -133,7 +133,7 @@ export function FaqDirectory({
           </nav>
           <div className="mt-4 border-t border-ink-10 pt-8">
             <TextLink href={contactHref} underline={false}>
-              Is there a question we haven’t answered?
+              Ask us a question
             </TextLink>
           </div>
         </div>
