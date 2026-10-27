@@ -79,7 +79,8 @@ export default async function ProductPage({ params, searchParams }: Params) {
       <main>
         {/* Gallery left (thumbnails down the side), product panel right */}
         <section className="gutter-x grid gap-8 pb-20 pt-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
-          <div className="min-w-0 lg:sticky lg:top-4 lg:self-start">
+          {/* Fits the screen height so it stays fixed while the details scroll and the dropdowns open. */}
+          <div className="min-w-0 lg:sticky lg:top-4 lg:h-[calc(100svh-2rem)] lg:self-start">
             <ProductGallery slides={details.gallery} tag={product.tag} />
           </div>
 

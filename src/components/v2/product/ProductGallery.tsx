@@ -13,8 +13,8 @@ export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string 
   const current = slides[i];
 
   return (
-    <div className="flex flex-col gap-2 lg:flex-row">
-      <div className="relative aspect-[4/5] w-full lg:flex-1 overflow-hidden bg-paper">
+    <div className="flex flex-col gap-2 lg:h-full lg:flex-row">
+      <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-full lg:flex-1 overflow-hidden bg-paper">
         <Image
           key={current.src}
           src={current.src}
