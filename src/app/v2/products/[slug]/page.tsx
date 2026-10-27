@@ -143,7 +143,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
           intro="We didn’t want to make another crisp. Here’s how Crosps compares."
           rows={["Base", "Vegetable content", "Ingredients", "Fibre per 100g"]}
           columns={[
-            { name: "Potato crisps", values: ["Potato", "Potato only", "3 to 16", "3.7–6.5g"] },
+            { name: "Potato crisps", values: ["Potato", "Potato only", "3 to 20+", "3.5–6.7g"] },
             {
               name: "Crosps",
               highlight: true,
@@ -151,8 +151,8 @@ export default async function ProductPage({ params, searchParams }: Params) {
               imageAlt: `${product.name} pack`,
               values: ["Tomato, onion, bell pepper", "88–90% whole veg", "4", "14–27g"],
             },
-            { name: "Traditional veg crisps", values: ["Usually root vegetables", "64% mixed root", "3", "10–11g"] },
-            { name: "Lentil crisps", values: ["Lentil flour + starches", "28–30% lentil", "0.7–7.5g", "3–5g"] },
+            { name: "Traditional veg crisps", values: ["Usually root vegetables", "60–65% mixed root", "3", "~10–11g"] },
+            { name: "Lentil crisps", values: ["Lentil flour + starches", "28–43% lentil", "5 to 15+", "~1–5g"] },
           ]}
         />
 
