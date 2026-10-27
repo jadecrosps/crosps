@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { REVIEWS } from "@/lib/v2-content";
 
-function Stars({ className = "" }: { className?: string }) {
-  return <Image src="/v2/stars.svg" alt="5 out of 5 stars" width={88} height={15} className={className} />;
+function Stars({ className = "", width = 88 }: { className?: string; width?: number }) {
+  return <Image src="/v2/stars.svg" alt="5 out of 5 stars" width={width} height={Math.round((width * 18) / 106)} className={className} />;
 }
 
 // Reviews band after pludolabs.com: header on the left, cards scrolling slowly across.
@@ -32,14 +32,13 @@ export function ReviewsMarquee({
   );
 
   return (
-    <section aria-label="Reviews" className="flex flex-col gap-10 bg-cream py-16 md:py-20">
+    <section aria-label="Reviews" className="flex flex-col gap-10 bg-crosps-charcoal py-16 md:py-20">
       <div className="gutter-x flex flex-col gap-2">
-        <div className="flex items-center gap-3">
-          <Stars />
-          <p className="type-label text-ink">From our first tasters</p>
-        </div>
-        <h2 className="type-heading text-ink">{title}</h2>
-        <p className="type-body text-ink-72">{subtitle}</p>
+        {/* Stars on their own line above the heading, white on the dark band. */}
+        <Stars width={132} className="mb-3 brightness-0 invert" />
+        <p className="type-label text-white/72">From our first tasters</p>
+        <h2 className="type-heading text-white">{title}</h2>
+        <p className="type-body text-white/72">{subtitle}</p>
       </div>
       <div className="overflow-hidden motion-reduce:overflow-x-auto">
         <div className="animate-ticker flex w-max hover:[animation-play-state:paused] motion-reduce:animate-none" style={{ animationDuration: "70s" }}>

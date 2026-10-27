@@ -49,6 +49,7 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
         <IntroStatement />
         <ShopRow links={V2_LINKS} variants={variants} />
         <Ticker items={TICKER} />
+        <CenteredCta />
         <Ingredients links={V2_LINKS} />
         <StorySplit
           image="/v2/story.jpg"
@@ -57,7 +58,6 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
         />
         <ReviewsMarquee />
         <SocialProof links={V2_LINKS} />
-        <CenteredCta links={V2_LINKS} />
         <WaitlistCard />
         <InstagramFeed />
       </main>
