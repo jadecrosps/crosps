@@ -6,7 +6,7 @@ import { ProductCard } from "@/components/v2/ProductCard";
 import { MobileCarousel } from "@/components/v2/MobileCarousel";
 import { Tag } from "@/components/v2/Tag";
 import { Ticker } from "@/components/v2/Ticker";
-import { ReviewCard } from "@/components/v2/ReviewCard";
+import { ReviewsMarquee } from "@/components/v2/ReviewsMarquee";
 import { BenefitsBlock } from "@/components/v2/product/BenefitsBlock";
 import { QuickAdd } from "@/components/v2/home/QuickAdd";
 import { RowHeader, PillLink } from "@/components/v2/home/HomeLayout";
@@ -18,7 +18,6 @@ import { NutritionTable } from "@/components/v2/product/ProductBenefits";
 import { getShopifyProduct } from "@/lib/shopify";
 import {
   ALLERGEN_NOTE,
-  REVIEWS,
   TICKER,
   INGREDIENT_INFO,
   PRODUCT_DETAILS,
@@ -167,20 +166,10 @@ export default async function ProductPage({ params, searchParams }: Params) {
           </p>
         </section>
 
-        {/* Reviews */}
-        <section className="gutter-x flex flex-col gap-8 pb-20 md:pb-32">
-          <RowHeader title="Worth talking about." />
-          <MobileCarousel label="Reviews" className="md:grid-cols-[repeat(auto-fit,minmax(0,1fr))] md:gap-2">
-            {REVIEWS.map((r) => (
-              <div key={r.author} className="flex h-full items-center justify-center bg-cream px-6 py-10">
-                <ReviewCard {...r} />
-              </div>
-            ))}
-          </MobileCarousel>
-        </section>
+        <ReviewsMarquee />
 
         {/* You may also like */}
-        <section className="gutter-x flex flex-col gap-8 border-t border-ink-10 py-20 md:py-28">
+        <section className="gutter-x flex flex-col gap-8 py-20 md:py-28">
           <RowHeader title="You may also like" action={<PillLink href={V2_LINKS.shop}>Shop all →</PillLink>} />
           <MobileCarousel label="More flavours" className="md:grid-cols-3 md:gap-5">
             {others.map((p: Product, n) => (
