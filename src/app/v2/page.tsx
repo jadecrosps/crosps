@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SerifAccent } from "@/components/ui/SerifAccent";
 import { Ticker } from "@/components/v2/Ticker";
 import { Footer } from "@/components/v2/Footer";
 import { InstagramFeed } from "@/components/v2/InstagramFeed";
@@ -7,7 +6,7 @@ import { HomeHero, Ingredients } from "@/components/v2/HomeSections";
 import {
   IntroStatement,
   ShopRow,
-  FeatureCard,
+  StorySplit,
   SocialProof,
   CenteredCta,
   WaitlistCard,
@@ -50,16 +49,10 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
         <ShopRow links={V2_LINKS} variants={variants} />
         <Ticker items={TICKER} />
         <div className="h-20 md:h-32" />
-        <FeatureCard
-          eyebrow="Why Crosps"
-          title={
-            <>
-              We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
-            </>
-          }
+        <StorySplit
           image="/v2/story.jpg"
           alt="A pepper crisp next to a fresh slice of pepper"
-          cta={{ href: V2_LINKS.about, label: "Our story" }}
+          href={V2_LINKS.about}
         />
         <Ingredients links={V2_LINKS} />
         <SocialProof links={V2_LINKS} />

@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { Divider } from "./SectionHeading";
 import { SerifAccent } from "@/components/ui/SerifAccent";
 
-const PARAGRAPHS = [
+export const STORY_PARAGRAPHS = [
   "Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting role. Crosps changes that.",
   "We wanted to rethink what savoury snacking could feel like. So we started with the vegetable itself.",
   "Real slices of tomato, onion and pepper. Ingredients you can see. Shapes that are naturally irregular. Colour, texture and flavour that still feel connected to where they came from.",
@@ -24,7 +24,7 @@ export function StorySection({ image = "/v2/story.jpg", href = "#" }: { image?: 
               We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
             </h2>
             <div className="flex max-w-[514px] flex-col gap-[25px] font-sans text-[16px] leading-[1.4] text-ink md:text-[18px]">
-              {PARAGRAPHS.map((p) => (
+              {STORY_PARAGRAPHS.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
