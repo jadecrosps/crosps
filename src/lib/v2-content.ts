@@ -105,22 +105,35 @@ export const INGREDIENT_INFO = {
 };
 
 // rating: stars to show (omit when the reviewer didn't give one).
-export const REVIEWS: { quote: string; author: string; rating?: number }[] = [
+// title/body: the reviewer's first sentence and the rest, in their own words.
+export const REVIEWS: { quote: string; title: string; body: string; author: string; rating?: number }[] = [
   {
     quote: "The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!",
+    title: "The tomato chips were delicious!",
+    body: "Would pair extremely well with a crisp white wine in the summer!",
     author: "Anne-Marie, London",
     rating: 5,
   },
-  { quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!", author: "Orla, Dublin", rating: 5 },
+  {
+    quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!",
+    title: "Very hard to pick one but tomatoes 🍅 are my winner.",
+    body: "LOVE LOVE LOVE them!",
+    author: "Orla, Dublin",
+    rating: 5,
+  },
   {
     quote:
       "Absolutely beautiful snack. I love the fact they’re sweet and savoury so you hit both of your cravings. They don’t last long in my house as it’s loved by my kids and us adults.",
+    title: "Absolutely beautiful snack.",
+    body: "I love the fact they’re sweet and savoury so you hit both of your cravings. They don’t last long in my house as it’s loved by my kids and us adults.",
     author: "Charlotte, Dublin",
     rating: 5,
   },
   {
     quote:
       "I tried the tomato and the onion flavours. They’re both delightful. I preferred the tomato flavour, although I can sense that the onion one will be great with dips.",
+    title: "I tried the tomato and the onion flavours.",
+    body: "They’re both delightful. I preferred the tomato flavour, although I can sense that the onion one will be great with dips.",
     author: "Romana, London",
     rating: 5,
   },
