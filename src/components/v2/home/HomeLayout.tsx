@@ -151,7 +151,7 @@ export function SocialProof({ links }: { links: Links }) {
       </div>
       <div className="flex flex-col gap-8">
         <RowHeader title="Found in good places" action={<TextLink href={`${links.contact}?topic=stock`}>Want to stock Crosps?</TextLink>} />
-        <div className="flex flex-wrap items-center justify-between gap-10 border-y border-ink-10 py-10 md:px-10">
+        <div className="flex flex-wrap items-end justify-center gap-10 border-y border-ink-10 py-10 md:gap-14">
           {STOCKISTS.map((s) => (
             <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
           ))}
@@ -177,7 +177,7 @@ export function CenteredCta({ links }: { links: Links }) {
 export function WaitlistCard() {
   return (
     <section className="gutter-x pb-20 md:pb-32">
-      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:h-[760px] md:p-12">
+      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1800/1268] md:min-h-0 md:p-12">
         <Image src="/v2/callout.jpg" alt="Crosps packs on a table" fill sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
         <div className="relative flex max-w-[420px] flex-col gap-6 text-white">
