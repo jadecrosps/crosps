@@ -168,7 +168,6 @@ export type ProductDetails = {
   ingredients: string;
   nutrition: NutritionRow[];
   vegetable: { label: string; image: string; crop?: Crop; colour: string };
-  tagline?: string; // product page line above the description; falls back to the card descriptor
   description: string;
   paragraphs: string[];
   gallery: { src: string; alt: string; contain?: boolean }[];
@@ -285,7 +284,6 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
       colour: "var(--color-pepper)",
     },
-    tagline: "Fresh and sweet.",
     description:
       "Vibrant and distinctive, capturing the unique character of green, yellow and red, bell peppers. Gently sweet and full of flavour, they deliver a colourful and satisfying crunch in every bite.",
     paragraphs: [

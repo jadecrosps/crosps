@@ -101,17 +101,12 @@ export default async function ProductPage({ params, searchParams }: Params) {
             </div>
 
             <div className="flex flex-col gap-4">
-              {product.status && <p className="type-mono text-ink-72">{product.status} · 8 packs of 30g</p>}
-              <p className="font-serif text-[24px] italic leading-[1.2] text-ink">{details.tagline ?? product.descriptor}</p>
+              {product.status && (
+                <p className="type-mono self-start bg-brown px-3 py-2 text-white">
+                  {product.status} · 8 packs of 30g
+                </p>
+              )}
               <p className="type-body text-ink-88">{details.description}</p>
-              <ul className="flex flex-col gap-2">
-                {details.benefits.map((b) => (
-                  <li key={b} className="type-body flex items-start gap-3 text-ink-88">
-                    <span aria-hidden className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-ink" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <ProductPurchase
