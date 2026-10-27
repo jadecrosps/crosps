@@ -176,9 +176,9 @@ export function CenteredCta({ links }: { links: Links }) {
 // Big image card with the waitlist sign-up over it.
 export function WaitlistCard() {
   return (
-    <section className="gutter-x pb-20 md:pb-32">
-      {/* Banner proportions from clueperfumery.com (1513×726), 40px inner padding. */}
-      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1513/726] md:min-h-0 md:p-10">
+    <section className="px-5 pb-20 md:px-10 md:pb-32">
+      {/* Near full-bleed like moremud.co's image cards: 40px side margins, 1633×737. */}
+      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1633/737] md:min-h-0 md:p-10">
         <Image
           src="/v2/waitlist-onion-packs.jpg"
           alt="Holding packs of Crosps Onion Chips on a London street"
