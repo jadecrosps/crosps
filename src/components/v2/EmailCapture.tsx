@@ -50,7 +50,7 @@ export function EmailCapture({
         <button
           type="submit"
           disabled={isLoading}
-          className="type-button shrink-0 cursor-pointer rounded-button-sm bg-ink px-4 py-2 text-white transition-colors hover:bg-ink-88 disabled:opacity-50"
+          className="type-mono shrink-0 cursor-pointer rounded-button-sm bg-ink px-4 py-2 text-white transition-colors hover:bg-ink-88 disabled:opacity-50"
         >
           {isLoading ? "Joining…" : "Join"}
         </button>

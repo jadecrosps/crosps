@@ -120,7 +120,7 @@ export function FeatureCard({
 }) {
   return (
     <section className="gutter-x">
-      <div className="relative flex min-h-[560px] flex-col justify-between overflow-hidden p-6 md:h-[760px] md:p-12">
+      <div className="relative flex min-h-[560px] flex-col justify-between overflow-hidden p-6 md:h-[min(760px,calc(100svh_-_4rem))] md:min-h-0 md:p-12">
         <Image src={image} alt={alt} fill sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/15 to-transparent" />
         <p className="type-label relative text-white">{eyebrow}</p>
@@ -165,7 +165,7 @@ export function SocialProof({ links }: { links: Links }) {
 export function CenteredCta({ links }: { links: Links }) {
   return (
     <section className="gutter-x flex flex-col items-center gap-8 pb-20 text-center md:pb-32">
-      <h2 className="type-display max-w-[760px] text-ink">
+      <h2 className="font-sans text-[32px] leading-[1.1] text-ink md:whitespace-nowrap md:text-[40px]">
         Made from crops, not <SerifAccent>compromises.</SerifAccent>
       </h2>
       <Button href={links.shop}>Shop all</Button>
@@ -177,7 +177,8 @@ export function CenteredCta({ links }: { links: Links }) {
 export function WaitlistCard() {
   return (
     <section className="gutter-x pb-20 md:pb-32">
-      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1800/1268] md:min-h-0 md:p-12">
+      {/* Photo ratio (1800×1268), but never taller than the browser window. */}
+      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:h-[min(calc((100vw_-_2*var(--gutter,40px))*0.7044),calc(100svh_-_4rem))] md:min-h-0 md:p-12">
         <Image src="/v2/callout.jpg" alt="Crosps packs on a table" fill sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
         <div className="relative flex max-w-[420px] flex-col gap-6 text-white">

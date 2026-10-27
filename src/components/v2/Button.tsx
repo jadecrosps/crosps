@@ -13,7 +13,7 @@ const VARIANTS = {
 };
 
 export function Button({ children, variant = "dark", href, className = "", ...rest }: ButtonProps) {
-  const classes = `type-button inline-flex items-center justify-center rounded-button px-10 py-4 whitespace-nowrap transition-colors duration-200 ${VARIANTS[variant]} ${className}`;
+  const classes = `type-mono inline-flex items-center justify-center rounded-button px-10 py-4 whitespace-nowrap transition-colors duration-200 ${VARIANTS[variant]} ${className}`;
 
   if (href) {
     return (
