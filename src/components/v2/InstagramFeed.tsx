@@ -11,13 +11,13 @@ const BEHOLD_URL = FEED_ID ? `https://feeds.behold.so/${FEED_ID}` : null;
 const PROFILE_URL = "https://www.instagram.com/eatcrosps/";
 
 // Shown until the feed loads, or if it fails.
-const FALLBACK = ["/v2/story.jpg", "/v2/insta-2.jpg", "/v2/insta-3.jpg", "/v2/insta-4.jpg"].map((src) => ({
+const FALLBACK = ["/v2/story.jpg", "/v2/insta-2.jpg", "/v2/insta-3.jpg", "/v2/insta-4.jpg", "/v2/lifestyle-pack.jpg", "/v2/crisps-mix.jpg"].map((src) => ({
   src,
   alt: "Crosps on Instagram",
   href: PROFILE_URL,
 }));
 
-// Figma 1:298: latest four posts from the Behold feed.
+// Figma 1:298: latest six posts from the Behold feed.
 export function InstagramFeed() {
   const [posts, setPosts] = useState(FALLBACK);
 
@@ -29,7 +29,7 @@ export function InstagramFeed() {
       .then((feed) => {
         if (cancelled || !feed?.posts?.length) return;
         setPosts(
-          feed.posts.slice(0, 4).map((p: Post) => ({
+          feed.posts.slice(0, 6).map((p: Post) => ({
             src: p.sizes?.large?.mediaUrl ?? p.mediaUrl,
             alt: p.prunedCaption || p.caption || "Crosps on Instagram",
             href: p.permalink,
@@ -60,7 +60,7 @@ export function InstagramFeed() {
           @eatcrosps
         </a>
       </div>
-      <MobileCarousel label="Instagram posts" className="md:grid-cols-2 md:gap-4 lg:grid-cols-4">
+      <MobileCarousel label="Instagram posts" className="md:grid-cols-3 md:gap-4 lg:grid-cols-6">
         {posts.map((p) => (
           <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block aspect-[3/4] select-none overflow-hidden [-webkit-touch-callout:none]">
             <Image
@@ -68,7 +68,7 @@ export function InstagramFeed() {
               alt={p.alt}
               fill
               draggable={false}
-              sizes="(max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 1024px) 33vw, 17vw"
               className="object-cover transition-transform duration-500 hover:scale-[1.03]"
               unoptimized={p.src.startsWith("https://") && !p.src.includes("behold")}
             />

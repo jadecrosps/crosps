@@ -66,16 +66,17 @@ export function InsetHero({ links }: { links: Links }) {
   );
 }
 
-// Large centred statement under the hero.
-export function IntroStatement() {
+// Large left-aligned statement under the hero, leading into the shop row.
+export function IntroStatement({ shopHref }: { shopHref: string }) {
   return (
-    <section className="gutter-x flex justify-center py-20 md:py-32">
-      <div className="flex max-w-[1080px] flex-col items-center gap-6 text-center">
+    <section className="gutter-x flex pb-12 pt-20 md:pb-16 md:pt-32">
+      <div className="flex max-w-[1080px] flex-col items-start gap-6">
         <p className="type-label text-ink-72">Good taste is personal</p>
         <p className="type-statement text-ink">
           Crosps is made for people who care about the details: what they eat, what they bring to the table, and the world
           they create around them. Three recognisable vegetables. Four ingredients. Each one <SerifAccent>distinct.</SerifAccent>
         </p>
+        <TextLink href={shopHref}>Shop now</TextLink>
       </div>
     </section>
   );
