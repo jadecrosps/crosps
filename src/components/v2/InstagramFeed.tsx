@@ -57,7 +57,7 @@ export function InstagramFeed() {
       </div>
       <MobileCarousel label="Instagram posts" className="md:grid-cols-2 md:gap-4 lg:grid-cols-4">
         {posts.map((p) => (
-          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block h-[420px] select-none overflow-hidden [-webkit-touch-callout:none] md:h-[500px]">
+          <a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer" className="relative block aspect-[3/4] select-none overflow-hidden [-webkit-touch-callout:none]">
             <Image
               src={p.src}
               alt={p.alt}

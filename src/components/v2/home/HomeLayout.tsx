@@ -27,7 +27,7 @@ function PillLink({ href, children, external }: { href: string; children: React.
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="type-label shrink-0 rounded-full border border-ink px-4 py-2 text-ink transition-colors hover:bg-ink hover:text-white"
+      className="type-label shrink-0 rounded-button border border-ink px-4 py-2 text-ink transition-colors hover:bg-ink hover:text-white"
     >
       {children}
     </a>

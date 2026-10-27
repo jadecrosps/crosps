@@ -125,7 +125,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
             { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
             { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
             {
-              label: "Peppers",
+              label: "Pepper",
               image: "/v2/ing-pepper.jpg",
               crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
               colour: "var(--color-pepper)",

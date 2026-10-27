@@ -247,7 +247,7 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       { label: "Salt", per100: "0.57g", perServing: "0.09g" },
     ],
     vegetable: {
-      label: "Peppers",
+      label: "Pepper",
       image: "/v2/ing-pepper.jpg",
       crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
       colour: "var(--color-pepper)",
