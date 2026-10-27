@@ -108,7 +108,7 @@ export function Stockists({ links }: { links: HomeLinks }) {
 // Figma 2:1066
 export function Ingredients({ links }: { links: HomeLinks }) {
   return (
-    <section className="gutter-x flex flex-col items-center gap-14 py-20 md:py-28">
+    <section className="gutter-x flex flex-col items-center gap-14 pt-20 md:pt-28">
       <SectionHeading
         title="The standard"
         subtitle={
@@ -141,7 +141,7 @@ export function Ingredients({ links }: { links: HomeLinks }) {
         <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
         <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
       </div>
-      <Button href={links.shop}>Shop</Button>
+      <Button href={links.shop}>Shop all</Button>
     </section>
   );
 }
