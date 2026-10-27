@@ -146,14 +146,13 @@ export function SocialProof({ links }: { links: Links }) {
   );
 }
 
-// Centred call to action.
-export function CenteredCta({ links }: { links: Links }) {
+// Centred statement line.
+export function CenteredCta() {
   return (
-    <section className="gutter-x flex flex-col items-center gap-8 pb-20 text-center md:pb-32">
+    <section className="gutter-x flex flex-col items-center py-20 text-center md:py-32">
       <h2 className="font-sans text-[32px] leading-[1.1] text-ink md:whitespace-nowrap md:text-[40px]">
         Made from crops, not <SerifAccent>compromises.</SerifAccent>
       </h2>
-      <Button href={links.shop}>Shop all</Button>
     </section>
   );
 }
