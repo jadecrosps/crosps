@@ -48,13 +48,12 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
         <IntroStatement />
         <ShopRow links={V2_LINKS} variants={variants} />
         <Ticker items={TICKER} />
-        <div className="h-20 md:h-32" />
+        <Ingredients links={V2_LINKS} />
         <StorySplit
           image="/v2/story.jpg"
           alt="A pepper crisp next to a fresh slice of pepper"
           href={V2_LINKS.about}
         />
-        <Ingredients links={V2_LINKS} />
         <SocialProof links={V2_LINKS} />
         <CenteredCta links={V2_LINKS} />
         <WaitlistCard />

@@ -108,7 +108,7 @@ export function ShopRow({
 // Story split (after chimi-online.com): text on white on the left, square photo on the right.
 export function StorySplit({ image, alt, href }: { image: string; alt: string; href: string }) {
   return (
-    <section className="gutter-x grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
+    <section className="gutter-x grid gap-10 pb-20 md:pb-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] lg:gap-16">
       <div className="flex flex-col justify-between gap-10">
         <p className="type-label text-ink">Why Crosps</p>
         <div className="flex max-w-[560px] flex-col items-start gap-8">
@@ -116,7 +116,8 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
             We didn’t want to make another <SerifAccent>crisp.</SerifAccent>
           </h2>
           <div className="flex flex-col gap-4">
-            {STORY_PARAGRAPHS.map((p) => (
+            {/* The first two paragraphs live on the About page. */}
+            {STORY_PARAGRAPHS.slice(2).map((p) => (
               <p key={p} className="type-body text-ink-88">
                 {p}
               </p>
@@ -175,7 +176,7 @@ export function WaitlistCard() {
   return (
     <section className="px-5 pb-20 md:px-10 md:pb-32">
       {/* Near full-bleed like moremud.co's image cards: 40px side margins, 1633×737. */}
-      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1633/737] md:min-h-0 md:p-10">
+      <div className="relative flex min-h-[600px] flex-col justify-end overflow-hidden p-6 md:aspect-[1633/737] md:min-h-0 md:p-10 md:pb-16 md:pl-16">
         <Image
           src="/v2/waitlist-onion-packs.jpg"
           alt="Holding packs of Crosps Onion Chips on a London street"
@@ -184,12 +185,12 @@ export function WaitlistCard() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
-        <div className="relative flex max-w-[420px] flex-col gap-6 text-white">
+        <div className="relative flex max-w-[420px] flex-col gap-6 text-white md:max-w-none">
           <div className="flex flex-col gap-2">
-            <h2 className="type-display">
+            <h2 className="type-display md:whitespace-nowrap">
               You’ll want in <SerifAccent>early.</SerifAccent>
             </h2>
-            <p className="type-body-lg text-white/88">Three vegetables. One first drop. Join the list for early access.</p>
+            <p className="type-body-lg text-white/88 md:whitespace-nowrap">Three vegetables. One first drop. Join the list for early access.</p>
           </div>
           <EmailCapture />
         </div>
