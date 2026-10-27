@@ -103,6 +103,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
             <div className="flex flex-col gap-4">
               {product.status && <p className="type-mono text-ink-72">{product.status} · 8 packs of 30g</p>}
               <p className="type-body-lg text-ink">{product.descriptor}</p>
+              <p className="type-body text-ink-88">{details.description}</p>
               <ul className="flex flex-col gap-2">
                 {details.benefits.map((b) => (
                   <li key={b} className="type-body flex items-start gap-3 text-ink-88">
