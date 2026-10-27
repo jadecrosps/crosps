@@ -39,13 +39,23 @@ function Arrow() {
   );
 }
 
-export function TextLink({ children, href, className = "" }: { children: React.ReactNode; href: string; className?: string }) {
+export function TextLink({
+  children,
+  href,
+  className = "",
+  underline = true,
+}: {
+  children: React.ReactNode;
+  href: string;
+  className?: string;
+  underline?: boolean;
+}) {
   return (
     <Link
       href={href}
       className={`group/link type-mono inline-flex items-center gap-2 text-ink ${className}`}
     >
-      <span className="underline decoration-from-font underline-offset-4">{children}</span>
+      <span className={underline ? "underline decoration-from-font underline-offset-4" : ""}>{children}</span>
       <Arrow />
     </Link>
   );
