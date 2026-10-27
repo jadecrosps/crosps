@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { TextLink } from "../Button";
 import { useCart } from "../cart/CartProvider";
 
-// "Learn more" + "Add to cart" under a product card (More Mud-style product row).
+// "Add to cart" + a "Learn more" text link under a product card.
 export function QuickAdd({ href, variantId, available = true }: { href: string; variantId: string | null; available?: boolean }) {
   const cart = useCart();
   const [busy, setBusy] = useState(false);
@@ -22,13 +22,7 @@ export function QuickAdd({ href, variantId, available = true }: { href: string; 
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="grid grid-cols-2 gap-2">
-        <Link
-          href={href}
-          className="type-label flex h-10 items-center justify-center rounded-button border border-brown text-ink transition-colors hover:bg-brown hover:text-white"
-        >
-          Learn more
-        </Link>
+      <div className="grid grid-cols-2 items-center gap-2">
         <button
           type="button"
           onClick={add}
@@ -37,6 +31,9 @@ export function QuickAdd({ href, variantId, available = true }: { href: string; 
         >
           {!available ? "Sold out" : busy ? "Adding…" : "Add to cart"}
         </button>
+        <TextLink href={href} className="justify-self-center">
+          Learn more
+        </TextLink>
       </div>
       {message && (
         <p role="status" className="type-small text-ink-72">
