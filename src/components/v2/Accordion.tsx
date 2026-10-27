@@ -3,17 +3,18 @@
 import { useId, useState } from "react";
 
 // Simple +/− accordion row (product details).
-export function Accordion({ title, children }: { title: string; children: React.ReactNode }) {
+export function Accordion({ title, children, tone = "light" }: { title: string; children: React.ReactNode; tone?: "light" | "dark" }) {
+  const dark = tone === "dark";
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
-    <div className="border-b border-ink-10">
+    <div className={`border-b ${dark ? "border-white/20" : "border-ink-10"}`}>
       <button
         type="button"
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((o) => !o)}
-        className="flex w-full cursor-pointer items-center justify-between py-5 text-left font-sans text-[20px] leading-[1.3] text-ink"
+        className={`flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left font-sans text-[20px] leading-[1.3] ${dark ? "text-white" : "text-ink"}`}
       >
         {title}
         <span aria-hidden className="relative size-3 shrink-0">
@@ -23,7 +24,7 @@ export function Accordion({ title, children }: { title: string; children: React.
       </button>
       <div id={id} role="region" className={`grid transition-[grid-template-rows] duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
         <div className="overflow-hidden">
-          <div className="type-body pb-6 text-ink-88">{children}</div>
+          <div className={`type-body pb-6 ${dark ? "text-white/72" : "text-ink-88"}`}>{children}</div>
         </div>
       </div>
     </div>

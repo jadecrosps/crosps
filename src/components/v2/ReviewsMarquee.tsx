@@ -32,7 +32,7 @@ export function ReviewsMarquee({
   );
 
   return (
-    <section aria-label="Reviews" className="flex flex-col gap-10 bg-cream py-16 md:py-20">
+    <section id="reviews" aria-label="Reviews" className="flex scroll-mt-6 flex-col gap-10 bg-cream py-16 md:py-20">
       <div className="gutter-x flex flex-col gap-2">
         <div className="flex items-center gap-3">
           <Stars />

@@ -6,15 +6,15 @@ import { Tag } from "../Tag";
 
 type Slide = { src: string; alt: string; contain?: boolean };
 
-// Gallery: large image with arrows, thumbnail strip underneath (moremud.co layout).
+// Gallery: large image with arrows; thumbnails underneath on mobile, down the left from lg (pludolabs.com layout).
 export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string }) {
   const [i, setI] = useState(0);
   const go = (d: number) => setI((n) => (n + d + slides.length) % slides.length);
   const current = slides[i];
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-paper">
+    <div className="flex flex-col gap-2 lg:flex-row">
+      <div className="relative aspect-[4/5] w-full lg:flex-1 overflow-hidden bg-paper">
         <Image
           key={current.src}
           src={current.src}
@@ -40,7 +40,7 @@ export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string 
           </>
         )}
       </div>
-      <div className="scrollbar-hide flex gap-2 overflow-x-auto">
+      <div className="scrollbar-hide flex gap-2 overflow-x-auto lg:order-first lg:flex-col lg:overflow-visible">
         {slides.map((s, n) => (
           <button
             key={s.src}
@@ -48,7 +48,7 @@ export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string 
             aria-label={`Show image ${n + 1}`}
             aria-current={n === i}
             onClick={() => setI(n)}
-            className={`relative aspect-square w-16 shrink-0 cursor-pointer overflow-hidden bg-paper transition-opacity md:w-20 ${n === i ? "outline outline-1 outline-ink" : "opacity-60 hover:opacity-90"}`}
+            className={`relative aspect-square w-16 shrink-0 cursor-pointer overflow-hidden bg-paper transition-opacity md:w-20 lg:w-[72px] ${n === i ? "outline outline-1 outline-ink" : "opacity-60 hover:opacity-90"}`}
           >
             <Image src={s.src} alt="" fill sizes="160px" className={s.contain ? "object-contain p-2" : "object-cover"} />
           </button>
