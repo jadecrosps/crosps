@@ -4,8 +4,8 @@ import { Divider } from "./SectionHeading";
 import { SerifAccent } from "@/components/ui/SerifAccent";
 
 export const STORY_PARAGRAPHS = [
-  "Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting role. Crosps changes that.",
-  "We wanted to rethink what savoury snacking could feel like. So we started with the vegetable itself.",
+  "Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting role. We wanted something simple. Something made from vegetables that still looked and tasted like vegetables.",
+  "So we started with the vegetable itself.",
   "Real slices of tomato, onion and pepper. Ingredients you can see. Shapes that are naturally irregular. Colour, texture and flavour that still feel connected to where they came from.",
   "The result is something familiar, but distinctly different.",
   "Crisp enough to satisfy the craving. Considered enough to feel like something new.",
