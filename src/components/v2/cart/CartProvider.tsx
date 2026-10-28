@@ -165,7 +165,7 @@ export function QuantityStepper({ value, onChange, small = false }: { value: num
   }`;
   return (
     <div className={`inline-flex items-center border border-ink-10 ${small ? "h-8" : "h-[52px]"}`}>
-      <button type="button" aria-label="Decrease quantity" onClick={() => onChange(value - 1)} disabled={!small && value <= 1} className={btn}>
+      <button type="button" aria-label="Decrease quantity" onClick={() => onChange(value - 1)} disabled={value <= 1} className={btn}>
         −
       </button>
       <span aria-live="polite" className={`type-body text-center ${small ? "w-6" : "w-8"}`}>

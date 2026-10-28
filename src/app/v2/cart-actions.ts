@@ -23,7 +23,7 @@ async function cartId() {
 }
 
 async function remember(cart: Cart) {
-  (await cookies()).set(COOKIE, cart.id, { httpOnly: true, sameSite: "lax", secure: true, path: "/", maxAge: 60 * 60 * 24 * 14 });
+  (await cookies()).set(COOKIE, cart.id, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 60 * 60 * 24 * 14 });
 }
 
 async function run(fn: () => Promise<Cart | null>): Promise<CartResult> {
@@ -76,7 +76,8 @@ export async function addToCart(variantId: string, quantity: number, sellingPlan
 export async function updateCartLine(lineId: string, quantity: number): Promise<CartResult> {
   return run(async () => {
     const id = await cartId();
-    if (!id) return null;
+    // Without the cookie we can't reach the cart; fail rather than show it as emptied.
+    if (!id) throw new Error("No cart cookie");
     if (quantity <= 0) {
       const { cartLinesRemove } = await storefront<{ cartLinesRemove: { cart: RawCart } }>(
         `mutation Remove($id: ID!, $ids: [ID!]!) { cartLinesRemove(cartId: $id, lineIds: $ids) { cart { ...CartFields } } } ${CART_FIELDS}`,
