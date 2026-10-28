@@ -45,6 +45,7 @@ export async function getCart(): Promise<CartResult> {
       `query Cart($id: ID!) { cart(id: $id) { ...CartFields } } ${CART_FIELDS}`,
       { id },
     );
+    if (!cart) (await cookies()).delete(COOKIE); // expired or already checked out
     return cart ? toCart(cart) : null;
   });
 }
@@ -73,22 +74,27 @@ export async function addToCart(variantId: string, quantity: number, sellingPlan
   });
 }
 
-export async function updateCartLine(lineId: string, quantity: number): Promise<CartResult> {
+// Takes the cart id the drawer is showing rather than trusting the cookie: if the
+// browser kept a stale cookie (e.g. an expired cart), updates would hit the wrong cart.
+export async function updateCartLine(id: string, lineId: string, quantity: number): Promise<CartResult> {
   return run(async () => {
-    const id = await cartId();
-    // Without the cookie we can't reach the cart; fail rather than show it as emptied.
-    if (!id) throw new Error("No cart cookie");
+    let raw: RawCart;
     if (quantity <= 0) {
       const { cartLinesRemove } = await storefront<{ cartLinesRemove: { cart: RawCart } }>(
         `mutation Remove($id: ID!, $ids: [ID!]!) { cartLinesRemove(cartId: $id, lineIds: $ids) { cart { ...CartFields } } } ${CART_FIELDS}`,
         { id, ids: [lineId] },
       );
-      return toCart(cartLinesRemove.cart);
+      raw = cartLinesRemove.cart;
+    } else {
+      const { cartLinesUpdate } = await storefront<{ cartLinesUpdate: { cart: RawCart } }>(
+        `mutation Update($id: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $id, lines: $lines) { cart { ...CartFields } } } ${CART_FIELDS}`,
+        { id, lines: [{ id: lineId, quantity }] },
+      );
+      raw = cartLinesUpdate.cart;
     }
-    const { cartLinesUpdate } = await storefront<{ cartLinesUpdate: { cart: RawCart } }>(
-      `mutation Update($id: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $id, lines: $lines) { cart { ...CartFields } } } ${CART_FIELDS}`,
-      { id, lines: [{ id: lineId, quantity }] },
-    );
-    return toCart(cartLinesUpdate.cart);
+    if (!raw) throw new Error("Cart not found");
+    const cart = toCart(raw);
+    await remember(cart);
+    return cart;
   });
 }

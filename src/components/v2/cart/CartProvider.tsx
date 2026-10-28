@@ -78,8 +78,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const update = (lineId: string, quantity: number) =>
+    cart &&
     startTransition(async () => {
-      apply(await updateCartLine(lineId, quantity));
+      apply(await updateCartLine(cart.id, lineId, quantity));
     });
 
   const count = cart?.totalQuantity ?? 0;
