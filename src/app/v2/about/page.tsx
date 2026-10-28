@@ -13,13 +13,12 @@ export const metadata: Metadata = {
 
 const STORY = [
   "We didn’t start with a crisp.",
-  "After a tough reset in 2023, I started eating as close to whole food as I could. And I kept noticing how little the savoury snack aisle had to offer.",
-  "The sweet side felt full of possibilities. But when I wanted something savoury, I kept finding more of the same: potato crisps, or ingredients lists that felt a long way from what I wanted to eat.",
-  "I wanted something simple. Something made from vegetables that still looked and tasted like vegetables.",
-  "Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting role. Crosps changes that.",
-  "We wanted to rethink what savoury snacking could feel like. So we started with the vegetable itself.",
-  "Some time later, Crosps was born. Whole vegetables, cooked gently enough to keep their colour, their shape and their flavour.",
-  "I hope you love them as much as I’ve loved bringing them to life.",
+  "After a tough reset in 2023, we started eating as close to whole food as we could. And we kept noticing how little the savoury snack aisle had to offer.",
+  "The sweet side felt full of possibilities. But whenever we wanted something savoury, we found more of the same: potato crisps, or ingredient lists a long way from what we actually wanted to eat.",
+  "Most savoury snacks are still built around potato, grains or starch, with vegetables playing a supporting role. We wanted something simple. Something made from vegetables that still looked and tasted like vegetables.",
+  "So we started with the vegetable itself.",
+  "That’s how Crosps was born: whole vegetables, cooked gently enough to keep their colour, their shape and their flavour.",
+  "We hope you love them as much as we’ve loved bringing them to life.",
   "Made from crops, not compromises.",
 ];
 
