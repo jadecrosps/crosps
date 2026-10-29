@@ -96,7 +96,7 @@ export function SignupPopup() {
           </div>
           <div className="relative order-first aspect-[4/3] md:order-none md:aspect-auto md:min-h-[480px]">
             <Image
-              src="/v2/signup-onion.jpg"
+              src="/v2/signup-boxes.jpg"
               alt=""
               fill
               loading="eager"
