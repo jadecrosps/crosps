@@ -5,9 +5,11 @@ import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
 import { Button } from "@/components/v2/Button";
 import { ContactForm } from "@/components/v2/ContactForm";
-import { isTradeUnlocked } from "@/lib/trade-auth";
+import { getTradeSession, type TradeSession } from "@/lib/trade-auth";
+import { getTradeVariants } from "@/lib/trade";
 import { PRODUCTS, REVIEWS, STOCKISTS, ALLERGEN_NOTE, V2_FOOTER_LINKS, V2_LINKS, gutterStyle } from "@/lib/v2-content";
 import { TradeLogin, TradeLogout } from "./TradeLogin";
+import { TradeBasket } from "./TradeBasket";
 
 export const metadata: Metadata = {
   title: "Trade | Crosps",
@@ -37,14 +39,22 @@ function Specs({ rows }: { rows: [string, string][] }) {
   );
 }
 
-function TradeDetails() {
+async function TradeDetails({ session }: { session: TradeSession }) {
+  const variants = await getTradeVariants();
+  const prices = Object.fromEntries(Object.entries(variants).map(([k, v]) => [k, v.price]));
   return (
     <div className="flex flex-col gap-12">
+      <div className="flex flex-wrap items-center justify-between gap-4 border border-ink-10 px-5 py-3">
+        <p className="type-small">
+          Logged in as <span className="text-ink">{session.name}</span> · {session.email}
+        </p>
+        <TradeLogout />
+      </div>
       <div className="grid bg-brown text-white md:grid-cols-3">
         {[
           ["Trade price", "£13.39", "Per case of 8 · £1.67 per bag"],
           ["RRP", "£2.79", "Per 30g bag"],
-          ["Retailer margin", "40%", "At RRP"],
+          ["Your margin", "40%", "At RRP"],
         ].map(([label, value, note], i) => (
           <div key={label} className={`flex flex-col gap-2 p-8 ${i > 0 ? "border-t border-white/20 md:border-l md:border-t-0" : ""}`}>
             <p className="type-label text-white/72">{label}</p>
@@ -52,6 +62,13 @@ function TradeDetails() {
             <p className="type-label text-white/72">{note}</p>
           </div>
         ))}
+      </div>
+
+      <div id="order" className="flex scroll-mt-6 flex-col gap-6">
+        <h3 className="type-heading">
+          Trade <SerifAccent>order.</SerifAccent>
+        </h3>
+        <TradeBasket prices={prices} />
       </div>
 
       <div className="grid gap-12 md:grid-cols-2">
@@ -85,16 +102,13 @@ function TradeDetails() {
 
       <div className="flex flex-col items-start gap-6 bg-cream p-8 md:flex-row md:items-center md:justify-between md:p-10">
         <div className="flex max-w-[520px] flex-col gap-2">
-          <h3 className="type-heading text-ink">
-            Ready to <SerifAccent>order?</SerifAccent>
+          <h3 className="type-heading">
+            Questions or <SerifAccent>terms?</SerifAccent>
           </h3>
-          <p className="type-body text-ink-88">
-            Email your order (cases of each flavour and delivery address) to jade@eatcrosps.com and we’ll send an invoice you can pay
-            online.
-          </p>
+          <p className="type-body text-ink-88">For 30-day payment terms, samples or anything else, email jade@eatcrosps.com.</p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Button href="mailto:jade@eatcrosps.com?subject=Crosps%20trade%20order">Email an order</Button>
+          <Button href="mailto:jade@eatcrosps.com?subject=Crosps%20trade">Email us</Button>
           <a
             href="/v2/trade/sell-sheet"
             className="type-mono rounded-button border border-brown px-6 py-4 text-ink transition-colors hover:bg-brown hover:text-white"
@@ -103,17 +117,14 @@ function TradeDetails() {
           </a>
         </div>
       </div>
-      <div>
-        <TradeLogout />
-      </div>
     </div>
   );
 }
 
 // V2 Trade: public pitch + application form; prices and the sell sheet behind a shared password.
-export default async function V2TradePage({ searchParams }: { searchParams: Promise<{ gutter?: string }> }) {
-  const { gutter } = await searchParams;
-  const unlocked = await isTradeUnlocked();
+export default async function V2TradePage({ searchParams }: { searchParams: Promise<{ gutter?: string; login?: string }> }) {
+  const { gutter, login } = await searchParams;
+  const session = await getTradeSession();
   const reviews = REVIEWS.filter((r) => r.rating === 5).slice(0, 3);
 
   return (
@@ -136,7 +147,7 @@ export default async function V2TradePage({ searchParams }: { searchParams: Prom
                 href="#login"
                 className="type-mono inline-flex items-center rounded-button border border-brown px-6 py-4 text-ink transition-colors hover:bg-brown hover:text-white"
               >
-                {unlocked ? "Trade prices" : "Stockist login"}
+                {session ? "Your trade order" : "Stockist login"}
               </a>
             </div>
           </div>
@@ -193,23 +204,15 @@ export default async function V2TradePage({ searchParams }: { searchParams: Prom
 
         {/* Stockist area */}
         <section id="login" className="gutter-x scroll-mt-6 pt-20 md:pt-28">
-          {unlocked ? (
+          {session ? (
             <div className="flex flex-col gap-8">
               <h2 className="type-heading">
                 Trade <SerifAccent>prices.</SerifAccent>
               </h2>
-              <TradeDetails />
+              <TradeDetails session={session} />
             </div>
           ) : (
-            <div className="flex flex-col items-start gap-6 bg-cream p-8 md:flex-row md:items-end md:justify-between md:p-12">
-              <div className="flex max-w-[480px] flex-col gap-2">
-                <h2 className="type-heading">
-                  Already a <SerifAccent>stockist?</SerifAccent>
-                </h2>
-                <p className="type-body text-ink-88">Enter your trade password to see prices, case and pallet details, and download our sell sheet.</p>
-              </div>
-              <TradeLogin />
-            </div>
+            <TradeLogin expired={login === "expired"} />
           )}
         </section>
 
@@ -219,7 +222,7 @@ export default async function V2TradePage({ searchParams }: { searchParams: Prom
             <h2 className="type-heading">
               Apply for a trade <SerifAccent>account.</SerifAccent>
             </h2>
-            <p className="type-body text-ink-88">Tell us about your shop and we’ll be in touch with prices and your trade password.</p>
+            <p className="type-body text-ink-88">Tell us about your shop. Once you’re approved, you can log in here with your email to see prices and order.</p>
           </div>
           <div className="min-w-0 lg:px-[112px]">
             <div className="max-w-[640px]">

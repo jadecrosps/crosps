@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { CART_FIELDS, shopifyConfigured, storefront, toCart, type Cart, type RawCart } from "@/lib/shopify";
-import { isTradeUnlocked } from "@/lib/trade-auth";
 
 // Cart server actions for the V2 pages. The Shopify cart id lives in a cookie;
 // checkout itself happens on Shopify's hosted checkout (cart.checkoutUrl).
@@ -14,14 +13,14 @@ export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "
 class SoldOut extends Error {}
 class TradeOnly extends Error {}
 
-// Trade cases (Shopify tag "trade") can only be added by logged-in stockists,
-// whatever variant id the browser sends.
+// Trade cases (Shopify tag "trade") never go in the shopper basket, whatever variant
+// id the browser sends; stockists order them through the trade page's own checkout.
 async function assertNotTrade(variantId: string) {
   const { node } = await storefront<{ node: { product?: { tags: string[] } } | null }>(
     `query Variant($id: ID!) { node(id: $id) { ... on ProductVariant { product { tags } } } }`,
     { id: variantId },
   );
-  if (node?.product?.tags.includes("trade") && !(await isTradeUnlocked())) throw new TradeOnly();
+  if (node?.product?.tags.includes("trade")) throw new TradeOnly();
 }
 
 type Warning = { code: string };
