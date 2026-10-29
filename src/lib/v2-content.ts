@@ -316,7 +316,8 @@ export const ALLERGEN_NOTE =
 export const V2_FOOTER_LINKS = {
   FAQ: V2_LINKS.faq,
   Stockists: `${V2_LINKS.contact}?topic=stock`,
-  "Shipping & Returns": V2_LINKS.policy("refund-policy"),
+  "Shipping & Returns": V2_LINKS.policy("shipping-policy"),
+  "Refund Policy": V2_LINKS.policy("refund-policy"),
   "Terms of Service": V2_LINKS.policy("terms-of-service"),
   "Privacy Policy": V2_LINKS.policy("privacy-policy"),
   Contact: V2_LINKS.contact,

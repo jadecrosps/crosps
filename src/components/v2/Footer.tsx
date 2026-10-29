@@ -6,7 +6,7 @@ export type FooterLinks = Partial<Record<string, string>>;
 
 const COLUMNS = [
   { title: "Explore", links: ["FAQ", "Stockists", "Shipping & Returns"] },
-  { title: "Legal", links: ["Terms of Service", "Privacy Policy", "Cookie Settings"] },
+  { title: "Legal", links: ["Terms of Service", "Refund Policy", "Privacy Policy", "Cookie Settings"] },
   { title: "Follow", links: ["Instagram", "TikTok", "Contact"] },
 ];
 
