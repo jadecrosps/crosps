@@ -111,8 +111,14 @@ export const REVIEWS: { quote: string; title: string; body: string; author: stri
     quote: "The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!",
     title: "The tomato chips were delicious!",
     body: "Would pair extremely well with a crisp white wine in the summer!",
-    author: "Anne-Marie, London",
+    author: "Emma, London",
     rating: 5,
+  },
+  {
+    quote: "Love the tomato flavour crosps! Delicious alternative to crisps. I’m hooked!",
+    title: "Love the tomato flavour crosps!",
+    body: "Delicious alternative to crisps. I’m hooked!",
+    author: "Anne-Marie, London",
   },
   {
     quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!",
