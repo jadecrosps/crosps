@@ -5,7 +5,7 @@ import Link from "next/link";
 import { setConsent, useConsent } from "@/lib/consent";
 import { V2_LINKS } from "@/lib/v2-content";
 
-// Shown until the visitor chooses; reopened from the footer's "Cookie Settings"
+// Bottom right. Shown until the visitor chooses; reopened from the footer's "Cookie Settings"
 // link (#cookie-settings). Accept and Reject carry equal weight.
 export function CookieBanner() {
   const consent = useConsent();
@@ -34,7 +34,7 @@ export function CookieBanner() {
     <div
       role="region"
       aria-label="Cookie consent"
-      className="fixed inset-x-4 bottom-4 z-30 flex max-w-[420px] flex-col gap-5 border border-ink-10 bg-white p-6 text-ink shadow-xl sm:left-6 sm:right-auto sm:bottom-6"
+      className="fixed inset-x-4 bottom-4 z-30 flex max-w-[420px] flex-col gap-5 border border-ink-10 bg-white p-6 text-ink shadow-xl sm:left-auto sm:right-6 sm:bottom-6"
     >
       <div className="flex flex-col gap-2">
         <p className="type-label">Cookies</p>
