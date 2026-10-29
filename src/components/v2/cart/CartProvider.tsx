@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState, useTransition } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { addToCart, getCart, updateCartLine, type CartResult } from "@/app/v2/cart-actions";
@@ -30,6 +30,23 @@ const ERRORS = {
   sold_out: "Sorry, this is sold out right now.",
 };
 
+// Cart with one line's quantity changed, priced from its current unit price, so the
+// drawer can update before Shopify answers. Shopify's reply replaces it.
+function withQuantity(cart: Cart, lineId: string, quantity: number): Cart {
+  const lines = cart.lines.flatMap((l) => {
+    if (l.id !== lineId) return [l];
+    if (quantity <= 0) return [];
+    const unit = Number(l.total.amount) / l.quantity;
+    return [{ ...l, quantity, total: { ...l.total, amount: String(unit * quantity) } }];
+  });
+  return {
+    ...cart,
+    lines,
+    totalQuantity: lines.reduce((n, l) => n + l.quantity, 0),
+    subtotal: { ...cart.subtotal, amount: String(lines.reduce((n, l) => n + Number(l.total.amount), 0)) },
+  };
+}
+
 function money(m: { amount: string; currencyCode: string }) {
   return new Intl.NumberFormat("en-GB", { style: "currency", currency: m.currencyCode }).format(Number(m.amount));
 }
@@ -38,7 +55,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<Cart | null>(null);
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [pending, startTransition] = useTransition();
+  const [pending, setPending] = useState(false);
+  // Quantity clicks are sent once the shopper pauses, one per line, and only the
+  // newest reply is applied, so fast clicking can't leave an older quantity showing.
+  const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>());
+  const latest = useRef(0);
 
   const apply = useCallback((r: CartResult) => {
     if (r.ok) {
@@ -69,19 +90,33 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const add = useCallback(
     async (variantId: string, quantity: number, sellingPlanId?: string) => {
+      // Open straight away; the new line appears when Shopify answers.
+      setOpen(true);
+      setPending(true);
       const r = await addToCart(variantId, quantity, sellingPlanId);
-      apply(r);
-      if (r.ok) setOpen(true);
+      setPending(false);
+      if (!apply(r)) setOpen(false);
       return r.ok ? null : ERRORS[r.error];
     },
     [apply],
   );
 
-  const update = (lineId: string, quantity: number) =>
-    cart &&
-    startTransition(async () => {
-      apply(await updateCartLine(cart.id, lineId, quantity));
-    });
+  const update = (lineId: string, quantity: number) => {
+    if (!cart) return;
+    const id = cart.id;
+    setCart((c) => c && withQuantity(c, lineId, quantity));
+    clearTimeout(timers.current.get(lineId));
+    timers.current.set(
+      lineId,
+      setTimeout(async () => {
+        const n = ++latest.current;
+        const r = await updateCartLine(id, lineId, quantity);
+        if (n !== latest.current) return;
+        // On failure, show what Shopify actually has.
+        if (!apply(r)) getCart().then((g) => g.ok && n === latest.current && setCart(g.cart));
+      }, 350),
+    );
+  };
 
   const count = cart?.totalQuantity ?? 0;
 
@@ -111,12 +146,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
         {!cart || cart.lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-start gap-4 px-6 py-10">
-            <p className="type-heading">Your cart is empty.</p>
+            <p className="type-heading">{pending ? "Adding to your cart…" : "Your cart is empty."}</p>
             {error && <p className="type-small text-ink-72">{error}</p>}
           </div>
         ) : (
           <>
-            <ul className={`flex-1 overflow-y-auto px-6 ${pending ? "opacity-60" : ""}`}>
+            <ul className="flex-1 overflow-y-auto px-6">
+              {pending && (
+                <li aria-live="polite" className="type-small border-b border-ink-10 py-4 text-ink-50">
+                  Adding to your cart…
+                </li>
+              )}
               {cart.lines.map((line) => (
                 <li key={line.id} className="flex gap-4 border-b border-ink-10 py-5">
                   <div className="relative size-[88px] shrink-0 bg-paper">
