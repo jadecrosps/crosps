@@ -48,10 +48,14 @@ export function SignupPopup() {
     // Only touch the class when present: classList.remove always rewrites the attribute,
     // which would retrigger the observer forever.
     const unlock = () => {
-      if (document.body.classList.contains("klaviyo-prevent-body-scrolling")) document.body.classList.remove("klaviyo-prevent-body-scrolling");
+      if (document.body.classList.contains("klaviyo-prevent-body-scrolling"))
+        document.body.classList.remove("klaviyo-prevent-body-scrolling");
     };
     const obs = new MutationObserver(unlock);
-    obs.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    obs.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
     return () => obs.disconnect();
   }, []);
 
@@ -66,44 +70,50 @@ export function SignupPopup() {
   return (
     <>
       <style>{`div.kl-private-reset-css-Xuajs1:has(> [data-kl-scroll-locking-modal]){display:none!important}`}</style>
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div aria-hidden onClick={close} className="absolute inset-0 bg-black/30" />
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="signup-title"
-            className="relative grid max-h-full w-full max-w-[880px] overflow-y-auto bg-cream text-ink shadow-xl md:grid-cols-2"
-          >
-            <div className="flex flex-col justify-center gap-8 p-8 md:p-12">
-              <div className="flex flex-col gap-3">
-                <p className="type-label text-ink-72">Early access</p>
-                <h2 id="signup-title" className="type-heading">
-                  Experience Crosps <SerifAccent>first.</SerifAccent>
-                </h2>
-                <p className="type-body text-ink-88">
-                  Join the waitlist and be first to hear when Crosps launches, where it’s stocked, and what’s coming next.
-                </p>
-              </div>
-              {/* Once they've submitted, don't show the popup again. */}
-              <div onSubmitCapture={remember}>
-                <EmailCapture />
-              </div>
+      {/* Kept mounted (hidden) so the photo is already loaded when it opens. */}
+      <div className={`fixed inset-0 z-50 items-center justify-center p-4 ${open ? "flex" : "hidden"}`}>
+        <div aria-hidden onClick={close} className="absolute inset-0 bg-black/30" />
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="signup-title"
+          className="relative grid max-h-full w-full max-w-[880px] overflow-y-auto bg-cream text-ink shadow-xl md:grid-cols-2"
+        >
+          <div className="flex flex-col justify-center gap-8 p-8 md:p-12">
+            <div className="flex flex-col gap-3">
+              <p className="type-label text-ink-72">Early access</p>
+              <h2 id="signup-title" className="type-heading">
+                Experience Crosps <SerifAccent>first.</SerifAccent>
+              </h2>
+              <p className="type-body text-ink-88">
+                Join the waitlist and be first to hear when Crosps launches, where it’s stocked, and what’s coming next.
+              </p>
             </div>
-            <div className="relative order-first aspect-[16/9] md:order-none md:aspect-auto md:min-h-[480px]">
-              <Image src="/v2/ing-tomato.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 440px" className="object-cover" />
+            {/* Once they've submitted, don't show the popup again. */}
+            <div onSubmitCapture={remember}>
+              <EmailCapture />
             </div>
-            <button
-              ref={closeRef}
-              type="button"
-              onClick={close}
-              className="type-nav absolute right-4 top-4 cursor-pointer bg-white px-3 py-1.5 text-ink hover:opacity-70"
-            >
-              Close
-            </button>
           </div>
+          <div className="relative order-first aspect-[4/3] md:order-none md:aspect-auto md:min-h-[480px]">
+            <Image
+              src="/v2/signup-onion.jpg"
+              alt=""
+              fill
+              loading="eager"
+              sizes="(max-width: 768px) 100vw, 440px"
+              className="object-cover"
+            />
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={close}
+            className="type-nav absolute right-4 top-4 cursor-pointer bg-white px-3 py-1.5 text-ink hover:opacity-70"
+          >
+            Close
+          </button>
         </div>
-      )}
+      </div>
     </>
   );
 }
