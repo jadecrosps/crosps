@@ -24,8 +24,9 @@ import {
 } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
-  title: "Crosps | A new world of vegetable crisps",
-  description: "Real vegetables, transformed into light, crisp, deeply savoury slices that keep their natural colour, character and flavour.",
+  title: "Crosps | Real Vegetables, Reimagined.",
+  description:
+    "We believe better snacks start with better ingredients. That’s why we make vegetable crisps using just four carefully considered ingredients. High in fibre, vegan, gluten-free and non-HFSS, Crosps brings together ingredient integrity with an uncompromising approach to taste. Made to change the way we snack.",
   robots: { index: false, follow: false },
 };
 
