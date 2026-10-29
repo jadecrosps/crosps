@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
+import { useConsent } from "@/lib/consent";
 
 // Klaviyo public Company ID — safe to expose client-side (like a Stripe
 // publishable key). Hardcoded intentionally per ops decision; do not
@@ -9,11 +10,15 @@ import { usePathname } from "next/navigation";
 const KLAVIYO_COMPANY_ID = "WSHPRF";
 
 // Internal review pages where the sign-up popup would get in the way.
-const EXCLUDED_PREFIXES = ["/design-system", "/v2"];
+const EXCLUDED_PREFIXES = ["/design-system"];
+// Pages behind the cookie banner: Klaviyo only loads once the visitor accepts.
+const CONSENT_PREFIXES = ["/v2"];
 
 export function KlaviyoScripts() {
   const pathname = usePathname();
+  const consent = useConsent();
   if (EXCLUDED_PREFIXES.some((p) => pathname?.startsWith(p))) return null;
+  if (CONSENT_PREFIXES.some((p) => pathname?.startsWith(p)) && consent !== "accepted") return null;
 
   return (
     <>

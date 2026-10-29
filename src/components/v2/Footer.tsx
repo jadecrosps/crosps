@@ -5,14 +5,15 @@ import { EmailCapture } from "./EmailCapture";
 export type FooterLinks = Partial<Record<string, string>>;
 
 const COLUMNS = [
-  { title: "Explore", links: ["FAQ", "Stockists", "Shipping & Returns"] },
-  { title: "Legal", links: ["Terms of Service", "Privacy Policy", "Cookie Policy"] },
+  { title: "Explore", links: ["FAQ", "Trade", "Shipping & Returns"] },
+  { title: "Legal", links: ["Terms of Service", "Refund Policy", "Privacy Policy", "Cookie Settings"] },
   { title: "Follow", links: ["Instagram", "TikTok", "Contact"] },
 ];
 
 const DEFAULT_LINKS: FooterLinks = {
   Instagram: "https://www.instagram.com/eatcrosps/",
   TikTok: "https://www.tiktok.com/@eatcrosps",
+  "Cookie Settings": "#cookie-settings", // reopens the CookieBanner
 };
 
 // Links without a destination yet fall back to "#".

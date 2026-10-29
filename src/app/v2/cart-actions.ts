@@ -8,9 +8,20 @@ import { CART_FIELDS, shopifyConfigured, storefront, toCart, type Cart, type Raw
 
 const COOKIE = "crosps_cart";
 
-export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "not_configured" | "failed" | "sold_out" };
+export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "not_configured" | "failed" | "sold_out" | "trade_only" };
 
 class SoldOut extends Error {}
+class TradeOnly extends Error {}
+
+// Trade cases (Shopify tag "trade") never go in the shopper basket, whatever variant
+// id the browser sends; stockists order them through the trade page's own checkout.
+async function assertNotTrade(variantId: string) {
+  const { node } = await storefront<{ node: { product?: { tags: string[] } } | null }>(
+    `query Variant($id: ID!) { node(id: $id) { ... on ProductVariant { product { tags } } } }`,
+    { id: variantId },
+  );
+  if (node?.product?.tags.includes("trade")) throw new TradeOnly();
+}
 
 type Warning = { code: string };
 
@@ -23,7 +34,7 @@ async function cartId() {
 }
 
 async function remember(cart: Cart) {
-  (await cookies()).set(COOKIE, cart.id, { httpOnly: true, sameSite: "lax", secure: true, path: "/", maxAge: 60 * 60 * 24 * 14 });
+  (await cookies()).set(COOKIE, cart.id, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 60 * 60 * 24 * 14 });
 }
 
 async function run(fn: () => Promise<Cart | null>): Promise<CartResult> {
@@ -32,6 +43,7 @@ async function run(fn: () => Promise<Cart | null>): Promise<CartResult> {
     return { ok: true, cart: await fn() };
   } catch (err) {
     if (err instanceof SoldOut) return { ok: false, error: "sold_out" };
+    if (err instanceof TradeOnly) return { ok: false, error: "trade_only" };
     console.error("[cart]", err);
     return { ok: false, error: "failed" };
   }
@@ -45,12 +57,14 @@ export async function getCart(): Promise<CartResult> {
       `query Cart($id: ID!) { cart(id: $id) { ...CartFields } } ${CART_FIELDS}`,
       { id },
     );
+    if (!cart) (await cookies()).delete(COOKIE); // expired or already checked out
     return cart ? toCart(cart) : null;
   });
 }
 
 export async function addToCart(variantId: string, quantity: number, sellingPlanId?: string): Promise<CartResult> {
   return run(async () => {
+    await assertNotTrade(variantId);
     const line = { merchandiseId: variantId, quantity, ...(sellingPlanId ? { sellingPlanId } : {}) };
     const id = await cartId();
     if (id) {
@@ -73,21 +87,27 @@ export async function addToCart(variantId: string, quantity: number, sellingPlan
   });
 }
 
-export async function updateCartLine(lineId: string, quantity: number): Promise<CartResult> {
+// Takes the cart id the drawer is showing rather than trusting the cookie: if the
+// browser kept a stale cookie (e.g. an expired cart), updates would hit the wrong cart.
+export async function updateCartLine(id: string, lineId: string, quantity: number): Promise<CartResult> {
   return run(async () => {
-    const id = await cartId();
-    if (!id) return null;
+    let raw: RawCart;
     if (quantity <= 0) {
       const { cartLinesRemove } = await storefront<{ cartLinesRemove: { cart: RawCart } }>(
         `mutation Remove($id: ID!, $ids: [ID!]!) { cartLinesRemove(cartId: $id, lineIds: $ids) { cart { ...CartFields } } } ${CART_FIELDS}`,
         { id, ids: [lineId] },
       );
-      return toCart(cartLinesRemove.cart);
+      raw = cartLinesRemove.cart;
+    } else {
+      const { cartLinesUpdate } = await storefront<{ cartLinesUpdate: { cart: RawCart } }>(
+        `mutation Update($id: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $id, lines: $lines) { cart { ...CartFields } } } ${CART_FIELDS}`,
+        { id, lines: [{ id: lineId, quantity }] },
+      );
+      raw = cartLinesUpdate.cart;
     }
-    const { cartLinesUpdate } = await storefront<{ cartLinesUpdate: { cart: RawCart } }>(
-      `mutation Update($id: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $id, lines: $lines) { cart { ...CartFields } } } ${CART_FIELDS}`,
-      { id, lines: [{ id: lineId, quantity }] },
-    );
-    return toCart(cartLinesUpdate.cart);
+    if (!raw) throw new Error("Cart not found");
+    const cart = toCart(raw);
+    await remember(cart);
+    return cart;
   });
 }

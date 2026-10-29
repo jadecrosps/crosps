@@ -111,8 +111,14 @@ export const REVIEWS: { quote: string; title: string; body: string; author: stri
     quote: "The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!",
     title: "The tomato chips were delicious!",
     body: "Would pair extremely well with a crisp white wine in the summer!",
-    author: "Anne-Marie, London",
+    author: "Emma, London",
     rating: 5,
+  },
+  {
+    quote: "Love the tomato flavour crosps! Delicious alternative to crisps. I’m hooked!",
+    title: "Love the tomato flavour crosps!",
+    body: "Delicious alternative to crisps. I’m hooked!",
+    author: "Anne-Marie, London",
   },
   {
     quote: "Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!",
@@ -146,6 +152,7 @@ export const V2_LINKS = {
   about: "/v2/about",
   faq: "/v2/faq",
   contact: "/v2/contact",
+  trade: "/v2/trade",
   product: (slug: string) => `/v2/products/${slug}`,
   policy: (handle: string) => `/v2/policies/${handle}`,
 };
@@ -168,6 +175,7 @@ export type ProductDetails = {
   ingredients: string;
   nutrition: NutritionRow[];
   vegetable: { label: string; image: string; crop?: Crop; colour: string };
+  description: string;
   paragraphs: string[];
   gallery: { src: string; alt: string; contain?: boolean }[];
 };
@@ -199,6 +207,8 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       { label: "Salt", per100: "0.14g", perServing: "0.02g" },
     ],
     vegetable: { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
+    description:
+      "Crosps Tomato crisps are bright, tangy and layered with rich umami flavour. A delicious balance of sweetness, savoury depth and subtle acidity brings every crunchy bite to life.",
     paragraphs: [
       "Tomatoes do more than add flavour. Naturally rich in lycopene, vitamin C and potassium, they’re a nutrient-dense vegetable (or fruit!) that brings colour and crunch to every bite.",
       "Gently crisped to preserve their goodness, these vibrant slices pack all the character of a tangy, delicious tomato, with a crispy twist.",
@@ -236,6 +246,8 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       { label: "Salt", per100: "0.4g", perServing: "0.06g" },
     ],
     vegetable: { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
+    description:
+      "Crosps Onion crisps balance mellow sweetness with deep savoury flavour. Familiar yet full of character, each bite delivers a satisfying crunch and a comforting, deliciously moreish finish.",
     paragraphs: [
       "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite.",
       "Complex and savoury: you either love it or hate it.",
@@ -279,6 +291,8 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
       colour: "var(--color-pepper)",
     },
+    description:
+      "Vibrant and distinctive, capturing the unique character of green, yellow and red, bell peppers. Gently sweet and full of flavour, they deliver a colourful and satisfying crunch in every bite.",
     paragraphs: [
       "One of the most popular vegetables in the world, now reimagined as a light crunch with bold colour.",
       "A classic with a refined twist.",
@@ -302,8 +316,9 @@ export const ALLERGEN_NOTE =
 // Footer link targets shared by every V2 page.
 export const V2_FOOTER_LINKS = {
   FAQ: V2_LINKS.faq,
-  Stockists: `${V2_LINKS.contact}?topic=stock`,
-  "Shipping & Returns": V2_LINKS.policy("refund-policy"),
+  Trade: V2_LINKS.trade,
+  "Shipping & Returns": V2_LINKS.policy("shipping-policy"),
+  "Refund Policy": V2_LINKS.policy("refund-policy"),
   "Terms of Service": V2_LINKS.policy("terms-of-service"),
   "Privacy Policy": V2_LINKS.policy("privacy-policy"),
   Contact: V2_LINKS.contact,

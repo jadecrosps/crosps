@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
 import { ProductCard } from "@/components/v2/ProductCard";
 import { MobileCarousel } from "@/components/v2/MobileCarousel";
-import { SectionHeading } from "@/components/v2/SectionHeading";
+import { Tag } from "@/components/v2/Tag";
+import { Ticker } from "@/components/v2/Ticker";
+import { ReviewsMarquee } from "@/components/v2/ReviewsMarquee";
+import { InstagramFeed } from "@/components/v2/InstagramFeed";
+import { SerifAccent } from "@/components/ui/SerifAccent";
+import { Comparison, FaqBand, IngredientChecklist, SplitFeature } from "@/components/v2/product/ProductSections";
+import { QuickAdd } from "@/components/v2/home/QuickAdd";
+import { RowHeader, PillLink } from "@/components/v2/home/HomeLayout";
 import { Accordion } from "@/components/v2/Accordion";
-import { IngredientCard } from "@/components/v2/IngredientCard";
 import { ProductGallery } from "@/components/v2/product/ProductGallery";
 import { ProductPurchase } from "@/components/v2/product/ProductPurchase";
-import { ProductBenefits, NutritionTable } from "@/components/v2/product/ProductBenefits";
+import { NutritionTable } from "@/components/v2/product/ProductBenefits";
 import { getShopifyProduct } from "@/lib/shopify";
 import {
   ALLERGEN_NOTE,
-  INGREDIENT_INFO,
+  FAQ_GROUPS,
+  TICKER,
   PRODUCT_DETAILS,
   PRODUCTS,
   V2_LINKS,
@@ -41,7 +49,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-// V2 product page: Figma "Product Page" (1:1102) content in a Lobie-style layout.
+// Pack claims shown as a checklist in the product panel.
+const CLAIMS = ["Just four ingredients", "Real vegetables, sliced", "Naturally high fibre", "Plant based", "Gluten free", "No added sugar"];
+
+// V2 product page: Figma "Product Page" (1:1102) content in the pludolabs.com product layout.
 export default async function ProductPage({ params, searchParams }: Params) {
   const { slug } = await params;
   const { gutter } = await searchParams;
@@ -56,40 +67,48 @@ export default async function ProductPage({ params, searchParams }: Params) {
     ? { amount: Number(shopify.price.amount), currencyCode: shopify.price.currencyCode }
     : { amount: Number(fallbackAmount), currencyCode: fallbackCurrency };
   const others = PRODUCTS.filter((p) => p.slug !== product.slug);
+  // Live variant ids for the "You may also like" Add to cart buttons.
+  const otherVariants = await Promise.all(others.map((p) => getShopifyProduct(PRODUCT_DETAILS[p.slug].shopifyHandle)));
+  const veg = details.vegetable.label.toLowerCase();
+  const stat = (n: number) => `${details.stats[n].value}${details.stats[n].unit ?? ""}`;
 
   return (
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
       <Nav tone="dark" links={{ home: V2_LINKS.home, shop: V2_LINKS.shop, about: V2_LINKS.about, faq: V2_LINKS.faq }} />
 
       <main>
-        <section className="gutter-x grid gap-10 pb-20 pt-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16 xl:gap-24">
-          <ProductGallery slides={details.gallery} tag={product.tag} />
+        {/* Gallery left (thumbnails down the side), product panel right */}
+        <section className="gutter-x grid gap-8 pb-20 pt-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
+          {/* Sits still in the page (no sticky), sized to fit the screen, so it never shifts
+              when the details scroll or the dropdowns open. */}
+          <div className="min-w-0 lg:h-[calc(100svh-108px)] lg:self-start">
+            <ProductGallery slides={details.gallery} tag={product.tag} />
+          </div>
 
-          <div className="flex flex-col gap-8 lg:sticky lg:top-6 lg:self-start lg:pt-6">
-            <div className="flex flex-col gap-3">
-              {product.status && <p className="type-label text-ink-50">{product.status}</p>}
-              <h1 className="font-sans text-[32px] leading-[1.1] md:text-[40px]">{product.name}</h1>
-              <p className="type-price text-[18px]">
-                {new Intl.NumberFormat("en-GB", { style: "currency", currency: price.currencyCode }).format(price.amount)}
-              </p>
-              <p className="type-small text-ink-88">
-                <span className="underline underline-offset-2">Shipping</span> calculated at checkout.
-              </p>
+          <div className="flex flex-col gap-8 lg:pt-4">
+            <div className="flex flex-col gap-4">
+              <a href="#reviews" className="type-small flex items-center gap-2 text-ink-72 hover:text-ink">
+                <Image src="/v2/stars.svg" alt="5 out of 5 stars" width={88} height={15} />
+                Loved by our first tasters
+              </a>
+              <h1 className="font-sans text-[32px] leading-[1.1] md:text-[44px]">{product.name}</h1>
+              {product.status && (
+                <div>
+                  <Tag tone="light">{product.status} · 8 packs of 30g</Tag>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col gap-4">
-              {details.paragraphs.map((p) => (
-                <p key={p} className="type-body-lg text-ink-88">
-                  {p}
-                </p>
-              ))}
-            </div>
-
-            <ProductBenefits benefits={details.benefits} stats={details.stats} />
-
-            <div className="flex flex-col gap-3">
-              <p className="type-mono">8 packs of 30g</p>
-              <hr className="border-0 border-t border-ink-10" />
+              <p className="type-body text-ink-88">{details.description}</p>
+              <ul className="grid justify-start gap-x-10 gap-y-1 sm:grid-cols-[auto_auto]">
+                {CLAIMS.map((c) => (
+                  <li key={c} className="type-body flex items-center gap-3 text-ink">
+                    <span aria-hidden className="text-[14px]">✓</span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <ProductPurchase
@@ -99,59 +118,100 @@ export default async function ProductPage({ params, searchParams }: Params) {
               sellingPlans={shopify?.sellingPlans ?? []}
             />
 
-
-            <div>
-              <Accordion title="Ingredients">
-                {details.ingredients}
-              </Accordion>
+            <div className="border-t border-ink-10">
+              <Accordion title="Ingredients">{details.ingredients}</Accordion>
               <Accordion title="Nutrition">
                 <NutritionTable rows={details.nutrition} />
               </Accordion>
               <Accordion title="Allergens">{ALLERGEN_NOTE}</Accordion>
+              <Accordion title="How to enjoy">
+                Perfect as they are, straight from the bag. Or crumble them over salads and soups for extra crunch. Store
+                in a cool, dry place.
+              </Accordion>
             </div>
           </div>
         </section>
 
-        {/* Figma 1:1205: this product's four ingredients */}
-        <section className="gutter-x flex flex-col items-center gap-10 py-20 md:py-28">
-          <SectionHeading
-            title="Only four ingredients"
-            subtitle={
-              <>
-                We put our ingredients where you can see them.
-                <br />
-                The vegetable is the product.
-              </>
-            }
-          />
-          <div className="grid w-full grid-cols-2 gap-x-2 gap-y-6 lg:grid-cols-4">
-            <IngredientCard label={details.vegetable.label} image={details.vegetable.image} crop={details.vegetable.crop} />
-            <IngredientCard
-              label="Rapeseed Oil"
-              image="/v2/ing-oil.jpg"
-              crop={{ width: 175.26, height: 134.94, left: -10.76, top: -17.45 }}
-              info={INGREDIENT_INFO.oil}
-            />
-            <IngredientCard label="Tapioca Starch" image="/v2/ing-tapioca.jpg" info={INGREDIENT_INFO.tapioca} />
-            <IngredientCard label="Sea Salt" image="/v2/ing-salt.jpg" overlay="rgba(206,207,212,0.5)" />
-          </div>
-        </section>
+        <Ticker items={TICKER} />
 
-        {/* Figma 1:1237 / Lobie "Complete the Collection" */}
-        <section className="gutter-x flex flex-col gap-8 border-t border-ink-10 py-20 md:py-28">
-          <div className="flex flex-col gap-2">
-            <h2 className="type-heading uppercase">Shop Crosps</h2>
-            <p className="type-body max-w-[557px] text-ink-88">
-              Real vegetables transformed into light, crispy, savoury snacks, all while intensifying their natural colour and
-              flavour through the process.
+        <Comparison
+          title={
+            <>
+              A different kind of <SerifAccent>crisp.</SerifAccent>
+            </>
+          }
+          intro="We didn’t want to make another crisp. Here’s how Crosps compares."
+          rows={["Base", "Vegetable content", "Ingredients", "Fibre per 100g"]}
+          columns={[
+            { name: "Potato crisps", values: ["Potato", "Potato only", "3 to 20+", "3.5–6.7g"] },
+            {
+              name: "Crosps",
+              highlight: true,
+              image: product.image,
+              imageAlt: `${product.name} pack`,
+              values: ["Tomato, onion, bell pepper", "88–90% whole veg", "4", "14–27g"],
+            },
+            { name: "Traditional veg crisps", values: ["Usually root vegetables", "60–65% mixed root", "3", "~10–11g"] },
+            { name: "Lentil crisps", values: ["Lentil flour + starches", "28–43% lentil", "5 to 15+", "~1–5g"] },
+          ]}
+        />
+
+        {/* Taste story, with the "why you'll love" points and the ingredients as dropdowns. */}
+        <SplitFeature image={product.hoverImage} alt={`${product.name} in hand`} tone="cream">
+          <h2 className="type-heading text-ink">
+            Why it tastes like <SerifAccent>{veg}.</SerifAccent>
+          </h2>
+          {details.paragraphs.map((p) => (
+            <p key={p} className="type-body text-ink-88">
+              {p}
             </p>
+          ))}
+          <div className="border-t border-ink-10">
+            <Accordion title={`${stat(0)} real ${veg}`}>The vegetable comes first, not potato or corn.</Accordion>
+            <Accordion title="Gently crisped">A gentle bake keeps the flavour, the colour and the crunch.</Accordion>
+            <Accordion title={`${stat(2)} fibre per 100g`}>High in fibre, with zero added sugar.</Accordion>
+            <Accordion title="Only four ingredients">
+              <div className="flex flex-col gap-4">
+                <IngredientChecklist
+                  items={[
+                    { name: details.vegetable.label, note: `${stat(0)} of every bag` },
+                    { name: "Rapeseed oil", note: "naturally low in saturated fat, with a clean, neutral taste" },
+                    { name: "Tapioca starch", note: "helps each slice crisp evenly" },
+                    { name: "Sea salt", note: "just a touch" },
+                  ]}
+                />
+                <p className="type-small text-ink-72">Full ingredient list: {details.ingredients}</p>
+              </div>
+            </Accordion>
           </div>
-          <MobileCarousel label="More flavours" className="md:grid-cols-2 md:gap-5 lg:max-w-[66%]">
-            {others.map((p: Product) => (
-              <ProductCard key={p.slug} {...p} href={V2_LINKS.product(p.slug)} />
+        </SplitFeature>
+
+        <ReviewsMarquee />
+
+        {/* You may also like */}
+        <section className="gutter-x flex flex-col gap-8 py-20 md:py-28">
+          <RowHeader title="You may also like" action={<PillLink href={V2_LINKS.shop}>Shop all →</PillLink>} />
+          <MobileCarousel label="More flavours" className="md:grid-cols-3 md:gap-5">
+            {others.map((p: Product, n) => (
+              <div key={p.slug} className="flex flex-col gap-4">
+                <ProductCard {...p} href={V2_LINKS.product(p.slug)} />
+                <QuickAdd
+                  href={V2_LINKS.product(p.slug)}
+                  variantId={otherVariants[n]?.variantId ?? null}
+                  available={otherVariants[n] ? otherVariants[n].availableForSale : true}
+                />
+              </div>
             ))}
           </MobileCarousel>
         </section>
+
+        <FaqBand
+          groups={FAQ_GROUPS.filter((g) => g.id !== "stockists")}
+          image="/v2/founder.jpg"
+          alt="Crosps founder"
+          href={V2_LINKS.faq}
+        />
+        <InstagramFeed />
       </main>
 
       <Footer links={V2_FOOTER_LINKS} />

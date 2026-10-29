@@ -35,7 +35,7 @@ export function ReviewsMarquee({
   );
 
   return (
-    <section aria-label="Reviews" className="flex flex-col gap-10 bg-white py-16 md:py-20">
+    <section id="reviews" aria-label="Reviews" className="flex scroll-mt-6 flex-col gap-10 bg-white py-16 md:py-20">
       <div className="gutter-x flex flex-col items-center gap-2 text-center">
         {/* Stars on their own line above the heading. */}
         <Stars width={132} className="mb-3" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { sendContact } from "@/app/v2/contact-actions";
 import { Button } from "./Button";
 
 export type ContactTopic = "stock" | "hello";
@@ -11,6 +12,7 @@ const TOPICS: { id: ContactTopic; title: string; body: string }[] = [
 ];
 
 const BUSINESS_TYPES = ["Shop or deli", "Café", "Restaurant or bar", "Hotel", "Office", "Other"];
+const VOLUMES = ["3–10 cases", "10–25 cases", "25–50 cases", "50+ cases or pallets", "Not sure yet"];
 
 const FIELD = "type-body w-full border-b border-ink-10 bg-transparent pb-2 pt-1 text-ink placeholder:text-ink-50 outline-none transition-colors focus:border-ink";
 
@@ -40,14 +42,18 @@ export function ContactForm({
   onSubmit,
   submitLabel,
   note,
+  lockTopic = false,
 }: {
   initialTopic?: ContactTopic;
+  lockTopic?: boolean; // hide the topic picker (e.g. the trade page)
   onSubmit?: (topic: ContactTopic, data: Record<string, string>) => void;
   submitLabel?: string;
   note?: React.ReactNode;
 }) {
   const [topic, setTopic] = useState<ContactTopic>(initialTopic);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   if (sent) {
     return (
@@ -67,15 +73,24 @@ export function ContactForm({
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-        onSubmit?.(topic, data);
-        setSent(true);
+        if (onSubmit) {
+          onSubmit(topic, data);
+          setSent(true);
+          return;
+        }
+        setSending(true);
+        setError(null);
+        const r = await sendContact({ ...data, topic });
+        setSending(false);
+        if (r.ok) setSent(true);
+        else setError(r.error);
       }}
       className="flex flex-col gap-10"
     >
-      <fieldset className="flex flex-col gap-3">
+      <fieldset className={`flex flex-col gap-3 ${lockTopic ? "hidden" : ""}`}>
         <legend className="type-label mb-3 text-ink">What’s it about?</legend>
         <div className="grid gap-3 sm:grid-cols-2">
           {TOPICS.map((t) => (
@@ -134,6 +149,18 @@ export function ContactForm({
             <Field label="Town or city" required>
               {(id) => <input id={id} name="city" required autoComplete="address-level2" placeholder="e.g. London" className={FIELD} />}
             </Field>
+            <Field label="Expected order size">
+              {(id) => (
+                <select id={id} name="volume" defaultValue="" className={`${FIELD} cursor-pointer appearance-none`}>
+                  <option value="" disabled>
+                    Choose one
+                  </option>
+                  {VOLUMES.map((v) => (
+                    <option key={v}>{v}</option>
+                  ))}
+                </select>
+              )}
+            </Field>
             <Field label="Website or Instagram">
               {(id) => <input id={id} name="website" placeholder="@yourshop" className={FIELD} />}
             </Field>
@@ -154,8 +181,28 @@ export function ContactForm({
         )}
       </Field>
 
+      {/* Honeypot for bots: hidden from people and screen readers. */}
+      <input type="text" name="company_url" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
+
       <div className="flex flex-col items-start gap-4">
-        <Button type="submit">{submitLabel ?? (topic === "stock" ? "Send enquiry" : "Send message")}</Button>
+        <Button type="submit" disabled={sending}>
+          {sending ? "Sending…" : (submitLabel ?? (topic === "stock" ? "Send enquiry" : "Send message"))}
+        </Button>
+        {error && (
+          <p role="alert" className="type-body text-tomato">
+            {error === "fallback" ? (
+              <>
+                Sorry, your message didn’t send. Please email us at{" "}
+                <a href="mailto:jade@eatcrosps.com" className="underline underline-offset-4">
+                  jade@eatcrosps.com
+                </a>
+                .
+              </>
+            ) : (
+              error
+            )}
+          </p>
+        )}
         {note && <p className="type-body text-ink-50">{note}</p>}
       </div>
     </form>

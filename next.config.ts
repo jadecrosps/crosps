@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Ship the password-protected trade sell sheet with its download route.
+  outputFileTracingIncludes: { "/v2/trade/sell-sheet": ["./trade-assets/**/*"] },
   images: {
     remotePatterns: [
       {

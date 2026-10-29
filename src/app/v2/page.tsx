@@ -24,8 +24,8 @@ import {
 } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
-  title: "Crosps | A new world of vegetable crisps",
-  description: "Real vegetables, transformed into light, crisp, deeply savoury slices that keep their natural colour, character and flavour.",
+  title: "Crosps | Real Vegetables, Reimagined.",
+  description: "Discover Crosps vegetable crisps. Made with just four ingredients, high in fibre, plant based and gluten-free. Real vegetables, reimagined.",
   robots: { index: false, follow: false },
 };
 
