@@ -25,7 +25,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Crosps | Real Vegetables, Reimagined.",
-  description: "Discover Crosps vegetable crisps. Made with just four ingredients, high in fibre, vegan and gluten-free. Real vegetables, reimagined.",
+  description: "Discover Crosps vegetable crisps. Made with just four ingredients, high in fibre, plant based and gluten-free. Real vegetables, reimagined.",
   robots: { index: false, follow: false },
 };
 
