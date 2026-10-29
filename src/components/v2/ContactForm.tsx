@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { sendContact } from "@/app/v2/contact-actions";
 import { Button } from "./Button";
 
 export type ContactTopic = "stock" | "hello";
@@ -48,6 +49,8 @@ export function ContactForm({
 }) {
   const [topic, setTopic] = useState<ContactTopic>(initialTopic);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   if (sent) {
     return (
@@ -67,11 +70,20 @@ export function ContactForm({
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-        onSubmit?.(topic, data);
-        setSent(true);
+        if (onSubmit) {
+          onSubmit(topic, data);
+          setSent(true);
+          return;
+        }
+        setSending(true);
+        setError(null);
+        const r = await sendContact({ ...data, topic });
+        setSending(false);
+        if (r.ok) setSent(true);
+        else setError(r.error);
       }}
       className="flex flex-col gap-10"
     >
@@ -154,8 +166,28 @@ export function ContactForm({
         )}
       </Field>
 
+      {/* Honeypot for bots: hidden from people and screen readers. */}
+      <input type="text" name="company_url" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
+
       <div className="flex flex-col items-start gap-4">
-        <Button type="submit">{submitLabel ?? (topic === "stock" ? "Send enquiry" : "Send message")}</Button>
+        <Button type="submit" disabled={sending}>
+          {sending ? "Sending…" : (submitLabel ?? (topic === "stock" ? "Send enquiry" : "Send message"))}
+        </Button>
+        {error && (
+          <p role="alert" className="type-body text-tomato">
+            {error === "fallback" ? (
+              <>
+                Sorry, your message didn’t send. Please email us at{" "}
+                <a href="mailto:jade@eatcrosps.com" className="underline underline-offset-4">
+                  jade@eatcrosps.com
+                </a>
+                .
+              </>
+            ) : (
+              error
+            )}
+          </p>
+        )}
         {note && <p className="type-body text-ink-50">{note}</p>}
       </div>
     </form>
