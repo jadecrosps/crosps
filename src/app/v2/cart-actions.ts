@@ -2,15 +2,27 @@
 
 import { cookies } from "next/headers";
 import { CART_FIELDS, shopifyConfigured, storefront, toCart, type Cart, type RawCart } from "@/lib/shopify";
+import { isTradeUnlocked } from "@/lib/trade-auth";
 
 // Cart server actions for the V2 pages. The Shopify cart id lives in a cookie;
 // checkout itself happens on Shopify's hosted checkout (cart.checkoutUrl).
 
 const COOKIE = "crosps_cart";
 
-export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "not_configured" | "failed" | "sold_out" };
+export type CartResult = { ok: true; cart: Cart | null } | { ok: false; error: "not_configured" | "failed" | "sold_out" | "trade_only" };
 
 class SoldOut extends Error {}
+class TradeOnly extends Error {}
+
+// Trade cases (Shopify tag "trade") can only be added by logged-in stockists,
+// whatever variant id the browser sends.
+async function assertNotTrade(variantId: string) {
+  const { node } = await storefront<{ node: { product?: { tags: string[] } } | null }>(
+    `query Variant($id: ID!) { node(id: $id) { ... on ProductVariant { product { tags } } } }`,
+    { id: variantId },
+  );
+  if (node?.product?.tags.includes("trade") && !(await isTradeUnlocked())) throw new TradeOnly();
+}
 
 type Warning = { code: string };
 
@@ -32,6 +44,7 @@ async function run(fn: () => Promise<Cart | null>): Promise<CartResult> {
     return { ok: true, cart: await fn() };
   } catch (err) {
     if (err instanceof SoldOut) return { ok: false, error: "sold_out" };
+    if (err instanceof TradeOnly) return { ok: false, error: "trade_only" };
     console.error("[cart]", err);
     return { ok: false, error: "failed" };
   }
@@ -52,6 +65,7 @@ export async function getCart(): Promise<CartResult> {
 
 export async function addToCart(variantId: string, quantity: number, sellingPlanId?: string): Promise<CartResult> {
   return run(async () => {
+    await assertNotTrade(variantId);
     const line = { merchandiseId: variantId, quantity, ...(sellingPlanId ? { sellingPlanId } : {}) };
     const id = await cartId();
     if (id) {

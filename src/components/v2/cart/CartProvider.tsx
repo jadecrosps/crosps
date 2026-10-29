@@ -28,6 +28,7 @@ const ERRORS = {
   not_configured: "Checkout isn’t connected yet. It will be once the Shopify store is linked.",
   failed: "Something went wrong. Please try again.",
   sold_out: "Sorry, this is sold out right now.",
+  trade_only: "That product is only available to Crosps stockists.",
 };
 
 // Cart with one line's quantity changed, priced from its current unit price, so the
