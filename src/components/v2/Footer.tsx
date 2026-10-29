@@ -5,7 +5,7 @@ import { EmailCapture } from "./EmailCapture";
 export type FooterLinks = Partial<Record<string, string>>;
 
 const COLUMNS = [
-  { title: "Explore", links: ["FAQ", "Stockists", "Shipping & Returns"] },
+  { title: "Explore", links: ["FAQ", "Trade", "Shipping & Returns"] },
   { title: "Legal", links: ["Terms of Service", "Refund Policy", "Privacy Policy", "Cookie Settings"] },
   { title: "Follow", links: ["Instagram", "TikTok", "Contact"] },
 ];

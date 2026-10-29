@@ -12,6 +12,7 @@ const TOPICS: { id: ContactTopic; title: string; body: string }[] = [
 ];
 
 const BUSINESS_TYPES = ["Shop or deli", "Café", "Restaurant or bar", "Hotel", "Office", "Other"];
+const VOLUMES = ["3–10 cases", "10–25 cases", "25–50 cases", "50+ cases or pallets", "Not sure yet"];
 
 const FIELD = "type-body w-full border-b border-ink-10 bg-transparent pb-2 pt-1 text-ink placeholder:text-ink-50 outline-none transition-colors focus:border-ink";
 
@@ -41,8 +42,10 @@ export function ContactForm({
   onSubmit,
   submitLabel,
   note,
+  lockTopic = false,
 }: {
   initialTopic?: ContactTopic;
+  lockTopic?: boolean; // hide the topic picker (e.g. the trade page)
   onSubmit?: (topic: ContactTopic, data: Record<string, string>) => void;
   submitLabel?: string;
   note?: React.ReactNode;
@@ -87,7 +90,7 @@ export function ContactForm({
       }}
       className="flex flex-col gap-10"
     >
-      <fieldset className="flex flex-col gap-3">
+      <fieldset className={`flex flex-col gap-3 ${lockTopic ? "hidden" : ""}`}>
         <legend className="type-label mb-3 text-ink">What’s it about?</legend>
         <div className="grid gap-3 sm:grid-cols-2">
           {TOPICS.map((t) => (
@@ -145,6 +148,18 @@ export function ContactForm({
             </Field>
             <Field label="Town or city" required>
               {(id) => <input id={id} name="city" required autoComplete="address-level2" placeholder="e.g. London" className={FIELD} />}
+            </Field>
+            <Field label="Expected order size">
+              {(id) => (
+                <select id={id} name="volume" defaultValue="" className={`${FIELD} cursor-pointer appearance-none`}>
+                  <option value="" disabled>
+                    Choose one
+                  </option>
+                  {VOLUMES.map((v) => (
+                    <option key={v}>{v}</option>
+                  ))}
+                </select>
+              )}
             </Field>
             <Field label="Website or Instagram">
               {(id) => <input id={id} name="website" placeholder="@yourshop" className={FIELD} />}

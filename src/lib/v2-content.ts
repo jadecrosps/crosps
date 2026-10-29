@@ -152,6 +152,7 @@ export const V2_LINKS = {
   about: "/v2/about",
   faq: "/v2/faq",
   contact: "/v2/contact",
+  trade: "/v2/trade",
   product: (slug: string) => `/v2/products/${slug}`,
   policy: (handle: string) => `/v2/policies/${handle}`,
 };
@@ -315,7 +316,7 @@ export const ALLERGEN_NOTE =
 // Footer link targets shared by every V2 page.
 export const V2_FOOTER_LINKS = {
   FAQ: V2_LINKS.faq,
-  Stockists: `${V2_LINKS.contact}?topic=stock`,
+  Trade: V2_LINKS.trade,
   "Shipping & Returns": V2_LINKS.policy("shipping-policy"),
   "Refund Policy": V2_LINKS.policy("refund-policy"),
   "Terms of Service": V2_LINKS.policy("terms-of-service"),

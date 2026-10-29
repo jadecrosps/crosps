@@ -10,7 +10,7 @@ import { PRODUCTS, STOCKISTS, type Product } from "@/lib/v2-content";
 
 // Homepage sections laid out after moremud.co, in the Crosps design system.
 
-type Links = { shop: string; about: string; contact: string; product: (slug: string) => string };
+type Links = { shop: string; about: string; contact: string; trade: string; product: (slug: string) => string };
 
 // Header row used by every list section: title left, small action right.
 export function RowHeader({ title, action }: { title: React.ReactNode; action?: React.ReactNode }) {
@@ -142,7 +142,7 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
 export function SocialProof({ links }: { links: Links }) {
   return (
     <section className="gutter-x flex flex-col gap-8 py-20 md:py-32">
-      <RowHeader title="Found in good places" action={<TextLink href={`${links.contact}?topic=stock`}>Want to stock Crosps?</TextLink>} />
+      <RowHeader title="Found in good places" action={<TextLink href={links.trade}>Want to stock Crosps?</TextLink>} />
       <div className="flex flex-wrap items-end justify-center gap-10 border-y border-ink-10 py-10 md:gap-14">
         {STOCKISTS.map((s) => (
           <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />

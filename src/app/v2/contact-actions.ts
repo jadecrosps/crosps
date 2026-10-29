@@ -14,6 +14,7 @@ const LABELS: Record<string, string> = {
   business: "Business name",
   business_type: "Type of business",
   city: "Town or city",
+  volume: "Expected order size",
   website: "Website or Instagram",
   message: "Message",
 };
