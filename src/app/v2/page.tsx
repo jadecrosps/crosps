@@ -25,8 +25,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Crosps | Real Vegetables, Reimagined.",
-  description:
-    "We believe better snacks start with better ingredients. That’s why we make vegetable crisps using just four carefully considered ingredients. High in fibre, vegan, gluten-free and non-HFSS, Crosps brings together ingredient integrity with an uncompromising approach to taste. Made to change the way we snack.",
+  description: "Vegetable crisps made with just four ingredients. High in fibre, plant based, gluten-free. Made to change the way we snack.",
   robots: { index: false, follow: false },
 };
 
