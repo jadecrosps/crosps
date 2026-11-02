@@ -10,15 +10,17 @@ export function CroppedImage({
   crop,
   sizes,
   className = "",
+  loading,
 }: {
   src: string;
   alt: string;
   crop?: Crop;
   sizes: string;
   className?: string;
+  loading?: "eager" | "lazy";
 }) {
   if (!crop) {
-    return <Image src={src} alt={alt} fill sizes={sizes} className={`object-cover ${className}`} />;
+    return <Image src={src} alt={alt} fill sizes={sizes} loading={loading} className={`object-cover ${className}`} />;
   }
 
   return (
@@ -27,7 +29,7 @@ export function CroppedImage({
         className="absolute"
         style={{ width: `${crop.width}%`, height: `${crop.height}%`, left: `${crop.left}%`, top: `${crop.top}%` }}
       >
-        <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+        <Image src={src} alt={alt} fill sizes={sizes} loading={loading} className="object-cover" />
       </div>
     </div>
   );

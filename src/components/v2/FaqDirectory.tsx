@@ -2,18 +2,22 @@
 
 import { useEffect, useId, useMemo, useState } from "react";
 import Link from "next/link";
+import { TextLink } from "./Button";
+import { withAllergens } from "./Allergens";
 
 export type FaqGroup = { id: string; title: string; items: { question: string; answer: string }[] };
 
 function PlusMinus({ open }: { open: boolean }) {
   return (
-    <span aria-hidden className="relative size-3 shrink-0">
-      <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
-      <span
-        className={`absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current transition-transform duration-300 ${
-          open ? "scale-y-0" : "scale-y-100"
-        }`}
-      />
+    <span aria-hidden className="relative flex size-6 shrink-0 items-center justify-center">
+      <span className="relative size-2.5">
+        <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
+        <span
+          className={`absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current transition-transform duration-300 ${
+            open ? "scale-y-0" : "scale-y-100"
+          }`}
+        />
+      </span>
     </span>
   );
 }
@@ -44,14 +48,14 @@ function FaqItem({ question, answer, defaultOpen = false }: { question: string; 
         className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <p className="type-body max-w-[640px] pb-6 text-ink-88">{answer}</p>
+          <p className="type-body max-w-[640px] pb-6 text-ink-88">{withAllergens(answer)}</p>
         </div>
       </div>
     </div>
   );
 }
 
-// Searchable FAQ: sticky category nav + search on the left, every group listed on the right.
+// Searchable FAQ: sticky search + large category nav on the left (after moremud.co), every group listed on the right.
 export function FaqDirectory({
   groups,
   searchPlaceholder = "Try “What are Crosps made of?”",
@@ -93,7 +97,7 @@ export function FaqDirectory({
 
   return (
     <div className="flex flex-col gap-10 lg:flex-row lg:gap-0">
-      <aside className="lg:w-[300px] lg:shrink-0 lg:border-r lg:border-ink-10 lg:pr-8">
+      <aside className="lg:w-[360px] lg:shrink-0 lg:pr-10">
         <div className="flex flex-col gap-8 lg:sticky lg:top-8">
           <div>
             <label htmlFor={searchId} className="sr-only">
@@ -109,7 +113,7 @@ export function FaqDirectory({
             />
           </div>
           <nav aria-label="FAQ categories" className="-mx-5 overflow-x-auto px-5 lg:mx-0 lg:overflow-visible lg:px-0">
-            <ul className="flex gap-5 lg:flex-col lg:gap-3">
+            <ul className="flex gap-5 lg:flex-col lg:gap-4">
               {groups.map((g) => {
                 const available = filtered.some((f) => f.id === g.id);
                 return (
@@ -117,7 +121,7 @@ export function FaqDirectory({
                     <a
                       href={`#faq-${g.id}`}
                       aria-current={active === g.id ? "true" : undefined}
-                      className={`type-small whitespace-nowrap transition-colors ${
+                      className={`type-small whitespace-nowrap transition-colors lg:font-sans lg:text-[20px] lg:leading-[1.2] ${
                         !available ? "pointer-events-none text-ink-10" : active === g.id ? "text-ink" : "text-ink-50 hover:text-ink"
                       }`}
                     >
@@ -128,16 +132,15 @@ export function FaqDirectory({
               })}
             </ul>
           </nav>
-          <div className="hidden flex-col gap-3 border-t border-ink-10 pt-6 lg:flex">
-            <p className="type-small text-ink-50">Still have a question?</p>
-            <Link href={contactHref} className="type-small text-ink underline underline-offset-4 hover:text-ink-72">
-              Contact us
-            </Link>
+          <div className="mt-4 border-t border-ink-10 pt-8">
+            <TextLink href={contactHref} underline={false}>
+              Ask us a question
+            </TextLink>
           </div>
         </div>
       </aside>
 
-      <div className="flex min-w-0 flex-1 flex-col gap-14 lg:pl-8">
+      <div className="flex min-w-0 flex-1 flex-col gap-14">
         {filtered.length === 0 && (
           <p className="type-body text-ink-72">
             No answers for “{query}”.{" "}

@@ -12,7 +12,10 @@ import { IngredientCard, VegetableIngredientCard } from "@/components/v2/Ingredi
 import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
 import { StorySection } from "@/components/v2/StorySection";
-import { FaqDirectory, type FaqGroup } from "@/components/v2/FaqDirectory";
+import { FaqDirectory } from "@/components/v2/FaqDirectory";
+import { Accordion } from "@/components/v2/Accordion";
+import { IngredientChecklist, SplitFeature } from "@/components/v2/product/ProductSections";
+import { PRODUCTS, TICKER, FAQ_GROUPS, STOCKISTS, INGREDIENT_INFO } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
   title: "Design System | Crosps",
@@ -46,7 +49,7 @@ const TYPE = [
   { name: "Body large", cls: "type-body-lg", spec: "Saans 18 / 1.5", sample: "Real vegetables, transformed into light, crisp, deeply savoury slices that keep their natural colour, character and flavour." },
   { name: "Body", cls: "type-body", spec: "Saans 16 / 1.5", sample: "Three vegetables. One first drop. Join the list for early access." },
   { name: "Small", cls: "type-small", spec: "Saans 14 / 1.2", sample: "Copyright ©2026 Crosps. All Rights Reserved" },
-  { name: "Nav", cls: "type-nav", spec: "Saans 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
+  { name: "Nav", cls: "type-nav", spec: "Saans Mono 14 / 1.5 · uppercase", sample: "Shop  About  FAQ" },
   { name: "Button", cls: "type-button", spec: "Saans 16 / 1 · +0.3% tracking", sample: "Shop the collection" },
   { name: "Label", cls: "type-label", spec: "Saans Mono 12 / 1.5 · uppercase", sample: "8×30g bags" },
   { name: "Mono", cls: "type-mono", spec: "Saans Mono 14 / 1.2 · uppercase", sample: "Anne-Marie, London" },
@@ -55,102 +58,12 @@ const TYPE = [
 
 const SPACING = [8, 16, 24, 40, 56, 64, 80];
 
-const PRODUCTS = [
-  { name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
-  { name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags", status: "Pre order" },
-  { name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags", status: "Pre order" },
-];
-
-const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
-
-// Current eatcrosps.com/faq answers, grouped, plus allergens.
-const FAQ_GROUPS: FaqGroup[] = [
-  {
-    id: "ingredients",
-    title: "Ingredients & Nutrition",
-    items: [
-      {
-        question: "What are Crosps made of?",
-        answer:
-          "Crosps are vegetable crisps made from just four ingredients: the vegetable itself, oil, tapioca starch and a touch of sea salt. Just simple, recognisable ingredients.",
-      },
-      {
-        question: "Are your products vegan?",
-        answer:
-          "All Crosps flavours are 100% plant-based. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
-      },
-      {
-        question: "Do Crosps contain any allergens?",
-        answer:
-          "No. Crosps contain no allergens. They are packed in a facility which also handles cereals containing gluten, peanuts, other nuts, sesame, egg and milk.",
-      },
-      {
-        question: "Can kids eat Crosps?",
-        answer:
-          "Crosps are made from simple, real ingredients and are a source of fibre. They’re a snack the whole family can enjoy. As with any snack, we recommend them as part of a balanced diet.",
-      },
-    ],
-  },
-  {
-    id: "product",
-    title: "The Product",
-    items: [
-      {
-        question: "How are they so crunchy?",
-        answer:
-          "We use a gentle baking process that crisps the vegetables without excess oil. Lower heat helps preserve nutrients and flavour while still giving you that satisfying crunch you expect from a great crisp.",
-      },
-      {
-        question: "What makes Crosps different from normal crisps?",
-        answer:
-          "Crosps start with real vegetables as the main ingredient, not potato or corn. We use up to 50% less oil, keep the good stuff (fibre, nutrients), and let the natural flavour of the veg lead. No artificial flavours or unnecessary additives.",
-      },
-    ],
-  },
-  {
-    id: "ordering",
-    title: "Ordering",
-    items: [
-      {
-        question: "Can I order a single pack?",
-        answer:
-          "We’re only launching with our pack of 8 for now. You can find single packs at our stockists, or sign up to our mailing list to hear where they’re available next.",
-      },
-    ],
-  },
-  {
-    id: "stockists",
-    title: "Stockists",
-    items: [
-      {
-        question: "Where can I buy Crosps?",
-        answer:
-          "We’re launching soon. Join our mailing list or follow us on social for stockist updates and where to find Crosps near you.",
-      },
-    ],
-  },
-];
-
-const STOCKISTS = [
-  { src: "/v2/stockist-farmerj.png", alt: "Farmer J", w: 134, h: 76 },
-  { src: "/v2/stockist-superette.png", alt: "Superette", w: 167, h: 50 },
-  { src: "/v2/stockist-fenwick.png", alt: "Fenwick", w: 150, h: 76 },
-  { src: "/v2/stockist-wholefoods.png", alt: "Whole Foods Market", w: 76, h: 76 },
-];
-
-// Tapioca copy is a draft, to be confirmed.
-const INGREDIENT_INFO = {
-  oil: "We use non-hydrogenated rapeseed oil, which is naturally low in saturated fat and has a clean, neutral taste, so the vegetable stays the main flavour.",
-  tapioca: "A light starch from the cassava root. It helps each slice crisp evenly, and it’s naturally gluten free.",
-};
-
 const QUESTIONS = [
   "FAQ: 8 questions in 4 categories so far. Send more (shipping, storage, shelf life) whenever you have them.",
   "Contact form: where should messages go? Options: a shared inbox (e.g. hello@eatcrosps.com), Klaviyo, or both. Until then the form shows a thank-you but sends nothing.",
   "The Tapioca Starch tooltip text is my draft. Send me the wording you want, and say if Sea Salt and the vegetables should get one too.",
   "Product descriptors are 16px on one card and 18px on others. I’ve used 16px at 50% ink. OK?",
   "Mobile designs: not yet. Mobile sizes here are my proposal until they arrive.",
-  "Onion close-up photo for the ingredients card: to follow. The Onion tab shows the tomato photo until then.",
 ];
 
 function Section({ n, title, children, note }: { n: number; title: string; children: React.ReactNode; note?: string }) {
@@ -174,7 +87,7 @@ export default function DesignSystemPage() {
   return (
     <main className="bg-white text-ink">
       <header className="flex flex-col gap-6 px-5 pb-14 pt-16 md:px-10">
-        <Image src="/v2/logo-ink.svg" alt="Crosps" width={140} height={32} />
+        <Image src="/v2/crosps-logo-black.svg" alt="Crosps" width={314} height={76} className="h-[34px] w-auto" />
         <h1 className="type-display max-w-[900px]">
           Design system <SerifAccent>v2</SerifAccent>
         </h1>
@@ -192,7 +105,7 @@ export default function DesignSystemPage() {
           </Button>
         </div>
         <nav className="type-small flex flex-wrap gap-x-4 gap-y-2 text-ink-72">
-          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "FAQ", "Sections", "Open questions"].map(
+          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "FAQ", "Sections", "Split feature", "Open questions"].map(
             (label, i) => (
               <a key={label} href={`#s${i + 1}`} className="hover:text-ink">
                 {i + 1}. {label}
@@ -345,8 +258,9 @@ export default function DesignSystemPage() {
           <ReviewCard
             quote="The tomato chips were delicious! Would pair extremely well with a crisp white wine in the summer!"
             author="Anne-Marie, London"
+            rating={5}
           />
-          <ReviewCard quote="Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!" author="Orla, Dublin" />
+          <ReviewCard quote="Very hard to pick one but tomatoes 🍅 are my winner. LOVE LOVE LOVE them!" author="Orla, Dublin" rating={5} />
         </div>
       </Section>
 
@@ -361,9 +275,9 @@ export default function DesignSystemPage() {
           <VegetableIngredientCard
             options={[
               { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
-              { label: "Onion", image: "/v2/ing-tomato.jpg", colour: "var(--color-onion)" },
+              { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
               {
-                label: "Peppers",
+                label: "Pepper",
                 image: "/v2/ing-pepper.jpg",
                 crop: { width: 128.33, height: 136.89, left: 0.01, top: -18.45 },
                 colour: "var(--color-pepper)",
@@ -493,7 +407,34 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={14} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
+      <Section n={14} title="Split feature" note="Half photo, half text, edge to edge. Text sits on cream or white, and the photo can go on either side. Not on the product pages for now.">
+        <div className="-mx-5 md:-mx-10">
+          <SplitFeature image="/v2/hover-tomato.jpg" alt="Tomato Chips in hand" tone="cream">
+            <h2 className="type-heading text-ink">
+              Why it tastes like <SerifAccent>tomato.</SerifAccent>
+            </h2>
+            <p className="type-body text-ink-88">
+              Gently crisped to preserve their goodness, these vibrant slices pack all the character of a tangy, delicious tomato, with a crispy twist.
+            </p>
+            <div className="border-t border-ink-10">
+              <Accordion title="88% real tomato">The vegetable comes first, not potato or corn.</Accordion>
+              <Accordion title="14g fibre per 100g">High in fibre, with zero added sugar.</Accordion>
+              <Accordion title="Only four ingredients">
+                <IngredientChecklist
+                  items={[
+                    { name: "Tomato", note: "88% of every bag" },
+                    { name: "Rapeseed oil", note: "naturally low in saturated fat, with a clean, neutral taste" },
+                    { name: "Tapioca starch", note: "helps each slice crisp evenly" },
+                    { name: "Sea salt", note: "just a touch" },
+                  ]}
+                />
+              </Accordion>
+            </div>
+          </SplitFeature>
+        </div>
+      </Section>
+
+      <Section n={15} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
         <ol className="flex max-w-[760px] list-decimal flex-col gap-4 pl-5">
           {QUESTIONS.map((q) => (
             <li key={q} className="type-body text-ink-88">

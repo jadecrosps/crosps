@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { saans, daVinci, saansMono } from "@/lib/fonts";
 import { Agentation } from "agentation";
 import { KlaviyoScripts } from "@/components/KlaviyoScripts";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({
         {/* Klaviyo onsite tracking + popup loader — the popup form itself is
             configured in Klaviyo's dashboard. */}
         <KlaviyoScripts />
+        <GoogleAnalytics />
       </body>
     </html>
   );

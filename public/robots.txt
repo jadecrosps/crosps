@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /crosps-data-sheet.pdf
+Disallow: /design-system
+Disallow: /api/
+
+Sitemap: https://eatcrosps.com/sitemap.xml

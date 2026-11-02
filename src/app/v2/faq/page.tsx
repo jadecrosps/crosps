@@ -1,0 +1,46 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { Nav } from "@/components/v2/Nav";
+import { Footer } from "@/components/v2/Footer";
+import { FaqDirectory } from "@/components/v2/FaqDirectory";
+import { Button } from "@/components/v2/Button";
+import { FAQ_GROUPS, V2_LINKS, gutterStyle, V2_FOOTER_LINKS } from "@/lib/v2-content";
+
+export const metadata: Metadata = {
+  title: "FAQ | Crosps",
+  description: "Answers about Crosps: ingredients, allergens, ordering and where to buy.",
+};
+
+// V2 FAQ: moremud.co support-centre layout (large category nav,
+// contact panel) around the Crosps searchable list.
+export default async function V2FaqPage({ searchParams }: { searchParams: Promise<{ gutter?: string }> }) {
+  const { gutter } = await searchParams;
+  return (
+    <div className="bg-white text-ink" style={gutterStyle(gutter)}>
+      <Nav tone="dark" links={{ home: V2_LINKS.home, shop: V2_LINKS.shop, about: V2_LINKS.about, faq: V2_LINKS.faq }} />
+      <main className="flex flex-col pb-20 md:pb-32">
+        <h1 className="sr-only">FAQ</h1>
+        <div className="gutter-x pt-12 md:pt-16">
+          <FaqDirectory groups={FAQ_GROUPS} contactHref={V2_LINKS.contact} />
+        </div>
+
+        {/* Contact panel */}
+        <section className="gutter-x pt-20 md:pt-32">
+          <div className="grid overflow-hidden bg-cream md:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
+            <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[420px]">
+              <Image src="/v2/founder.jpg" alt="Jade holding packs of Crosps" fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover object-[50%_20%]" />
+            </div>
+            <div className="flex flex-col items-start justify-center gap-6 p-8 md:p-14">
+              <h2 className="type-heading text-ink">Still have a question?</h2>
+              <p className="type-body max-w-[440px] text-ink-88">
+                Send us a message and we’ll get back to you. Whether it’s about an order, an ingredient or stocking Crosps, we’re happy to help.
+              </p>
+              <Button href={V2_LINKS.contact}>Contact us</Button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer links={V2_FOOTER_LINKS} />
+    </div>
+  );
+}
