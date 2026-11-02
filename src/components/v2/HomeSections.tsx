@@ -116,8 +116,9 @@ export function Ingredients({ links }: { links: HomeLinks }) {
           title="The standard"
           subtitle={
             <>
-              We put our ingredients where you can see them.
-              <br />
+              We put our ingredients where you can see them.{" "}
+              {/* One flowing paragraph on mobile, two lines from md up. */}
+              <br className="hidden md:block" />
               The vegetable is the product. Everything it needs. Nothing it doesn’t.
             </>
           }

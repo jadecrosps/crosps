@@ -18,7 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${saans.variable} ${daVinci.variable} ${saansMono.variable}`}>
+    // data-scroll-behavior: keeps smooth scrolling for in-page links (#shop) but tells Next.js
+    // to jump straight to the top when opening a new page, instead of animating up.
+    <html lang="en" data-scroll-behavior="smooth" className={`${saans.variable} ${daVinci.variable} ${saansMono.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />
