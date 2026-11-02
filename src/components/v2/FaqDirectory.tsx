@@ -3,6 +3,7 @@
 import { useEffect, useId, useMemo, useState } from "react";
 import Link from "next/link";
 import { TextLink } from "./Button";
+import { withAllergens } from "./Allergens";
 
 export type FaqGroup = { id: string; title: string; items: { question: string; answer: string }[] };
 
@@ -47,7 +48,7 @@ function FaqItem({ question, answer, defaultOpen = false }: { question: string; 
         className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <p className="type-body max-w-[640px] pb-6 text-ink-88">{answer}</p>
+          <p className="type-body max-w-[640px] pb-6 text-ink-88">{withAllergens(answer)}</p>
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { SerifAccent } from "@/components/ui/SerifAccent";
-import { Button, TextLink } from "../Button";
+import { Button } from "../Button";
 import { ProductCard } from "../ProductCard";
 import { EmailCapture } from "../EmailCapture";
 import { MobileCarousel } from "../MobileCarousel";
 import { QuickAdd } from "./QuickAdd";
 import { STORY_PARAGRAPHS } from "../StorySection";
-import { PRODUCTS, STOCKISTS, type Product } from "@/lib/v2-content";
+import { PRODUCTS, SHOP_OPEN, type Product } from "@/lib/v2-content";
 
 // Homepage sections laid out after moremud.co, in the Crosps design system.
 
@@ -95,7 +95,7 @@ export function ShopRow({
       <MobileCarousel label="Products" className="md:grid-cols-3 md:gap-5">
         {PRODUCTS.map((p) => (
           <div key={p.slug} className="flex flex-col gap-4">
-            <ProductCard {...p} href={links.product(p.slug)} />
+            <ProductCard {...p} price={SHOP_OPEN ? p.price : undefined} href={links.product(p.slug)} />
             <QuickAdd href={links.product(p.slug)} {...variants[p.slug]} />
           </div>
         ))}
@@ -131,22 +131,30 @@ export function StorySplit({ image, alt, href }: { image: string; alt: string; h
           Our story
         </Button>
       </div>
-      <div className="relative aspect-square w-full">
+      {/* Photo first on mobile, on the right from lg up. */}
+      <div className="relative order-first aspect-square w-full lg:order-none">
         <Image src={image} alt={alt} fill sizes="(max-width: 1024px) 100vw, 820px" className="object-cover" />
       </div>
     </section>
   );
 }
 
-// Stockist logos (reviews now live in ReviewsMarquee).
+// Call for stockists. Stockist logos stay off the site until we've launched with them.
 export function SocialProof({ links }: { links: Links }) {
   return (
-    <section className="gutter-x flex flex-col gap-8 py-20 md:py-32">
-      <RowHeader title="Found in good places" action={<TextLink href={links.trade}>Want to stock Crosps?</TextLink>} />
-      <div className="flex flex-wrap items-end justify-center gap-10 border-y border-ink-10 py-10 md:gap-14">
-        {STOCKISTS.map((s) => (
-          <Image key={s.alt} src={s.src} alt={s.alt} width={s.w} height={s.h} className="object-contain" style={{ height: s.h, width: "auto" }} />
-        ))}
+    <section className="gutter-x py-20 md:py-32">
+      <div className="flex flex-col items-start justify-between gap-8 border-y border-ink-10 py-12 md:flex-row md:items-center md:py-16">
+        <div className="flex max-w-[560px] flex-col gap-3">
+          <h2 className="font-sans text-[28px] leading-[1.1] text-ink md:text-[32px]">
+            Want to stock <SerifAccent>Crosps?</SerifAccent>
+          </h2>
+          <p className="type-body text-ink-88">
+            We’re bringing Crosps to a handful of shops, delis and cafés we love. If you’d like to be one of them, we’d love to hear from you.
+          </p>
+        </div>
+        <Button href={links.trade} className="shrink-0">
+          Become a stockist
+        </Button>
       </div>
     </section>
   );
@@ -174,7 +182,7 @@ export function WaitlistCard() {
           alt="Holding packs of Crosps Onion Chips on a London street"
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[85%_50%] md:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
         <div className="relative flex max-w-[420px] flex-col gap-6 text-white md:max-w-none">

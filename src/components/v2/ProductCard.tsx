@@ -6,7 +6,7 @@ import { CroppedImage, type Crop } from "./CroppedImage";
 export type ProductCardProps = {
   name: string;
   descriptor: string;
-  price: string;
+  price?: string;
   image: string;
   hoverImage?: string;
   hoverCrop?: Crop;
@@ -43,7 +43,7 @@ export function ProductCard({ name, descriptor, price, image, hoverImage, hoverC
       <div className="flex flex-col gap-0.5">
         <h3 className="font-sans text-[18px] leading-[1.2] text-ink">{name}</h3>
         <p className="font-sans text-[16px] leading-[1.2] text-ink-50">{descriptor}</p>
-        <p className="type-price text-ink">{price}</p>
+        {price && <p className="type-price text-ink">{price}</p>}
       </div>
     </article>
   );

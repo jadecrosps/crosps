@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { SerifAccent } from "@/components/ui/SerifAccent";
+import { Tag } from "@/components/v2/Tag";
 import { TRADE, TRADE_FLAVOURS, totalCases, type TradeQuantities } from "@/lib/trade-terms";
 import { requestPalletQuote, tradeCheckout } from "./actions";
 
@@ -84,6 +85,20 @@ export function TradeBasket({ prices }: { prices: Partial<Record<(typeof TRADE_F
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-12">
       <div className="flex flex-col">
+        <div className="flex flex-wrap gap-2 pb-5">
+          {[
+            "Mix any flavours",
+            `Minimum ${TRADE.minCases} cases`,
+            `£${TRADE.smallOrderDelivery.toFixed(2)} delivery under ${TRADE.freeDeliveryFrom} cases`,
+            `Free delivery from ${TRADE.freeDeliveryFrom} cases`,
+            `Pallets from ${TRADE.palletFrom} cases`,
+            `1 layer = ${TRADE.casesPerLayer} cases`,
+          ].map((t) => (
+            <Tag key={t} tone="light">
+              {t}
+            </Tag>
+          ))}
+        </div>
         {TRADE_FLAVOURS.map((f) => (
           <div key={f.slug} className="flex flex-wrap items-center gap-5 border-t border-ink-10 py-5 last:border-b">
             <div className="relative size-[96px] shrink-0 bg-paper">
@@ -106,16 +121,19 @@ export function TradeBasket({ prices }: { prices: Partial<Record<(typeof TRADE_F
             <p className="type-price hidden w-24 text-right sm:block">{gbp(qty[f.slug] * (prices[f.slug] ?? 0))}</p>
           </div>
         ))}
-        <p className="type-small pt-4 text-ink-50">
-          Mix any flavours. Minimum {TRADE.minCases} cases · £{TRADE.smallOrderDelivery.toFixed(2)} delivery under {TRADE.freeDeliveryFrom} cases · free{" "}
-          {TRADE.freeDeliveryFrom}–{TRADE.palletFrom - 1} cases · pallets from {TRADE.palletFrom} cases. A layer is {TRADE.casesPerLayer} cases.
-        </p>
       </div>
 
       <aside className="flex h-fit flex-col gap-5 bg-cream p-6 md:p-8">
-        <p className="type-heading">
-          Your <SerifAccent>order.</SerifAccent>
-        </p>
+        <div className="flex items-baseline justify-between gap-4">
+          <p className="type-heading">
+            Your <SerifAccent>order.</SerifAccent>
+          </p>
+          {cases > 0 && (
+            <button type="button" onClick={() => setQty(EMPTY)} className="type-mono cursor-pointer whitespace-nowrap text-ink-72 underline underline-offset-4 hover:text-ink">
+              Clear all
+            </button>
+          )}
+        </div>
         <dl className="flex flex-col gap-3">
           <div className="flex justify-between">
             <dt className="type-body">

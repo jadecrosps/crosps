@@ -16,6 +16,7 @@ import { getShopifyProduct } from "@/lib/shopify";
 import {
   PRODUCT_DETAILS,
   PRODUCTS,
+  SHOP_OPEN,
   TICKER,
   V2_FOOTER_LINKS,
   V2_LINKS,
@@ -37,7 +38,7 @@ export default async function V2HomePage({ searchParams }: { searchParams: Promi
   const entries = await Promise.all(
     PRODUCTS.map(async (p) => {
       const sp = await getShopifyProduct(PRODUCT_DETAILS[p.slug].shopifyHandle);
-      return [p.slug, { variantId: sp?.variantId ?? null, available: sp ? sp.availableForSale : true }] as const;
+      return [p.slug, { variantId: sp?.variantId ?? null, available: SHOP_OPEN && (sp ? sp.availableForSale : true) }] as const;
     }),
   );
   const variants = Object.fromEntries(entries) as Record<Product["slug"], { variantId: string | null; available: boolean }>;

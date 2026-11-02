@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { NutritionRow, Stat } from "@/lib/v2-content";
 
 // Three benefit lines plus a row of stat tiles.
@@ -30,29 +33,39 @@ export function ProductBenefits({ benefits, stats }: { benefits: string[]; stats
   );
 }
 
-// Back-of-pack nutrition table.
+// Nutrition as a simple list: per 100g by default, with a switch to per serving.
 export function NutritionTable({ rows }: { rows: NutritionRow[] }) {
+  const [perServing, setPerServing] = useState(false);
   return (
-    <table className="type-small w-full">
-      <thead>
-        <tr className="border-b border-ink-10 text-left text-ink-72">
-          <th className="py-2 font-normal">Typical values</th>
-          <th className="py-2 text-right font-normal">Per 100g</th>
-          <th className="py-2 text-right font-normal">Per 15g serving</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr key={r.label} className="border-b border-ink-10">
-            <th scope="row" className={`py-2 text-left font-normal ${r.sub ? "pl-3 text-ink-72" : ""}`}>
-              {r.label}
-            </th>
-            <td className="py-2 text-right">{r.per100}</td>
-            <td className="py-2 text-right">{r.perServing}</td>
-          </tr>
+    <div className="flex flex-col gap-4">
+      <div role="group" aria-label="Show nutrition" className="flex gap-2">
+        {[
+          ["Per 100g", false],
+          ["Per 15g serving", true],
+        ].map(([label, value]) => (
+          <button
+            key={String(label)}
+            type="button"
+            aria-pressed={perServing === value}
+            onClick={() => setPerServing(value as boolean)}
+            className={`type-label cursor-pointer rounded-button border px-3 py-1.5 transition-colors ${
+              perServing === value ? "border-brown bg-brown text-white" : "border-ink-10 text-ink-72 hover:border-ink-50"
+            }`}
+          >
+            {label}
+          </button>
         ))}
-      </tbody>
-      <caption className="caption-bottom pt-2 text-left text-ink-50">Contains 2 servings. Contains naturally occurring sugars.</caption>
-    </table>
+      </div>
+      <dl className="flex flex-col gap-2">
+        {rows.map((r) => (
+          <div key={r.label} className={`type-body flex items-baseline gap-2 ${r.sub ? "pl-4 text-ink-72" : "text-ink"}`}>
+            <dt>{r.label}</dt>
+            <span aria-hidden className="flex-1 border-b border-dotted border-ink-50" />
+            <dd>{perServing ? r.perServing : r.per100}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="type-small text-ink-50">Each 30g bag contains 2 servings. Contains naturally occurring sugars.</p>
+    </div>
   );
 }

@@ -10,10 +10,11 @@ import { Ticker } from "@/components/v2/Ticker";
 import { ReviewsMarquee } from "@/components/v2/ReviewsMarquee";
 import { InstagramFeed } from "@/components/v2/InstagramFeed";
 import { SerifAccent } from "@/components/ui/SerifAccent";
-import { Comparison, FaqBand, IngredientChecklist, SplitFeature } from "@/components/v2/product/ProductSections";
+import { Comparison, FaqBand } from "@/components/v2/product/ProductSections";
 import { QuickAdd } from "@/components/v2/home/QuickAdd";
 import { RowHeader, PillLink } from "@/components/v2/home/HomeLayout";
 import { Accordion } from "@/components/v2/Accordion";
+import { withAllergens } from "@/components/v2/Allergens";
 import { ProductGallery } from "@/components/v2/product/ProductGallery";
 import { ProductPurchase } from "@/components/v2/product/ProductPurchase";
 import { NutritionTable } from "@/components/v2/product/ProductBenefits";
@@ -24,6 +25,7 @@ import {
   TICKER,
   PRODUCT_DETAILS,
   PRODUCTS,
+  SHOP_OPEN,
   V2_LINKS,
   gutterStyle,
   type Product,
@@ -52,6 +54,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 // Pack claims shown as a checklist in the product panel.
 const CLAIMS = ["Just four ingredients", "Real vegetables, sliced", "Naturally high fibre", "Plant based", "Gluten free", "No added sugar"];
 
+// The short FAQ on product pages: product questions only. The rest stay on the FAQ page.
+const PRODUCT_FAQ = FAQ_GROUPS.filter((g) => g.id === "ingredients" || g.id === "product").map((g) => ({
+  ...g,
+  items: g.items.filter((q) => q.question !== "Is the packaging recyclable?"),
+}));
+
 // V2 product page: Figma "Product Page" (1:1102) content in the pludolabs.com product layout.
 export default async function ProductPage({ params, searchParams }: Params) {
   const { slug } = await params;
@@ -69,8 +77,6 @@ export default async function ProductPage({ params, searchParams }: Params) {
   const others = PRODUCTS.filter((p) => p.slug !== product.slug);
   // Live variant ids for the "You may also like" Add to cart buttons.
   const otherVariants = await Promise.all(others.map((p) => getShopifyProduct(PRODUCT_DETAILS[p.slug].shopifyHandle)));
-  const veg = details.vegetable.label.toLowerCase();
-  const stat = (n: number) => `${details.stats[n].value}${details.stats[n].unit ?? ""}`;
 
   return (
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
@@ -114,7 +120,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
             <ProductPurchase
               variantId={shopify?.variantId ?? null}
               price={price}
-              available={shopify ? shopify.availableForSale : true}
+              available={SHOP_OPEN && (shopify ? shopify.availableForSale : true)}
               sellingPlans={shopify?.sellingPlans ?? []}
             />
 
@@ -123,7 +129,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
               <Accordion title="Nutrition">
                 <NutritionTable rows={details.nutrition} />
               </Accordion>
-              <Accordion title="Allergens">{ALLERGEN_NOTE}</Accordion>
+              <Accordion title="Allergens">{withAllergens(ALLERGEN_NOTE)}</Accordion>
               <Accordion title="How to enjoy">
                 Perfect as they are, straight from the bag. Or crumble them over salads and soups for extra crunch. Store
                 in a cool, dry place.
@@ -156,36 +162,6 @@ export default async function ProductPage({ params, searchParams }: Params) {
           ]}
         />
 
-        {/* Taste story, with the "why you'll love" points and the ingredients as dropdowns. */}
-        <SplitFeature image={product.hoverImage} alt={`${product.name} in hand`} tone="cream">
-          <h2 className="type-heading text-ink">
-            Why it tastes like <SerifAccent>{veg}.</SerifAccent>
-          </h2>
-          {details.paragraphs.map((p) => (
-            <p key={p} className="type-body text-ink-88">
-              {p}
-            </p>
-          ))}
-          <div className="border-t border-ink-10">
-            <Accordion title={`${stat(0)} real ${veg}`}>The vegetable comes first, not potato or corn.</Accordion>
-            <Accordion title="Gently crisped">A gentle bake keeps the flavour, the colour and the crunch.</Accordion>
-            <Accordion title={`${stat(2)} fibre per 100g`}>High in fibre, with zero added sugar.</Accordion>
-            <Accordion title="Only four ingredients">
-              <div className="flex flex-col gap-4">
-                <IngredientChecklist
-                  items={[
-                    { name: details.vegetable.label, note: `${stat(0)} of every bag` },
-                    { name: "Rapeseed oil", note: "naturally low in saturated fat, with a clean, neutral taste" },
-                    { name: "Tapioca starch", note: "helps each slice crisp evenly" },
-                    { name: "Sea salt", note: "just a touch" },
-                  ]}
-                />
-                <p className="type-small text-ink-72">Full ingredient list: {details.ingredients}</p>
-              </div>
-            </Accordion>
-          </div>
-        </SplitFeature>
-
         <ReviewsMarquee />
 
         {/* You may also like */}
@@ -194,11 +170,11 @@ export default async function ProductPage({ params, searchParams }: Params) {
           <MobileCarousel label="More flavours" className="md:grid-cols-3 md:gap-5">
             {others.map((p: Product, n) => (
               <div key={p.slug} className="flex flex-col gap-4">
-                <ProductCard {...p} href={V2_LINKS.product(p.slug)} />
+                <ProductCard {...p} price={SHOP_OPEN ? p.price : undefined} href={V2_LINKS.product(p.slug)} />
                 <QuickAdd
                   href={V2_LINKS.product(p.slug)}
                   variantId={otherVariants[n]?.variantId ?? null}
-                  available={otherVariants[n] ? otherVariants[n].availableForSale : true}
+                  available={SHOP_OPEN && (otherVariants[n] ? otherVariants[n].availableForSale : true)}
                 />
               </div>
             ))}
@@ -206,7 +182,7 @@ export default async function ProductPage({ params, searchParams }: Params) {
         </section>
 
         <FaqBand
-          groups={FAQ_GROUPS.filter((g) => g.id !== "stockists")}
+          groups={PRODUCT_FAQ}
           image="/v2/founder.jpg"
           alt="Crosps founder"
           href={V2_LINKS.faq}

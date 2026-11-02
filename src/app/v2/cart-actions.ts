@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { CART_FIELDS, shopifyConfigured, storefront, toCart, type Cart, type RawCart } from "@/lib/shopify";
+import { SHOP_OPEN } from "@/lib/v2-content";
 
 // Cart server actions for the V2 pages. The Shopify cart id lives in a cookie;
 // checkout itself happens on Shopify's hosted checkout (cart.checkoutUrl).
@@ -63,6 +64,7 @@ export async function getCart(): Promise<CartResult> {
 }
 
 export async function addToCart(variantId: string, quantity: number, sellingPlanId?: string): Promise<CartResult> {
+  if (!SHOP_OPEN) return { ok: false, error: "sold_out" };
   return run(async () => {
     await assertNotTrade(variantId);
     const line = { merchandiseId: variantId, quantity, ...(sellingPlanId ? { sellingPlanId } : {}) };

@@ -39,8 +39,8 @@ export function CookieBanner() {
       <div className="flex flex-col gap-2">
         <p className="type-label">Cookies</p>
         <p className="type-small text-ink-88">
-          We use essential cookies to keep your basket working. With your OK, we’d also use cookies to remember you and tailor
-          our emails and offers. Read our{" "}
+          We use essential cookies to keep your basket working. With your OK, we’d also use cookies to see how people use the
+          site and to tailor our emails and offers. Read our{" "}
           <Link href={V2_LINKS.policy("privacy-policy")} className="underline underline-offset-4">
             privacy policy
           </Link>

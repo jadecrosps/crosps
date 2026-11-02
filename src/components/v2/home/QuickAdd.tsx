@@ -20,16 +20,28 @@ export function QuickAdd({ href, variantId, available = true }: { href: string; 
     setBusy(false);
   }
 
+  // Shop closed: one full-width "Coming soon" button that opens the product page.
+  if (!available) {
+    return (
+      <Link
+        href={href}
+        className="type-label flex h-10 items-center justify-center rounded-button bg-brown text-white transition-colors hover:bg-brown-88"
+      >
+        Coming soon
+      </Link>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
           onClick={add}
-          disabled={!available || busy}
+          disabled={busy}
           className="type-label flex h-10 cursor-pointer items-center justify-center rounded-button bg-brown text-white transition-colors hover:bg-brown-88 disabled:cursor-default disabled:opacity-50"
         >
-          {!available ? "Sold out" : busy ? "Adding…" : "Add to cart"}
+          {busy ? "Adding…" : "Add to cart"}
         </button>
         <Link
           href={href}

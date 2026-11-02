@@ -13,6 +13,8 @@ import { Nav } from "@/components/v2/Nav";
 import { Footer } from "@/components/v2/Footer";
 import { StorySection } from "@/components/v2/StorySection";
 import { FaqDirectory } from "@/components/v2/FaqDirectory";
+import { Accordion } from "@/components/v2/Accordion";
+import { IngredientChecklist, SplitFeature } from "@/components/v2/product/ProductSections";
 import { PRODUCTS, TICKER, FAQ_GROUPS, STOCKISTS, INGREDIENT_INFO } from "@/lib/v2-content";
 
 export const metadata: Metadata = {
@@ -103,7 +105,7 @@ export default function DesignSystemPage() {
           </Button>
         </div>
         <nav className="type-small flex flex-wrap gap-x-4 gap-y-2 text-ink-72">
-          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "FAQ", "Sections", "Open questions"].map(
+          {["Colour", "Typography", "Spacing & shape", "Buttons & links", "Tags", "Product card", "Ticker", "Headings", "Reviews", "Email capture", "Ingredients", "FAQ", "Sections", "Split feature", "Open questions"].map(
             (label, i) => (
               <a key={label} href={`#s${i + 1}`} className="hover:text-ink">
                 {i + 1}. {label}
@@ -405,7 +407,34 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section n={14} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
+      <Section n={14} title="Split feature" note="Half photo, half text, edge to edge. Text sits on cream or white, and the photo can go on either side. Not on the product pages for now.">
+        <div className="-mx-5 md:-mx-10">
+          <SplitFeature image="/v2/hover-tomato.jpg" alt="Tomato Chips in hand" tone="cream">
+            <h2 className="type-heading text-ink">
+              Why it tastes like <SerifAccent>tomato.</SerifAccent>
+            </h2>
+            <p className="type-body text-ink-88">
+              Gently crisped to preserve their goodness, these vibrant slices pack all the character of a tangy, delicious tomato, with a crispy twist.
+            </p>
+            <div className="border-t border-ink-10">
+              <Accordion title="88% real tomato">The vegetable comes first, not potato or corn.</Accordion>
+              <Accordion title="14g fibre per 100g">High in fibre, with zero added sugar.</Accordion>
+              <Accordion title="Only four ingredients">
+                <IngredientChecklist
+                  items={[
+                    { name: "Tomato", note: "88% of every bag" },
+                    { name: "Rapeseed oil", note: "naturally low in saturated fat, with a clean, neutral taste" },
+                    { name: "Tapioca starch", note: "helps each slice crisp evenly" },
+                    { name: "Sea salt", note: "just a touch" },
+                  ]}
+                />
+              </Accordion>
+            </div>
+          </SplitFeature>
+        </div>
+      </Section>
+
+      <Section n={15} title="Open questions" note="Things in the Figma file that didn’t quite line up. I’ve made a call on each; tell me if any are wrong.">
         <ol className="flex max-w-[760px] list-decimal flex-col gap-4 pl-5">
           {QUESTIONS.map((q) => (
             <li key={q} className="type-body text-ink-88">

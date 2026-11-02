@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SerifAccent } from "@/components/ui/SerifAccent";
 import { Accordion } from "../Accordion";
+import { withAllergens } from "../Allergens";
 import type { FaqGroup } from "../FaqDirectory";
 
 // Product page sections laid out after pludolabs.com, in the Crosps design system.
@@ -133,7 +134,7 @@ export function FaqBand({ groups, image, alt, href }: { groups: FaqGroup[]; imag
           <div className="border-t border-white/20">
             {items.map((q) => (
               <Accordion key={q.question} title={q.question} tone="dark">
-                {q.answer}
+                {withAllergens(q.answer)}
               </Accordion>
             ))}
           </div>

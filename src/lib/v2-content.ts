@@ -10,15 +10,20 @@ export type Product = {
   price: string;
   image: string;
   hoverImage: string;
-  hoverCrop: Crop;
+  hoverCrop?: Crop;
   tag: string;
   status: string;
 };
 
+// Shop switch. While false, every product shows "Coming soon", prices are hidden and nothing
+// can be added to the cart. Trade ordering on /v2/trade is separate and stays open.
+export const SHOP_OPEN = false;
+const STATUS = SHOP_OPEN ? "Pre order" : "Coming soon";
+
 export const PRODUCTS: Product[] = [
-  { slug: "pepper", name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/hover-pepper.jpg", hoverCrop: { width: 128.87, height: 171.24, left: -14.43, top: -54.8 }, tag: "8×30g bags", status: "Pre order" },
-  { slug: "onion", name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: "Pre order" },
-  { slug: "tomato", name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags", status: "Pre order" },
+  { slug: "pepper", name: "Pepper Chips", descriptor: "Bright, crisp, naturally sweet.", price: "21.99 GBP", image: "/v2/pack-pepper.png", hoverImage: "/v2/crosps-pepper-chips-on-the-go.jpg", tag: "8×30g bags", status: STATUS },
+  { slug: "onion", name: "Onion Chips", descriptor: "Sweet, savoury, delicate.", price: "21.99 GBP", image: "/v2/pack-onion.png", hoverImage: "/v2/hover-onion.jpg", hoverCrop: { width: 164.2, height: 218.2, left: -32.1, top: -46.4 }, tag: "8×30g bags", status: STATUS },
+  { slug: "tomato", name: "Tomato Chips", descriptor: "Rich, tangy, umami.", price: "21.99 GBP", image: "/v2/pack-tomato.png", hoverImage: "/v2/hover-tomato.jpg", hoverCrop: { width: 174.44, height: 231.81, left: -21.46, top: -92.47 }, tag: "8×30g bags", status: STATUS },
 ];
 
 export const TICKER = ["Only 4 Ingredients", "Gluten Free", "Plant Based", "High Fibre", "Real Vegetables", "No Added Sugar"];
@@ -35,9 +40,14 @@ export const FAQ_GROUPS: FaqGroup[] = [
           "Crosps are vegetable crisps made from just four ingredients: the vegetable itself, oil, tapioca starch and a touch of sea salt. Just simple, recognisable ingredients.",
       },
       {
-        question: "Are your products vegan?",
+        question: "Are they vegan?",
         answer:
           "All Crosps flavours are 100% plant-based. They are packed in a facility which also handles cereals containing gluten, milk, sesame and egg.",
+      },
+      {
+        question: "Are your products gluten-free?",
+        answer:
+          "Yes. All Crosps flavours are naturally gluten-free. They are packed in a facility which also handles cereals containing gluten, milk, sesame and egg.",
       },
       {
         question: "Do Crosps contain any allergens?",
@@ -56,14 +66,23 @@ export const FAQ_GROUPS: FaqGroup[] = [
     title: "The Product",
     items: [
       {
-        question: "How are they so crunchy?",
-        answer:
-          "We use a gentle baking process that crisps the vegetables without excess oil. Lower heat helps preserve nutrients and flavour while still giving you that satisfying crunch you expect from a great crisp.",
-      },
-      {
         question: "What makes Crosps different from normal crisps?",
         answer:
-          "Crosps start with real vegetables as the main ingredient, not potato or corn. We use up to 50% less oil, keep the good stuff (fibre, nutrients), and let the natural flavour of the veg lead. No artificial flavours or unnecessary additives.",
+          "Most crisps begin with potato or corn. Ours begin with the vegetable itself: real tomato, onion and bell pepper, gently crisped so that their natural colour and character lead every bite. Just four considered ingredients, high in fibre, with no artificial flavours.",
+      },
+      {
+        question: "Why do the colour and shape vary from bag to bag?",
+        answer:
+          "Because they’re made from real vegetables, and no two vegetables are the same. The size, shape and colour of each slice comes from the vegetable itself, so every bag looks a little different.",
+      },
+      {
+        question: "What flavours are there, and what do they go well with?",
+        answer:
+          "There are three: Tomato (rich, tangy, umami), Onion (sweet, savoury, delicate) and Pepper (bright, crisp, naturally sweet). The list of ways to enjoy them is endless: straight out of the bag, on avo toast, crumbled over salads or sprinkled on soups. They’re also lovely with hummus or a nice glass of wine.",
+      },
+      {
+        question: "Is the packaging recyclable?",
+        answer: "Yes. Our bags can be recycled at store drop-off points that collect soft plastics. Please don’t put them in your recycling at home.",
       },
     ],
   },
@@ -76,16 +95,31 @@ export const FAQ_GROUPS: FaqGroup[] = [
         answer:
           "We’re only launching with our pack of 8 for now. You can find single packs at our stockists, or sign up to our mailing list to hear where they’re available next.",
       },
+      {
+        question: "Do you do bundles, subscriptions or gift boxes?",
+        answer:
+          "Not yet. For now we only sell cases of 8 bags in a single flavour, with no mixed packs. Sign up to our mailing list to hear when this changes.",
+      },
+      {
+        question: "Can I order for an event or office, or stock them in my shop or café?",
+        answer:
+          "Yes. To stock Crosps in your shop or café, apply for a trade account on our Trade page. For an event or office order, or if you’d rather talk to us first, send us a message in the contact section.",
+      },
+      {
+        question: "My order arrived damaged. What should I do?",
+        answer:
+          "We’re sorry about that. Email jade@eatcrosps.com with your order number and a photo if you can, and we’ll put it right.",
+      },
     ],
   },
   {
     id: "stockists",
-    title: "Stockists",
+    title: "Buying & Delivery",
     items: [
       {
-        question: "Where can I buy Crosps?",
+        question: "Where can I buy them, and where do you deliver?",
         answer:
-          "We’re launching soon. Join our mailing list or follow us on social for stockist updates and where to find Crosps near you.",
+          "You can order on our website, and we deliver to UK addresses only for now. Orders usually arrive within 2–4 working days.",
       },
     ],
   },
@@ -208,16 +242,16 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
     ],
     vegetable: { label: "Tomato", image: "/v2/ing-tomato.jpg", colour: "var(--color-tomato)" },
     description:
-      "Crosps Tomato crisps are bright, tangy and layered with rich umami flavour. A delicious balance of sweetness, savoury depth and subtle acidity brings every crunchy bite to life.",
+      "Bright, tangy and layered with rich umami flavour. A delicious balance of sweetness, savoury depth and subtle acidity, they bring every crunchy bite to life.",
     paragraphs: [
       "Tomatoes do more than add flavour. Naturally rich in lycopene, vitamin C and potassium, they’re a nutrient-dense vegetable (or fruit!) that brings colour and crunch to every bite.",
       "Gently crisped to preserve their goodness, these vibrant slices pack all the character of a tangy, delicious tomato, with a crispy twist.",
     ],
     gallery: [
       { src: "/v2/pack-tomato.png", alt: "Tomato Chips pack", contain: true },
+      { src: "/v2/crosps-tomato-chips.jpg", alt: "Crosps Tomato Chips on a steel plate" },
       { src: "/v2/hover-tomato.jpg", alt: "Tomato Chips on the go" },
       { src: "/v2/ing-tomato.jpg", alt: "Fresh tomato" },
-      { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
     ],
   },
   onion: {
@@ -247,17 +281,16 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
     ],
     vegetable: { label: "Onion", image: "/v2/ing-onion-red.jpg", colour: "var(--color-onion)" },
     description:
-      "Crosps Onion crisps balance mellow sweetness with deep savoury flavour. Familiar yet full of character, each bite delivers a satisfying crunch and a comforting, deliciously moreish finish.",
+      "Mellow, sweet and deeply savoury. Familiar yet full of character, they deliver a satisfying crunch and a comforting, moreish finish in every bite.",
     paragraphs: [
       "Our most controversial flavour. Onions transformed into a delicately crisp, golden bite.",
       "Complex and savoury: you either love it or hate it.",
     ],
     gallery: [
       { src: "/v2/pack-onion.png", alt: "Onion Chips pack", contain: true },
+      { src: "/v2/crosps-onion-chips.jpg", alt: "Crosps Onion Chips, white and purple onion, on a steel plate" },
       { src: "/v2/hover-onion.jpg", alt: "Onion Chips on the go" },
       { src: "/v2/ing-onion-red.jpg", alt: "Red onion, sliced" },
-      { src: "/v2/lifestyle-pack.jpg", alt: "Carrying Crosps" },
-      { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
     ],
   },
   pepper: {
@@ -292,17 +325,16 @@ export const PRODUCT_DETAILS: Record<Product["slug"], ProductDetails> = {
       colour: "var(--color-pepper)",
     },
     description:
-      "Vibrant and distinctive, capturing the unique character of green, yellow and red, bell peppers. Gently sweet and full of flavour, they deliver a colourful and satisfying crunch in every bite.",
+      "Vibrant and distinctive, capturing the unique character of green, yellow and red bell peppers. Gently sweet and full of flavour, they deliver a colourful and satisfying crunch in every bite.",
     paragraphs: [
       "One of the most popular vegetables in the world, now reimagined as a light crunch with bold colour.",
       "A classic with a refined twist.",
     ],
     gallery: [
       { src: "/v2/pack-pepper.png", alt: "Pepper Chips pack", contain: true },
+      { src: "/v2/crosps-pepper-chips.jpg", alt: "Crosps Pepper Chips, green, red and yellow pepper, on a steel plate" },
       { src: "/v2/story.jpg", alt: "A pepper crisp next to a fresh slice of pepper" },
       { src: "/v2/ing-pepper.jpg", alt: "Fresh green pepper" },
-      { src: "/v2/lifestyle-pack.jpg", alt: "Carrying Crosps" },
-      { src: "/v2/crisps-mix.jpg", alt: "Crosps vegetable crisps" },
     ],
   },
 };

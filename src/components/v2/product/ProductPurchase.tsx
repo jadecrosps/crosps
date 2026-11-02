@@ -42,6 +42,19 @@ export function ProductPurchase({
     setBusy(false);
   }
 
+  // Shop closed: no quantities or prices, just the "Coming soon" button.
+  if (!available) {
+    return (
+      <button
+        type="button"
+        disabled
+        className="type-mono flex h-[52px] w-full items-center justify-center rounded-button bg-brown px-6 text-white"
+      >
+        Coming soon
+      </button>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <fieldset className="flex flex-col gap-3">
@@ -95,10 +108,10 @@ export function ProductPurchase({
         <button
           type="button"
           onClick={add}
-          disabled={!available || busy}
+          disabled={busy}
           className="type-mono flex h-[52px] w-full cursor-pointer items-center justify-center rounded-button bg-brown px-6 text-white transition-colors hover:bg-brown-88 disabled:cursor-default disabled:opacity-50"
         >
-          {!available ? "Sold out" : busy ? "Adding…" : `Add to cart · ${fmt(unit * qty)}`}
+          {busy ? "Adding…" : `Add to cart · ${fmt(unit * qty)}`}
         </button>
         <p className="type-small text-center text-ink-72">UK delivery £3.95 · Free on orders over £{FREE_SHIPPING_FROM}</p>
         {message && (
