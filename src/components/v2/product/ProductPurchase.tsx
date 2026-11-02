@@ -1,10 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
+import { useSubscribe } from "@/hooks/useSubscribe";
 import { useCart } from "../cart/CartProvider";
 import type { SellingPlan } from "@/lib/shopify";
 
 const QUANTITIES = [1, 2, 3];
+
+// Joins the Klaviyo "Website Newsletter" list, same as the footer sign-up.
+function Waitlist() {
+  const id = useId();
+  const [email, setEmail] = useState("");
+  const { subscribe, isLoading, isSuccess, error } = useSubscribe();
+
+  if (isSuccess) {
+    return (
+      <p role="status" className="type-body border border-ink-10 bg-paper p-5 text-ink">
+        You’re on the list. We’ll let you know the moment Crosps launches.
+      </p>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (email) void subscribe(email);
+      }}
+      className="flex flex-col gap-3"
+    >
+      <label htmlFor={id} className="type-body text-ink">
+        Coming soon. Be the first to know when we launch.
+      </label>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <input
+          id={id}
+          type="email"
+          required
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Your email"
+          aria-invalid={!!error || undefined}
+          className="type-body h-[52px] w-full min-w-0 border sm:flex-1 border-ink-10 bg-white px-4 text-ink outline-none placeholder:text-ink-50 focus:border-ink"
+        />
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="type-mono flex h-[52px] shrink-0 cursor-pointer items-center justify-center rounded-button bg-brown px-6 text-white transition-colors hover:bg-brown-88 disabled:cursor-default disabled:opacity-50"
+        >
+          {isLoading ? "Joining…" : "Join the waitlist"}
+        </button>
+      </div>
+      {error && (
+        <p role="alert" className="type-small text-tomato">
+          {error}
+        </p>
+      )}
+    </form>
+  );
+}
 // UK shipping in Shopify: £3.95, free on orders of £40 and over.
 const FREE_SHIPPING_FROM = 40;
 
@@ -42,18 +97,8 @@ export function ProductPurchase({
     setBusy(false);
   }
 
-  // Shop closed: no quantities or prices, just the "Coming soon" button.
-  if (!available) {
-    return (
-      <button
-        type="button"
-        disabled
-        className="type-mono flex h-[52px] w-full items-center justify-center rounded-button bg-brown px-6 text-white"
-      >
-        Coming soon
-      </button>
-    );
-  }
+  // Shop closed: no quantities or prices, a waitlist sign-up instead.
+  if (!available) return <Waitlist />;
 
   return (
     <div className="flex flex-col gap-6">
