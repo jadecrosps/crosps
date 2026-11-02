@@ -32,7 +32,7 @@ export function HomeHero({ links }: { links: HomeLinks }) {
       </video>
       <div className="absolute inset-0 bg-black/20" />
       <div className="relative">
-        <Nav links={{ home: "/v2", shop: links.shop, about: links.about, faq: links.faq }} />
+        <Nav links={{ home: "/", shop: links.shop, about: links.about, faq: links.faq }} />
       </div>
       <div className="gutter-x relative flex flex-col items-start gap-10 pb-14 md:pb-[105px]">
         <div className="flex flex-col gap-3 text-white">

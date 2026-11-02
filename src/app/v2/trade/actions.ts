@@ -28,7 +28,7 @@ export async function requestTradeLink(_prev: LinkState, form: FormData): Promis
   try {
     const customer = await findTradeCustomer(email);
     if (!customer) return { status: "not_approved", email };
-    const url = `${await origin()}/v2/trade/login?token=${linkToken({ email, name: customer.displayName || email, customerId: customer.id })}`;
+    const url = `${await origin()}/trade/login?token=${linkToken({ email, name: customer.displayName || email, customerId: customer.id })}`;
     const sent = await sendEmail({
       to: email,
       from: "Crosps <website@eatcrosps.com>",

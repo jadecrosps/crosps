@@ -166,7 +166,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                   <div className="flex flex-1 flex-col justify-between gap-2">
                     <div className="flex justify-between gap-3">
                       <div>
-                        <Link href={`/v2/products/${line.handle.replace(/-chips$/, "")}`} className="font-sans text-[16px] leading-[1.2]">
+                        <Link href={`/products/${line.handle.replace(/-chips$/, "")}`} className="font-sans text-[16px] leading-[1.2]">
                           {line.title}
                         </Link>
                         <p className="type-small text-ink-50">{line.plan ?? "8×30g bags"}</p>

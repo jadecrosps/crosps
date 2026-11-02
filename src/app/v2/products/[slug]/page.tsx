@@ -47,7 +47,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: product ? `${product.name} | Crosps` : "Crosps",
     description: product?.descriptor,
-    robots: { index: false, follow: false },
   };
 }
 

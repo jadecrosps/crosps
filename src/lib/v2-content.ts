@@ -179,16 +179,17 @@ export const REVIEWS: { quote: string; title: string; body: string; author: stri
   },
 ];
 
-// Where V2 pages link to. Points at the current site until each V2 page exists.
+// Where V2 pages link to. The pages live in src/app/v2 but are served from the site root
+// (see the rewrites in next.config.ts), so links use the clean addresses.
 export const V2_LINKS = {
-  home: "/v2",
-  shop: "/v2#shop",
-  about: "/v2/about",
-  faq: "/v2/faq",
-  contact: "/v2/contact",
-  trade: "/v2/trade",
-  product: (slug: string) => `/v2/products/${slug}`,
-  policy: (handle: string) => `/v2/policies/${handle}`,
+  home: "/",
+  shop: "/#shop",
+  about: "/about",
+  faq: "/faq",
+  contact: "/contact",
+  trade: "/trade",
+  product: (slug: string) => `/products/${slug}`,
+  policy: (handle: string) => `/policies/${handle}`,
 };
 
 // Side margin for V2 pages. Default 100px; ?gutter=40|60|80|100|120 to compare.

@@ -16,7 +16,6 @@ import { TradeBasket } from "./TradeBasket";
 export const metadata: Metadata = {
   title: "Trade | Crosps",
   description: "Stock Crosps: vegetable crisps in shelf-ready cases for shops, delis and cafés.",
-  robots: { index: false, follow: false },
 };
 
 const REASONS = [
@@ -57,7 +56,7 @@ async function TradeAccount({ session }: { session: TradeSession }) {
             <p className="type-small text-ink-72">Logged in as {session.email}</p>
           </div>
           <div className="flex flex-wrap items-center gap-6">
-            <a href="/v2/trade/sell-sheet" className="type-mono text-ink-72 underline underline-offset-4 hover:text-ink">
+            <a href="/trade/sell-sheet" className="type-mono text-ink-72 underline underline-offset-4 hover:text-ink">
               Download sell sheet
             </a>
             <TradeLogout />

@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const link = verifyLinkToken(url.searchParams.get("token") ?? undefined);
   const customer = link ? await findTradeCustomer(link.email).catch(() => null) : null;
-  if (!link || !customer) return Response.redirect(new URL("/v2/trade?login=expired#login", url), 303);
+  if (!link || !customer) return Response.redirect(new URL("/trade?login=expired#login", url), 303);
   await startTradeSession({ ...link, name: customer.displayName || link.name });
-  return Response.redirect(new URL("/v2/trade#order", url), 303);
+  return Response.redirect(new URL("/trade#order", url), 303);
 }

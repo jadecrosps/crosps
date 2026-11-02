@@ -8,7 +8,6 @@ import { V2_FOOTER_LINKS, V2_LINKS, gutterStyle } from "@/lib/v2-content";
 export const metadata: Metadata = {
   title: "Contact | Crosps",
   description: "Questions, stockist enquiries or feedback: get in touch with Crosps.",
-  robots: { index: false, follow: false },
 };
 
 // V2 Contact: heading and intro on the left (~40%), design-system form on the right.
