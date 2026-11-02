@@ -15,13 +15,15 @@ export function ReviewsMarquee({
   subtitle?: string;
 }) {
   const row = (hidden: boolean) => (
-    <ul className="flex shrink-0 gap-3 pr-3" aria-hidden={hidden || undefined}>
-      {/* Reviews twice per half so the loop stays seamless on wide screens. */}
+    <ul className={`flex shrink-0 gap-3 pr-3 ${hidden ? "max-md:hidden" : ""}`} aria-hidden={hidden || undefined}>
+      {/* Reviews twice per half so the loop stays seamless on wide screens; once on mobile, where they swipe. */}
       {[...REVIEWS, ...REVIEWS].map((r, i) => (
         <li
           key={`${r.author}-${i}`}
           aria-hidden={i >= REVIEWS.length || undefined}
-          className="flex min-h-[240px] w-[min(440px,82vw)] shrink-0 flex-col justify-between gap-8 border border-ink-10 bg-white p-6"
+          className={`flex min-h-[240px] w-[min(440px,82vw)] shrink-0 snap-start flex-col justify-between gap-8 border border-ink-10 bg-white p-6 ${
+            i >= REVIEWS.length ? "max-md:hidden" : ""
+          }`}
         >
           <div className="flex flex-col gap-3">
             {r.rating === 5 && <Stars />}
@@ -43,8 +45,12 @@ export function ReviewsMarquee({
         <h2 className="type-heading text-ink">{title}</h2>
         <p className="type-body text-ink-72">{subtitle}</p>
       </div>
-      <div className="overflow-hidden motion-reduce:overflow-x-auto">
-        <div className="animate-ticker flex w-max hover:[animation-play-state:paused] motion-reduce:animate-none" style={{ animationDuration: "140s" }}>
+      {/* Mobile: swipe through, snapping to each card. md and up: slow scroll that pauses on hover. */}
+      <div className="snap-x snap-mandatory scroll-pl-5 overflow-x-auto [scrollbar-width:none] md:snap-none md:overflow-hidden md:motion-reduce:overflow-x-auto [&::-webkit-scrollbar]:hidden">
+        <div
+          className="flex w-max max-md:pl-5 md:animate-ticker md:hover:[animation-play-state:paused] md:motion-reduce:animate-none"
+          style={{ animationDuration: "140s" }}
+        >
           {row(false)}
           {row(true)}
         </div>
