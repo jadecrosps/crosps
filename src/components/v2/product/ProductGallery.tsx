@@ -10,20 +10,24 @@ type Slide = { src: string; alt: string; contain?: boolean };
 export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string }) {
   const [i, setI] = useState(0);
   const go = (d: number) => setI((n) => (n + d + slides.length) % slides.length);
-  const current = slides[i];
 
   return (
     <div className="flex flex-col gap-2 lg:h-full lg:flex-row">
       <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-full lg:flex-1 overflow-hidden bg-paper">
-        <Image
-          key={current.src}
-          src={current.src}
-          alt={current.alt}
-          fill
-          priority={i === 0}
-          sizes="(max-width: 768px) 100vw, 45vw"
-          className={current.contain ? "object-contain p-[12%]" : "object-cover"}
-        />
+        {/* Every slide loads up front and the current one is shown, so switching is instant. */}
+        {slides.map((s, n) => (
+          <Image
+            key={s.src}
+            src={s.src}
+            alt={n === i ? s.alt : ""}
+            aria-hidden={n !== i || undefined}
+            fill
+            priority={n === 0}
+            loading={n === 0 ? undefined : "eager"}
+            sizes="(max-width: 768px) 100vw, 45vw"
+            className={`${s.contain ? "object-contain p-[12%]" : "object-cover"} ${n === i ? "" : "invisible"}`}
+          />
+        ))}
         {tag && (
           <div className="absolute left-6 top-6">
             <Tag tone="light">{tag}</Tag>
@@ -48,7 +52,7 @@ export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string 
             aria-label={`Show image ${n + 1}`}
             aria-current={n === i}
             onClick={() => setI(n)}
-            className={`relative aspect-square w-16 shrink-0 cursor-pointer overflow-hidden bg-paper transition-opacity md:w-20 lg:w-[72px] ${n === i ? "outline outline-1 outline-ink" : "opacity-60 hover:opacity-90"}`}
+            className={`relative aspect-square w-16 shrink-0 cursor-pointer overflow-hidden bg-paper transition-opacity md:w-20 lg:w-[72px] ${n === i ? "" : "opacity-60 hover:opacity-90"}`}
           >
             <Image src={s.src} alt="" fill sizes="160px" className={s.contain ? "object-contain p-2" : "object-cover"} />
           </button>

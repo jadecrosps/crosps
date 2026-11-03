@@ -25,6 +25,9 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Keep resized photos for a week, so repeat visits don't re-check every image.
+    // Replacing a photo? Give the new file a new name so visitors see it straight away.
+    minimumCacheTTL: 60 * 60 * 24 * 7,
     remotePatterns: [
       {
         protocol: "https",
