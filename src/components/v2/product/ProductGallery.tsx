@@ -10,20 +10,24 @@ type Slide = { src: string; alt: string; contain?: boolean };
 export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string }) {
   const [i, setI] = useState(0);
   const go = (d: number) => setI((n) => (n + d + slides.length) % slides.length);
-  const current = slides[i];
 
   return (
     <div className="flex flex-col gap-2 lg:h-full lg:flex-row">
       <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-full lg:flex-1 overflow-hidden bg-paper">
-        <Image
-          key={current.src}
-          src={current.src}
-          alt={current.alt}
-          fill
-          priority={i === 0}
-          sizes="(max-width: 768px) 100vw, 45vw"
-          className={current.contain ? "object-contain p-[12%]" : "object-cover"}
-        />
+        {/* Every slide loads up front and the current one is shown, so switching is instant. */}
+        {slides.map((s, n) => (
+          <Image
+            key={s.src}
+            src={s.src}
+            alt={n === i ? s.alt : ""}
+            aria-hidden={n !== i || undefined}
+            fill
+            priority={n === 0}
+            loading={n === 0 ? undefined : "eager"}
+            sizes="(max-width: 768px) 100vw, 45vw"
+            className={`${s.contain ? "object-contain p-[12%]" : "object-cover"} ${n === i ? "" : "invisible"}`}
+          />
+        ))}
         {tag && (
           <div className="absolute left-6 top-6">
             <Tag tone="light">{tag}</Tag>
