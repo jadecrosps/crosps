@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { SectionLink } from "./Button";
 import { EmailCapture } from "./EmailCapture";
 
 export type FooterLinks = Partial<Record<string, string>>;
@@ -36,9 +36,9 @@ export function Footer({ links = {} }: { links?: FooterLinks }) {
               <ul className="flex flex-col gap-2">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <Link href={hrefs[link] ?? "#"} className="type-mono text-white/72 transition-colors hover:text-white">
+                    <SectionLink href={hrefs[link] ?? "#"} className="type-mono text-white/72 transition-colors hover:text-white">
                       {link}
-                    </Link>
+                    </SectionLink>
                   </li>
                 ))}
               </ul>
