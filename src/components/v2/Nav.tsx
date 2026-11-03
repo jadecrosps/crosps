@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NavLink } from "./Button";
+import { scrollToSection } from "./scrollToSection";
 import { useCart } from "./cart/CartProvider";
 import { V2_LINKS } from "@/lib/v2-content";
 
@@ -172,7 +173,14 @@ export function Nav({
         <ul className="gutter-x flex flex-col gap-1 pt-6">
           {mobileItems.map((i, n) => (
             <li key={i.label} className={rise(open)} style={{ transitionDelay: open ? `${120 + n * 50}ms` : "0ms" }}>
-              <Link href={i.href} onClick={() => setOpen(false)} className="block py-2 font-sans text-[20px] leading-[1.3]">
+              <Link
+                href={i.href}
+                onClick={(e) => {
+                  setOpen(false);
+                  scrollToSection(e);
+                }}
+                className="block py-2 font-sans text-[20px] leading-[1.3]"
+              >
                 {i.label}
               </Link>
             </li>

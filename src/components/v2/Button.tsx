@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { scrollToSection } from "./scrollToSection";
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -17,7 +20,7 @@ export function Button({ children, variant = "dark", href, className = "", ...re
 
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} onClick={scrollToSection} className={classes}>
         {children}
       </Link>
     );
@@ -53,6 +56,7 @@ export function TextLink({
   return (
     <Link
       href={href}
+      onClick={scrollToSection}
       className={`group/link type-mono inline-flex items-center gap-2 text-ink ${className}`}
     >
       <span className={underline ? "underline decoration-from-font underline-offset-4" : ""}>{children}</span>
@@ -73,9 +77,15 @@ export function NavLink({
   return (
     <Link
       href={href}
+      onClick={scrollToSection}
       className={`type-nav border-b border-transparent px-2 pb-0.5 pt-2 transition-colors hover:border-current ${tone === "light" ? "text-white" : "text-ink"}`}
     >
       {children}
     </Link>
   );
+}
+
+// Plain <Link> that scrolls to its section when it points at the current page.
+export function SectionLink(props: React.ComponentProps<typeof Link>) {
+  return <Link {...props} onClick={scrollToSection} />;
 }
