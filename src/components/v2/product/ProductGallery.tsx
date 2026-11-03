@@ -52,7 +52,7 @@ export function ProductGallery({ slides, tag }: { slides: Slide[]; tag?: string 
             aria-label={`Show image ${n + 1}`}
             aria-current={n === i}
             onClick={() => setI(n)}
-            className={`relative aspect-square w-16 shrink-0 cursor-pointer overflow-hidden bg-paper transition-opacity md:w-20 lg:w-[72px] ${n === i ? "outline outline-1 outline-ink" : "opacity-60 hover:opacity-90"}`}
+            className={`relative aspect-square w-16 shrink-0 cursor-pointer overflow-hidden bg-paper transition-opacity md:w-20 lg:w-[72px] ${n === i ? "" : "opacity-60 hover:opacity-90"}`}
           >
             <Image src={s.src} alt="" fill sizes="160px" className={s.contain ? "object-contain p-2" : "object-cover"} />
           </button>
