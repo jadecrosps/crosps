@@ -1,47 +1,88 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { SerifAccent } from "@/components/ui/SerifAccent";
-import { useConsent } from "@/lib/consent";
 import { EmailCapture } from "./EmailCapture";
+import { useCart } from "./cart/CartProvider";
 
 // Early-access popup in the Crosps design system, replacing Klaviyo's own popup on V2.
-// Sign-ups go to the same Klaviyo list as the footer form. Waits until the cookie
-// banner has been answered, then opens once; closing or signing up stops it coming back.
+// Sign-ups go to the same Klaviyo list as the footer form.
+// When it opens: on desktop after 5 seconds, or earlier if the visitor heads for the top of the
+// window to leave; on phones once they've scrolled 40% of the page. Never over the cart, or on
+// trade, contact and policy pages. At most once a day; never again once they've signed up.
 
-const DISMISSED = "crosps_signup_dismissed";
-const DELAY_MS = 6000;
+const DISMISSED = "crosps_signup_dismissed"; // "subscribed", or when it last opened (ms)
+const DELAY_MS = 5000;
+const SCROLL_DEPTH = 0.4;
+const SNOOZE_MS = 24 * 60 * 60 * 1000;
+const SKIP_PAGES = ["/trade", "/contact", "/policies"];
 
-function dismissed() {
+function hidden() {
   try {
-    return localStorage.getItem(DISMISSED) === "1";
+    const v = localStorage.getItem(DISMISSED);
+    if (v === "subscribed") return true;
+    const shownAt = Number(v);
+    return shownAt > 0 && Date.now() - shownAt < SNOOZE_MS;
   } catch {
     return false;
   }
 }
 
-function remember() {
+function remember(value: string) {
   try {
-    localStorage.setItem(DISMISSED, "1");
+    localStorage.setItem(DISMISSED, value);
   } catch {}
 }
 
 export function SignupPopup() {
-  const consent = useConsent();
   const [open, setOpen] = useState(false);
+  const cartOpen = useCart()?.isOpen ?? false;
+  const pathname = usePathname();
+  const skipPage = SKIP_PAGES.some((p) => pathname.startsWith(p));
+  // Read inside the triggers, so opening the cart or changing page doesn't restart them.
+  const blocked = useRef(false);
+  useEffect(() => {
+    blocked.current = cartOpen || skipPage;
+  }, [cartOpen, skipPage]);
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  function close() {
-    remember();
-    setOpen(false);
-  }
+  const close = () => setOpen(false);
 
   useEffect(() => {
-    if (consent === "unknown" || consent === null || dismissed()) return;
-    const t = setTimeout(() => setOpen(true), DELAY_MS);
-    return () => clearTimeout(t);
-  }, [consent]);
+    if (hidden()) return;
+    let done = false;
+    const show = () => {
+      if (done || blocked.current || hidden()) return;
+      done = true;
+      remember(String(Date.now()));
+      setOpen(true);
+      cleanup();
+    };
+
+    const phone = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max > 0 && window.scrollY / max >= SCROLL_DEPTH) show();
+    };
+    // Exit intent: the pointer leaves through the top of the window, towards the tabs and address bar.
+    const onLeave = (e: MouseEvent) => {
+      if (!e.relatedTarget && e.clientY <= 0) show();
+    };
+    // Desktop: from 5 seconds in, check each second, so a cart that's open at that moment only postpones it.
+    const start = Date.now();
+    const timer = phone ? undefined : setInterval(() => Date.now() - start >= DELAY_MS && show(), 1000);
+    if (phone) window.addEventListener("scroll", onScroll, { passive: true });
+    else document.addEventListener("mouseout", onLeave);
+
+    function cleanup() {
+      clearInterval(timer);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("mouseout", onLeave);
+    }
+    return cleanup;
+  }, []);
 
   // Klaviyo's script locks page scroll when its own popup opens; that popup is hidden on V2 (below).
   useEffect(() => {
@@ -89,8 +130,7 @@ export function SignupPopup() {
                 Join the waitlist and be first to hear when Crosps launches, where it’s stocked, and what’s coming next.
               </p>
             </div>
-            {/* Once they've submitted, don't show the popup again. */}
-            <div onSubmitCapture={remember}>
+                        <div>
               <EmailCapture />
             </div>
           </div>

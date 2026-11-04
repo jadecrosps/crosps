@@ -11,6 +11,7 @@ type CartContextValue = {
   cart: Cart | null;
   count: number;
   open: () => void;
+  isOpen: boolean;
   // Resolves to null on success, or a message to show.
   add: (variantId: string, quantity: number, sellingPlanId?: string) => Promise<string | null>;
   pending: boolean;
@@ -122,7 +123,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const count = cart?.totalQuantity ?? 0;
 
   return (
-    <CartContext.Provider value={{ cart, count, open: () => setOpen(true), add, pending, error }}>
+    <CartContext.Provider value={{ cart, count, open: () => setOpen(true), isOpen, add, pending, error }}>
       {children}
       <div
         aria-hidden={!isOpen}

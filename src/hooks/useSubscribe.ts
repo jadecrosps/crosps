@@ -90,6 +90,10 @@ export function useSubscribe(): UseSubscribeReturn {
       // Klaviyo returns 202 Accepted on success; treat any 2xx as success.
       if (res.status >= 200 && res.status < 300) {
         setState({ isLoading: false, isSuccess: true, error: null });
+        // Already on the list, so the V2 sign-up popup won't show again.
+        try {
+          localStorage.setItem("crosps_signup_dismissed", "subscribed");
+        } catch {}
         return;
       }
 
