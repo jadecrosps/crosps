@@ -10,8 +10,8 @@ import { V2_LINKS } from "@/lib/v2-content";
 // reopened from the footer's "Cookie Settings" link (#cookie-settings). Accept and Reject carry equal weight.
 const LEAVE_MS = 500; // matches animate-fade-out
 
-// Fine film grain, so the blur reads as frosted glass rather than a flat wash.
-const GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+// Film grain over the blur; it shifts a few times a second, like projected film.
+const GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3' intercept='-1'/%3E%3CfeFuncG type='linear' slope='3' intercept='-1'/%3E%3CfeFuncB type='linear' slope='3' intercept='-1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
 export function CookieBanner() {
   const consent = useConsent();
@@ -53,9 +53,12 @@ export function CookieBanner() {
       {blur && (
         <div
           aria-hidden
-          className={`${fade} fixed inset-0 z-[60] bg-gradient-to-b from-paper/25 via-paper/10 to-paper/45 backdrop-blur-[48px] backdrop-saturate-[1.4]`}
+          className={`${fade} fixed inset-0 z-[60] overflow-hidden bg-gradient-to-b from-paper/25 via-paper/10 to-paper/45 backdrop-blur-[26px] backdrop-saturate-[1.3]`}
         >
-          <div className="absolute inset-0 opacity-[0.07] mix-blend-multiply" style={{ backgroundImage: GRAIN }} />
+          <div
+            className="absolute -inset-[60px] animate-grain opacity-[0.15] motion-reduce:animate-none"
+            style={{ backgroundImage: GRAIN }}
+          />
         </div>
       )}
       <div
