@@ -227,3 +227,17 @@
     transform: translateY(0);
   }
 }
+
+/* ── Cookie banner backdrop (after how.studio) ───────────── */
+@utility animate-fade-in {
+  animation: fade-in 600ms ease-out both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
