@@ -21,7 +21,7 @@ const COOKIE_TOOLS = [
   },
   {
     name: "Google Analytics",
-    body: "Shows us how people find and move around the site: where they came from and which pages they visit. It isn’t linked to your name or email.",
+    body: "Shows us how people find and move around the site: where they came from and which pages they visit. This data is not connected to any personal information.",
   },
   {
     name: "Klaviyo",
@@ -87,12 +87,12 @@ export function CookieBanner() {
       >
         <p className="type-mono normal-case leading-[1.45] text-ink-72">
           We use cookies to keep the site and your basket working, and with your OK, to understand how the site is used.
-          {/* The policy link appears with the Learn more notes. */}
+          {/* The policy link appears with the Learn more notes. Cookies are covered in the privacy policy. */}
           {details && (
             <>
               {" "}
               <Link href={V2_LINKS.policy("privacy-policy")} className="text-ink underline underline-offset-4">
-                Privacy policy
+                Cookie policy
               </Link>
             </>
           )}
