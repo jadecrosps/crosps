@@ -86,10 +86,16 @@ export function CookieBanner() {
         className={`${fade} fixed inset-x-4 bottom-4 z-[61] flex max-h-[calc(100dvh-2rem)] max-w-[400px] flex-col overflow-y-auto rounded-[10px] bg-paper p-6 text-ink shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] sm:left-auto sm:right-6 sm:bottom-6`}
       >
         <p className="type-mono normal-case leading-[1.45] text-ink-72">
-          We use cookies to keep the site and your basket working, and with your OK, to understand how the site is used.{" "}
-          <Link href={V2_LINKS.policy("privacy-policy")} className="text-ink underline underline-offset-4">
-            Privacy policy
-          </Link>
+          We use cookies to keep the site and your basket working, and with your OK, to understand how the site is used.
+          {/* The policy link appears with the Learn more notes. */}
+          {details && (
+            <>
+              {" "}
+              <Link href={V2_LINKS.policy("privacy-policy")} className="text-ink underline underline-offset-4">
+                Privacy policy
+              </Link>
+            </>
+          )}
         </p>
 
         {/* "Learn more" opens a note on each tool. */}
