@@ -230,7 +230,20 @@
 
 /* ── Cookie banner backdrop (after how.studio) ───────────── */
 @utility animate-fade-in {
-  animation: fade-in 600ms ease-out both;
+  animation: fade-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-fade-out {
+  animation: fade-out 500ms ease-out both;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes fade-in {
