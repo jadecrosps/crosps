@@ -9,6 +9,8 @@ import { V2_LINKS } from "@/lib/v2-content";
 // Bottom right, over a blurred page (after how.studio), with a "Learn more" note on each tool. Shown until the visitor chooses;
 // reopened from the footer's "Cookie Settings" link (#cookie-settings). Accept and Reject carry equal weight.
 const LEAVE_MS = 500; // matches animate-fade-out
+// Let the page be seen for a moment before the blur and banner ease in.
+const ENTER_DELAY_MS = 1200;
 
 // Film grain over the blur; it shifts a few times a second, like projected film.
 const GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3' intercept='-1'/%3E%3CfeFuncG type='linear' slope='3' intercept='-1'/%3E%3CfeFuncB type='linear' slope='3' intercept='-1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
@@ -63,6 +65,8 @@ export function CookieBanner() {
     }, LEAVE_MS);
   };
   const fade = leaving ? "animate-fade-out" : "animate-fade-in";
+  // No wait when reopened from Cookie Settings.
+  const enter = leaving || reopened ? undefined : { animationDelay: `${ENTER_DELAY_MS}ms` };
   const btn =
     "type-mono normal-case flex h-[52px] w-full cursor-pointer items-center justify-center rounded-button transition-colors";
 
@@ -72,6 +76,7 @@ export function CookieBanner() {
       {blur && (
         <div
           aria-hidden
+          style={enter}
           className={`${fade} fixed inset-0 z-[60] overflow-hidden bg-gradient-to-b from-paper/25 via-paper/10 to-paper/45 backdrop-blur-[26px] backdrop-saturate-[1.3]`}
         >
           <div
@@ -83,6 +88,7 @@ export function CookieBanner() {
       <div
         role="region"
         aria-label="Cookie consent"
+        style={enter}
         className={`${fade} fixed inset-x-4 bottom-4 z-[61] flex max-h-[calc(100dvh-2rem)] max-w-[400px] flex-col overflow-y-auto rounded-[10px] bg-paper p-6 text-ink shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] sm:left-auto sm:right-6 sm:bottom-6`}
       >
         <p className="type-mono normal-case leading-[1.45] text-ink-72">
