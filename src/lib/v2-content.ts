@@ -119,7 +119,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Where can I buy them, and where do you deliver?",
         answer:
-          "You can order on our website, and we deliver to UK addresses only for now. Orders usually arrive within 2–4 working days.",
+          "You can pre-order on our website, and we deliver to UK addresses only for now. Pre-orders ship as soon as our first batch is ready, and we’ll email you when yours is on its way.",
       },
     ],
   },
