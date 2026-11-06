@@ -74,19 +74,19 @@ export const INGREDIENTS_BY_TAB: Record<string, Ingredient[]> = {
   Tomato: [
     { name: "Tomato", iconSrc: "/ingredients/tomato.png", description: "Refined by technique, not excess." },
     { name: "Sea Salt", iconSrc: "/ingredients/salt.png", description: "Refined by technique, not excess." },
-    { name: "Olive Oil", iconSrc: "/ingredients/oil.png", description: "Refined by technique, not excess." },
+    { name: "Rapeseed Oil", iconSrc: "/ingredients/oil.png", description: "Refined by technique, not excess." },
     { name: "Tapioca Starch", iconSrc: "/ingredients/tapioca.png", description: "Refined by technique, not excess." },
   ],
   Onion: [
     { name: "Onion", iconSrc: "/products/onion.png", description: "Refined by technique, not excess." },
     { name: "Sea Salt", iconSrc: "/ingredients/salt.png", description: "Refined by technique, not excess." },
-    { name: "Olive Oil", iconSrc: "/ingredients/oil.png", description: "Refined by technique, not excess." },
+    { name: "Rapeseed Oil", iconSrc: "/ingredients/oil.png", description: "Refined by technique, not excess." },
     { name: "Tapioca Starch", iconSrc: "/ingredients/tapioca.png", description: "Refined by technique, not excess." },
   ],
   Peppers: [
     { name: "Peppers", iconSrc: "/products/pepper.png", description: "Refined by technique, not excess." },
     { name: "Sea Salt", iconSrc: "/ingredients/salt.png", description: "Refined by technique, not excess." },
-    { name: "Olive Oil", iconSrc: "/ingredients/oil.png", description: "Refined by technique, not excess." },
+    { name: "Rapeseed Oil", iconSrc: "/ingredients/oil.png", description: "Refined by technique, not excess." },
     { name: "Tapioca Starch", iconSrc: "/ingredients/tapioca.png", description: "Refined by technique, not excess." },
   ],
 };
