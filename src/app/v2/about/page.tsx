@@ -14,8 +14,7 @@ const STORY = [
   "We didn’t start with a crisp.",
   "In 2023, a bike crash changed everything. I started putting my health first while recovering, eating as close to whole food as I could. And I kept noticing how little the savoury snack aisle had to offer.",
   "The sweet side felt full of possibilities. But whenever I wanted something savoury, I found more of the same: potato crisps, or ingredient lists a long way from what I actually wanted to eat.",
-  "That’s how Crosps was born, from seeing that something was missing: whole vegetables, cooked gently enough to keep their flavour, shape and colour.",
-  "We slice real tomato, onion and pepper, then gently crisp each slice, so the vegetable’s natural colour and character lead every bite.",
+  "That gap is how Crosps was born: whole vegetables, cooked gently enough to keep their flavour, shape and colour, then crisped slice by slice, so the vegetable’s natural character leads every bite.",
   "We hope you love them as much as we’ve loved bringing them to life.",
   "Made from crops, not compromises.",
 ];
