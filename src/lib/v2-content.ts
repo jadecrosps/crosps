@@ -93,12 +93,12 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Can I order a single pack?",
         answer:
-          "We’re only launching with our pack of 8 for now. You can find single packs at our stockists, or sign up to our mailing list to hear where they’re available next.",
+          "We’re launching with our pack of 8 only. Sign up to our mailing list to hear when and where single packs become available.",
       },
       {
         question: "Do you do bundles, subscriptions or gift boxes?",
         answer:
-          "Not yet. For now we only sell cases of 8 bags in a single flavour, with no mixed packs. Sign up to our mailing list to hear when this changes.",
+          "Not yet. We’re launching with cases of 8 bags in a single flavour, with no mixed packs. Sign up to our mailing list to hear when this changes.",
       },
       {
         question: "Can I order for an event or office, or stock them in my shop or café?",
@@ -119,7 +119,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         question: "Where can I buy them, and where do you deliver?",
         answer:
-          "You can order on our website, and we deliver to UK addresses only for now. Orders usually arrive within 2–4 working days.",
+          "Crosps launches on our website at the end of 2026. Join the waitlist and we’ll email you as soon as you can order. We’ll deliver to UK addresses only to begin with.",
       },
     ],
   },

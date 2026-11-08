@@ -35,6 +35,14 @@ export default async function V2ContactPage({
             </Link>
             .
           </p>
+          {/* Business details, shown in full so shoppers and Google Merchant Center can see who runs the shop. */}
+          <address className="type-body mt-4 flex flex-col gap-1 not-italic text-ink-88">
+            <span className="text-ink">Crosps Foods Limited</span>
+            <span>167–169 Great Portland Street, 5th Floor, London W1W 5PF, United Kingdom</span>
+            <a href="mailto:jade@eatcrosps.com" className="w-fit border-b border-ink pb-0.5 text-ink transition-opacity hover:opacity-70">
+              jade@eatcrosps.com
+            </a>
+          </address>
         </header>
         <div className="min-w-0 lg:px-[112px]">
           <div className="max-w-[640px]">
