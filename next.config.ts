@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
   // public/v2 (images, video) and must not be redirected.
   async redirects() {
     return [
+      // One address for the site: www.eatcrosps.com goes to eatcrosps.com.
+      { source: "/:path*", has: [{ type: "host", value: "www.eatcrosps.com" }], destination: "https://eatcrosps.com/:path*", permanent: true },
       { source: "/v2", destination: "/", permanent: true },
       { source: "/v2/:path((?!.*\\.).*)", destination: "/:path", permanent: true },
     ];

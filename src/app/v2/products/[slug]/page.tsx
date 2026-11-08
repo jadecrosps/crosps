@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: product ? `${product.name} | Crosps` : "Crosps",
     description: product?.descriptor,
+    alternates: product ? { canonical: `https://eatcrosps.com/products/${product.slug}` } : undefined,
   };
 }
 
@@ -77,8 +78,30 @@ export default async function ProductPage({ params, searchParams }: Params) {
   // Live variant ids for the "You may also like" Add to cart buttons.
   const otherVariants = await Promise.all(others.map((p) => getShopifyProduct(PRODUCT_DETAILS[p.slug].shopifyHandle)));
 
+  const fmtPrice = new Intl.NumberFormat("en-GB", { style: "currency", currency: price.currencyCode }).format(price.amount);
+  // Product details Google reads from the page. Price and stock must match the Google product feed (/feeds/google.xml).
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `Crosps ${product.name}`,
+    description: details.description,
+    image: `https://eatcrosps.com${product.image}`,
+    sku: details.shopifyHandle,
+    brand: { "@type": "Brand", name: "Crosps" },
+    offers: {
+      "@type": "Offer",
+      url: `https://eatcrosps.com/products/${product.slug}`,
+      price: price.amount.toFixed(2),
+      priceCurrency: price.currencyCode,
+      availability: SHOP_OPEN ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@type": "Organization", name: "Crosps Foods Limited" },
+    },
+  };
+
   return (
     <div className="bg-white text-ink" style={gutterStyle(gutter)}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Nav tone="dark" links={{ home: V2_LINKS.home, shop: V2_LINKS.shop, about: V2_LINKS.about, faq: V2_LINKS.faq }} />
 
       <main>
@@ -101,6 +124,13 @@ export default async function ProductPage({ params, searchParams }: Params) {
                 <div>
                   <Tag tone="light">{product.status} · 8 packs of 30g</Tag>
                 </div>
+              )}
+              {/* Shop closed: the price still shows, marked out of stock, so the page matches Google's listing. */}
+              {!SHOP_OPEN && (
+                <p className="type-body flex items-baseline gap-3 text-ink">
+                  <span className="type-price">{fmtPrice}</span>
+                  <span className="text-ink-72">Out of stock</span>
+                </p>
               )}
             </div>
 
