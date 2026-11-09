@@ -27,6 +27,7 @@ import {
 export const metadata: Metadata = {
   title: "Crosps | Real Vegetables, Reimagined.",
   description: "Discover Crosps vegetable crisps. Made with just four ingredients, high in fibre, plant based and gluten-free. Real vegetables, reimagined.",
+  alternates: { canonical: "https://eatcrosps.com" },
 };
 
 // V2 homepage: Crosps design system in the moremud.co layout. Preview only until launch.

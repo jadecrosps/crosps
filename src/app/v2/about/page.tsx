@@ -8,6 +8,7 @@ import { V2_LINKS, gutterStyle, V2_FOOTER_LINKS } from "@/lib/v2-content";
 export const metadata: Metadata = {
   title: "About | Crosps",
   description: "Why Jade started Crosps: whole vegetables, cooked gently enough to keep their colour, shape and flavour.",
+  alternates: { canonical: "https://eatcrosps.com/about" },
 };
 
 const STORY = [
