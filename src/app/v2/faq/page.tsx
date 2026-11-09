@@ -9,6 +9,7 @@ import { FAQ_GROUPS, V2_LINKS, gutterStyle, V2_FOOTER_LINKS } from "@/lib/v2-con
 export const metadata: Metadata = {
   title: "FAQ | Crosps",
   description: "Answers about Crosps: ingredients, allergens, ordering and where to buy.",
+  alternates: { canonical: "https://eatcrosps.com/faq" },
 };
 
 // V2 FAQ: moremud.co support-centre layout (large category nav,

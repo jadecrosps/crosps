@@ -10,7 +10,7 @@ type Params = { params: Promise<{ policy: string }>; searchParams: Promise<{ gut
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { policy } = await params;
   const doc = POLICY_HANDLES.includes(policy as PolicyHandle) ? await getShopPolicy(policy as PolicyHandle) : null;
-  return { title: doc ? `${doc.title} | Crosps` : "Crosps" };
+  return { title: doc ? `${doc.title} | Crosps` : "Crosps", alternates: { canonical: `https://eatcrosps.com/policies/${policy}` } };
 }
 
 // Store policies, written and kept up to date in Shopify (Settings → Policies).

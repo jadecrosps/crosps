@@ -16,6 +16,7 @@ import { TradeBasket } from "./TradeBasket";
 export const metadata: Metadata = {
   title: "Trade | Crosps",
   description: "Stock Crosps: vegetable crisps in shelf-ready cases for shops, delis and cafés.",
+  alternates: { canonical: "https://eatcrosps.com/trade" },
 };
 
 const REASONS = [
