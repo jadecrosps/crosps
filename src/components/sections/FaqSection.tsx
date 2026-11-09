@@ -7,7 +7,7 @@ const FAQ_ITEMS = [
   {
     question: "What are Crosps made of?",
     answer:
-      "Crosps are made from just four ingredients: real vegetables (tomato, onion, or pepper depending on the flavour), olive oil, sea salt, and a touch of tapioca starch. No additives, no fillers — just simple, recognisable ingredients.",
+      "Crosps are made from just four ingredients: real vegetables (tomato, onion, or pepper depending on the flavour), rapeseed oil, sea salt, and a touch of tapioca starch. No additives, no fillers — just simple, recognisable ingredients.",
   },
   {
     question: "Are your products vegan?",
